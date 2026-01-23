@@ -246,7 +246,15 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Use any email/password with role selection above',
+                      'Doctor: doctor@demo.com / password',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    Text(
+                      'Patient: patient@demo.com / password',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    Text(
+                      'Admin: admin@demo.com / password',
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
