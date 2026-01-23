@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/auth_controller.dart';
+import '../widgets/role_selection_widget.dart';
 import '../../../../core/controllers/theme_controller.dart';
 import '../../../shared/widgets/network_aware_widget.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  String? selectedRole;
 
   @override
   Widget build(BuildContext context) {
     final authController = Get.find<AuthController>();
     final themeController = Get.find<ThemeController>();
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
 
     return NetworkAwareWidget(
       child: Scaffold(
@@ -22,7 +30,7 @@ class LoginPage extends StatelessWidget {
         actions: [
           Obx(() => PopupMenuButton<AppThemeMode>(
             icon: Icon(_getThemeIcon(themeController.currentThemeMode)),
-            tooltip: 'Theme Settings',
+            tooltip: 'theme_settings'.tr,
             onSelected: themeController.setThemeMode,
             itemBuilder: (context) => [
               PopupMenuItem(
@@ -31,7 +39,7 @@ class LoginPage extends StatelessWidget {
                   children: [
                     const Icon(Icons.light_mode),
                     const SizedBox(width: 8),
-                    const Text('Light'),
+                    Text('light'.tr),
                     if (themeController.currentThemeMode == AppThemeMode.light)
                       const Spacer(),
                     if (themeController.currentThemeMode == AppThemeMode.light)
@@ -45,7 +53,7 @@ class LoginPage extends StatelessWidget {
                   children: [
                     const Icon(Icons.dark_mode),
                     const SizedBox(width: 8),
-                    const Text('Dark'),
+                    Text('dark'.tr),
                     if (themeController.currentThemeMode == AppThemeMode.dark)
                       const Spacer(),
                     if (themeController.currentThemeMode == AppThemeMode.dark)
@@ -59,7 +67,7 @@ class LoginPage extends StatelessWidget {
                   children: [
                     const Icon(Icons.settings_suggest),
                     const SizedBox(width: 8),
-                    const Text('System'),
+                    Text('system'.tr),
                     if (themeController.currentThemeMode == AppThemeMode.system)
                       const Spacer(),
                     if (themeController.currentThemeMode == AppThemeMode.system)
@@ -92,7 +100,7 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               Text(
-                'WitteHMS',
+                'app_name'.tr,
                 style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.primary,
@@ -100,18 +108,29 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'Healthcare Management System',
+                'app_subtitle'.tr,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
-              const SizedBox(height: 48),
+              const SizedBox(height: 32),
+
+              // Role Selection
+              RoleSelectionWidget(
+                selectedRole: selectedRole,
+                onRoleChanged: (role) {
+                  setState(() {
+                    selectedRole = role;
+                  });
+                },
+              ),
+              const SizedBox(height: 24),
 
               // Email Field
               TextField(
                 controller: emailController,
                 decoration: InputDecoration(
-                  labelText: 'Email',
+                  labelText: 'email'.tr,
                   prefixIcon: const Icon(Icons.email),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -127,7 +146,7 @@ class LoginPage extends StatelessWidget {
               TextField(
                 controller: passwordController,
                 decoration: InputDecoration(
-                  labelText: 'Password',
+                  labelText: 'password'.tr,
                   prefixIcon: const Icon(Icons.lock),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -183,6 +202,7 @@ class LoginPage extends StatelessWidget {
                           authController.login(
                             emailController.text.trim(),
                             passwordController.text,
+                            // selectedRole: selectedRole,
                           );
                         },
                   style: ElevatedButton.styleFrom(
@@ -201,7 +221,7 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                         )
-                      : const Text('Login'),
+                      : Text('login'.tr),
                 ),
               )),
 
@@ -218,7 +238,7 @@ class LoginPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Demo Credentials:',
+                      'demo_credentials'.tr,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -226,15 +246,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Doctor: doctor@demo.com / password',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    Text(
-                      'Patient: patient@demo.com / password',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    Text(
-                      'Admin: admin@demo.com / password',
+                      'Use any email/password with role selection above',
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -245,7 +257,6 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     ));
-  }
   }
 
   IconData _getThemeIcon(AppThemeMode mode) {
@@ -258,3 +269,4 @@ class LoginPage extends StatelessWidget {
         return Icons.settings_suggest;
     }
   }
+}

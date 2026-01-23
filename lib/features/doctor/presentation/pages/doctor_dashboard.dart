@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import '../../../auth/presentation/controllers/auth_controller.dart';
 import '../../../shared/widgets/theme_aware_app_bar.dart';
 import '../../../shared/widgets/network_aware_widget.dart';
+import '../../../shared/widgets/role_based_drawer.dart';
+import '../../../../core/controllers/language_controller.dart';
 
 class DoctorDashboard extends StatelessWidget {
   const DoctorDashboard({super.key});
@@ -11,13 +13,19 @@ class DoctorDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return NetworkAwareWidget(
       child: Scaffold(
+      drawer: const RoleBasedDrawer(),
       appBar: ThemeAwareAppBar(
-        title: 'Doctor Dashboard',
+        title: 'doctor_dashboard'.tr,
         actions: [
+          IconButton(
+            onPressed: () => Get.find<LanguageController>().showLanguageDialog(),
+            icon: const Icon(Icons.language),
+            tooltip: 'change_language'.tr,
+          ),
           IconButton(
             onPressed: () => Get.find<AuthController>().logout(),
             icon: const Icon(Icons.logout),
-            tooltip: 'Logout',
+            tooltip: 'logout'.tr,
           ),
         ],
       ),
@@ -40,15 +48,19 @@ class DoctorDashboard extends StatelessWidget {
                           size: 32,
                         ),
                         const SizedBox(width: 12),
-                        Text(
-                          'Welcome Doctor!',
-                          style: Theme.of(context).textTheme.headlineSmall,
+                        Expanded(
+                          child: Text(
+                            'welcome_doctor'.tr,
+                            maxLines:2,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.headlineSmall,
+                          ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'Manage your patients, appointments, and medical records.',
+                      'manage_patients_desc'.tr,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -64,28 +76,28 @@ class DoctorDashboard extends StatelessWidget {
                 children: [
                   _buildDashboardCard(
                     context,
-                    'Patients',
+                    'patients'.tr,
                     Icons.people,
                     '24',
                     Colors.blue,
                   ),
                   _buildDashboardCard(
                     context,
-                    'Appointments',
+                    'appointments'.tr,
                     Icons.calendar_today,
                     '8',
                     Colors.green,
                   ),
                   _buildDashboardCard(
                     context,
-                    'Prescriptions',
+                    'prescriptions'.tr,
                     Icons.receipt,
                     '12',
                     Colors.orange,
                   ),
                   _buildDashboardCard(
                     context,
-                    'Reports',
+                    'reports'.tr,
                     Icons.analytics,
                     '5',
                     Colors.purple,

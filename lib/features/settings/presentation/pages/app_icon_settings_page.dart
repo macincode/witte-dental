@@ -13,8 +13,8 @@ class AppIconSettingsPage extends StatelessWidget {
     
     return NetworkAwareWidget(
       child: Scaffold(
-        appBar: const ThemeAwareAppBar(
-          title: 'App Icon Settings',
+        appBar: ThemeAwareAppBar(
+          title: 'app_icon_settings'.tr,
           showThemeToggle: false,
         ),
         body: Padding(
@@ -23,102 +23,102 @@ class AppIconSettingsPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Choose App Icon',
+                'choose_app_icon'.tr,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 8),
               Text(
-                'Select from predefined healthcare-themed icons',
+                'icon_selection_desc'.tr,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(height: 24),
               Expanded(
-                child: Obx(() => GridView.builder(
+                child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
-                    childAspectRatio: 1.2,
+                    childAspectRatio: 1.4,
                   ),
                   itemCount: iconController.availableIcons.length,
                   itemBuilder: (context, index) {
                     final icon = iconController.availableIcons[index];
-                    final isSelected = iconController.currentIcon == icon.id;
                     
-                    return Card(
-                      elevation: isSelected ? 8 : 2,
-                      child: InkWell(
-                        onTap: () => _changeIcon(context, iconController, icon.id),
-                        borderRadius: BorderRadius.circular(12),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 60,
-                                height: 60,
-                                decoration: BoxDecoration(
-                                  color: isSelected 
-                                    ? Theme.of(context).colorScheme.primary
-                                    : Theme.of(context).colorScheme.surfaceVariant,
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Icon(
-                                  Icons.local_hospital,
-                                  size: 32,
-                                  color: isSelected 
-                                    ? Theme.of(context).colorScheme.onPrimary
-                                    : Theme.of(context).colorScheme.onSurfaceVariant,
-                                ),
-                              ),
-                              const SizedBox(height: 12),
-                              Text(
-                                icon.name,
-                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                icon.description,
-                                style: Theme.of(context).textTheme.bodySmall,
-                                textAlign: TextAlign.center,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              if (isSelected)
+                    return Obx(() {
+                      final isSelected = iconController.currentIcon == icon.id;
+                      
+                      return Card(
+                        elevation: isSelected ? 8 : 2,
+                        child: InkWell(
+                          onTap: () => _changeIcon(context, iconController, icon.id),
+                          borderRadius: BorderRadius.circular(12),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
                                 Container(
-                                  margin: const EdgeInsets.only(top: 8),
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
+                                  width: 40,
+                                  height: 40,
                                   decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.primary,
-                                    borderRadius: BorderRadius.circular(12),
+                                    color: isSelected 
+                                      ? Theme.of(context).colorScheme.primary
+                                      : Theme.of(context).colorScheme.surfaceVariant,
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
+                                  child: Icon(
+                                    Icons.local_hospital,
+                                    size: 24,
+                                    color: isSelected 
+                                      ? Theme.of(context).colorScheme.onPrimary
+                                      : Theme.of(context).colorScheme.onSurfaceVariant,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Flexible(
                                   child: Text(
-                                    'Active',
-                                    style: TextStyle(
-                                      color: Theme.of(context).colorScheme.onPrimary,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
+                                    icon.name,
+                                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                if (isSelected)
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 4),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 4,
+                                      vertical: 2,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).colorScheme.primary,
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Text(
+                                      'active'.tr,
+                                      style: TextStyle(
+                                        color: Theme.of(context).colorScheme.onPrimary,
+                                        fontSize: 8,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
+                      );
+                    });
                   },
-                )),
+                ),
               ),
             ],
           ),
@@ -132,8 +132,8 @@ class AppIconSettingsPage extends StatelessWidget {
     
     if (!success) {
       Get.snackbar(
-        'Note',
-        'Icon preference saved. Dynamic icon changing requires additional native setup.',
+        'note'.tr,
+        'icon_change_note'.tr,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
         colorText: Theme.of(context).colorScheme.onSurfaceVariant,

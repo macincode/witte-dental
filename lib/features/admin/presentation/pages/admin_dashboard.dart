@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import '../../../auth/presentation/controllers/auth_controller.dart';
 import '../../../shared/widgets/theme_aware_app_bar.dart';
 import '../../../shared/widgets/network_aware_widget.dart';
+import '../../../shared/widgets/role_based_drawer.dart';
+import '../../../../core/controllers/language_controller.dart';
 
 class AdminDashboard extends StatelessWidget {
   const AdminDashboard({super.key});
@@ -11,13 +13,19 @@ class AdminDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return NetworkAwareWidget(
       child: Scaffold(
+      drawer: const RoleBasedDrawer(),
       appBar: ThemeAwareAppBar(
-        title: 'Admin Dashboard',
+        title: 'admin_dashboard'.tr,
         actions: [
+          IconButton(
+            onPressed: () => Get.find<LanguageController>().showLanguageDialog(),
+            icon: const Icon(Icons.language),
+            tooltip: 'change_language'.tr,
+          ),
           IconButton(
             onPressed: () => Get.find<AuthController>().logout(),
             icon: const Icon(Icons.logout),
-            tooltip: 'Logout',
+            tooltip: 'logout'.tr,
           ),
         ],
       ),
@@ -40,15 +48,19 @@ class AdminDashboard extends StatelessWidget {
                           size: 32,
                         ),
                         const SizedBox(width: 12),
-                        Text(
-                          'Welcome Admin!',
-                          style: Theme.of(context).textTheme.headlineSmall,
+                        Expanded(
+                          child: Text(
+                            'welcome_admin'.tr,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.headlineSmall,
+                          ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'Manage users, system settings, and monitor healthcare operations.',
+                      'manage_system_desc'.tr,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -64,28 +76,28 @@ class AdminDashboard extends StatelessWidget {
                 children: [
                   _buildDashboardCard(
                     context,
-                    'Users',
+                    'users'.tr,
                     Icons.group,
                     '156',
                     Colors.blue,
                   ),
                   _buildDashboardCard(
                     context,
-                    'Doctors',
+                    'doctors'.tr,
                     Icons.medical_services,
                     '24',
                     Colors.green,
                   ),
                   _buildDashboardCard(
                     context,
-                    'Patients',
+                    'patients'.tr,
                     Icons.people,
                     '132',
                     Colors.orange,
                   ),
                   _buildDashboardCard(
                     context,
-                    'System Health',
+                    'system_health'.tr,
                     Icons.monitor_heart,
                     '98%',
                     Colors.purple,

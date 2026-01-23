@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import '../../../auth/presentation/controllers/auth_controller.dart';
 import '../../../shared/widgets/theme_aware_app_bar.dart';
 import '../../../shared/widgets/network_aware_widget.dart';
+import '../../../shared/widgets/role_based_drawer.dart';
+import '../../../../core/controllers/language_controller.dart';
 
 class PatientDashboard extends StatelessWidget {
   const PatientDashboard({super.key});
@@ -11,13 +13,19 @@ class PatientDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return NetworkAwareWidget(
       child: Scaffold(
+      drawer: const RoleBasedDrawer(),
       appBar: ThemeAwareAppBar(
-        title: 'Patient Dashboard',
+        title: 'patient_dashboard'.tr,
         actions: [
+          IconButton(
+            onPressed: () => Get.find<LanguageController>().showLanguageDialog(),
+            icon: const Icon(Icons.language),
+            tooltip: 'change_language'.tr,
+          ),
           IconButton(
             onPressed: () => Get.find<AuthController>().logout(),
             icon: const Icon(Icons.logout),
-            tooltip: 'Logout',
+            tooltip: 'logout'.tr,
           ),
         ],
       ),
@@ -40,15 +48,19 @@ class PatientDashboard extends StatelessWidget {
                           size: 32,
                         ),
                         const SizedBox(width: 12),
-                        Text(
-                          'Welcome Patient!',
-                          style: Theme.of(context).textTheme.headlineSmall,
+                        Expanded(
+                          child: Text(
+                            'welcome_patient'.tr,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.headlineSmall,
+                          ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'Access your medical records, book appointments, and manage your health.',
+                      'manage_health_desc'.tr,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -64,28 +76,28 @@ class PatientDashboard extends StatelessWidget {
                 children: [
                   _buildDashboardCard(
                     context,
-                    'Appointments',
+                    'appointments'.tr,
                     Icons.event,
                     '3',
                     Colors.blue,
                   ),
                   _buildDashboardCard(
                     context,
-                    'Prescriptions',
+                    'prescriptions'.tr,
                     Icons.medication,
                     '2',
                     Colors.green,
                   ),
                   _buildDashboardCard(
                     context,
-                    'Medical History',
+                    'medical_history'.tr,
                     Icons.history,
                     '15',
                     Colors.orange,
                   ),
                   _buildDashboardCard(
                     context,
-                    'Health Reports',
+                    'health_reports'.tr,
                     Icons.assessment,
                     '7',
                     Colors.purple,

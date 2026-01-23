@@ -5,6 +5,8 @@ import 'core/config/hive_config.dart';
 import 'core/constants/app_constants.dart';
 import 'core/controllers/theme_controller.dart';
 import 'core/controllers/network_controller.dart';
+import 'core/controllers/language_controller.dart';
+import 'core/localization/app_translations.dart';
 import 'core/theme/app_theme.dart';
 import 'features/auth/presentation/controllers/auth_controller.dart';
 import 'app/routes/app_pages.dart';
@@ -21,6 +23,7 @@ void main() async {
   // Initialize GetX dependencies
   Get.put(NetworkController());
   Get.put(ThemeController());
+  Get.put(LanguageController());
   Get.put(AuthController());
   
   runApp(const HealthcareApp());
@@ -39,6 +42,9 @@ class HealthcareApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: themeController.themeMode,
+      locale: const Locale('en', 'US'),
+      fallbackLocale: const Locale('en', 'US'),
+      translations: AppTranslations(),
       initialRoute: AppConstants.loginRoute,
       getPages: AppPages.routes,
     ));
