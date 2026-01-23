@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../domain/entities/user.dart';
 import '../../../../core/storage/hive_service.dart';
@@ -16,7 +17,10 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _checkAuthStatus();
+    // Delay auth check until GetMaterialApp is ready
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkAuthStatus();
+    });
   }
 
   void _checkAuthStatus() {
