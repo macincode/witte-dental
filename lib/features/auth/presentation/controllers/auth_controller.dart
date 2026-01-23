@@ -17,13 +17,9 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Delay auth check until GetMaterialApp is ready
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _checkAuthStatus();
-    });
   }
 
-  void _checkAuthStatus() {
+  void checkAuthStatus() {
     if (HiveService.isLoggedIn) {
       final userRole = HiveService.userRole;
       final userId = HiveService.getUserData<String>('user_id');

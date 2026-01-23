@@ -39,7 +39,7 @@ class HealthcareApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: themeController.themeMode,
-      initialRoute: AppConstants.loginRoute,
+      initialRoute: AppConstants.splashRoute,
       getPages: AppPages.routes,
     ));
   }
