@@ -10,7 +10,9 @@ class AppConstants {
   static const String roleStaff = 'staff';
   
   // Routes
+  static const String splashRoute = '/splash';
   static const String loginRoute = '/login';
+  // static const String splashRoute = '/splash';
   static const String doctorDashboard = '/doctor';
   static const String patientDashboard = '/patient';
   static const String adminDashboard = '/admin';

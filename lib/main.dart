@@ -45,7 +45,7 @@ class HealthcareApp extends StatelessWidget {
       locale: const Locale('en', 'US'),
       fallbackLocale: const Locale('en', 'US'),
       translations: AppTranslations(),
-      initialRoute: AppConstants.loginRoute,
+       initialRoute: AppConstants.splashRoute,
       getPages: AppPages.routes,
     ));
   }
