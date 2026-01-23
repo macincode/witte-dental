@@ -4,6 +4,7 @@ import '../../core/middleware/auth_middleware.dart';
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
 import '../../features/splash/bindings/splash_binding.dart';
+import '../../features/onboarding/presentation/pages/onboarding_screen.dart';
 import '../../features/doctor/presentation/pages/doctor_dashboard.dart';
 import '../../features/patient/presentation/pages/patient_dashboard.dart';
 import '../../features/admin/presentation/pages/admin_dashboard.dart';
@@ -15,6 +16,10 @@ class AppPages {
       name: AppConstants.splashRoute,
       page: () => const SplashPage(),
       binding: SplashBinding(),
+    ),
+    GetPage(
+      name: AppConstants.onboardingRoute,
+      page: () => const OnboardingScreen(),
     ),
     GetPage(
       name: AppConstants.loginRoute,

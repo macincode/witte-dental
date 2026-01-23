@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/constants/app_constants.dart';
+import '../../../../core/storage/hive_service.dart';
 import 'dart:math' as math;
 
 class SplashPage extends StatefulWidget {
@@ -95,7 +96,15 @@ class _SplashPageState extends State<SplashPage>
     _ctaController.forward();
     
     await Future.delayed(const Duration(seconds: 3));
-    Get.offAllNamed(AppConstants.loginRoute);
+    
+    // Check if onboarding is completed
+    final onboardingCompleted = HiveService.getSetting<bool>('onboarding_completed') ?? false;
+    
+    if (onboardingCompleted) {
+      Get.offAllNamed(AppConstants.loginRoute);
+    } else {
+      Get.offAllNamed(AppConstants.onboardingRoute);
+    }
   }
 
   @override
