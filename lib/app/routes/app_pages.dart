@@ -1,4 +1,7 @@
 import 'package:get/get.dart';
+import 'package:wittehms/features/admin/presentation/pages/appointments.dart';
+import 'package:wittehms/features/admin/presentation/pages/category_Management.dart';
+import 'package:wittehms/features/admin/presentation/pages/admin_invoice.dart';
 import '../../core/constants/app_constants.dart';
 import '../../core/middleware/auth_middleware.dart';
 import '../../features/auth/presentation/pages/login_page.dart';
@@ -25,21 +28,43 @@ class AppPages {
       name: AppConstants.loginRoute,
       page: () => const LoginPage(),
     ),
+
+    // Doctor routes
     GetPage(
       name: AppConstants.doctorDashboard,
       page: () => const DoctorDashboard(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleDoctor)],
     ),
+
+     // Patient routes
     GetPage(
       name: AppConstants.patientDashboard,
       page: () => const PatientDashboard(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.rolePatient)],
     ),
+
+  // Admin routes
     GetPage(
       name: AppConstants.adminDashboard,
       page: () => const AdminDashboard(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
+      GetPage(
+        name: AppConstants.adminInvoice,
+        page: () => const AdminInvoice(),
+        middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+      ),
+       GetPage(
+        name: AppConstants.categoryManagement,
+        page: () => const CategoryManagement(),
+        middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+      ),
+        GetPage(
+        name: AppConstants.appointments,
+        page: () => const AppointmentScreens(),
+        middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+      ),
+
     GetPage(
       name: AppConstants.appIconSettings,
       page: () => const AppIconSettingsPage(),

@@ -166,7 +166,7 @@ class _SplashPageState extends State<SplashPage>
           ),
           
           Positioned(
-            bottom: size.height * 0.25,
+            bottom: size.height * 0.20,
             left: 0,
             right: 0,
             child: AnimatedBuilder(
@@ -176,6 +176,7 @@ class _SplashPageState extends State<SplashPage>
                   opacity: _scaleAnimation.value.clamp(0.0, 1.0),
                   child: Column(
                     children: [
+                      const SizedBox(height: 15),
                       Text(
                         AppConstants.appName,
                         style: const TextStyle(
@@ -201,43 +202,43 @@ class _SplashPageState extends State<SplashPage>
             ),
           ),
           
-          Positioned(
-            bottom: size.height * 0.1,
-            left: 0,
-            right: 0,
-            child: AnimatedBuilder(
-              animation: _ctaAnimation,
-              builder: (context, child) {
-                return Transform.scale(
-                  scale: _ctaAnimation.value,
-                  child: Center(
-                    child: Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFF00D4FF), Color(0xFF0099CC)],
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xFF00D4FF).withOpacity(0.3),
-                            blurRadius: 20,
-                            spreadRadius: 2,
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.white,
-                        size: 24,
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
+          // Positioned(
+          //   bottom: size.height * 0.1,
+          //   left: 0,
+          //   right: 0,
+          //   child: AnimatedBuilder(
+          //     animation: _ctaAnimation,
+          //     builder: (context, child) {
+          //       return Transform.scale(
+          //         scale: _ctaAnimation.value,
+          //         child: Center(
+          //           child: Container(
+          //             width: 60,
+          //             height: 60,
+          //             decoration: BoxDecoration(
+          //               shape: BoxShape.circle,
+          //               gradient: const LinearGradient(
+          //                 colors: [Color(0xFF00D4FF), Color(0xFF0099CC)],
+          //               ),
+          //               boxShadow: [
+          //                 BoxShadow(
+          //                   color: const Color(0xFF00D4FF).withOpacity(0.3),
+          //                   blurRadius: 20,
+          //                   spreadRadius: 2,
+          //                 ),
+          //               ],
+          //             ),
+          //             child: const Icon(
+          //               Icons.arrow_forward_ios,
+          //               color: Colors.white,
+          //               size: 24,
+          //             ),
+          //           ),
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // ),
         ],
       ),
     );

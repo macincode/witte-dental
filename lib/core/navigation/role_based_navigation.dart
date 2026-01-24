@@ -76,12 +76,17 @@ class RoleBasedNavigation {
       NavigationItem(
         title: 'user_management'.tr,
         icon: Icons.group,
-        route: '/admin/users',
+        route: AppConstants.adminInvoice,
       ),
       NavigationItem(
-        title: 'system_settings'.tr,
-        icon: Icons.settings,
-        route: '/admin/settings',
+        title: 'Users',
+        icon: Icons.people,
+        route: AppConstants.categoryManagement,
+      ),
+       NavigationItem(
+        title: 'Appointments',
+        icon: Icons.calendar_today,
+        route: AppConstants.appointments,
       ),
       NavigationItem(
         title: 'reports'.tr,

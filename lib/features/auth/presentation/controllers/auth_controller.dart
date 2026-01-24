@@ -52,7 +52,10 @@ class AuthController extends GetxController {
         id: '123',
         email: email,
         name: 'Dr. John Doe',
-        role: AppConstants.roleDoctor,
+        role: 
+        AppConstants.roleAdmin,
+        // AppConstants.roleDoctor,
+        // AppConstants.rolePatient,
         isActive: true,
         createdAt: DateTime.now(),
       );

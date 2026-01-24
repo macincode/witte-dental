@@ -13,12 +13,20 @@ class AppConstants {
   static const String splashRoute = '/splash';
   static const String onboardingRoute = '/onboarding';
   static const String loginRoute = '/login';
-  // static const String splashRoute = '/splash';
-  static const String doctorDashboard = '/doctor';
-  static const String patientDashboard = '/patient';
-  static const String adminDashboard = '/admin';
   static const String appIconSettings = '/app-icon-settings';
-  
+
+  // Doctor Routes
+  static const String doctorDashboard = '/doctor';
+
+  // patient Routes
+  static const String patientDashboard = '/patient';
+
+  // Admin Routes
+   static const String adminDashboard = '/admin';
+   static const String adminInvoice = '/admin-invoice';
+   static const String categoryManagement = '/category-management';
+   static const String appointments = '/appointments';
+
   // Validation
   static const int minPasswordLength = 8;
   static const int maxNameLength = 50;
