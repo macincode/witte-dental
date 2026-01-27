@@ -298,14 +298,15 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: authController.isLoading
                             ? null
                             : () {
-                                authController.clearError();
-                                authController.login(
+                                authController..clearError()
+                                ..login(
                                   emailController.text.trim(),
                                   passwordController.text,
                                   // selectedRole: selectedRole,
                                 );
                               },
                         style: ElevatedButton.styleFrom(
+                          backgroundColor:  Theme.of(context).colorScheme.secondary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -317,7 +318,7 @@ class _LoginPageState extends State<LoginPage> {
                                 child: CircularProgressIndicator(
                                   strokeWidth: 2,
                                   valueColor: AlwaysStoppedAnimation<Color>(
-                                    Theme.of(context).colorScheme.onPrimary,
+                                    Theme.of(context).colorScheme.secondary,
                                   ),
                                 ),
                               )

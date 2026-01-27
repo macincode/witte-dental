@@ -91,7 +91,7 @@ class OnboardingController extends GetxController
 
   Future<void> completeOnboarding() async {
     await HiveService.saveSetting('onboarding_completed', true);
-    Get.offAllNamed(AppConstants.loginRoute);
+    await Get.offAllNamed(AppConstants.loginRoute);
   }
 
   @override
