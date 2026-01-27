@@ -179,21 +179,30 @@ class _SplashPageState extends State<SplashPage>
                       const SizedBox(height: 15),
                       Text(
                         AppConstants.appName,
-                        style: const TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                          letterSpacing: 2,
-                        ),
+                        style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 28,
+                                          color: Colors.white,
+                                          letterSpacing: 1.5,
+                                        ),
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Healthcare Management',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white.withOpacity(0.6),
-                          letterSpacing: 1,
-                        ),
+                        'Dentalcare Management',
+                        style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w500,
+                                          // fontSize: 28,
+                                          color: Colors.white.withOpacity(0.6),
+                                          // letterSpacing: 1.5,
+                                        ),
+                        
+                       
                       ),
                     ],
                   ),
@@ -252,13 +261,7 @@ class _SplashPageState extends State<SplashPage>
           width: 100,
           height: 100,
           decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            gradient: const RadialGradient(
-              colors: [
-                Color(0xFF00D4FF),
-                Color(0xFF0099CC),
-              ],
-            ),
+           
             boxShadow: [
               BoxShadow(
                 color: const Color(0xFF00D4FF).withOpacity((_glowAnimation.value * 0.5).clamp(0.0, 1.0)),
@@ -267,10 +270,9 @@ class _SplashPageState extends State<SplashPage>
               ),
             ],
           ),
-          child: const Icon(
-            Icons.local_hospital,
-            size: 50,
-            color: Colors.white,
+          child: Image.asset(
+          'assets/images/appLogo.png',
+          fit: BoxFit.cover, 
           ),
         );
       },

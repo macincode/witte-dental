@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/adapters.dart';
 import '../controllers/auth_controller.dart';
 import '../widgets/role_selection_widget.dart';
 import '../../../../core/controllers/theme_controller.dart';
@@ -24,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
 
     return NetworkAwareWidget(
       child: Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,  
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -80,37 +82,60 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // App Logo/Title
               Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.local_hospital,
-                  size: 60,
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
-                ),
-              ),
-              const SizedBox(height: 24),
-              Text(
-                'app_name'.tr,
-                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
+          width: MediaQuery.of(context).size.width * 0.5,
+          height: 100,
+         
+          decoration: const BoxDecoration(
+          
+          ),
+          child: Obx(() => Image.asset(
+            themeController.currentThemeMode == AppThemeMode.dark ||
+            (themeController.currentThemeMode == AppThemeMode.system &&
+             Theme.of(context).brightness == Brightness.dark)
+                ? 'assets/images/app_logo_dark.png'
+                : 'assets/images/app_logo_light.png',
+            fit: BoxFit.contain,
+          )),
+        ),
+              // const SizedBox(height: 5),
+//                 ShaderMask(
+//   shaderCallback: (bounds) {
+//     return  LinearGradient(
+//       colors: [
+//         Theme.of(context).colorScheme.secondary,
+//         Theme.of(context).colorScheme.primary,
+        
+//       ],
+//       begin: Alignment.topLeft,
+//       end: Alignment.bottomRight,
+//     ).createShader(
+//       Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+//     );
+//   },
+//   child: Text(
+//     'app_name'.tr,
+//     style: const TextStyle(
+//       fontSize: 32,
+//       fontWeight: FontWeight.bold,
+//       color: Colors.white, // IMPORTANT
+//     ),
+//   ),
+// ),
+
+             
               const SizedBox(height: 8),
               Text(
                 'app_subtitle'.tr,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  color: Theme.of(context).colorScheme.onSecondary,
                 ),
               ),
               const SizedBox(height: 32),
@@ -131,12 +156,34 @@ class _LoginPageState extends State<LoginPage> {
                 controller: emailController,
                 decoration: InputDecoration(
                   labelText: 'email'.tr,
-                  prefixIcon: const Icon(Icons.email),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                  labelStyle: context.theme.textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onSecondary,
+                    fontWeight: FontWeight.bold
                   ),
+                  
+                  prefixIcon: const Icon(Icons.email,color: Color(0xff9ca3af),),
+                
+                  
                   filled: true,
                   fillColor: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
+                  
+
+enabledBorder:  OutlineInputBorder(
+borderSide: const BorderSide(color: Colors.grey),
+borderRadius: BorderRadius.circular(12),
+),
+focusedBorder: OutlineInputBorder(
+borderSide:  BorderSide(color: Theme.of(context).colorScheme.primary.withOpacity(0.7), width: 2),
+borderRadius: BorderRadius.circular(12),
+),
+disabledBorder:  OutlineInputBorder(
+borderSide: const BorderSide(color: Colors.grey),
+borderRadius: BorderRadius.circular(12),
+),
+errorBorder:  OutlineInputBorder(
+borderSide: const BorderSide(color: Colors.red),
+borderRadius: BorderRadius.circular(12),
+),
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
@@ -147,10 +194,29 @@ class _LoginPageState extends State<LoginPage> {
                 controller: passwordController,
                 decoration: InputDecoration(
                   labelText: 'password'.tr,
-                  prefixIcon: const Icon(Icons.lock),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                   labelStyle: context.theme.textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onSecondary,
+                    fontWeight: FontWeight.bold
                   ),
+                  prefixIcon: const Icon(Icons.lock, color: Color(0xff9ca3af),),
+                  suffixIcon: const Icon(Icons.visibility_rounded, color: Color(0xff9ca3af),),
+                 
+enabledBorder:  OutlineInputBorder(
+borderSide: const BorderSide(color: Colors.grey),
+borderRadius: BorderRadius.circular(12),
+),
+focusedBorder: OutlineInputBorder(
+borderSide:  BorderSide(color: Theme.of(context).colorScheme.primary.withOpacity(0.7), width: 2),
+borderRadius: BorderRadius.circular(12),
+),
+disabledBorder:  OutlineInputBorder(
+borderSide: const BorderSide(color: Colors.grey),
+borderRadius: BorderRadius.circular(12),
+),
+errorBorder:  OutlineInputBorder(
+borderSide: const BorderSide(color: Colors.red),
+borderRadius: BorderRadius.circular(12),
+),
                   filled: true,
                   fillColor: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
                 ),
@@ -263,6 +329,7 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
+      ),
       ),
     ));
   }
