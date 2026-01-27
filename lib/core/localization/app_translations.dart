@@ -5,7 +5,7 @@ import 'ta_in.dart';
 class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
-    'en_US': enUS,
-    'ta_IN': taIN,
-  };
+        'en_US': enUS,
+        'ta_IN': taIN,
+      };
 }

@@ -14,19 +14,20 @@ import 'features/auth/presentation/controllers/auth_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Set environment (can be configured via build flavors)
   AppConfig.setEnvironment(Environment.dev);
-  
+
   // Initialize Hive
   await HiveConfig.init();
-  
+
   // Initialize GetX dependencies
-  Get..put(NetworkController())
-  ..put(ThemeController())
-  ..put(LanguageController())
-  ..put(AuthController());
-  
+  Get
+    ..put(NetworkController())
+    ..put(ThemeController())
+    ..put(LanguageController())
+    ..put(AuthController());
+
   runApp(const WitteDentalApp());
 }
 
@@ -36,18 +37,20 @@ class WitteDentalApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeController = Get.find<ThemeController>();
-    
-    return Obx(() => GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: AppConstants.appName,
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: themeController.themeMode,
-      locale: const Locale('en', 'US'),
-      fallbackLocale: const Locale('en', 'US'),
-      translations: AppTranslations(),
-       initialRoute: AppConstants.splashRoute,
-      getPages: AppPages.routes,
-    ),);
+
+    return Obx(
+      () => GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: AppConstants.appName,
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: themeController.themeMode,
+        locale: const Locale('en', 'US'),
+        fallbackLocale: const Locale('en', 'US'),
+        translations: AppTranslations(),
+        initialRoute: AppConstants.splashRoute,
+        getPages: AppPages.routes,
+      ),
+    );
   }
 }

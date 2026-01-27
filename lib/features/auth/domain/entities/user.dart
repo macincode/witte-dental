@@ -1,11 +1,12 @@
 class User {
-
   const User({
     required this.id,
     required this.email,
     required this.name,
     required this.role,
-    required this.isActive, required this.createdAt, this.phone,
+    required this.isActive,
+    required this.createdAt,
+    this.phone,
     this.profileImage,
     this.lastLoginAt,
   });

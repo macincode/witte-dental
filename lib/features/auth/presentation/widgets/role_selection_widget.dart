@@ -3,14 +3,13 @@ import 'package:get/get.dart';
 import '../../../../core/constants/app_constants.dart';
 
 class RoleSelectionWidget extends StatelessWidget {
-  final String? selectedRole;
-  final Function(String?) onRoleChanged;
-
   const RoleSelectionWidget({
+    required this.onRoleChanged,
     super.key,
     this.selectedRole,
-    required this.onRoleChanged,
   });
+  final String? selectedRole;
+  final Function(String?) onRoleChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +19,8 @@ class RoleSelectionWidget extends StatelessWidget {
         Text(
           'select_role'.tr,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+                fontWeight: FontWeight.w600,
+              ),
         ),
         const SizedBox(height: 12),
         Row(
@@ -42,7 +41,7 @@ class RoleSelectionWidget extends StatelessWidget {
                 AppConstants.rolePatient,
                 Icons.person,
                 'Patient',
-               Theme.of(context).colorScheme.secondary,
+                Theme.of(context).colorScheme.secondary,
               ),
             ),
             const SizedBox(width: 8),
@@ -52,19 +51,17 @@ class RoleSelectionWidget extends StatelessWidget {
                 AppConstants.roleAdmin,
                 Icons.admin_panel_settings,
                 'Admin',
-                               Theme.of(context).colorScheme.secondary,
-
+                Theme.of(context).colorScheme.secondary,
               ),
             ),
-             const SizedBox(width: 8),
+            const SizedBox(width: 8),
             Expanded(
               child: _buildRoleCard(
                 context,
                 AppConstants.roleStaff,
                 Icons.support_agent,
                 'Staff',
-                               Theme.of(context).colorScheme.secondary,
-
+                Theme.of(context).colorScheme.secondary,
               ),
             ),
           ],
@@ -81,18 +78,21 @@ class RoleSelectionWidget extends StatelessWidget {
     Color color,
   ) {
     final isSelected = selectedRole == role;
-    
+
     return GestureDetector(
       onTap: () => onRoleChanged(role),
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isSelected 
+          color: isSelected
               ? color.withOpacity(0.1)
-              : Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
+              : Theme.of(context)
+                  .colorScheme
+                  .surfaceContainerHighest
+                  .withOpacity(0.3),
           border: Border.all(
-            color: isSelected 
-                ? color 
+            color: isSelected
+                ? color
                 : Theme.of(context).colorScheme.outline.withOpacity(0.3),
             width: isSelected ? 2 : 1,
           ),
@@ -102,16 +102,21 @@ class RoleSelectionWidget extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: isSelected ? color : Theme.of(context).colorScheme.onSurfaceVariant,
+              color: isSelected
+                  ? color
+                  : Theme.of(context).colorScheme.onSurfaceVariant,
               size: 24,
             ),
             const SizedBox(height: 4),
             Text(
               title,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: isSelected ? color : Theme.of(context).colorScheme.onSurfaceVariant,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-              ),
+                    color: isSelected
+                        ? color
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
+                    fontWeight:
+                        isSelected ? FontWeight.w600 : FontWeight.normal,
+                  ),
             ),
           ],
         ),

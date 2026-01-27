@@ -11,7 +11,7 @@ class AppIconSettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final iconController = Get.put(AppIconController());
-    
+
     return NetworkAwareWidget(
       child: Scaffold(
         appBar: ThemeAwareAppBar(
@@ -26,15 +26,15 @@ class AppIconSettingsPage extends StatelessWidget {
               Text(
                 'choose_app_icon'.tr,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               const SizedBox(height: 8),
               Text(
                 'icon_selection_desc'.tr,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
               ),
               const SizedBox(height: 24),
               Expanded(
@@ -48,14 +48,15 @@ class AppIconSettingsPage extends StatelessWidget {
                   itemCount: iconController.availableIcons.length,
                   itemBuilder: (context, index) {
                     final icon = iconController.availableIcons[index];
-                    
+
                     return Obx(() {
                       final isSelected = iconController.currentIcon == icon.id;
-                      
+
                       return Card(
                         elevation: isSelected ? 8 : 2,
                         child: InkWell(
-                          onTap: () => _changeIcon(context, iconController, icon.id),
+                          onTap: () =>
+                              _changeIcon(context, iconController, icon.id),
                           borderRadius: BorderRadius.circular(12),
                           child: Padding(
                             padding: const EdgeInsets.all(8),
@@ -67,26 +68,37 @@ class AppIconSettingsPage extends StatelessWidget {
                                   width: 40,
                                   height: 40,
                                   decoration: BoxDecoration(
-                                    color: isSelected 
-                                      ? Theme.of(context).colorScheme.primary
-                                      : Theme.of(context).colorScheme.surfaceContainerHighest,
+                                    color: isSelected
+                                        ? Theme.of(context).colorScheme.primary
+                                        : Theme.of(context)
+                                            .colorScheme
+                                            .surfaceContainerHighest,
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: Icon(
                                     Icons.local_hospital,
                                     size: 24,
-                                    color: isSelected 
-                                      ? Theme.of(context).colorScheme.onPrimary
-                                      : Theme.of(context).colorScheme.onSurfaceVariant,
+                                    color: isSelected
+                                        ? Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary
+                                        : Theme.of(context)
+                                            .colorScheme
+                                            .onSurfaceVariant,
                                   ),
                                 ),
                                 const SizedBox(height: 8),
                                 Flexible(
                                   child: Text(
                                     icon.name,
-                                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          fontWeight: isSelected
+                                              ? FontWeight.bold
+                                              : FontWeight.normal,
+                                        ),
                                     textAlign: TextAlign.center,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
@@ -100,13 +112,16 @@ class AppIconSettingsPage extends StatelessWidget {
                                       vertical: 2,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: Theme.of(context).colorScheme.primary,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
                                       borderRadius: BorderRadius.circular(4),
                                     ),
                                     child: Text(
                                       'active'.tr,
                                       style: TextStyle(
-                                        color: Theme.of(context).colorScheme.onPrimary,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary,
                                         fontSize: 8,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -128,9 +143,13 @@ class AppIconSettingsPage extends StatelessWidget {
     );
   }
 
-  Future<void> _changeIcon(BuildContext context, AppIconController controller, String iconId) async {
+  Future<void> _changeIcon(
+    BuildContext context,
+    AppIconController controller,
+    String iconId,
+  ) async {
     final success = await controller.changeAppIcon(iconId);
-    
+
     if (!success) {
       Get.snackbar(
         'note'.tr,

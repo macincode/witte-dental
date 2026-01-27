@@ -14,7 +14,6 @@ class AuthMiddleware extends GetMiddleware {
 }
 
 class RoleMiddleware extends GetMiddleware {
-  
   RoleMiddleware({required this.requiredRole});
   final String requiredRole;
 
@@ -23,7 +22,7 @@ class RoleMiddleware extends GetMiddleware {
     if (!HiveService.isLoggedIn) {
       return const RouteSettings(name: AppConstants.loginRoute);
     }
-    
+
     final userRole = HiveService.userRole;
     if (userRole != requiredRole) {
       // Redirect to appropriate dashboard based on user's actual role

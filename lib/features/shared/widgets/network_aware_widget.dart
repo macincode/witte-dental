@@ -4,16 +4,16 @@ import '../../../core/controllers/network_controller.dart';
 import 'no_internet_screen.dart';
 
 class NetworkAwareWidget extends StatelessWidget {
-  
   const NetworkAwareWidget({
-    required this.child, super.key,
+    required this.child,
+    super.key,
   });
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     final networkController = Get.find<NetworkController>();
-    
+
     return Obx(() {
       if (networkController.isConnected) {
         return child;

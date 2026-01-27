@@ -5,14 +5,15 @@ import '../../../../core/constants/app_constants.dart';
 import '../../../../core/storage/hive_service.dart';
 import '../../data/models/onboarding_model.dart';
 
-class OnboardingController extends GetxController with GetTickerProviderStateMixin {
+class OnboardingController extends GetxController
+    with GetTickerProviderStateMixin {
   late PageController pageController;
   late AnimationController fadeController;
   late AnimationController slideController;
-  
+
   final RxInt currentPage = 0.obs;
   final RxBool isLastPage = false.obs;
-  
+
   late Animation<double> fadeAnimation;
   late Animation<Offset> slideAnimation;
 
@@ -24,12 +25,12 @@ class OnboardingController extends GetxController with GetTickerProviderStateMix
 
   void _initControllers() {
     pageController = PageController();
-    
+
     fadeController = AnimationController(
       duration: const Duration(milliseconds: 600),
       vsync: this,
     );
-    
+
     slideController = AnimationController(
       duration: const Duration(milliseconds: 800),
       vsync: this,
@@ -38,18 +39,22 @@ class OnboardingController extends GetxController with GetTickerProviderStateMix
     fadeAnimation = Tween<double>(
       begin: 0,
       end: 1,
-    ).animate(CurvedAnimation(
-      parent: fadeController,
-      curve: Curves.easeInOut,
-    ),);
+    ).animate(
+      CurvedAnimation(
+        parent: fadeController,
+        curve: Curves.easeInOut,
+      ),
+    );
 
     slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.3),
       end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: slideController,
-      curve: Curves.easeOutCubic,
-    ),);
+    ).animate(
+      CurvedAnimation(
+        parent: slideController,
+        curve: Curves.easeOutCubic,
+      ),
+    );
 
     _startAnimations();
   }
@@ -62,7 +67,7 @@ class OnboardingController extends GetxController with GetTickerProviderStateMix
   void onPageChanged(int page) {
     currentPage.value = page;
     isLastPage.value = page == OnboardingData.pages.length - 1;
-    
+
     // Reset and restart animations for new page
     fadeController.reset();
     slideController.reset();

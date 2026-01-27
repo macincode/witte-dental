@@ -14,102 +14,104 @@ class DoctorDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return NetworkAwareWidget(
       child: Scaffold(
-      drawer: const RoleBasedDrawer(),
-      appBar: ThemeAwareAppBar(
-        title: 'doctor_dashboard'.tr,
-        actions: [
-          IconButton(
-            onPressed: () => Get.find<LanguageController>().showLanguageDialog(),
-            icon: const Icon(Icons.language),
-            tooltip: 'change_language'.tr,
-          ),
-          IconButton(
-            onPressed: () => Get.find<AuthController>().logout(),
-            icon: const Icon(Icons.logout),
-            tooltip: 'logout'.tr,
-          ),
-        ],
-      ),
-      body: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.medical_services,
-                          color: Theme.of(context).colorScheme.primary,
-                          size: 32,
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Text(
-                            'welcome_doctor'.tr,
-                            maxLines:2,
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.headlineSmall,
+        drawer: const RoleBasedDrawer(),
+        appBar: ThemeAwareAppBar(
+          title: 'doctor_dashboard'.tr,
+          actions: [
+            IconButton(
+              onPressed: () =>
+                  Get.find<LanguageController>().showLanguageDialog(),
+              icon: const Icon(Icons.language),
+              tooltip: 'change_language'.tr,
+            ),
+            IconButton(
+              onPressed: () => Get.find<AuthController>().logout(),
+              icon: const Icon(Icons.logout),
+              tooltip: 'logout'.tr,
+            ),
+          ],
+        ),
+        body: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.medical_services,
+                            color: Theme.of(context).colorScheme.primary,
+                            size: 32,
                           ),
-                        ),
-                      ],
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Text(
+                              'welcome_doctor'.tr,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context).textTheme.headlineSmall,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'manage_patients_desc'.tr,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Expanded(
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  children: [
+                    _buildDashboardCard(
+                      context,
+                      'patients'.tr,
+                      Icons.people,
+                      '24',
+                      Colors.blue,
                     ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'manage_patients_desc'.tr,
-                      style: Theme.of(context).textTheme.bodyMedium,
+                    _buildDashboardCard(
+                      context,
+                      'appointments'.tr,
+                      Icons.calendar_today,
+                      '8',
+                      Colors.green,
+                    ),
+                    _buildDashboardCard(
+                      context,
+                      'prescriptions'.tr,
+                      Icons.receipt,
+                      '12',
+                      Colors.orange,
+                    ),
+                    _buildDashboardCard(
+                      context,
+                      'reports'.tr,
+                      Icons.analytics,
+                      '5',
+                      Colors.purple,
                     ),
                   ],
                 ),
               ),
-            ),
-            const SizedBox(height: 16),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                children: [
-                  _buildDashboardCard(
-                    context,
-                    'patients'.tr,
-                    Icons.people,
-                    '24',
-                    Colors.blue,
-                  ),
-                  _buildDashboardCard(
-                    context,
-                    'appointments'.tr,
-                    Icons.calendar_today,
-                    '8',
-                    Colors.green,
-                  ),
-                  _buildDashboardCard(
-                    context,
-                    'prescriptions'.tr,
-                    Icons.receipt,
-                    '12',
-                    Colors.orange,
-                  ),
-                  _buildDashboardCard(
-                    context,
-                    'reports'.tr,
-                    Icons.analytics,
-                    '5',
-                    Colors.purple,
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    ),);
+    );
   }
 
   Widget _buildDashboardCard(
@@ -137,9 +139,9 @@ class DoctorDashboard extends StatelessWidget {
               Text(
                 count,
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: color,
-                  fontWeight: FontWeight.bold,
-                ),
+                      color: color,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               const SizedBox(height: 4),
               Text(

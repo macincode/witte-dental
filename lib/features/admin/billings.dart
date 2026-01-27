@@ -22,10 +22,8 @@ class _BillingScreenState extends State<BillingScreen>
   @override
   void initState() {
     super.initState();
-   
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +80,9 @@ class _BillingScreenState extends State<BillingScreen>
                           backgroundColor: Colors.grey[100],
                           side: BorderSide.none,
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8,),
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
                           onSelected: (bool selected) {
                             setState(() {
                               _selectedIndex = selected ? index : null;
@@ -124,7 +124,9 @@ class _BillingScreenState extends State<BillingScreen>
                         fillColor: Theme.of(context).colorScheme.surface,
                         prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
                         contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 14,),
+                          horizontal: 16,
+                          vertical: 14,
+                        ),
                       ),
                     ),
                   ),
@@ -138,8 +140,10 @@ class _BillingScreenState extends State<BillingScreen>
                   ),
                   child: IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.tune,
-                        color: Theme.of(context).colorScheme.primary,),
+                    icon: Icon(
+                      Icons.tune,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -246,7 +250,9 @@ class _BillingScreenState extends State<BillingScreen>
                             ),
                             Container(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 4,),
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
                               decoration: BoxDecoration(
                                 color: statusColor.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(8),
@@ -306,42 +312,45 @@ class _BillingScreenState extends State<BillingScreen>
                         Row(
                           children: [
                             Expanded(
-                                child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .error
-                                        .withOpacity(0.1),
-                                    borderRadius: BorderRadius.circular(8),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .error
+                                          .withOpacity(0.1),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Icon(
+                                      Icons.close,
+                                      size: 16,
+                                      color:
+                                          Theme.of(context).colorScheme.error,
+                                    ),
                                   ),
-                                  child: Icon(
-                                    Icons.close,
-                                    size: 16,
-                                    color: Theme.of(context).colorScheme.error,
+                                  Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary
+                                          .withOpacity(0.1),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Icon(
+                                      Icons.check,
+                                      size: 16,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
                                   ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .primary
-                                        .withOpacity(0.1),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Icon(
-                                    Icons.check,
-                                    size: 16,
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                  ),
-                                ),
-                              ],
-                            ),),
+                                ],
+                              ),
+                            ),
                             const SizedBox(width: 8),
                             Expanded(
                               child: ElevatedButton.icon(
@@ -447,8 +456,10 @@ class _BillingScreenState extends State<BillingScreen>
                           decoration:
                               _getInputDecoration('Patient', Icons.person),
                           items: ['Karthi', 'Jegin']
-                              .map((e) =>
-                                  DropdownMenuItem(value: e, child: Text(e)),)
+                              .map(
+                                (e) =>
+                                    DropdownMenuItem(value: e, child: Text(e)),
+                              )
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -457,10 +468,14 @@ class _BillingScreenState extends State<BillingScreen>
                         context,
                         child: DropdownButtonFormField<String>(
                           decoration: _getInputDecoration(
-                              'Doctor', Icons.medical_services,),
+                            'Doctor',
+                            Icons.medical_services,
+                          ),
                           items: ['Dr. Smith', 'Dr. Johnson']
-                              .map((e) =>
-                                  DropdownMenuItem(value: e, child: Text(e)),)
+                              .map(
+                                (e) =>
+                                    DropdownMenuItem(value: e, child: Text(e)),
+                              )
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -469,32 +484,37 @@ class _BillingScreenState extends State<BillingScreen>
                         context,
                         child: DropdownButtonFormField<String>(
                           decoration: _getInputDecoration(
-                              'Department', Icons.local_hospital,),
+                            'Department',
+                            Icons.local_hospital,
+                          ),
                           items: ['Cardiology', 'Orthology']
-                              .map((e) =>
-                                  DropdownMenuItem(value: e, child: Text(e)),)
+                              .map(
+                                (e) =>
+                                    DropdownMenuItem(value: e, child: Text(e)),
+                              )
                               .toList(),
                           onChanged: (value) {},
                         ),
                       ),
                       _buildFormField(
-                              context,
-                              child: TextField(
-                                decoration: _getInputDecoration(
-                                    'Date', Icons.calendar_today,),
-                                readOnly: true,
-                                onTap: () async {
-                                  await showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime(1900),
-                                    lastDate: DateTime.now()
-                                        .add(const Duration(days: 365)),
-                                  );
-                                },
-                              ),
-                            ),
-                      
+                        context,
+                        child: TextField(
+                          decoration: _getInputDecoration(
+                            'Date',
+                            Icons.calendar_today,
+                          ),
+                          readOnly: true,
+                          onTap: () async {
+                            await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1900),
+                              lastDate:
+                                  DateTime.now().add(const Duration(days: 365)),
+                            );
+                          },
+                        ),
+                      ),
                       _buildFormField(
                         context,
                         child: TextField(
@@ -647,8 +667,10 @@ class _BillingScreenState extends State<BillingScreen>
                           decoration:
                               _getInputDecoration('Patient', Icons.person),
                           items: ['Karthi', 'Jegin']
-                              .map((e) =>
-                                  DropdownMenuItem(value: e, child: Text(e)),)
+                              .map(
+                                (e) =>
+                                    DropdownMenuItem(value: e, child: Text(e)),
+                              )
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -657,10 +679,14 @@ class _BillingScreenState extends State<BillingScreen>
                         context,
                         child: DropdownButtonFormField<String>(
                           decoration: _getInputDecoration(
-                              'Doctor', Icons.medical_services,),
+                            'Doctor',
+                            Icons.medical_services,
+                          ),
                           items: ['Dr. Smith', 'Dr. Johnson']
-                              .map((e) =>
-                                  DropdownMenuItem(value: e, child: Text(e)),)
+                              .map(
+                                (e) =>
+                                    DropdownMenuItem(value: e, child: Text(e)),
+                              )
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -669,10 +695,14 @@ class _BillingScreenState extends State<BillingScreen>
                         context,
                         child: DropdownButtonFormField<String>(
                           decoration: _getInputDecoration(
-                              'Department', Icons.local_hospital,),
+                            'Department',
+                            Icons.local_hospital,
+                          ),
                           items: ['Cardiology', 'Orthology']
-                              .map((e) =>
-                                  DropdownMenuItem(value: e, child: Text(e)),)
+                              .map(
+                                (e) =>
+                                    DropdownMenuItem(value: e, child: Text(e)),
+                              )
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -684,7 +714,9 @@ class _BillingScreenState extends State<BillingScreen>
                               context,
                               child: TextField(
                                 decoration: _getInputDecoration(
-                                    'Date', Icons.calendar_today,),
+                                  'Date',
+                                  Icons.calendar_today,
+                                ),
                                 readOnly: true,
                                 onTap: () async {
                                   await showDatePicker(
@@ -704,7 +736,9 @@ class _BillingScreenState extends State<BillingScreen>
                               context,
                               child: TextField(
                                 decoration: _getInputDecoration(
-                                    'Time', Icons.access_time,),
+                                  'Time',
+                                  Icons.access_time,
+                                ),
                               ),
                             ),
                           ),
@@ -717,7 +751,9 @@ class _BillingScreenState extends State<BillingScreen>
                               context,
                               child: TextField(
                                 decoration: _getInputDecoration(
-                                    'Charge', Icons.attach_money,),
+                                  'Charge',
+                                  Icons.attach_money,
+                                ),
                               ),
                             ),
                           ),
@@ -727,10 +763,16 @@ class _BillingScreenState extends State<BillingScreen>
                               context,
                               child: DropdownButtonFormField<String>(
                                 decoration: _getInputDecoration(
-                                    'Payment', Icons.payment,),
+                                  'Payment',
+                                  Icons.payment,
+                                ),
                                 items: ['Cash', 'Credit Card', 'Debit Card']
-                                    .map((e) => DropdownMenuItem(
-                                        value: e, child: Text(e),),)
+                                    .map(
+                                      (e) => DropdownMenuItem(
+                                        value: e,
+                                        child: Text(e),
+                                      ),
+                                    )
                                     .toList(),
                                 onChanged: (value) {},
                               ),

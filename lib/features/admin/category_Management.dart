@@ -75,7 +75,9 @@ class _CategoryManagementState extends State<CategoryManagement> {
                           backgroundColor: Colors.grey[100],
                           side: BorderSide.none,
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8,),
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
                           onSelected: (bool selected) {
                             setState(() {
                               _selectedIndex = selected ? index : null;
@@ -117,7 +119,9 @@ class _CategoryManagementState extends State<CategoryManagement> {
                         fillColor: Theme.of(context).colorScheme.surface,
                         prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
                         contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 14,),
+                          horizontal: 16,
+                          vertical: 14,
+                        ),
                       ),
                     ),
                   ),
@@ -130,11 +134,11 @@ class _CategoryManagementState extends State<CategoryManagement> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: IconButton(
-                    onPressed: () {
-                     
-                    },
-                    icon: Icon(Icons.tune,
-                        color: Theme.of(context).colorScheme.primary,),
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.tune,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -159,34 +163,28 @@ class _CategoryManagementState extends State<CategoryManagement> {
                 final categories = [
                   'Karthick K',
                   'Ram',
-                 
                 ];
                 final icons = [
                   Icons.medical_services,
                   Icons.content_cut,
-                  
                 ];
                 final colors = [
                   Colors.blue,
                   Colors.green,
-                 
                 ];
 
                 final categoryName = categories[index % categories.length];
-                 final category = [
+                final category = [
                   'karthi@macincode.com',
                   'ram@macincode.com',
-
                 ];
-                final categoryemail =category[index % categories.length];
+                final categoryemail = category[index % categories.length];
 
-                
-                 final categoryRoles = [
+                final categoryRoles = [
                   'Doctor',
                   'Lab Technician',
-
                 ];
-final categoryRole = categoryRoles[index % categories.length];
+                final categoryRole = categoryRoles[index % categories.length];
 
                 final categoryIcon = icons[index % icons.length];
                 final categoryColor = colors[index % colors.length];
@@ -248,51 +246,63 @@ final categoryRole = categoryRoles[index % categories.length];
                                           color: Colors.grey[600],
                                         ),
                                   ),
-                                   const SizedBox(height: 4),
+                                  const SizedBox(height: 4),
                                   Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 4,),
-                              decoration: BoxDecoration(
-                                color:Theme.of(context).colorScheme.primary.withOpacity(0.09),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Text(
-                                categoryRole,
-                                style:  Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 10,
-                                          color: Theme.of(context).colorScheme.primary,
-                                        ),
-                              ),
-                            ),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary
+                                          .withOpacity(0.09),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Text(
+                                      categoryRole,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 10,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
+                                          ),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
                             Container(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 4,),
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
                               decoration: BoxDecoration(
-                                color:Theme.of(context).colorScheme.primary.withOpacity(0.09),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.09),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Text(
                                 'Active',
-                                style:  Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 10,
-                                          color: Theme.of(context).colorScheme.primary,
-                                        ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 10,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
                               ),
                             ),
                           ],
                         ),
-                        
                         const SizedBox(height: 12),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -300,17 +310,25 @@ final categoryRole = categoryRoles[index % categories.length];
                             Expanded(
                               child: OutlinedButton.icon(
                                 onPressed: () {},
-                                icon: const Icon(Icons.delete, size: 18,color: Colors.red,),
-                                label:  Text('Delete',style:Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(
-                                          fontWeight: FontWeight.w400,
-                                         
-                                          color: Theme.of(context).colorScheme.error,
-                                        ),),
+                                icon: const Icon(
+                                  Icons.delete,
+                                  size: 18,
+                                  color: Colors.red,
+                                ),
+                                label: Text(
+                                  'Delete',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.copyWith(
+                                        fontWeight: FontWeight.w400,
+                                        color:
+                                            Theme.of(context).colorScheme.error,
+                                      ),
+                                ),
                                 style: OutlinedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(vertical: 8),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),
@@ -324,7 +342,6 @@ final categoryRole = categoryRoles[index % categories.length];
                                 icon: const Icon(Icons.edit, size: 16),
                                 label: const Text('Edit'),
                                 style: ElevatedButton.styleFrom(
-                                
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),
@@ -458,8 +475,7 @@ final categoryRole = categoryRoles[index % categories.length];
                       _buildFormField(
                         context,
                         child: TextField(
-                          decoration:
-                              _getInputDecoration('Email', Icons.email),
+                          decoration: _getInputDecoration('Email', Icons.email),
                         ),
                       ),
                       Row(
@@ -469,7 +485,9 @@ final categoryRole = categoryRoles[index % categories.length];
                               context,
                               child: TextField(
                                 decoration: _getInputDecoration(
-                                    'D.O.B', Icons.calendar_today,),
+                                  'D.O.B',
+                                  Icons.calendar_today,
+                                ),
                                 readOnly: true,
                                 onTap: () async {
                                   await showDatePicker(
@@ -489,10 +507,16 @@ final categoryRole = categoryRoles[index % categories.length];
                               context,
                               child: DropdownButtonFormField<String>(
                                 decoration: _getInputDecoration(
-                                    'Gender', Icons.person_3_sharp,),
+                                  'Gender',
+                                  Icons.person_3_sharp,
+                                ),
                                 items: ['Male', 'Female', 'Others']
-                                    .map((e) => DropdownMenuItem(
-                                        value: e, child: Text(e),),)
+                                    .map(
+                                      (e) => DropdownMenuItem(
+                                        value: e,
+                                        child: Text(e),
+                                      ),
+                                    )
                                     .toList(),
                                 onChanged: (value) {},
                               ),
@@ -500,32 +524,33 @@ final categoryRole = categoryRoles[index % categories.length];
                           ),
                         ],
                       ),
-                      
                       _buildFormField(
                         context,
                         child: TextField(
-                         
-                          decoration:
-                              _getInputDecoration('Twitter URL', Icons.chat_bubble_outline),
+                          decoration: _getInputDecoration(
+                            'Twitter URL',
+                            Icons.chat_bubble_outline,
+                          ),
                         ),
                       ),
                       _buildFormField(
                         context,
                         child: TextField(
-                         
-                          decoration:
-                              _getInputDecoration('Facebook URL', Icons.facebook),
+                          decoration: _getInputDecoration(
+                            'Facebook URL',
+                            Icons.facebook,
+                          ),
                         ),
                       ),
                       _buildFormField(
                         context,
                         child: TextField(
-                         
-                          decoration:
-                              _getInputDecoration('Instagram URL', Icons.camera_alt),
+                          decoration: _getInputDecoration(
+                            'Instagram URL',
+                            Icons.camera_alt,
+                          ),
                         ),
                       ),
-                      
                       const SizedBox(height: 24),
                       Row(
                         children: [
@@ -682,23 +707,29 @@ final categoryRole = categoryRoles[index % categories.length];
                       _buildFormField(
                         context,
                         child: TextField(
-                          decoration:
-                              _getInputDecoration('Email', Icons.email),
+                          decoration: _getInputDecoration('Email', Icons.email),
                         ),
                       ),
-                       _buildFormField(
-                              context,
-                              child: DropdownButtonFormField<String>(
-                                decoration: _getInputDecoration(
-                                    'Role', Icons.person_3_sharp,),
-                                items: ['Patient', 'Doctor', 'Lab Technician', 'Nurse']
-                                    .map((e) => DropdownMenuItem(
-                                        value: e, child: Text(e),),)
-                                    .toList(),
-                                onChanged: (value) {},
-                              ),
-                            ),
-                            _buildFormField(
+                      _buildFormField(
+                        context,
+                        child: DropdownButtonFormField<String>(
+                          decoration: _getInputDecoration(
+                            'Role',
+                            Icons.person_3_sharp,
+                          ),
+                          items:
+                              ['Patient', 'Doctor', 'Lab Technician', 'Nurse']
+                                  .map(
+                                    (e) => DropdownMenuItem(
+                                      value: e,
+                                      child: Text(e),
+                                    ),
+                                  )
+                                  .toList(),
+                          onChanged: (value) {},
+                        ),
+                      ),
+                      _buildFormField(
                         context,
                         child: TextField(
                           decoration:
@@ -708,8 +739,10 @@ final categoryRole = categoryRoles[index % categories.length];
                       _buildFormField(
                         context,
                         child: TextField(
-                          decoration:
-                              _getInputDecoration('Confirm Password', Icons.password_sharp),
+                          decoration: _getInputDecoration(
+                            'Confirm Password',
+                            Icons.password_sharp,
+                          ),
                         ),
                       ),
                       Row(
@@ -719,7 +752,9 @@ final categoryRole = categoryRoles[index % categories.length];
                               context,
                               child: TextField(
                                 decoration: _getInputDecoration(
-                                    'D.O.B', Icons.calendar_today,),
+                                  'D.O.B',
+                                  Icons.calendar_today,
+                                ),
                                 readOnly: true,
                                 onTap: () async {
                                   await showDatePicker(
@@ -739,10 +774,16 @@ final categoryRole = categoryRoles[index % categories.length];
                               context,
                               child: DropdownButtonFormField<String>(
                                 decoration: _getInputDecoration(
-                                    'Gender', Icons.person_3_sharp,),
+                                  'Gender',
+                                  Icons.person_3_sharp,
+                                ),
                                 items: ['Male', 'Female', 'Others']
-                                    .map((e) => DropdownMenuItem(
-                                        value: e, child: Text(e),),)
+                                    .map(
+                                      (e) => DropdownMenuItem(
+                                        value: e,
+                                        child: Text(e),
+                                      ),
+                                    )
                                     .toList(),
                                 onChanged: (value) {},
                               ),
@@ -750,40 +791,40 @@ final categoryRole = categoryRoles[index % categories.length];
                           ),
                         ],
                       ),
-                      
                       _buildFormField(
                         context,
                         child: TextField(
-                         
-                          decoration:
-                              _getInputDecoration('Twitter URL', Icons.chat_bubble_outline),
+                          decoration: _getInputDecoration(
+                            'Twitter URL',
+                            Icons.chat_bubble_outline,
+                          ),
                         ),
                       ),
                       _buildFormField(
                         context,
                         child: TextField(
-                         
-                          decoration:
-                              _getInputDecoration('Facebook URL', Icons.facebook),
+                          decoration: _getInputDecoration(
+                            'Facebook URL',
+                            Icons.facebook,
+                          ),
                         ),
                       ),
                       _buildFormField(
                         context,
                         child: TextField(
-                         
-                          decoration:
-                              _getInputDecoration('Instagram URL', Icons.camera_alt),
+                          decoration: _getInputDecoration(
+                            'Instagram URL',
+                            Icons.camera_alt,
+                          ),
                         ),
                       ),
                       _buildFormField(
                         context,
                         child: TextField(
-                         
                           decoration:
                               _getInputDecoration('LinkedIn URL', Icons.link),
                         ),
                       ),
-                      
                       const SizedBox(height: 24),
                       Row(
                         children: [
@@ -855,6 +896,4 @@ final categoryRole = categoryRoles[index % categories.length];
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
     );
   }
-
-  
 }

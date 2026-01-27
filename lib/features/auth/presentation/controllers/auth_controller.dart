@@ -14,12 +14,11 @@ class AuthController extends GetxController {
   String get errorMessage => _errorMessage.value;
   bool get isLoggedIn => HiveService.isLoggedIn && _currentUser.value != null;
 
-
   void checkAuthStatus() {
     if (HiveService.isLoggedIn) {
       final userRole = HiveService.userRole;
       final userId = HiveService.getUserData<String>('user_id');
-      
+
       if (userRole != null && userId != null) {
         // Create user from stored data
         _currentUser.value = User(
@@ -42,14 +41,13 @@ class AuthController extends GetxController {
 
       // Simulate API call - replace with actual implementation
       await Future.delayed(const Duration(seconds: 2));
-      
+
       // Mock user data - replace with API response
       final user = User(
         id: '123',
         email: email,
         name: 'Dr. John Doe',
-        role: 
-        AppConstants.roleAdmin,
+        role: AppConstants.roleAdmin,
         // AppConstants.roleDoctor,
         // AppConstants.rolePatient,
         isActive: true,
@@ -67,7 +65,6 @@ class AuthController extends GetxController {
 
       _currentUser.value = user;
       _navigateBasedOnRole(user.role);
-      
     } catch (e) {
       _errorMessage.value = 'Login failed: $e';
     } finally {

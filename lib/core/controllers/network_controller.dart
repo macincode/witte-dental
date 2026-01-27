@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class NetworkController extends GetxController {
   final RxBool _isConnected = true.obs;
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
-  
+
   bool get isConnected => _isConnected.value;
 
   @override
@@ -23,8 +23,8 @@ class NetworkController extends GetxController {
 
   void _listenToConnectivityChanges() {
     _connectivitySubscription = Connectivity().onConnectivityChanged.listen(
-      _updateConnectionStatus,
-    );
+          _updateConnectionStatus,
+        );
   }
 
   void _updateConnectionStatus(ConnectivityResult result) {

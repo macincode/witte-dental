@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../auth/presentation/controllers/auth_controller.dart';
-import '../../../core/navigation/role_based_navigation.dart';
+
 import '../../../core/constants/app_constants.dart';
+import '../../../core/navigation/role_based_navigation.dart';
+import '../../auth/presentation/controllers/auth_controller.dart';
 
 class RoleBasedDrawer extends StatelessWidget {
   const RoleBasedDrawer({super.key});
@@ -10,13 +11,13 @@ class RoleBasedDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authController = Get.find<AuthController>();
-    
+
     return Obx(() {
       final user = authController.currentUser;
       if (user == null) return const SizedBox.shrink();
-      
+
       final navigationItems = RoleBasedNavigation.getNavigationItems(user.role);
-      
+
       return Drawer(
         child: Column(
           children: [
@@ -53,7 +54,7 @@ class RoleBasedDrawer extends StatelessWidget {
                 ),
               ],
             ),
-            
+
             // Navigation Items
             Expanded(
               child: ListView.builder(
@@ -62,25 +63,30 @@ class RoleBasedDrawer extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final item = navigationItems[index];
                   final isCurrentRoute = Get.currentRoute == item.route;
-                  
+
                   return ListTile(
                     leading: Icon(
                       item.icon,
-                      color: isCurrentRoute 
+                      color: isCurrentRoute
                           ? Theme.of(context).colorScheme.primary
                           : Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                     title: Text(
                       item.title,
                       style: TextStyle(
-                        color: isCurrentRoute 
+                        color: isCurrentRoute
                             ? Theme.of(context).colorScheme.primary
                             : Theme.of(context).colorScheme.onSurface,
-                        fontWeight: isCurrentRoute ? FontWeight.w600 : FontWeight.normal,
+                        fontWeight: isCurrentRoute
+                            ? FontWeight.w600
+                            : FontWeight.normal,
                       ),
                     ),
                     selected: isCurrentRoute,
-                    selectedTileColor: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
+                    selectedTileColor: Theme.of(context)
+                        .colorScheme
+                        .primaryContainer
+                        .withOpacity(0.3),
                     onTap: () {
                       Navigator.pop(context);
                       if (!isCurrentRoute) {
@@ -91,7 +97,7 @@ class RoleBasedDrawer extends StatelessWidget {
                 },
               ),
             ),
-            
+
             // Bottom Actions
             const Divider(),
             ListTile(

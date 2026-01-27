@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class PageIndicator extends StatelessWidget {
-
   const PageIndicator({
-    required this.currentPage, required this.totalPages, super.key,
+    required this.currentPage,
+    required this.totalPages,
+    super.key,
   });
   final int currentPage;
   final int totalPages;

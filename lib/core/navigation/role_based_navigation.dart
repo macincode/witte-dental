@@ -83,7 +83,7 @@ class RoleBasedNavigation {
         icon: Icons.people,
         route: AppConstants.categoryManagement,
       ),
-       NavigationItem(
+      NavigationItem(
         title: 'Appointments',
         icon: Icons.calendar_today,
         route: AppConstants.appointments,
@@ -103,7 +103,6 @@ class RoleBasedNavigation {
 }
 
 class NavigationItem {
-
   NavigationItem({
     required this.title,
     required this.icon,

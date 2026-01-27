@@ -44,40 +44,38 @@ class AppPages {
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleDoctor)],
     ),
 
-     // Patient routes
+    // Patient routes
     GetPage(
       name: AppConstants.patientDashboard,
       page: () => const PatientDashboard(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.rolePatient)],
     ),
 
-  // Admin routes
+    // Admin routes
     GetPage(
       name: AppConstants.adminDashboard,
       page: () => const AdminDashboard(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
-      GetPage(
-        name: AppConstants.adminInvoice,
-        page: () => const AdminInvoice(),
-        middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
-      ),
-       GetPage(
-        name: AppConstants.categoryManagement,
-        page: () => const CategoryManagement(),
-        middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
-      ),
-        GetPage(
-        name: AppConstants.appointments,
-        page: () => const AppointmentScreens(),
-        middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
-      ),
-      GetPage(
-        name: AppConstants.billings,
-        page: () => const BillingScreen(),
-        middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
-      ),
-
-    
+    GetPage(
+      name: AppConstants.adminInvoice,
+      page: () => const AdminInvoice(),
+      middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+    ),
+    GetPage(
+      name: AppConstants.categoryManagement,
+      page: () => const CategoryManagement(),
+      middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+    ),
+    GetPage(
+      name: AppConstants.appointments,
+      page: () => const AppointmentScreens(),
+      middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+    ),
+    GetPage(
+      name: AppConstants.billings,
+      page: () => const BillingScreen(),
+      middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+    ),
   ];
 }

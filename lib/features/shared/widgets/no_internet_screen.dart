@@ -8,7 +8,7 @@ class NoInternetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final networkController = Get.find<NetworkController>();
-    
+
     return Scaffold(
       body: Center(
         child: Padding(
@@ -25,8 +25,8 @@ class NoInternetScreen extends StatelessWidget {
               Text(
                 'no_internet_connection'.tr,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+                      fontWeight: FontWeight.bold,
+                    ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),

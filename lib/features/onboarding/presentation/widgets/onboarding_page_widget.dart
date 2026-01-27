@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import '../../data/models/onboarding_model.dart';
 
 class OnboardingPageWidget extends StatelessWidget {
-
   const OnboardingPageWidget({
-    required this.page, required this.fadeAnimation, required this.slideAnimation, required this.slideController, super.key,
+    required this.page,
+    required this.fadeAnimation,
+    required this.slideAnimation,
+    required this.slideController,
+    super.key,
   });
   final OnboardingPage page;
   final Animation<double> fadeAnimation;
@@ -14,7 +17,7 @@ class OnboardingPageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    
+
     return DecoratedBox(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -29,7 +32,7 @@ class OnboardingPageWidget extends StatelessWidget {
           child: Column(
             children: [
               const Spacer(flex: 2),
-              
+
               // Illustration Area
               FadeTransition(
                 opacity: fadeAnimation,
@@ -52,9 +55,9 @@ class OnboardingPageWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              
+
               const Spacer(),
-              
+
               // Title
               FadeTransition(
                 opacity: fadeAnimation,
@@ -62,10 +65,12 @@ class OnboardingPageWidget extends StatelessWidget {
                   position: Tween<Offset>(
                     begin: const Offset(0, 0.5),
                     end: Offset.zero,
-                  ).animate(CurvedAnimation(
-                    parent: slideController,
-                    curve: const Interval(0.2, 1, curve: Curves.easeOutCubic),
-                  ),),
+                  ).animate(
+                    CurvedAnimation(
+                      parent: slideController,
+                      curve: const Interval(0.2, 1, curve: Curves.easeOutCubic),
+                    ),
+                  ),
                   child: Text(
                     page.title,
                     style: const TextStyle(
@@ -78,9 +83,9 @@ class OnboardingPageWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              
+
               const SizedBox(height: 24),
-              
+
               // Description
               FadeTransition(
                 opacity: fadeAnimation,
@@ -88,10 +93,12 @@ class OnboardingPageWidget extends StatelessWidget {
                   position: Tween<Offset>(
                     begin: const Offset(0, 0.7),
                     end: Offset.zero,
-                  ).animate(CurvedAnimation(
-                    parent: slideController,
-                    curve: const Interval(0.4, 1, curve: Curves.easeOutCubic),
-                  ),),
+                  ).animate(
+                    CurvedAnimation(
+                      parent: slideController,
+                      curve: const Interval(0.4, 1, curve: Curves.easeOutCubic),
+                    ),
+                  ),
                   child: Text(
                     page.description,
                     style: TextStyle(
@@ -103,7 +110,7 @@ class OnboardingPageWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              
+
               const Spacer(flex: 2),
             ],
           ),
@@ -114,7 +121,7 @@ class OnboardingPageWidget extends StatelessWidget {
 
   Widget _buildIcon() {
     IconData iconData;
-    
+
     switch (page.iconData) {
       case 'shield_health':
         iconData = Icons.security;

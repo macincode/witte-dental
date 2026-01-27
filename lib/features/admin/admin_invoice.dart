@@ -10,58 +10,58 @@ class AdminInvoice extends StatefulWidget {
 }
 
 class _AdminInvoiceState extends State<AdminInvoice> {
-
   @override
   Widget build(BuildContext context) {
     return NetworkAwareWidget(
-        child: Scaffold(
-      // drawer: const RoleBasedDrawer(),
-      appBar: AppBar(
-        title: const Text('Admin Invoice'),
-      ),
-      body: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            const SizedBox(height: 16),
-            Expanded(
-              child: ListView(
-                children: [
-                  _buildDashboardCard(
-                    context,
-                    'Invoice Amount',
-                    Icons.group,
-                    '27k',
-                  ),
-                  const SizedBox(height: 16),
-                  _buildDashboardCard(
-                    context,
-                    'Billed Amount',
-                    Icons.medical_services,
-                    '7.45k',
-                  ),
-                  const SizedBox(height: 16),
-                  _buildDashboardCard(
-                    context,
-                    'Payment Amount',
-                    Icons.people,
-                    '100k',
-                  ),
-                  const SizedBox(height: 16),
-                  _buildDashboardCard(
-                    context,
-                    'Doctors',
-                    Icons.monitor_heart,
-                    '2',
-                  ),
-                ],
+      child: Scaffold(
+        // drawer: const RoleBasedDrawer(),
+        appBar: AppBar(
+          title: const Text('Admin Invoice'),
+        ),
+        body: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              const SizedBox(height: 16),
+              Expanded(
+                child: ListView(
+                  children: [
+                    _buildDashboardCard(
+                      context,
+                      'Invoice Amount',
+                      Icons.group,
+                      '27k',
+                    ),
+                    const SizedBox(height: 16),
+                    _buildDashboardCard(
+                      context,
+                      'Billed Amount',
+                      Icons.medical_services,
+                      '7.45k',
+                    ),
+                    const SizedBox(height: 16),
+                    _buildDashboardCard(
+                      context,
+                      'Payment Amount',
+                      Icons.people,
+                      '100k',
+                    ),
+                    const SizedBox(height: 16),
+                    _buildDashboardCard(
+                      context,
+                      'Doctors',
+                      Icons.monitor_heart,
+                      '2',
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    ),);
+    );
   }
 
   Widget _buildDashboardCard(
@@ -97,7 +97,8 @@ class _AdminInvoiceState extends State<AdminInvoice> {
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: Theme.of(context).colorScheme.onPrimary,),
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Icon(
@@ -121,8 +122,7 @@ class _AdminInvoiceState extends State<AdminInvoice> {
             Text(
               '₹ $amt',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.bold
-                        ,
+                    fontWeight: FontWeight.bold,
                   ),
               textAlign: TextAlign.center,
             ),

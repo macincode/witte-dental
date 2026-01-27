@@ -34,11 +34,9 @@ class _AppointmentScreensState extends State<AppointmentScreens>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
             child: Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(80),
@@ -94,7 +92,9 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                         fillColor: Theme.of(context).colorScheme.surface,
                         prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
                         contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 14,),
+                          horizontal: 16,
+                          vertical: 14,
+                        ),
                       ),
                     ),
                   ),
@@ -108,8 +108,10 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                   ),
                   child: IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.tune,
-                        color: Theme.of(context).colorScheme.primary,),
+                    icon: Icon(
+                      Icons.tune,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -216,7 +218,9 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                             ),
                             Container(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 4,),
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
                               decoration: BoxDecoration(
                                 color: statusColor.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(8),
@@ -276,42 +280,45 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                         Row(
                           children: [
                             Expanded(
-                                child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .error
-                                        .withOpacity(0.1),
-                                    borderRadius: BorderRadius.circular(8),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .error
+                                          .withOpacity(0.1),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Icon(
+                                      Icons.close,
+                                      size: 16,
+                                      color:
+                                          Theme.of(context).colorScheme.error,
+                                    ),
                                   ),
-                                  child: Icon(
-                                    Icons.close,
-                                    size: 16,
-                                    color: Theme.of(context).colorScheme.error,
+                                  Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary
+                                          .withOpacity(0.1),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Icon(
+                                      Icons.check,
+                                      size: 16,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
                                   ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .primary
-                                        .withOpacity(0.1),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Icon(
-                                    Icons.check,
-                                    size: 16,
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                  ),
-                                ),
-                              ],
-                            ),),
+                                ],
+                              ),
+                            ),
                             const SizedBox(width: 8),
                             Expanded(
                               child: ElevatedButton.icon(
@@ -417,8 +424,10 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                           decoration:
                               _getInputDecoration('Patient', Icons.person),
                           items: ['Karthi', 'Jegin']
-                              .map((e) =>
-                                  DropdownMenuItem(value: e, child: Text(e)),)
+                              .map(
+                                (e) =>
+                                    DropdownMenuItem(value: e, child: Text(e)),
+                              )
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -427,10 +436,14 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                         context,
                         child: DropdownButtonFormField<String>(
                           decoration: _getInputDecoration(
-                              'Doctor', Icons.medical_services,),
+                            'Doctor',
+                            Icons.medical_services,
+                          ),
                           items: ['Dr. Smith', 'Dr. Johnson']
-                              .map((e) =>
-                                  DropdownMenuItem(value: e, child: Text(e)),)
+                              .map(
+                                (e) =>
+                                    DropdownMenuItem(value: e, child: Text(e)),
+                              )
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -439,32 +452,37 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                         context,
                         child: DropdownButtonFormField<String>(
                           decoration: _getInputDecoration(
-                              'Department', Icons.local_hospital,),
+                            'Department',
+                            Icons.local_hospital,
+                          ),
                           items: ['Cardiology', 'Orthology']
-                              .map((e) =>
-                                  DropdownMenuItem(value: e, child: Text(e)),)
+                              .map(
+                                (e) =>
+                                    DropdownMenuItem(value: e, child: Text(e)),
+                              )
                               .toList(),
                           onChanged: (value) {},
                         ),
                       ),
                       _buildFormField(
-                              context,
-                              child: TextField(
-                                decoration: _getInputDecoration(
-                                    'Date', Icons.calendar_today,),
-                                readOnly: true,
-                                onTap: () async {
-                                  await showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime(1900),
-                                    lastDate: DateTime.now()
-                                        .add(const Duration(days: 365)),
-                                  );
-                                },
-                              ),
-                            ),
-                      
+                        context,
+                        child: TextField(
+                          decoration: _getInputDecoration(
+                            'Date',
+                            Icons.calendar_today,
+                          ),
+                          readOnly: true,
+                          onTap: () async {
+                            await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1900),
+                              lastDate:
+                                  DateTime.now().add(const Duration(days: 365)),
+                            );
+                          },
+                        ),
+                      ),
                       _buildFormField(
                         context,
                         child: TextField(
@@ -617,8 +635,10 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                           decoration:
                               _getInputDecoration('Patient', Icons.person),
                           items: ['Karthi', 'Jegin']
-                              .map((e) =>
-                                  DropdownMenuItem(value: e, child: Text(e)),)
+                              .map(
+                                (e) =>
+                                    DropdownMenuItem(value: e, child: Text(e)),
+                              )
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -627,10 +647,14 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                         context,
                         child: DropdownButtonFormField<String>(
                           decoration: _getInputDecoration(
-                              'Doctor', Icons.medical_services,),
+                            'Doctor',
+                            Icons.medical_services,
+                          ),
                           items: ['Dr. Smith', 'Dr. Johnson']
-                              .map((e) =>
-                                  DropdownMenuItem(value: e, child: Text(e)),)
+                              .map(
+                                (e) =>
+                                    DropdownMenuItem(value: e, child: Text(e)),
+                              )
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -639,10 +663,14 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                         context,
                         child: DropdownButtonFormField<String>(
                           decoration: _getInputDecoration(
-                              'Department', Icons.local_hospital,),
+                            'Department',
+                            Icons.local_hospital,
+                          ),
                           items: ['Cardiology', 'Orthology']
-                              .map((e) =>
-                                  DropdownMenuItem(value: e, child: Text(e)),)
+                              .map(
+                                (e) =>
+                                    DropdownMenuItem(value: e, child: Text(e)),
+                              )
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -654,7 +682,9 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                               context,
                               child: TextField(
                                 decoration: _getInputDecoration(
-                                    'Date', Icons.calendar_today,),
+                                  'Date',
+                                  Icons.calendar_today,
+                                ),
                                 readOnly: true,
                                 onTap: () async {
                                   await showDatePicker(
@@ -674,7 +704,9 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                               context,
                               child: TextField(
                                 decoration: _getInputDecoration(
-                                    'Time', Icons.access_time,),
+                                  'Time',
+                                  Icons.access_time,
+                                ),
                               ),
                             ),
                           ),
@@ -687,7 +719,9 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                               context,
                               child: TextField(
                                 decoration: _getInputDecoration(
-                                    'Charge', Icons.attach_money,),
+                                  'Charge',
+                                  Icons.attach_money,
+                                ),
                               ),
                             ),
                           ),
@@ -697,10 +731,16 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                               context,
                               child: DropdownButtonFormField<String>(
                                 decoration: _getInputDecoration(
-                                    'Payment', Icons.payment,),
+                                  'Payment',
+                                  Icons.payment,
+                                ),
                                 items: ['Cash', 'Credit Card', 'Debit Card']
-                                    .map((e) => DropdownMenuItem(
-                                        value: e, child: Text(e),),)
+                                    .map(
+                                      (e) => DropdownMenuItem(
+                                        value: e,
+                                        child: Text(e),
+                                      ),
+                                    )
                                     .toList(),
                                 onChanged: (value) {},
                               ),

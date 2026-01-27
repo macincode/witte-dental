@@ -46,21 +46,25 @@ class OnboardingScreen extends StatelessWidget {
             Positioned(
               top: MediaQuery.of(context).padding.top + 16,
               right: 24,
-              child: Obx(() => AnimatedOpacity(
-                opacity: controller.isLastPage.value ? 0.0 : 1.0,
-                duration: const Duration(milliseconds: 300),
-                child: TextButton(
-                  onPressed: controller.isLastPage.value ? null : controller.skipOnboarding,
-                  child: const Text(
-                    'Skip',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+              child: Obx(
+                () => AnimatedOpacity(
+                  opacity: controller.isLastPage.value ? 0.0 : 1.0,
+                  duration: const Duration(milliseconds: 300),
+                  child: TextButton(
+                    onPressed: controller.isLastPage.value
+                        ? null
+                        : controller.skipOnboarding,
+                    child: const Text(
+                      'Skip',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ),
-              ),),
+              ),
             ),
 
             // Bottom Controls
@@ -73,36 +77,42 @@ class OnboardingScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     // Page Indicator
-                    Obx(() => PageIndicator(
-                      currentPage: controller.currentPage.value,
-                      totalPages: OnboardingData.pages.length,
-                    ),),
-                    
+                    Obx(
+                      () => PageIndicator(
+                        currentPage: controller.currentPage.value,
+                        totalPages: OnboardingData.pages.length,
+                      ),
+                    ),
+
                     const SizedBox(height: 32),
-                    
+
                     // Next/Get Started Button
-                    Obx(() => SizedBox(
-                      width: double.infinity,
-                      height: 56,
-                      child: ElevatedButton(
-                        onPressed: controller.nextPage,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          foregroundColor: Colors.black87,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(28),
+                    Obx(
+                      () => SizedBox(
+                        width: double.infinity,
+                        height: 56,
+                        child: ElevatedButton(
+                          onPressed: controller.nextPage,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.black87,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(28),
+                            ),
                           ),
-                        ),
-                        child: Text(
-                          controller.isLastPage.value ? 'Get Started' : 'Next',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                          child: Text(
+                            controller.isLastPage.value
+                                ? 'Get Started'
+                                : 'Next',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       ),
-                    ),),
+                    ),
                   ],
                 ),
               ),

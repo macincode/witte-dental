@@ -8,9 +8,9 @@ enum AppThemeMode { light, dark, system }
 
 class ThemeController extends GetxController {
   final Rx<AppThemeMode> _themeMode = AppThemeMode.system.obs;
-  
+
   AppThemeMode get currentThemeMode => _themeMode.value;
-  
+
   ThemeMode get themeMode {
     switch (_themeMode.value) {
       case AppThemeMode.light:
