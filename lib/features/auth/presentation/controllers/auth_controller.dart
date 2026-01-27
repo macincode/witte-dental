@@ -93,7 +93,7 @@ class AuthController extends GetxController {
       _isLoading.value = true;
       await HiveService.logout();
       _currentUser.value = null;
-      Get.offAllNamed(AppConstants.loginRoute);
+      await Get.offAllNamed(AppConstants.loginRoute);
     } finally {
       _isLoading.value = false;
     }
