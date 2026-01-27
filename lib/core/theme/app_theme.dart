@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static const Color primaryColor = Color(0xFF2b8cee);
   static const Color secondaryColor = Color(0xFF18a19a);
+  static const Color secondaryContainerColor = Color(0xFF179b97);
   static const Color tertiaryColor = Color(0xFF8b35eb);
   static const Color errorColor = Color(0xFFD32F2F);
   static const Color buttonColor = Color(0xFF1faf1d);
@@ -18,10 +19,13 @@ class AppTheme {
     colorScheme: const ColorScheme.light(
       primary: primaryColor,
       secondary: secondaryColor,
+      secondaryContainer: secondaryContainerColor,
       tertiary: tertiaryColor,
       error: errorColor,
       onPrimary: lightThemePrimaryText,
       onSecondary: lightThemeSecondaryText,
+      background: lightThemeBackgroundColor,
+      surface: lightThemeSurfaceColor,
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: primaryColor,
@@ -99,8 +103,8 @@ class AppTheme {
   );
 
   // Dark Theme Colors
-  static const Color darkThemeBackgroundColor = Color(0xFF212121);
-  static const Color darkThemeSurfaceColor = Color(0xFF1E1E1E);
+  static const Color darkThemeBackgroundColor = Color(0xFF0a0c10);
+  static const Color darkThemeSurfaceColor = Color(0xFF161b22);
   static const Color darkThemePrimaryText = Colors.white;
   static const Color darkThemeSecondaryText = Color(0xFF617589);
 
@@ -110,12 +114,12 @@ class AppTheme {
       primary: primaryColor,
       secondary: secondaryColor,
       tertiary: tertiaryColor,
-      surface: darkThemeSurfaceColor,
       error: errorColor,
       onPrimary: darkThemePrimaryText,
-      // onBackground: Colors.white,
-      // onSurface: Colors.white,
-      // onError: Colors.white,
+      onSecondary: darkThemeSecondaryText,
+       secondaryContainer: secondaryContainerColor,
+      background: darkThemeBackgroundColor,
+      surface: darkThemeSurfaceColor,
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Color(0xFF212121),

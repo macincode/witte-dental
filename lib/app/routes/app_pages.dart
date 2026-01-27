@@ -54,7 +54,7 @@ class AppPages {
     // Admin routes
     GetPage(
       name: AppConstants.adminDashboard,
-      page: () => const AdminDashboard(),
+      page: () =>  AdminDashboard(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
     GetPage(
