@@ -1,17 +1,18 @@
 import 'package:get/get.dart';
-import 'package:wittehms/features/admin/presentation/pages/appointments.dart';
-import 'package:wittehms/features/admin/presentation/pages/category_Management.dart';
-import 'package:wittehms/features/admin/presentation/pages/admin_invoice.dart';
+import 'package:wittehms/features/admin/appointments.dart';
+import 'package:wittehms/features/admin/billings.dart';
+import 'package:wittehms/features/admin/category_Management.dart';
+import 'package:wittehms/features/admin/admin_invoice.dart';
 import '../../core/constants/app_constants.dart';
 import '../../core/middleware/auth_middleware.dart';
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
 import '../../features/splash/bindings/splash_binding.dart';
 import '../../features/onboarding/presentation/pages/onboarding_screen.dart';
-import '../../features/doctor/presentation/pages/doctor_dashboard.dart';
-import '../../features/patient/presentation/pages/patient_dashboard.dart';
-import '../../features/admin/presentation/pages/admin_dashboard.dart';
-import '../../features/settings/presentation/pages/app_icon_settings_page.dart';
+import '../../features/doctors/doctor_dashboard.dart';
+import '../../features/patients/patient_dashboard.dart';
+import '../../features/admin/admin_dashboard.dart';
+import '../../features/settings/app_icon_settings_page.dart';
 
 class AppPages {
   static final routes = [
@@ -27,6 +28,12 @@ class AppPages {
     GetPage(
       name: AppConstants.loginRoute,
       page: () => const LoginPage(),
+    ),
+
+    GetPage(
+      name: AppConstants.appIconSettings,
+      page: () => const AppIconSettingsPage(),
+      middlewares: [AuthMiddleware()],
     ),
 
     // Doctor routes
@@ -64,11 +71,12 @@ class AppPages {
         page: () => const AppointmentScreens(),
         middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
       ),
+      GetPage(
+        name: AppConstants.billings,
+        page: () => const BillingScreen(),
+        middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+      ),
 
-    GetPage(
-      name: AppConstants.appIconSettings,
-      page: () => const AppIconSettingsPage(),
-      middlewares: [AuthMiddleware()],
-    ),
+    
   ];
 }

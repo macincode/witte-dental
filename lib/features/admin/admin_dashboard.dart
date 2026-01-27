@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../auth/presentation/controllers/auth_controller.dart';
-import '../../../shared/widgets/theme_aware_app_bar.dart';
-import '../../../shared/widgets/network_aware_widget.dart';
-import '../../../shared/widgets/role_based_drawer.dart';
-import '../../../../core/controllers/language_controller.dart';
+import '../auth/presentation/controllers/auth_controller.dart';
+import '../shared/widgets/theme_aware_app_bar.dart';
+import '../shared/widgets/network_aware_widget.dart';
+import '../shared/widgets/role_based_drawer.dart';
+import '../../core/controllers/language_controller.dart';
 
-class DoctorDashboard extends StatelessWidget {
-  const DoctorDashboard({super.key});
+class AdminDashboard extends StatelessWidget {
+  const AdminDashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class DoctorDashboard extends StatelessWidget {
       child: Scaffold(
       drawer: const RoleBasedDrawer(),
       appBar: ThemeAwareAppBar(
-        title: 'doctor_dashboard'.tr,
+        title: 'admin_dashboard'.tr,
         actions: [
           IconButton(
             onPressed: () => Get.find<LanguageController>().showLanguageDialog(),
@@ -43,15 +43,15 @@ class DoctorDashboard extends StatelessWidget {
                     Row(
                       children: [
                         Icon(
-                          Icons.medical_services,
+                          Icons.admin_panel_settings,
                           color: Theme.of(context).colorScheme.primary,
                           size: 32,
                         ),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            'welcome_doctor'.tr,
-                            maxLines:2,
+                            'welcome_admin'.tr,
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
@@ -60,7 +60,7 @@ class DoctorDashboard extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'manage_patients_desc'.tr,
+                      'manage_system_desc'.tr,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -76,30 +76,30 @@ class DoctorDashboard extends StatelessWidget {
                 children: [
                   _buildDashboardCard(
                     context,
-                    'patients'.tr,
-                    Icons.people,
-                    '24',
+                    'users'.tr,
+                    Icons.group,
+                    '156',
                     Colors.blue,
                   ),
                   _buildDashboardCard(
                     context,
-                    'appointments'.tr,
-                    Icons.calendar_today,
-                    '8',
+                    'doctors'.tr,
+                    Icons.medical_services,
+                    '24',
                     Colors.green,
                   ),
                   _buildDashboardCard(
                     context,
-                    'prescriptions'.tr,
-                    Icons.receipt,
-                    '12',
+                    'patients'.tr,
+                    Icons.people,
+                    '132',
                     Colors.orange,
                   ),
                   _buildDashboardCard(
                     context,
-                    'reports'.tr,
-                    Icons.analytics,
-                    '5',
+                    'system_health'.tr,
+                    Icons.monitor_heart,
+                    '98%',
                     Colors.purple,
                   ),
                 ],

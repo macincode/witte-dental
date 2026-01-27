@@ -89,6 +89,11 @@ class RoleBasedNavigation {
         route: AppConstants.appointments,
       ),
       NavigationItem(
+        title: 'Billings',
+        icon: Icons.payment,
+        route: AppConstants.billings,
+      ),
+      NavigationItem(
         title: 'reports'.tr,
         icon: Icons.analytics,
         route: '/admin/reports',

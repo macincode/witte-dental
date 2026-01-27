@@ -11,7 +11,7 @@ class AppointmentScreens extends StatefulWidget {
 class _AppointmentScreensState extends State<AppointmentScreens>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final List<String> _options = ['Option 1', 'Option 2'];
+  final List<String> _options = ['Appointments', 'Appointment Transaction'];
 
   @override
   void initState() {
@@ -35,15 +35,18 @@ class _AppointmentScreensState extends State<AppointmentScreens>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(80),
                 boxShadow: [
                   BoxShadow(
-                    color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.1),
                     spreadRadius: 2,
                     blurRadius: 5,
                     offset: const Offset(0, 3),
@@ -92,7 +95,8 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                         filled: true,
                         fillColor: Theme.of(context).colorScheme.surface,
                         prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 14),
                       ),
                     ),
                   ),
@@ -100,12 +104,14 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                 const SizedBox(width: 12),
                 Container(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.tune, color: Theme.of(context).colorScheme.primary),
+                    icon: Icon(Icons.tune,
+                        color: Theme.of(context).colorScheme.primary),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -115,7 +121,9 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _showAddAppointmentDialog();
+                    },
                     icon: const Icon(Icons.add, color: Colors.white),
                   ),
                 ),
@@ -127,11 +135,21 @@ class _AppointmentScreensState extends State<AppointmentScreens>
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
               itemCount: 20,
               itemBuilder: (context, index) {
-                final statuses = ['Scheduled', 'Completed', 'Cancelled', 'In Progress'];
-                final statusColors = [Colors.blue, Colors.green, Colors.red, Colors.orange];
+                final statuses = [
+                  'Scheduled',
+                  'Completed',
+                  'Cancelled',
+                  'In Progress'
+                ];
+                final statusColors = [
+                  Colors.blue,
+                  Colors.green,
+                  Colors.red,
+                  Colors.orange
+                ];
                 final currentStatus = statuses[index % statuses.length];
                 final statusColor = statusColors[index % statusColors.length];
-                
+
                 return Container(
                   margin: const EdgeInsets.only(bottom: 12),
                   decoration: BoxDecoration(
@@ -159,7 +177,10 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                                 gradient: LinearGradient(
                                   colors: [
                                     Theme.of(context).colorScheme.primary,
-                                    Theme.of(context).colorScheme.primary.withOpacity(0.7),
+                                    Theme.of(context)
+                                        .colorScheme
+                                        .primary
+                                        .withOpacity(0.7),
                                   ],
                                 ),
                                 borderRadius: BorderRadius.circular(12),
@@ -177,22 +198,29 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                                 children: [
                                   Text(
                                     'Patient ${index + 1}',
-                                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
                                     'Dr. Smith • Cardiology',
-                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                      color: Colors.grey[600],
-                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.copyWith(
+                                          color: Colors.grey[600],
+                                        ),
                                   ),
                                 ],
                               ),
                             ),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
                               decoration: BoxDecoration(
                                 color: statusColor.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(8),
@@ -212,7 +240,10 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                         Container(
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.primary.withOpacity(0.05),
+                            color: Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withOpacity(0.05),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Row(
@@ -225,19 +256,23 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                               const SizedBox(width: 8),
                               Text(
                                 'Today, 10:${30 + index} AM',
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                               ),
-                              const Spacer(),
-                              Text(
-                                '\$${50 + (index * 10)}',
-                                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
+                              //  const Spacer(),
+                              // Text(
+                              //   '\$${50 + (index * 10)}',
+                              //   style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                              //     color: Theme.of(context).colorScheme.primary,
+                              //     fontWeight: FontWeight.w600,
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),
@@ -245,28 +280,53 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                         Row(
                           children: [
                             Expanded(
-                              child: OutlinedButton.icon(
-                                onPressed: () {},
-                                icon: const Icon(Icons.phone, size: 16),
-                                label: const Text('Call'),
-                                style: OutlinedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(vertical: 8),
-                                  shape: RoundedRectangleBorder(
+                                child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .error
+                                        .withOpacity(0.1),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
+                                  child: Icon(
+                                    Icons.close,
+                                    size: 16,
+                                    color: Theme.of(context).colorScheme.error,
+                                  ),
                                 ),
-                              ),
-                            ),
+                                Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .primary
+                                        .withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Icon(
+                                    Icons.check,
+                                    size: 16,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                              ],
+                            )),
                             const SizedBox(width: 8),
                             Expanded(
                               child: ElevatedButton.icon(
                                 onPressed: () {
-                                  _showEditCategoryDialog(index);
+                                  _showEditAppointmentDialog(index);
                                 },
                                 icon: const Icon(Icons.edit, size: 16),
                                 label: const Text('Edit'),
                                 style: ElevatedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(vertical: 8),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),
@@ -286,8 +346,212 @@ class _AppointmentScreensState extends State<AppointmentScreens>
       ),
     );
   }
-  
-  void _showEditCategoryDialog(int index) {
+
+  void _showAddAppointmentDialog() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height * 0.75,
+          minHeight: MediaQuery.of(context).size.height * 0.45,
+        ),
+        // height: MediaQuery.of(context).size.height * 0.85,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surface,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(
+            left: 20,
+            right: 20,
+            top: 20,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+          ),
+          child: Column(
+            children: [
+              Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Text(
+                    'Add New Appointment',
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 24),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      _buildFormField(
+                        context,
+                        child: DropdownButtonFormField<String>(
+                          decoration:
+                              _getInputDecoration('Patient', Icons.person),
+                          items: ['Karthi', 'Jegin']
+                              .map((e) =>
+                                  DropdownMenuItem(value: e, child: Text(e)))
+                              .toList(),
+                          onChanged: (value) {},
+                        ),
+                      ),
+                      _buildFormField(
+                        context,
+                        child: DropdownButtonFormField<String>(
+                          decoration: _getInputDecoration(
+                              'Doctor', Icons.medical_services),
+                          items: ['Dr. Smith', 'Dr. Johnson']
+                              .map((e) =>
+                                  DropdownMenuItem(value: e, child: Text(e)))
+                              .toList(),
+                          onChanged: (value) {},
+                        ),
+                      ),
+                      _buildFormField(
+                        context,
+                        child: DropdownButtonFormField<String>(
+                          decoration: _getInputDecoration(
+                              'Department', Icons.local_hospital),
+                          items: ['Cardiology', 'Orthology']
+                              .map((e) =>
+                                  DropdownMenuItem(value: e, child: Text(e)))
+                              .toList(),
+                          onChanged: (value) {},
+                        ),
+                      ),
+                      _buildFormField(
+                              context,
+                              child: TextField(
+                                decoration: _getInputDecoration(
+                                    'Date', Icons.calendar_today),
+                                readOnly: true,
+                                onTap: () async {
+                                  await showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime(1900),
+                                    lastDate: DateTime.now()
+                                        .add(const Duration(days: 365)),
+                                  );
+                                },
+                              ),
+                            ),
+                      
+                      _buildFormField(
+                        context,
+                        child: TextField(
+                          maxLines: 3,
+                          decoration:
+                              _getInputDecoration('Description', Icons.notes),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.05),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.toggle_on,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                'Active Status',
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                            ),
+                            Switch(
+                              value: true,
+                              onChanged: (value) {},
+                              activeColor:
+                                  Theme.of(context).colorScheme.primary,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: OutlinedButton(
+                              onPressed: () => Navigator.pop(context),
+                              style: OutlinedButton.styleFrom(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              child: const Text('Cancel'),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () => Navigator.pop(context),
+                              style: ElevatedButton.styleFrom(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              child: const Text('Save Changes'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showEditAppointmentDialog(int index) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -323,7 +587,10 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withOpacity(0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: IconButton(
@@ -338,8 +605,8 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                   Text(
                     'Edit Appointment',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                          fontWeight: FontWeight.w600,
+                        ),
                   ),
                 ],
               ),
@@ -351,9 +618,11 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                       _buildFormField(
                         context,
                         child: DropdownButtonFormField<String>(
-                          decoration: _getInputDecoration('Patient', Icons.person),
+                          decoration:
+                              _getInputDecoration('Patient', Icons.person),
                           items: ['Karthi', 'Jegin']
-                              .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                              .map((e) =>
+                                  DropdownMenuItem(value: e, child: Text(e)))
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -361,9 +630,11 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                       _buildFormField(
                         context,
                         child: DropdownButtonFormField<String>(
-                          decoration: _getInputDecoration('Doctor', Icons.medical_services),
+                          decoration: _getInputDecoration(
+                              'Doctor', Icons.medical_services),
                           items: ['Dr. Smith', 'Dr. Johnson']
-                              .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                              .map((e) =>
+                                  DropdownMenuItem(value: e, child: Text(e)))
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -371,9 +642,11 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                       _buildFormField(
                         context,
                         child: DropdownButtonFormField<String>(
-                          decoration: _getInputDecoration('Department', Icons.local_hospital),
+                          decoration: _getInputDecoration(
+                              'Department', Icons.local_hospital),
                           items: ['Cardiology', 'Orthology']
-                              .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                              .map((e) =>
+                                  DropdownMenuItem(value: e, child: Text(e)))
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -384,14 +657,16 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                             child: _buildFormField(
                               context,
                               child: TextField(
-                                decoration: _getInputDecoration('Date', Icons.calendar_today),
+                                decoration: _getInputDecoration(
+                                    'Date', Icons.calendar_today),
                                 readOnly: true,
                                 onTap: () async {
                                   await showDatePicker(
                                     context: context,
                                     initialDate: DateTime.now(),
                                     firstDate: DateTime(1900),
-                                    lastDate: DateTime.now().add(const Duration(days: 365)),
+                                    lastDate: DateTime.now()
+                                        .add(const Duration(days: 365)),
                                   );
                                 },
                               ),
@@ -402,7 +677,8 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                             child: _buildFormField(
                               context,
                               child: TextField(
-                                decoration: _getInputDecoration('Time', Icons.access_time),
+                                decoration: _getInputDecoration(
+                                    'Time', Icons.access_time),
                               ),
                             ),
                           ),
@@ -414,7 +690,8 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                             child: _buildFormField(
                               context,
                               child: TextField(
-                                decoration: _getInputDecoration('Charge', Icons.attach_money),
+                                decoration: _getInputDecoration(
+                                    'Charge', Icons.attach_money),
                               ),
                             ),
                           ),
@@ -423,9 +700,11 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                             child: _buildFormField(
                               context,
                               child: DropdownButtonFormField<String>(
-                                decoration: _getInputDecoration('Payment', Icons.payment),
+                                decoration: _getInputDecoration(
+                                    'Payment', Icons.payment),
                                 items: ['Cash', 'Credit Card', 'Debit Card']
-                                    .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                                    .map((e) => DropdownMenuItem(
+                                        value: e, child: Text(e)))
                                     .toList(),
                                 onChanged: (value) {},
                               ),
@@ -437,13 +716,17 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                         context,
                         child: TextField(
                           maxLines: 3,
-                          decoration: _getInputDecoration('Description', Icons.notes),
+                          decoration:
+                              _getInputDecoration('Description', Icons.notes),
                         ),
                       ),
                       Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary.withOpacity(0.05),
+                          color: Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.05),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Row(
@@ -462,7 +745,8 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                             Switch(
                               value: true,
                               onChanged: (value) {},
-                              activeColor: Theme.of(context).colorScheme.primary,
+                              activeColor:
+                                  Theme.of(context).colorScheme.primary,
                             ),
                           ],
                         ),
@@ -474,7 +758,8 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                             child: OutlinedButton(
                               onPressed: () => Navigator.pop(context),
                               style: OutlinedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(vertical: 16),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
@@ -487,7 +772,8 @@ class _AppointmentScreensState extends State<AppointmentScreens>
                             child: ElevatedButton(
                               onPressed: () => Navigator.pop(context),
                               style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(vertical: 16),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),

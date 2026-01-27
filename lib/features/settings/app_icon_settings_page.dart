@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../core/controllers/app_icon_controller.dart';
-import '../../../shared/widgets/theme_aware_app_bar.dart';
-import '../../../shared/widgets/network_aware_widget.dart';
+import '../../core/controllers/app_icon_controller.dart';
+import '../shared/widgets/theme_aware_app_bar.dart';
+import '../shared/widgets/network_aware_widget.dart';
 
 class AppIconSettingsPage extends StatelessWidget {
   const AppIconSettingsPage({super.key});

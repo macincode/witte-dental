@@ -26,6 +26,7 @@ class AppConstants {
    static const String adminInvoice = '/admin-invoice';
    static const String categoryManagement = '/category-management';
    static const String appointments = '/appointments';
+   static const String billings = '/billings';
 
   // Validation
   static const int minPasswordLength = 8;
