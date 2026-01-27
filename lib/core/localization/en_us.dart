@@ -20,8 +20,8 @@ const Map<String, String> enUS = {
   'system_settings': 'System Settings',
   
   // App Info
-  'app_name': 'WitteHMS',
-  'app_subtitle': 'Healthcare Management System',
+  'app_name': 'WITTE',
+  'app_subtitle': 'Dentalcare Management System',
   
   // Login Page
   'demo_credentials': 'Demo Credentials:',

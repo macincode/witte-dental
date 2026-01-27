@@ -13,9 +13,10 @@ class AdminDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return NetworkAwareWidget(
       child: Scaffold(
+        backgroundColor: Theme.of(  context).colorScheme.background,
       drawer: const RoleBasedDrawer(),
       appBar: ThemeAwareAppBar(
-        title: 'admin_dashboard'.tr,
+        title: 'Dashboard'.tr,
         actions: [
           IconButton(
             onPressed: () => Get.find<LanguageController>().showLanguageDialog(),
@@ -76,28 +77,28 @@ class AdminDashboard extends StatelessWidget {
                 children: [
                   _buildDashboardCard(
                     context,
-                    'users'.tr,
+                    'Total Patients',
                     Icons.group,
-                    '156',
+                    '434',
                     Colors.blue,
                   ),
                   _buildDashboardCard(
                     context,
-                    'doctors'.tr,
+                    'Appointments',
                     Icons.medical_services,
                     '24',
                     Colors.green,
                   ),
                   _buildDashboardCard(
                     context,
-                    'patients'.tr,
+                    'Montly Revenue',
                     Icons.people,
                     '132',
                     Colors.orange,
                   ),
                   _buildDashboardCard(
                     context,
-                    'system_health'.tr,
+                    'Active Staff',
                     Icons.monitor_heart,
                     '98%',
                     Colors.purple,
@@ -118,32 +119,60 @@ class AdminDashboard extends StatelessWidget {
     String count,
     Color color,
   ) {
-    return Card(
-      child: InkWell(
-        onTap: () {},
-        borderRadius: BorderRadius.circular(12),
+    return InkWell(
+      onTap: () {},
+     
+     
+      child: Container(
+      
+        decoration: BoxDecoration(
+          color: context.theme.cardColor,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.1),
+          width: 2),
+          boxShadow: context.theme == ThemeData.dark()
+              ? []
+              : [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 0.8,
+                    blurRadius: 10,
+                    offset: const Offset(0, 1),
+                  ),
+                ],
+        ),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                icon,
-                size: 32,
-                color: color,
+              Container(
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: color.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Icon(
+                  icon,
+                  size: 32,
+                  color: color,
+                ),
               ),
               const SizedBox(height: 8),
               Text(
                 count,
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: color,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimary,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 4),
               Text(
                 title,
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSecondary,
+                  fontWeight: FontWeight.bold,
+                ),
                 textAlign: TextAlign.center,
               ),
             ],

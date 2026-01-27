@@ -25,7 +25,7 @@ class RoleBasedDrawer extends StatelessWidget {
               accountName: Text(user.name),
               accountEmail: Text(user.email),
               currentAccountPicture: CircleAvatar(
-                backgroundColor: Theme.of(context).colorScheme.primary,
+                backgroundColor: Colors.white,
                 child: Text(
                   user.name.isNotEmpty ? user.name[0].toUpperCase() : 'U',
                   style: TextStyle(

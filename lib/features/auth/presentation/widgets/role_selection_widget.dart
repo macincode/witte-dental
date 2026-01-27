@@ -32,7 +32,7 @@ class RoleSelectionWidget extends StatelessWidget {
                 AppConstants.roleDoctor,
                 Icons.medical_services,
                 'Doctor',
-                Colors.blue,
+                Theme.of(context).colorScheme.secondary,
               ),
             ),
             const SizedBox(width: 8),
@@ -42,7 +42,7 @@ class RoleSelectionWidget extends StatelessWidget {
                 AppConstants.rolePatient,
                 Icons.person,
                 'Patient',
-                Colors.green,
+               Theme.of(context).colorScheme.secondary,
               ),
             ),
             const SizedBox(width: 8),
@@ -52,7 +52,19 @@ class RoleSelectionWidget extends StatelessWidget {
                 AppConstants.roleAdmin,
                 Icons.admin_panel_settings,
                 'Admin',
-                Colors.orange,
+                               Theme.of(context).colorScheme.secondary,
+
+              ),
+            ),
+             const SizedBox(width: 8),
+            Expanded(
+              child: _buildRoleCard(
+                context,
+                AppConstants.roleStaff,
+                Icons.support_agent,
+                'Staff',
+                               Theme.of(context).colorScheme.secondary,
+
               ),
             ),
           ],
