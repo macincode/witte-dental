@@ -1,6 +1,8 @@
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:crypto/crypto.dart';
 import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 import '../constants/storage_keys.dart';
 
 class HiveConfig {

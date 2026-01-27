@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
 class OnboardingPage {
-  final String title;
-  final String description;
-  final String iconData;
-  final List<Color> gradientColors;
 
   const OnboardingPage({
     required this.title,
@@ -12,6 +8,10 @@ class OnboardingPage {
     required this.iconData,
     required this.gradientColors,
   });
+  final String title;
+  final String description;
+  final String iconData;
+  final List<Color> gradientColors;
 }
 
 class OnboardingData {

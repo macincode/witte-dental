@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../domain/entities/user.dart';
-import '../../../../core/storage/hive_service.dart';
+
 import '../../../../core/constants/app_constants.dart';
+import '../../../../core/storage/hive_service.dart';
+import '../../domain/entities/user.dart';
 
 class AuthController extends GetxController {
   final Rx<User?> _currentUser = Rx<User?>(null);
@@ -14,10 +14,6 @@ class AuthController extends GetxController {
   String get errorMessage => _errorMessage.value;
   bool get isLoggedIn => HiveService.isLoggedIn && _currentUser.value != null;
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
 
   void checkAuthStatus() {
     if (HiveService.isLoggedIn) {
@@ -73,7 +69,7 @@ class AuthController extends GetxController {
       _navigateBasedOnRole(user.role);
       
     } catch (e) {
-      _errorMessage.value = 'Login failed: ${e.toString()}';
+      _errorMessage.value = 'Login failed: $e';
     } finally {
       _isLoading.value = false;
     }

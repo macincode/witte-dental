@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../core/storage/hive_service.dart';
+
 import '../../../../core/constants/app_constants.dart';
+import '../../../../core/storage/hive_service.dart';
 import '../../data/models/onboarding_model.dart';
 
 class OnboardingController extends GetxController with GetTickerProviderStateMixin {
@@ -35,12 +36,12 @@ class OnboardingController extends GetxController with GetTickerProviderStateMix
     );
 
     fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
+      begin: 0,
+      end: 1,
     ).animate(CurvedAnimation(
       parent: fadeController,
       curve: Curves.easeInOut,
-    ));
+    ),);
 
     slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.3),
@@ -48,7 +49,7 @@ class OnboardingController extends GetxController with GetTickerProviderStateMix
     ).animate(CurvedAnimation(
       parent: slideController,
       curve: Curves.easeOutCubic,
-    ));
+    ),);
 
     _startAnimations();
   }
@@ -83,7 +84,7 @@ class OnboardingController extends GetxController with GetTickerProviderStateMix
     completeOnboarding();
   }
 
-  void completeOnboarding() async {
+  Future<void> completeOnboarding() async {
     await HiveService.saveSetting('onboarding_completed', true);
     Get.offAllNamed(AppConstants.loginRoute);
   }

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
+
 import '../storage/hive_service.dart';
-import '../constants/storage_keys.dart';
 
 class AppIconController extends GetxController {
   final RxString _currentIcon = 'default'.obs;
@@ -47,9 +47,9 @@ class AppIconController extends GetxController {
 }
 
 class AppIconOption {
+  
+  AppIconOption(this.id, this.name, this.description);
   final String id;
   final String name;
   final String description;
-  
-  AppIconOption(this.id, this.name, this.description);
 }

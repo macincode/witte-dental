@@ -14,9 +14,9 @@ class AuthMiddleware extends GetMiddleware {
 }
 
 class RoleMiddleware extends GetMiddleware {
-  final String requiredRole;
   
   RoleMiddleware({required this.requiredRole});
+  final String requiredRole;
 
   @override
   RouteSettings? redirect(String? route) {

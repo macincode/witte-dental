@@ -12,7 +12,7 @@ class NoInternetScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -37,7 +37,7 @@ class NoInternetScreen extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               ElevatedButton.icon(
-                onPressed: () => networkController.checkConnection(),
+                onPressed: networkController.checkConnection,
                 icon: const Icon(Icons.refresh),
                 label: Text('check_connection'.tr),
                 style: ElevatedButton.styleFrom(

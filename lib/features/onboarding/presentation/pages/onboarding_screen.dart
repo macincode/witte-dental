@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../shared/widgets/network_aware_widget.dart';
+import '../../data/models/onboarding_model.dart';
 import '../controllers/onboarding_controller.dart';
 import '../widgets/onboarding_page_widget.dart';
 import '../widgets/page_indicator.dart';
-import '../../data/models/onboarding_model.dart';
-import '../../../shared/widgets/network_aware_widget.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -59,7 +60,7 @@ class OnboardingScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-              )),
+              ),),
             ),
 
             // Bottom Controls
@@ -75,7 +76,7 @@ class OnboardingScreen extends StatelessWidget {
                     Obx(() => PageIndicator(
                       currentPage: controller.currentPage.value,
                       totalPages: OnboardingData.pages.length,
-                    )),
+                    ),),
                     
                     const SizedBox(height: 32),
                     
@@ -101,7 +102,7 @@ class OnboardingScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                    )),
+                    ),),
                   ],
                 ),
               ),

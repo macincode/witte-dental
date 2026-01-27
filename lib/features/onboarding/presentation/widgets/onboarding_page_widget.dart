@@ -2,24 +2,20 @@ import 'package:flutter/material.dart';
 import '../../data/models/onboarding_model.dart';
 
 class OnboardingPageWidget extends StatelessWidget {
+
+  const OnboardingPageWidget({
+    required this.page, required this.fadeAnimation, required this.slideAnimation, required this.slideController, super.key,
+  });
   final OnboardingPage page;
   final Animation<double> fadeAnimation;
   final Animation<Offset> slideAnimation;
   final AnimationController slideController;
 
-  const OnboardingPageWidget({
-    super.key,
-    required this.page,
-    required this.fadeAnimation,
-    required this.slideAnimation,
-    required this.slideController,
-  });
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     
-    return Container(
+    return DecoratedBox(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -57,7 +53,7 @@ class OnboardingPageWidget extends StatelessWidget {
                 ),
               ),
               
-              const Spacer(flex: 1),
+              const Spacer(),
               
               // Title
               FadeTransition(
@@ -68,8 +64,8 @@ class OnboardingPageWidget extends StatelessWidget {
                     end: Offset.zero,
                   ).animate(CurvedAnimation(
                     parent: slideController,
-                    curve: const Interval(0.2, 1.0, curve: Curves.easeOutCubic),
-                  )),
+                    curve: const Interval(0.2, 1, curve: Curves.easeOutCubic),
+                  ),),
                   child: Text(
                     page.title,
                     style: const TextStyle(
@@ -94,8 +90,8 @@ class OnboardingPageWidget extends StatelessWidget {
                     end: Offset.zero,
                   ).animate(CurvedAnimation(
                     parent: slideController,
-                    curve: const Interval(0.4, 1.0, curve: Curves.easeOutCubic),
-                  )),
+                    curve: const Interval(0.4, 1, curve: Curves.easeOutCubic),
+                  ),),
                   child: Text(
                     page.description,
                     style: TextStyle(

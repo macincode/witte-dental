@@ -1,6 +1,7 @@
-import 'package:get/get.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:get/get.dart';
 
 class NetworkController extends GetxController {
   final RxBool _isConnected = true.obs;
@@ -15,7 +16,7 @@ class NetworkController extends GetxController {
     _listenToConnectivityChanges();
   }
 
-  void _checkInitialConnection() async {
+  Future<void> _checkInitialConnection() async {
     final result = await Connectivity().checkConnectivity();
     _updateConnectionStatus(result);
   }

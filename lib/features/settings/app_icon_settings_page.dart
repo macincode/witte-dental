@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../core/controllers/app_icon_controller.dart';
-import '../shared/widgets/theme_aware_app_bar.dart';
 import '../shared/widgets/network_aware_widget.dart';
+import '../shared/widgets/theme_aware_app_bar.dart';
 
 class AppIconSettingsPage extends StatelessWidget {
   const AppIconSettingsPage({super.key});
@@ -68,7 +69,7 @@ class AppIconSettingsPage extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     color: isSelected 
                                       ? Theme.of(context).colorScheme.primary
-                                      : Theme.of(context).colorScheme.surfaceVariant,
+                                      : Theme.of(context).colorScheme.surfaceContainerHighest,
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: Icon(
@@ -127,7 +128,7 @@ class AppIconSettingsPage extends StatelessWidget {
     );
   }
 
-  void _changeIcon(BuildContext context, AppIconController controller, String iconId) async {
+  Future<void> _changeIcon(BuildContext context, AppIconController controller, String iconId) async {
     final success = await controller.changeAppIcon(iconId);
     
     if (!success) {
@@ -135,7 +136,7 @@ class AppIconSettingsPage extends StatelessWidget {
         'note'.tr,
         'icon_change_note'.tr,
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
         colorText: Theme.of(context).colorScheme.onSurfaceVariant,
       );
     }

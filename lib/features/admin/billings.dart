@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 
 class BillingScreen extends StatefulWidget {
   const BillingScreen({super.key});
@@ -37,7 +36,7 @@ class _BillingScreenState extends State<BillingScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -46,8 +45,8 @@ class _BillingScreenState extends State<BillingScreen>
                   (int index) {
                     final isSelected = _selectedIndex == index;
                     return Padding(
-                      padding: const EdgeInsets.only(right: 12.0),
-                      child: Container(
+                      padding: const EdgeInsets.only(right: 12),
+                      child: DecoratedBox(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25),
                           boxShadow: isSelected
@@ -83,7 +82,7 @@ class _BillingScreenState extends State<BillingScreen>
                           backgroundColor: Colors.grey[100],
                           side: BorderSide.none,
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8),
+                              horizontal: 16, vertical: 8,),
                           onSelected: (bool selected) {
                             setState(() {
                               _selectedIndex = selected ? index : null;
@@ -98,11 +97,11 @@ class _BillingScreenState extends State<BillingScreen>
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Row(
               children: [
                 Expanded(
-                  child: Container(
+                  child: DecoratedBox(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
@@ -125,13 +124,13 @@ class _BillingScreenState extends State<BillingScreen>
                         fillColor: Theme.of(context).colorScheme.surface,
                         prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
                         contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 14),
+                            horizontal: 16, vertical: 14,),
                       ),
                     ),
                   ),
                 ),
                 const SizedBox(width: 12),
-                Container(
+                DecoratedBox(
                   decoration: BoxDecoration(
                     color:
                         Theme.of(context).colorScheme.primary.withOpacity(0.1),
@@ -140,19 +139,17 @@ class _BillingScreenState extends State<BillingScreen>
                   child: IconButton(
                     onPressed: () {},
                     icon: Icon(Icons.tune,
-                        color: Theme.of(context).colorScheme.primary),
+                        color: Theme.of(context).colorScheme.primary,),
                   ),
                 ),
                 const SizedBox(width: 8),
-                Container(
+                DecoratedBox(
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.primary,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: IconButton(
-                    onPressed: () {
-                      _showAddAppointmentDialog();
-                    },
+                    onPressed: _showAddAppointmentDialog,
                     icon: const Icon(Icons.add, color: Colors.white),
                   ),
                 ),
@@ -168,13 +165,13 @@ class _BillingScreenState extends State<BillingScreen>
                   'Scheduled',
                   'Completed',
                   'Cancelled',
-                  'In Progress'
+                  'In Progress',
                 ];
                 final statusColors = [
                   Colors.blue,
                   Colors.green,
                   Colors.red,
-                  Colors.orange
+                  Colors.orange,
                 ];
                 final currentStatus = statuses[index % statuses.length];
                 final statusColor = statusColors[index % statusColors.length];
@@ -214,7 +211,7 @@ class _BillingScreenState extends State<BillingScreen>
                                 ),
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              child: Icon(
+                              child: const Icon(
                                 Icons.person,
                                 color: Colors.white,
                                 size: 24,
@@ -249,7 +246,7 @@ class _BillingScreenState extends State<BillingScreen>
                             ),
                             Container(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 4),
+                                  horizontal: 8, vertical: 4,),
                               decoration: BoxDecoration(
                                 color: statusColor.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(8),
@@ -344,7 +341,7 @@ class _BillingScreenState extends State<BillingScreen>
                                   ),
                                 ),
                               ],
-                            )),
+                            ),),
                             const SizedBox(width: 8),
                             Expanded(
                               child: ElevatedButton.icon(
@@ -414,7 +411,7 @@ class _BillingScreenState extends State<BillingScreen>
               const SizedBox(height: 20),
               Row(
                 children: [
-                  Container(
+                  DecoratedBox(
                     decoration: BoxDecoration(
                       color: Theme.of(context)
                           .colorScheme
@@ -451,7 +448,7 @@ class _BillingScreenState extends State<BillingScreen>
                               _getInputDecoration('Patient', Icons.person),
                           items: ['Karthi', 'Jegin']
                               .map((e) =>
-                                  DropdownMenuItem(value: e, child: Text(e)))
+                                  DropdownMenuItem(value: e, child: Text(e)),)
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -460,10 +457,10 @@ class _BillingScreenState extends State<BillingScreen>
                         context,
                         child: DropdownButtonFormField<String>(
                           decoration: _getInputDecoration(
-                              'Doctor', Icons.medical_services),
+                              'Doctor', Icons.medical_services,),
                           items: ['Dr. Smith', 'Dr. Johnson']
                               .map((e) =>
-                                  DropdownMenuItem(value: e, child: Text(e)))
+                                  DropdownMenuItem(value: e, child: Text(e)),)
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -472,10 +469,10 @@ class _BillingScreenState extends State<BillingScreen>
                         context,
                         child: DropdownButtonFormField<String>(
                           decoration: _getInputDecoration(
-                              'Department', Icons.local_hospital),
+                              'Department', Icons.local_hospital,),
                           items: ['Cardiology', 'Orthology']
                               .map((e) =>
-                                  DropdownMenuItem(value: e, child: Text(e)))
+                                  DropdownMenuItem(value: e, child: Text(e)),)
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -484,7 +481,7 @@ class _BillingScreenState extends State<BillingScreen>
                               context,
                               child: TextField(
                                 decoration: _getInputDecoration(
-                                    'Date', Icons.calendar_today),
+                                    'Date', Icons.calendar_today,),
                                 readOnly: true,
                                 onTap: () async {
                                   await showDatePicker(
@@ -531,7 +528,7 @@ class _BillingScreenState extends State<BillingScreen>
                             Switch(
                               value: true,
                               onChanged: (value) {},
-                              activeColor:
+                              activeThumbColor:
                                   Theme.of(context).colorScheme.primary,
                             ),
                           ],
@@ -614,7 +611,7 @@ class _BillingScreenState extends State<BillingScreen>
               const SizedBox(height: 20),
               Row(
                 children: [
-                  Container(
+                  DecoratedBox(
                     decoration: BoxDecoration(
                       color: Theme.of(context)
                           .colorScheme
@@ -651,7 +648,7 @@ class _BillingScreenState extends State<BillingScreen>
                               _getInputDecoration('Patient', Icons.person),
                           items: ['Karthi', 'Jegin']
                               .map((e) =>
-                                  DropdownMenuItem(value: e, child: Text(e)))
+                                  DropdownMenuItem(value: e, child: Text(e)),)
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -660,10 +657,10 @@ class _BillingScreenState extends State<BillingScreen>
                         context,
                         child: DropdownButtonFormField<String>(
                           decoration: _getInputDecoration(
-                              'Doctor', Icons.medical_services),
+                              'Doctor', Icons.medical_services,),
                           items: ['Dr. Smith', 'Dr. Johnson']
                               .map((e) =>
-                                  DropdownMenuItem(value: e, child: Text(e)))
+                                  DropdownMenuItem(value: e, child: Text(e)),)
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -672,10 +669,10 @@ class _BillingScreenState extends State<BillingScreen>
                         context,
                         child: DropdownButtonFormField<String>(
                           decoration: _getInputDecoration(
-                              'Department', Icons.local_hospital),
+                              'Department', Icons.local_hospital,),
                           items: ['Cardiology', 'Orthology']
                               .map((e) =>
-                                  DropdownMenuItem(value: e, child: Text(e)))
+                                  DropdownMenuItem(value: e, child: Text(e)),)
                               .toList(),
                           onChanged: (value) {},
                         ),
@@ -687,7 +684,7 @@ class _BillingScreenState extends State<BillingScreen>
                               context,
                               child: TextField(
                                 decoration: _getInputDecoration(
-                                    'Date', Icons.calendar_today),
+                                    'Date', Icons.calendar_today,),
                                 readOnly: true,
                                 onTap: () async {
                                   await showDatePicker(
@@ -707,7 +704,7 @@ class _BillingScreenState extends State<BillingScreen>
                               context,
                               child: TextField(
                                 decoration: _getInputDecoration(
-                                    'Time', Icons.access_time),
+                                    'Time', Icons.access_time,),
                               ),
                             ),
                           ),
@@ -720,7 +717,7 @@ class _BillingScreenState extends State<BillingScreen>
                               context,
                               child: TextField(
                                 decoration: _getInputDecoration(
-                                    'Charge', Icons.attach_money),
+                                    'Charge', Icons.attach_money,),
                               ),
                             ),
                           ),
@@ -730,10 +727,10 @@ class _BillingScreenState extends State<BillingScreen>
                               context,
                               child: DropdownButtonFormField<String>(
                                 decoration: _getInputDecoration(
-                                    'Payment', Icons.payment),
+                                    'Payment', Icons.payment,),
                                 items: ['Cash', 'Credit Card', 'Debit Card']
                                     .map((e) => DropdownMenuItem(
-                                        value: e, child: Text(e)))
+                                        value: e, child: Text(e),),)
                                     .toList(),
                                 onChanged: (value) {},
                               ),
@@ -774,7 +771,7 @@ class _BillingScreenState extends State<BillingScreen>
                             Switch(
                               value: true,
                               onChanged: (value) {},
-                              activeColor:
+                              activeThumbColor:
                                   Theme.of(context).colorScheme.primary,
                             ),
                           ],

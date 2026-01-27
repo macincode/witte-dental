@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../core/controllers/language_controller.dart';
 import '../auth/presentation/controllers/auth_controller.dart';
-import '../shared/widgets/theme_aware_app_bar.dart';
 import '../shared/widgets/network_aware_widget.dart';
 import '../shared/widgets/role_based_drawer.dart';
-import '../../core/controllers/language_controller.dart';
+import '../shared/widgets/theme_aware_app_bar.dart';
 
 class DoctorDashboard extends StatelessWidget {
   const DoctorDashboard({super.key});
@@ -108,7 +109,7 @@ class DoctorDashboard extends StatelessWidget {
           ],
         ),
       ),
-    ));
+    ),);
   }
 
   Widget _buildDashboardCard(

@@ -3,16 +3,15 @@ import 'package:get/get.dart';
 import '../../../core/controllers/theme_controller.dart';
 
 class ThemeAwareAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
-  final List<Widget>? actions;
-  final bool showThemeToggle;
 
   const ThemeAwareAppBar({
-    super.key,
-    required this.title,
+    required this.title, super.key,
     this.actions,
     this.showThemeToggle = true,
   });
+  final String title;
+  final List<Widget>? actions;
+  final bool showThemeToggle;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +69,7 @@ class ThemeAwareAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
             ],
-          )),
+          ),),
         ...?actions,
       ],
     );

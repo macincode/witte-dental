@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
 
 class CategoryManagement extends StatefulWidget {
   const CategoryManagement({super.key});
@@ -30,7 +29,7 @@ class _CategoryManagementState extends State<CategoryManagement> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -39,8 +38,8 @@ class _CategoryManagementState extends State<CategoryManagement> {
                   (int index) {
                     final isSelected = _selectedIndex == index;
                     return Padding(
-                      padding: const EdgeInsets.only(right: 12.0),
-                      child: Container(
+                      padding: const EdgeInsets.only(right: 12),
+                      child: DecoratedBox(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25),
                           boxShadow: isSelected
@@ -76,7 +75,7 @@ class _CategoryManagementState extends State<CategoryManagement> {
                           backgroundColor: Colors.grey[100],
                           side: BorderSide.none,
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8),
+                              horizontal: 16, vertical: 8,),
                           onSelected: (bool selected) {
                             setState(() {
                               _selectedIndex = selected ? index : null;
@@ -91,11 +90,11 @@ class _CategoryManagementState extends State<CategoryManagement> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Row(
               children: [
                 Expanded(
-                  child: Container(
+                  child: DecoratedBox(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
@@ -118,13 +117,13 @@ class _CategoryManagementState extends State<CategoryManagement> {
                         fillColor: Theme.of(context).colorScheme.surface,
                         prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
                         contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 14),
+                            horizontal: 16, vertical: 14,),
                       ),
                     ),
                   ),
                 ),
                 const SizedBox(width: 12),
-                Container(
+                DecoratedBox(
                   decoration: BoxDecoration(
                     color:
                         Theme.of(context).colorScheme.primary.withOpacity(0.1),
@@ -135,17 +134,17 @@ class _CategoryManagementState extends State<CategoryManagement> {
                      
                     },
                     icon: Icon(Icons.tune,
-                        color: Theme.of(context).colorScheme.primary),
+                        color: Theme.of(context).colorScheme.primary,),
                   ),
                 ),
                 const SizedBox(width: 8),
-                Container(
+                DecoratedBox(
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.primary,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: IconButton(
-                    onPressed: () { _showAddCategoryDialog();},
+                    onPressed: _showAddCategoryDialog,
                     icon: const Icon(Icons.add, color: Colors.white),
                   ),
                 ),
@@ -176,7 +175,7 @@ class _CategoryManagementState extends State<CategoryManagement> {
                 final categoryName = categories[index % categories.length];
                  final category = [
                   'karthi@macincode.com',
-                  'ram@macincode.com'
+                  'ram@macincode.com',
 
                 ];
                 final categoryemail =category[index % categories.length];
@@ -252,7 +251,7 @@ final categoryRole = categoryRoles[index % categories.length];
                                    const SizedBox(height: 4),
                                   Container(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 4),
+                                  horizontal: 8, vertical: 4,),
                               decoration: BoxDecoration(
                                 color:Theme.of(context).colorScheme.primary.withOpacity(0.09),
                                 borderRadius: BorderRadius.circular(10),
@@ -265,7 +264,7 @@ final categoryRole = categoryRoles[index % categories.length];
                                         ?.copyWith(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 10,
-                                          color: Theme.of(context).colorScheme.primary
+                                          color: Theme.of(context).colorScheme.primary,
                                         ),
                               ),
                             ),
@@ -274,7 +273,7 @@ final categoryRole = categoryRoles[index % categories.length];
                             ),
                             Container(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 4),
+                                  horizontal: 8, vertical: 4,),
                               decoration: BoxDecoration(
                                 color:Theme.of(context).colorScheme.primary.withOpacity(0.09),
                                 borderRadius: BorderRadius.circular(10),
@@ -287,7 +286,7 @@ final categoryRole = categoryRoles[index % categories.length];
                                         ?.copyWith(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 10,
-                                          color: Theme.of(context).colorScheme.primary
+                                          color: Theme.of(context).colorScheme.primary,
                                         ),
                               ),
                             ),
@@ -308,7 +307,7 @@ final categoryRole = categoryRoles[index % categories.length];
                                         ?.copyWith(
                                           fontWeight: FontWeight.w400,
                                          
-                                          color: Theme.of(context).colorScheme.error
+                                          color: Theme.of(context).colorScheme.error,
                                         ),),
                                 style: OutlinedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(vertical: 8),
@@ -380,7 +379,7 @@ final categoryRole = categoryRoles[index % categories.length];
               const SizedBox(height: 20),
               Row(
                 children: [
-                  Container(
+                  DecoratedBox(
                     decoration: BoxDecoration(
                       color: Theme.of(context)
                           .colorScheme
@@ -408,7 +407,7 @@ final categoryRole = categoryRoles[index % categories.length];
               const SizedBox(height: 24),
               GestureDetector(
                 onTap: () {},
-                child: Container(
+                child: SizedBox(
                   width: 90,
                   child: Stack(
                     children: [
@@ -470,7 +469,7 @@ final categoryRole = categoryRoles[index % categories.length];
                               context,
                               child: TextField(
                                 decoration: _getInputDecoration(
-                                    'D.O.B', Icons.calendar_today),
+                                    'D.O.B', Icons.calendar_today,),
                                 readOnly: true,
                                 onTap: () async {
                                   await showDatePicker(
@@ -490,10 +489,10 @@ final categoryRole = categoryRoles[index % categories.length];
                               context,
                               child: DropdownButtonFormField<String>(
                                 decoration: _getInputDecoration(
-                                    'Gender', Icons.person_3_sharp),
+                                    'Gender', Icons.person_3_sharp,),
                                 items: ['Male', 'Female', 'Others']
                                     .map((e) => DropdownMenuItem(
-                                        value: e, child: Text(e)))
+                                        value: e, child: Text(e),),)
                                     .toList(),
                                 onChanged: (value) {},
                               ),
@@ -604,7 +603,7 @@ final categoryRole = categoryRoles[index % categories.length];
               const SizedBox(height: 20),
               Row(
                 children: [
-                  Container(
+                  DecoratedBox(
                     decoration: BoxDecoration(
                       color: Theme.of(context)
                           .colorScheme
@@ -632,7 +631,7 @@ final categoryRole = categoryRoles[index % categories.length];
               const SizedBox(height: 24),
               GestureDetector(
                 onTap: () {},
-                child: Container(
+                child: SizedBox(
                   width: 90,
                   child: Stack(
                     children: [
@@ -691,10 +690,10 @@ final categoryRole = categoryRoles[index % categories.length];
                               context,
                               child: DropdownButtonFormField<String>(
                                 decoration: _getInputDecoration(
-                                    'Role', Icons.person_3_sharp),
+                                    'Role', Icons.person_3_sharp,),
                                 items: ['Patient', 'Doctor', 'Lab Technician', 'Nurse']
                                     .map((e) => DropdownMenuItem(
-                                        value: e, child: Text(e)))
+                                        value: e, child: Text(e),),)
                                     .toList(),
                                 onChanged: (value) {},
                               ),
@@ -720,7 +719,7 @@ final categoryRole = categoryRoles[index % categories.length];
                               context,
                               child: TextField(
                                 decoration: _getInputDecoration(
-                                    'D.O.B', Icons.calendar_today),
+                                    'D.O.B', Icons.calendar_today,),
                                 readOnly: true,
                                 onTap: () async {
                                   await showDatePicker(
@@ -740,10 +739,10 @@ final categoryRole = categoryRoles[index % categories.length];
                               context,
                               child: DropdownButtonFormField<String>(
                                 decoration: _getInputDecoration(
-                                    'Gender', Icons.person_3_sharp),
+                                    'Gender', Icons.person_3_sharp,),
                                 items: ['Male', 'Female', 'Others']
                                     .map((e) => DropdownMenuItem(
-                                        value: e, child: Text(e)))
+                                        value: e, child: Text(e),),)
                                     .toList(),
                                 onChanged: (value) {},
                               ),

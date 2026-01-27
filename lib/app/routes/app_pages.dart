@@ -1,18 +1,19 @@
 import 'package:get/get.dart';
+import 'package:wittehms/features/admin/admin_invoice.dart';
 import 'package:wittehms/features/admin/appointments.dart';
 import 'package:wittehms/features/admin/billings.dart';
 import 'package:wittehms/features/admin/category_Management.dart';
-import 'package:wittehms/features/admin/admin_invoice.dart';
+
 import '../../core/constants/app_constants.dart';
 import '../../core/middleware/auth_middleware.dart';
-import '../../features/auth/presentation/pages/login_page.dart';
-import '../../features/splash/presentation/pages/splash_page.dart';
-import '../../features/splash/bindings/splash_binding.dart';
-import '../../features/onboarding/presentation/pages/onboarding_screen.dart';
-import '../../features/doctors/doctor_dashboard.dart';
-import '../../features/patients/patient_dashboard.dart';
 import '../../features/admin/admin_dashboard.dart';
+import '../../features/auth/presentation/pages/login_page.dart';
+import '../../features/doctors/doctor_dashboard.dart';
+import '../../features/onboarding/presentation/pages/onboarding_screen.dart';
+import '../../features/patients/patient_dashboard.dart';
 import '../../features/settings/app_icon_settings_page.dart';
+import '../../features/splash/bindings/splash_binding.dart';
+import '../../features/splash/presentation/pages/splash_page.dart';
 
 class AppPages {
   static final routes = [
