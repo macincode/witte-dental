@@ -66,11 +66,16 @@ class RoleBasedDrawer extends StatelessWidget {
                               ),
                               const SizedBox(height: 6),
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 4,
+                                ),
                                 decoration: BoxDecoration(
                                   color: Colors.white.withOpacity(0.2),
                                   borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(color: Colors.white.withOpacity(0.3)),
+                                  border: Border.all(
+                                    color: Colors.white.withOpacity(0.3),
+                                  ),
                                 ),
                                 child: Text(
                                   _getRoleDisplayName(user.role),
@@ -103,7 +108,9 @@ class RoleBasedDrawer extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Text(
-                                  user.name.isNotEmpty ? user.name[0].toUpperCase() : 'U',
+                                  user.name.isNotEmpty
+                                      ? user.name[0].toUpperCase()
+                                      : 'U',
                                   style: TextStyle(
                                     color: _getRoleColor(user.role),
                                     fontSize: 20,
@@ -121,7 +128,8 @@ class RoleBasedDrawer extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   color: _getRoleColor(user.role),
                                   shape: BoxShape.circle,
-                                  border: Border.all(color: Colors.white, width: 2),
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
                                 ),
                                 child: Icon(
                                   _getRoleIcon(user.role),
@@ -148,7 +156,10 @@ class RoleBasedDrawer extends StatelessWidget {
                     final isCurrentRoute = Get.currentRoute == item.route;
 
                     return Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 1,
+                      ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: isCurrentRoute
@@ -157,7 +168,10 @@ class RoleBasedDrawer extends StatelessWidget {
                       ),
                       child: ListTile(
                         dense: true,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 2,
+                        ),
                         leading: Container(
                           width: 32,
                           height: 32,
@@ -261,9 +275,7 @@ class RoleBasedDrawer extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: isDestructive
-                ? Colors.red.shade200
-                : Colors.grey.shade300,
+            color: isDestructive ? Colors.red.shade200 : Colors.grey.shade300,
           ),
         ),
         child: Row(
@@ -277,7 +289,8 @@ class RoleBasedDrawer extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                color: isDestructive ? Colors.red.shade600 : Colors.grey.shade800,
+                color:
+                    isDestructive ? Colors.red.shade600 : Colors.grey.shade800,
                 fontWeight: FontWeight.w500,
                 fontSize: 18,
               ),

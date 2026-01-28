@@ -1,6 +1,8 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:device_info_plus/device_info_plus.dart';
+import 'package:witte_dental_pms/features/shared/widgets/global_widgets.dart';
+
 import 'firebase_service.dart';
 
 class AppConfig {
@@ -22,14 +24,21 @@ class AppConfig {
 
   // API Configuration
   static String get baseUrl => FirebaseService.getRemoteConfigValue(
-    'api_base_url', 
-    isDebug ? 'http://localhost:8000/api' : 'https://witte.macincode.com/api'
-  );
+        'api_base_url',
+        isDebug
+            ? 'http://localhost:8000/api'
+            : 'https://witte.macincode.com/api',
+      );
 
   // Feature Flags
-  static bool get isChatEnabled => FirebaseService.getRemoteConfigValue('feature_chat_enabled', true);
-  static bool get isTelemedicineEnabled => FirebaseService.getRemoteConfigValue('feature_telemedicine_enabled', false);
-  static bool get isMaintenanceMode => FirebaseService.getRemoteConfigValue('app_maintenance_mode', false);
+  static bool get isChatEnabled =>
+      FirebaseService.getRemoteConfigValue('feature_chat_enabled', true);
+  static bool get isTelemedicineEnabled => FirebaseService.getRemoteConfigValue(
+        'feature_telemedicine_enabled',
+        false,
+      );
+  static bool get isMaintenanceMode =>
+      FirebaseService.getRemoteConfigValue('app_maintenance_mode', false);
 
   // App Constants
   static const String supportEmail = 'support@witte.macincode.com';
@@ -58,27 +67,29 @@ class AppConfig {
     try {
       // Get package info
       _packageInfo = await PackageInfo.fromPlatform();
-      
+
       // Get device info
       _deviceInfo = DeviceInfoPlugin();
       _deviceData = await _getDeviceData();
-      
-      print('✅ App Config initialized');
-      print('📱 App: $appName v$fullVersion');
-      print('🔧 Environment: ${isDebug ? 'Debug' : isRelease ? 'Release' : 'Profile'}');
-      print('🌐 API Base URL: $baseUrl');
+
+      dPrint('✅ App Config initialized');
+      dPrint('📱 App: $appName v$fullVersion');
+      dPrint(
+        '🔧 Environment: ${isDebug ? 'Debug' : isRelease ? 'Release' : 'Profile'}',
+      );
+      dPrint('🌐 API Base URL: $baseUrl');
     } catch (e) {
-      print('❌ App Config initialization failed: $e');
+      dPrint('❌ App Config initialization failed: $e');
     }
   }
 
   /// Get device information
   static Future<Map<String, dynamic>> _getDeviceData() async {
-    Map<String, dynamic> deviceData = {};
+    var deviceData = <String, dynamic>{};
 
     try {
       if (defaultTargetPlatform == TargetPlatform.android) {
-        AndroidDeviceInfo androidInfo = await _deviceInfo.androidInfo;
+        final androidInfo = await _deviceInfo.androidInfo;
         deviceData = {
           'platform': 'Android',
           'model': androidInfo.model,
@@ -90,7 +101,7 @@ class AppConfig {
           'id': androidInfo.id,
         };
       } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-        IosDeviceInfo iosInfo = await _deviceInfo.iosInfo;
+        final iosInfo = await _deviceInfo.iosInfo;
         deviceData = {
           'platform': 'iOS',
           'model': iosInfo.model,
@@ -101,7 +112,7 @@ class AppConfig {
         };
       }
     } catch (e) {
-      print('❌ Device info retrieval failed: $e');
+      dPrint('❌ Device info retrieval failed: $e');
     }
 
     return deviceData;
@@ -119,10 +130,12 @@ class AppConfig {
   /// Check if app version is supported
   static bool isVersionSupported(String minVersion) {
     try {
-      List<int> currentVersion = version.split('.').map(int.parse).toList();
-      List<int> minimumVersion = minVersion.split('.').map(int.parse).toList();
+      final currentVersion = version.split('.').map(int.parse).toList();
+      final minimumVersion = minVersion.split('.').map(int.parse).toList();
 
-      for (int i = 0; i < currentVersion.length && i < minimumVersion.length; i++) {
+      for (var i = 0;
+          i < currentVersion.length && i < minimumVersion.length;
+          i++) {
         if (currentVersion[i] > minimumVersion[i]) return true;
         if (currentVersion[i] < minimumVersion[i]) return false;
       }
@@ -135,30 +148,32 @@ class AppConfig {
 
   /// Get app headers for API requests
   static Map<String, String> get apiHeaders => {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'User-Agent': '$appName/$fullVersion ($platformName)',
-    'X-App-Version': version,
-    'X-Build-Number': buildNumber,
-    'X-Platform': platformName,
-    'X-Device-Model': deviceModel,
-  };
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'User-Agent': '$appName/$fullVersion ($platformName)',
+        'X-App-Version': version,
+        'X-Build-Number': buildNumber,
+        'X-Platform': platformName,
+        'X-Device-Model': deviceModel,
+      };
 
   /// Environment-specific configurations
-  static Map<String, dynamic> get environmentConfig => {
-    'debug': {
-      'enableLogging': true,
-      'enableAnalytics': false,
-      'enableCrashlytics': false,
-      'apiTimeout': 60, // seconds
-    },
-    'release': {
-      'enableLogging': false,
-      'enableAnalytics': true,
-      'enableCrashlytics': true,
-      'apiTimeout': 30, // seconds
-    },
-  }[isDebug ? 'debug' : 'release'] ?? {};
+  static Map<String, dynamic> get environmentConfig =>
+      {
+        'debug': {
+          'enableLogging': true,
+          'enableAnalytics': false,
+          'enableCrashlytics': false,
+          'apiTimeout': 60, // seconds
+        },
+        'release': {
+          'enableLogging': false,
+          'enableAnalytics': true,
+          'enableCrashlytics': true,
+          'apiTimeout': 30, // seconds
+        },
+      }[isDebug ? 'debug' : 'release'] ??
+      {};
 
   /// Check if feature is enabled
   static bool isFeatureEnabled(String feature) {

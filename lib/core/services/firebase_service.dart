@@ -1,11 +1,11 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:firebase_performance/firebase_performance.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_performance/firebase_performance.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
+import 'package:witte_dental_pms/features/shared/widgets/global_widgets.dart';
 
 class FirebaseService {
   static FirebaseAnalytics? _analytics;
@@ -25,37 +25,37 @@ class FirebaseService {
     try {
       // Initialize Firebase
       await Firebase.initializeApp();
-      
+
       // Initialize Analytics
       _analytics = FirebaseAnalytics.instance;
       await _analytics!.setAnalyticsCollectionEnabled(!kDebugMode);
-      
+
       // Initialize Crashlytics
       _crashlytics = FirebaseCrashlytics.instance;
       await _crashlytics!.setCrashlyticsCollectionEnabled(!kDebugMode);
-      
+
       // Set up Crashlytics error handling
       FlutterError.onError = _crashlytics!.recordFlutterFatalError;
       PlatformDispatcher.instance.onError = (error, stack) {
         _crashlytics!.recordError(error, stack, fatal: true);
         return true;
       };
-      
+
       // Initialize Performance Monitoring
       _performance = FirebasePerformance.instance;
       await _performance!.setPerformanceCollectionEnabled(!kDebugMode);
-      
+
       // Initialize Messaging
       _messaging = FirebaseMessaging.instance;
       await _setupMessaging();
-      
+
       // Initialize Remote Config
       _remoteConfig = FirebaseRemoteConfig.instance;
       await _setupRemoteConfig();
-      
-      print('✅ Firebase services initialized successfully');
+
+      dPrint('✅ Firebase services initialized successfully');
     } catch (e, stackTrace) {
-      print('❌ Firebase initialization failed: $e');
+      dPrint('❌ Firebase initialization failed: $e');
       if (_crashlytics != null) {
         await _crashlytics!.recordError(e, stackTrace);
       }
@@ -66,55 +66,52 @@ class FirebaseService {
   static Future<void> _setupMessaging() async {
     try {
       // Request permission for iOS
-      NotificationSettings settings = await _messaging!.requestPermission(
-        alert: true,
-        announcement: false,
-        badge: true,
-        carPlay: false,
-        criticalAlert: false,
-        provisional: false,
-        sound: true,
-      );
+      final settings = await _messaging!.requestPermission();
 
       if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-        print('✅ User granted permission for notifications');
+        dPrint('✅ User granted permission for notifications');
       } else {
-        print('⚠️ User declined or has not accepted permission for notifications');
+        dPrint(
+          '⚠️ User declined or has not accepted permission for notifications',
+        );
       }
 
       // Get FCM token
-      String? token = await _messaging!.getToken();
-      print('📱 FCM Token: $token');
+      final token = await _messaging!.getToken();
+      dPrint('📱 FCM Token: $token');
 
       // Handle background messages
-      FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+      FirebaseMessaging.onBackgroundMessage(
+        _firebaseMessagingBackgroundHandler,
+      );
 
       // Handle foreground messages
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-        print('📨 Received foreground message: ${message.messageId}');
+        dPrint('📨 Received foreground message: ${message.messageId}');
         _handleMessage(message);
       });
 
       // Handle message when app is opened from notification
       FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-        print('📱 App opened from notification: ${message.messageId}');
+        dPrint('📱 App opened from notification: ${message.messageId}');
         _handleMessage(message);
       });
-
     } catch (e) {
-      print('❌ Messaging setup failed: $e');
+      dPrint('❌ Messaging setup failed: $e');
     }
   }
 
   /// Setup Remote Config
   static Future<void> _setupRemoteConfig() async {
     try {
-      await _remoteConfig!.setConfigSettings(RemoteConfigSettings(
-        fetchTimeout: const Duration(minutes: 1),
-        minimumFetchInterval: kDebugMode 
-          ? const Duration(minutes: 1) 
-          : const Duration(hours: 1),
-      ));
+      await _remoteConfig!.setConfigSettings(
+        RemoteConfigSettings(
+          fetchTimeout: const Duration(minutes: 1),
+          minimumFetchInterval: kDebugMode
+              ? const Duration(minutes: 1)
+              : const Duration(hours: 1),
+        ),
+      );
 
       // Set default values
       await _remoteConfig!.setDefaults({
@@ -126,9 +123,9 @@ class FirebaseService {
       });
 
       await _remoteConfig!.fetchAndActivate();
-      print('✅ Remote Config initialized');
+      dPrint('✅ Remote Config initialized');
     } catch (e) {
-      print('❌ Remote Config setup failed: $e');
+      dPrint('❌ Remote Config setup failed: $e');
     }
   }
 
@@ -158,40 +155,47 @@ class FirebaseService {
         _handleSystemUpdate(data);
         break;
       default:
-        print('📨 General notification: ${notification?.title}');
+        dPrint('📨 General notification: ${notification?.title}');
     }
   }
 
   static void _handleAppointmentReminder(Map<String, dynamic> data) {
-    print('📅 Appointment reminder: ${data['appointment_id']}');
+    dPrint('📅 Appointment reminder: ${data['appointment_id']}');
     // Navigate to appointment details
   }
 
   static void _handlePaymentDue(Map<String, dynamic> data) {
-    print('💰 Payment due: ${data['invoice_id']}');
+    dPrint('💰 Payment due: ${data['invoice_id']}');
     // Navigate to payment screen
   }
 
   static void _handleSystemUpdate(Map<String, dynamic> data) {
-    print('🔄 System update: ${data['message']}');
+    dPrint('🔄 System update: ${data['message']}');
     // Show system update dialog
   }
 
   /// Log custom analytics event
-  static Future<void> logEvent(String name, Map<String, Object>? parameters) async {
+  static Future<void> logEvent(
+    String name,
+    Map<String, Object>? parameters,
+  ) async {
     try {
       await _analytics?.logEvent(name: name, parameters: parameters);
     } catch (e) {
-      print('❌ Analytics event logging failed: $e');
+      dPrint('❌ Analytics event logging failed: $e');
     }
   }
 
   /// Log custom error
-  static Future<void> logError(dynamic error, StackTrace? stackTrace, {String? reason}) async {
+  static Future<void> logError(
+    dynamic error,
+    StackTrace? stackTrace, {
+    String? reason,
+  }) async {
     try {
       await _crashlytics?.recordError(error, stackTrace, reason: reason);
     } catch (e) {
-      print('❌ Error logging failed: $e');
+      dPrint('❌ Error logging failed: $e');
     }
   }
 
@@ -205,12 +209,12 @@ class FirebaseService {
       await _analytics?.setUserId(id: userId);
       await _analytics?.setUserProperty(name: 'user_role', value: userRole);
       await _analytics?.setUserProperty(name: 'hospital_id', value: hospitalId);
-      
+
       await _crashlytics?.setUserIdentifier(userId);
       await _crashlytics?.setCustomKey('user_role', userRole ?? 'unknown');
       await _crashlytics?.setCustomKey('hospital_id', hospitalId ?? 'unknown');
     } catch (e) {
-      print('❌ User properties setup failed: $e');
+      dPrint('❌ User properties setup failed: $e');
     }
   }
 
@@ -219,15 +223,15 @@ class FirebaseService {
     try {
       final value = _remoteConfig?.getValue(key);
       if (value == null) return defaultValue;
-      
+
       if (T == bool) return value.asBool() as T;
       if (T == int) return value.asInt() as T;
       if (T == double) return value.asDouble() as T;
       if (T == String) return value.asString() as T;
-      
+
       return defaultValue;
     } catch (e) {
-      print('❌ Remote Config value retrieval failed: $e');
+      dPrint('❌ Remote Config value retrieval failed: $e');
       return defaultValue;
     }
   }
@@ -242,5 +246,5 @@ class FirebaseService {
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  print('📨 Background message: ${message.messageId}');
+  dPrint('📨 Background message: ${message.messageId}');
 }

@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:flutter/services.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:witte_dental_pms/features/shared/widgets/global_widgets.dart';
 
 import 'app/routes/app_pages.dart';
 import 'core/config/app_config.dart';
@@ -11,9 +12,9 @@ import 'core/controllers/language_controller.dart';
 import 'core/controllers/network_controller.dart';
 import 'core/controllers/theme_controller.dart';
 import 'core/localization/app_translations.dart';
-import 'core/theme/app_theme.dart';
-import 'core/services/firebase_service.dart';
 import 'core/services/app_config.dart' as config;
+import 'core/services/firebase_service.dart';
+import 'core/theme/app_theme.dart';
 import 'features/auth/presentation/controllers/auth_controller.dart';
 
 void main() async {
@@ -36,10 +37,10 @@ Future<void> _initializeServices() async {
   try {
     // Initialize Firebase services
     await FirebaseService.initialize();
-    
+
     // Initialize App Configuration
     await config.AppConfig.initialize();
-    
+
     // Set environment (can be configured via build flavors)
     AppConfig.setEnvironment(Environment.dev);
 
@@ -63,10 +64,14 @@ Future<void> _initializeServices() async {
       ),
     );
 
-    print('✅ All services initialized successfully');
+    dPrint('✅ All services initialized successfully');
   } catch (e, stackTrace) {
-    print('❌ Service initialization failed: $e');
-    await FirebaseService.logError(e, stackTrace, reason: 'Service initialization failed');
+    dPrint('❌ Service initialization failed: $e');
+    await FirebaseService.logError(
+      e,
+      stackTrace,
+      reason: 'Service initialization failed',
+    );
   }
 }
 
@@ -89,7 +94,7 @@ class WitteDentalApp extends StatelessWidget {
         translations: AppTranslations(),
         initialRoute: AppConstants.splashRoute,
         getPages: AppPages.routes,
-        
+
         // Global error handling
         builder: (context, child) {
           // Handle global errors
@@ -101,10 +106,10 @@ class WitteDentalApp extends StatelessWidget {
             );
             return _buildErrorWidget(errorDetails);
           };
-          
+
           return child ?? const SizedBox.shrink();
         },
-        
+
         // Navigation observer for analytics
         navigatorObservers: [
           FirebaseAnalyticsObserver(analytics: FirebaseService.analytics),
@@ -112,15 +117,15 @@ class WitteDentalApp extends StatelessWidget {
       ),
     );
   }
-  
+
   /// Build custom error widget
   Widget _buildErrorWidget(FlutterErrorDetails errorDetails) {
     return Material(
-      child: Container(
+      child: ColoredBox(
         color: Colors.red.shade50,
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
