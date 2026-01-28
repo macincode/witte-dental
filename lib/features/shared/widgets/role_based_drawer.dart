@@ -32,8 +32,8 @@ class RoleBasedDrawer extends StatelessWidget {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      Color(0xFF20B2AA), // Light Sea Green
-                      Color(0xFF2E8B57), // Sea Green
+                      Color(0xFF145BD9), // Light Sea Green
+                      Color(0xFF07BDFF), // Sea Green
                     ],
                   ),
                 ),
@@ -152,7 +152,7 @@ class RoleBasedDrawer extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: isCurrentRoute
-                            ? const Color(0xFF2E8B57).withOpacity(0.1)
+                            ? const Color(0xFF07BDFF).withOpacity(0.1)
                             : Colors.transparent,
                       ),
                       child: ListTile(
@@ -163,7 +163,7 @@ class RoleBasedDrawer extends StatelessWidget {
                           height: 32,
                           decoration: BoxDecoration(
                             color: isCurrentRoute
-                                ? const Color(0xFF2E8B57)
+                                ? const Color(0xFF07BDFF)
                                 : Colors.grey.shade100,
                             borderRadius: BorderRadius.circular(8),
                           ),
@@ -179,7 +179,7 @@ class RoleBasedDrawer extends StatelessWidget {
                           item.title,
                           style: TextStyle(
                             color: isCurrentRoute
-                                ? const Color(0xFF2E8B57)
+                                ? const Color(0xFF07BDFF)
                                 : Colors.grey.shade800,
                             fontWeight: isCurrentRoute
                                 ? FontWeight.w600
@@ -192,7 +192,7 @@ class RoleBasedDrawer extends StatelessWidget {
                                 width: 4,
                                 height: 4,
                                 decoration: const BoxDecoration(
-                                  color: Color(0xFF2E8B57),
+                                  color: Color(0xFF07BDFF),
                                   shape: BoxShape.circle,
                                 ),
                               )
@@ -291,9 +291,9 @@ class RoleBasedDrawer extends StatelessWidget {
   Color _getRoleColor(String role) {
     switch (role) {
       case AppConstants.roleDoctor:
-        return const Color(0xFF2E8B57); // Sea Green
+        return const Color(0xFF07BDFF); // Sea Green
       case AppConstants.rolePatient:
-        return const Color(0xFF20B2AA); // Light Sea Green
+        return const Color(0xFF145BD9); // Light Sea Green
       case AppConstants.roleAdmin:
         return const Color(0xFF4682B4); // Steel Blue
       case AppConstants.roleStaff:

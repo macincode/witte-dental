@@ -1,10 +1,12 @@
 {
     "cSpell.words": [
+        "buildscript",
         "cupertino",
         "Getx",
         "Roboto",
         "unawaited",
         "Witte",
         "witte-dental-pms"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

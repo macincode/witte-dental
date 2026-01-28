@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 class NetworkController extends GetxController {
   final RxBool _isConnected = true.obs;
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
 
   bool get isConnected => _isConnected.value;
 
@@ -27,8 +27,8 @@ class NetworkController extends GetxController {
         );
   }
 
-  void _updateConnectionStatus(ConnectivityResult result) {
-    _isConnected.value = result != ConnectivityResult.none;
+  void _updateConnectionStatus(List<ConnectivityResult> results) {
+    _isConnected.value = !results.contains(ConnectivityResult.none);
   }
 
   Future<void> checkConnection() async {
