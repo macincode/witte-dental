@@ -8,11 +8,11 @@ class NoInternetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final networkController = Get.find<NetworkController>();
-    
+
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -23,23 +23,23 @@ class NoInternetScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               Text(
-                'No Internet Connection',
+                'no_internet_connection'.tr,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+                      fontWeight: FontWeight.bold,
+                    ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
               Text(
-                'Please check your internet connection and try again.',
+                'check_internet_desc'.tr,
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 32),
               ElevatedButton.icon(
-                onPressed: () => networkController.checkConnection(),
+                onPressed: networkController.checkConnection,
                 icon: const Icon(Icons.refresh),
-                label: const Text('Check Connection'),
+                label: Text('check_connection'.tr),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 24,

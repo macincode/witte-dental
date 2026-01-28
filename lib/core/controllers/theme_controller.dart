@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../storage/hive_service.dart';
+
 import '../constants/storage_keys.dart';
+import '../storage/hive_service.dart';
 
 enum AppThemeMode { light, dark, system }
 
 class ThemeController extends GetxController {
   final Rx<AppThemeMode> _themeMode = AppThemeMode.system.obs;
-  
+
   AppThemeMode get currentThemeMode => _themeMode.value;
-  
+
   ThemeMode get themeMode {
     switch (_themeMode.value) {
       case AppThemeMode.light:

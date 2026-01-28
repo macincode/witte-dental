@@ -1,11 +1,12 @@
-import 'package:get/get.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:get/get.dart';
 
 class NetworkController extends GetxController {
   final RxBool _isConnected = true.obs;
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
-  
+
   bool get isConnected => _isConnected.value;
 
   @override
@@ -15,15 +16,15 @@ class NetworkController extends GetxController {
     _listenToConnectivityChanges();
   }
 
-  void _checkInitialConnection() async {
+  Future<void> _checkInitialConnection() async {
     final result = await Connectivity().checkConnectivity();
     _updateConnectionStatus(result);
   }
 
   void _listenToConnectivityChanges() {
     _connectivitySubscription = Connectivity().onConnectivityChanged.listen(
-      _updateConnectionStatus,
-    );
+          _updateConnectionStatus,
+        );
   }
 
   void _updateConnectionStatus(ConnectivityResult result) {
