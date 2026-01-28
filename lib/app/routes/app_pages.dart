@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:wittehms/features/admin/admin_invoice.dart';
+import 'package:wittehms/features/admin/inquiries_screen.dart';
 import 'package:wittehms/features/admin/appointments.dart';
 import 'package:wittehms/features/admin/billings.dart';
 import 'package:wittehms/features/admin/category_Management.dart';
@@ -58,8 +58,8 @@ class AppPages {
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
     GetPage(
-      name: AppConstants.adminInvoice,
-      page: () => const AdminInvoice(),
+      name: AppConstants.InquirieScreen,
+      page: () => const InquirieScreen(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
     GetPage(

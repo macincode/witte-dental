@@ -16,6 +16,68 @@ class DashboardCard extends StatelessWidget {
     this.onTap,
   });
 
+  static Widget buildHeaderCard(BuildContext context, String title, String subtitle) {
+    final themeController = Get.find<ThemeController>();
+    
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: themeController.currentThemeMode == AppThemeMode.dark ||
+              (themeController.currentThemeMode == AppThemeMode.system &&
+                  Theme.of(context).brightness == Brightness.dark)
+          ? BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: const Color(0xff30363d),
+                width: 2,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xff30363d).withOpacity(0.2),
+                  spreadRadius: 0.6,
+                  blurRadius: 3,
+                  offset: const Offset(1, 1),
+                ),
+              ],
+            )
+          : BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.12),
+                width: 2,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 0.8,
+                  blurRadius: 10,
+                  offset: const Offset(0, 1),
+                ),
+              ],
+            ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            subtitle,
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+              color: Theme.of(context).colorScheme.onSecondary,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeController = Get.find<ThemeController>();

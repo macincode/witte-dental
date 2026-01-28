@@ -104,7 +104,7 @@ class RoleSelectionWidget extends StatelessWidget {
               icon,
               color: isSelected
                   ? color
-                  : Theme.of(context).colorScheme.onSurfaceVariant,
+                  : Theme.of(context).colorScheme.onSecondary,
               size: 24,
             ),
             const SizedBox(height: 4),
@@ -115,7 +115,7 @@ class RoleSelectionWidget extends StatelessWidget {
                         ? color
                         : Theme.of(context).colorScheme.onSurfaceVariant,
                     fontWeight:
-                        isSelected ? FontWeight.w600 : FontWeight.normal,
+                        isSelected ? FontWeight.w600 : FontWeight.w500,
                   ),
             ),
           ],

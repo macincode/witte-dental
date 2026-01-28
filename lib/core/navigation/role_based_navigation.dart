@@ -74,9 +74,9 @@ class RoleBasedNavigation {
         route: AppConstants.adminDashboard,
       ),
       NavigationItem(
-        title: 'user_management'.tr,
+        title: 'Inquiries',
         icon: Icons.group,
-        route: AppConstants.adminInvoice,
+        route: AppConstants.InquirieScreen,
       ),
       NavigationItem(
         title: 'Users',
