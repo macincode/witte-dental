@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:wittehms/features/admin/appointments.dart';
-import 'package:wittehms/features/admin/billings.dart';
-import 'package:wittehms/features/admin/category_Management.dart';
-import 'package:wittehms/features/admin/inquiries_screen.dart';
+import 'package:witte_dental_pms/features/admin/appointments.dart';
+import 'package:witte_dental_pms/features/admin/billings.dart';
+import 'package:witte_dental_pms/features/admin/category_Management.dart';
+import 'package:witte_dental_pms/features/admin/inquiries_screen.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../core/middleware/auth_middleware.dart';

@@ -94,26 +94,40 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   }
 
   Future<void> _startSequence() async {
-    await Future.delayed(const Duration(milliseconds: 300));
-    await _scaleController.forward();
+    try {
+      // Start scale animation
+      await Future.delayed(const Duration(milliseconds: 300));
+      _scaleController.forward();
 
-    await Future.delayed(const Duration(milliseconds: 600));
-    await _orbitController.repeat();
-    await _glowController.repeat(reverse: true);
+      // Start orbit and glow animations (don't await repeat as it runs indefinitely)
+      await Future.delayed(const Duration(milliseconds: 600));
+      _orbitController.repeat();
+      _glowController.repeat(reverse: true);
 
-    await Future.delayed(const Duration(milliseconds: 1000));
-    await _ctaController.forward();
+      // Start CTA animation
+      await Future.delayed(const Duration(milliseconds: 1000));
+      _ctaController.forward();
 
-    await Future.delayed(const Duration(seconds: 3));
+      // Wait for animations to be visible
+      await Future.delayed(const Duration(seconds: 2));
 
-    // Check if onboarding is completed
-    final onboardingCompleted =
-        HiveService.getSetting<bool>('onboarding_completed') ?? false;
+      // Check if onboarding is completed
+      final onboardingCompleted =
+          HiveService.getSetting<bool>('onboarding_completed') ?? false;
 
-    if (onboardingCompleted) {
-      await Get.offAllNamed(AppConstants.loginRoute);
-    } else {
-      await Get.offAllNamed(AppConstants.onboardingRoute);
+      // Navigate to appropriate screen
+      if (mounted) {
+        if (onboardingCompleted) {
+          Get.offAllNamed(AppConstants.loginRoute);
+        } else {
+          Get.offAllNamed(AppConstants.onboardingRoute);
+        }
+      }
+    } catch (e) {
+      // Fallback navigation in case of any error
+      if (mounted) {
+        Get.offAllNamed(AppConstants.onboardingRoute);
+      }
     }
   }
 

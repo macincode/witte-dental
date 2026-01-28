@@ -1,5 +1,5 @@
-name: wittehms
-description: "A professional healthcare management system built with Flutter"
+name: witte_dental_pms
+description: "Witte Dental PMS is a modern, responsive web application designed to streamline dental hospital operations. It provides comprehensive management tools for patient care, inventory, pharmacy, staff, and financial operations specifically tailored for dental hospitals and clinics."
 publish_to: 'none'
 
 version: 1.0.0+1

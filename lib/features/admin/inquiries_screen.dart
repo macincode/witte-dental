@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wittehms/core/constants/app_constants.dart';
-import 'package:wittehms/core/controllers/theme_controller.dart';
-import 'package:wittehms/features/admin/details_card.dart';
+import 'package:witte_dental_pms/core/constants/app_constants.dart';
+import 'package:witte_dental_pms/core/controllers/theme_controller.dart';
+import 'package:witte_dental_pms/features/admin/details_card.dart';
 
 import '../shared/widgets/network_aware_widget.dart';
 

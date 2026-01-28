@@ -1,4 +1,4 @@
-package com.example.wittehms
+package com.macincode.wittedental
 
 import io.flutter.embedding.android.FlutterActivity
 

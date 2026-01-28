@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "888634345199",
+    "project_id": "witte-dental",
+    "storage_bucket": "witte-dental.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888634345199:android:bc56052a876602e761fd1a",
+        "android_client_info": {
+          "package_name": "com.macincode.wittedental"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASfeuzbk0k_SqOo3AzjC-uzf9wxP3iNso"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

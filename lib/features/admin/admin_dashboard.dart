@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wittehms/core/controllers/theme_controller.dart';
+import 'package:witte_dental_pms/core/controllers/theme_controller.dart';
 
 import '../../core/controllers/language_controller.dart';
 import '../auth/presentation/controllers/auth_controller.dart';
