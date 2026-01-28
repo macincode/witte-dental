@@ -4,24 +4,21 @@ import 'package:wittehms/core/controllers/theme_controller.dart';
 
 import '../../core/controllers/language_controller.dart';
 import '../auth/presentation/controllers/auth_controller.dart';
-import 'details_card.dart';
 import '../shared/widgets/network_aware_widget.dart';
 import '../shared/widgets/role_based_drawer.dart';
 import '../shared/widgets/theme_aware_app_bar.dart';
+import 'details_card.dart';
 
 class AdminDashboard extends StatelessWidget {
-   AdminDashboard({super.key});
+  AdminDashboard({super.key});
 
   final themeController = Get.find<ThemeController>();
 
   @override
   Widget build(BuildContext context) {
-
-    
-
     return NetworkAwareWidget(
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         drawer: const RoleBasedDrawer(),
         appBar: ThemeAwareAppBar(
           title: 'Dashboard'.tr,
@@ -44,7 +41,6 @@ class AdminDashboard extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-            
               const SizedBox(height: 16),
               Expanded(
                 child: GridView.count(
@@ -81,6 +77,4 @@ class AdminDashboard extends StatelessWidget {
       ),
     );
   }
-
-
 }

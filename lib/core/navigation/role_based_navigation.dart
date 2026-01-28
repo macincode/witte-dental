@@ -76,7 +76,7 @@ class RoleBasedNavigation {
       NavigationItem(
         title: 'Inquiries',
         icon: Icons.group,
-        route: AppConstants.InquirieScreen,
+        route: AppConstants.inquiryScreen,
       ),
       NavigationItem(
         title: 'Users',

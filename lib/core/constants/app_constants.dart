@@ -23,7 +23,7 @@ class AppConstants {
 
   // Admin Routes
   static const String adminDashboard = '/admin';
-  static const String InquirieScreen = '/inquiries';
+  static const String inquiryScreen = '/inquiries';
   static const String categoryManagement = '/category-management';
   static const String appointments = '/appointments';
   static const String billings = '/billings';

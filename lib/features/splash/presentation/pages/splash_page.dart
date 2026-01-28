@@ -95,14 +95,14 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
   Future<void> _startSequence() async {
     await Future.delayed(const Duration(milliseconds: 300));
-    _scaleController.forward();
+    await _scaleController.forward();
 
     await Future.delayed(const Duration(milliseconds: 600));
-    _orbitController.repeat();
-    _glowController.repeat(reverse: true);
+    await _orbitController.repeat();
+    await _glowController.repeat(reverse: true);
 
     await Future.delayed(const Duration(milliseconds: 1000));
-    _ctaController.forward();
+    await _ctaController.forward();
 
     await Future.delayed(const Duration(seconds: 3));
 
@@ -111,9 +111,9 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         HiveService.getSetting<bool>('onboarding_completed') ?? false;
 
     if (onboardingCompleted) {
-      Get.offAllNamed(AppConstants.loginRoute);
+      await Get.offAllNamed(AppConstants.loginRoute);
     } else {
-      Get.offAllNamed(AppConstants.onboardingRoute);
+      await Get.offAllNamed(AppConstants.onboardingRoute);
     }
   }
 

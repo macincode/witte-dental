@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:wittehms/features/admin/inquiries_screen.dart';
 import 'package:wittehms/features/admin/appointments.dart';
 import 'package:wittehms/features/admin/billings.dart';
 import 'package:wittehms/features/admin/category_Management.dart';
+import 'package:wittehms/features/admin/inquiries_screen.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../core/middleware/auth_middleware.dart';
@@ -54,12 +54,12 @@ class AppPages {
     // Admin routes
     GetPage(
       name: AppConstants.adminDashboard,
-      page: () =>  AdminDashboard(),
+      page: AdminDashboard.new,
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
     GetPage(
-      name: AppConstants.InquirieScreen,
-      page: () => const InquirieScreen(),
+      name: AppConstants.inquiryScreen,
+      page: () => const InquiryScreen(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
     GetPage(

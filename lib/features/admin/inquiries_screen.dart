@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:wittehms/core/constants/app_constants.dart';
 import 'package:wittehms/core/controllers/theme_controller.dart';
 import 'package:wittehms/features/admin/details_card.dart';
 
 import '../shared/widgets/network_aware_widget.dart';
 
-class InquirieScreen extends StatefulWidget {
-  const InquirieScreen({super.key});
+class InquiryScreen extends StatefulWidget {
+  const InquiryScreen({super.key});
 
   @override
-  State<InquirieScreen> createState() => _InquirieScreenState();
+  State<InquiryScreen> createState() => _InquiryScreenState();
 }
 
-class _InquirieScreenState extends State<InquirieScreen> {
+class _InquiryScreenState extends State<InquiryScreen> {
   @override
   Widget build(BuildContext context) {
     final themeController = Get.find<ThemeController>();
 
     return NetworkAwareWidget(
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: AppBar(
           title: const Text('Inquiries'),
         ),

@@ -3,22 +3,25 @@ import 'package:get/get.dart';
 import 'package:wittehms/core/controllers/theme_controller.dart';
 
 class DashboardCard extends StatelessWidget {
+  const DashboardCard({
+    required this.title,
+    required this.icon,
+    required this.count,
+    super.key,
+    this.onTap,
+  });
   final String title;
   final IconData icon;
   final String count;
   final VoidCallback? onTap;
 
-  const DashboardCard({
-    super.key,
-    required this.title,
-    required this.icon,
-    required this.count,
-    this.onTap,
-  });
-
-  static Widget buildHeaderCard(BuildContext context, String title, String subtitle) {
+  static Widget buildHeaderCard(
+    BuildContext context,
+    String title,
+    String subtitle,
+  ) {
     final themeController = Get.find<ThemeController>();
-    
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: themeController.currentThemeMode == AppThemeMode.dark ||
@@ -44,7 +47,8 @@ class DashboardCard extends StatelessWidget {
               color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.12),
+                color:
+                    Theme.of(context).colorScheme.onSecondary.withOpacity(0.12),
                 width: 2,
               ),
               boxShadow: [
@@ -62,16 +66,16 @@ class DashboardCard extends StatelessWidget {
           Text(
             title,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.primary,
-            ),
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
           ),
           const SizedBox(height: 8),
           Text(
             subtitle,
             style: Theme.of(context).textTheme.displaySmall?.copyWith(
-              color: Theme.of(context).colorScheme.onSecondary,
-            ),
+                  color: Theme.of(context).colorScheme.onSecondary,
+                ),
           ),
         ],
       ),
@@ -81,7 +85,7 @@ class DashboardCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeController = Get.find<ThemeController>();
-    
+
     return InkWell(
       onTap: onTap ?? () {},
       child: DecoratedBox(
@@ -108,7 +112,10 @@ class DashboardCard extends StatelessWidget {
                 color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.12),
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onSecondary
+                      .withOpacity(0.12),
                   width: 2,
                 ),
                 boxShadow: [
@@ -130,7 +137,10 @@ class DashboardCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Theme.of(context).colorScheme.secondaryContainer.withOpacity(0.09),
+                      Theme.of(context)
+                          .colorScheme
+                          .secondaryContainer
+                          .withOpacity(0.09),
                       Theme.of(context).colorScheme.secondary.withOpacity(0.3),
                     ],
                     begin: Alignment.topLeft,
@@ -148,17 +158,17 @@ class DashboardCard extends StatelessWidget {
               Text(
                 count,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  fontWeight: FontWeight.bold,
-                ),
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               const SizedBox(height: 4),
               Text(
                 title,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSecondary,
-                  fontWeight: FontWeight.bold,
-                ),
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      fontWeight: FontWeight.bold,
+                    ),
                 textAlign: TextAlign.center,
               ),
             ],

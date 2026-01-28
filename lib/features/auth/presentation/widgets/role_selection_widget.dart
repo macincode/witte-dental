@@ -114,8 +114,7 @@ class RoleSelectionWidget extends StatelessWidget {
                     color: isSelected
                         ? color
                         : Theme.of(context).colorScheme.onSurfaceVariant,
-                    fontWeight:
-                        isSelected ? FontWeight.w600 : FontWeight.w500,
+                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                   ),
             ),
           ],

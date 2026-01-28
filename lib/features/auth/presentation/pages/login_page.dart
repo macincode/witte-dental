@@ -298,15 +298,17 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: authController.isLoading
                             ? null
                             : () {
-                                authController..clearError()
-                                ..login(
-                                  emailController.text.trim(),
-                                  passwordController.text,
-                                  // selectedRole: selectedRole,
-                                );
+                                authController
+                                  ..clearError()
+                                  ..login(
+                                    emailController.text.trim(),
+                                    passwordController.text,
+                                    // selectedRole: selectedRole,
+                                  );
                               },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:  Theme.of(context).colorScheme.secondary,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
