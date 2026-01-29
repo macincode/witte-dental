@@ -6,7 +6,7 @@ class DashboardCard extends StatelessWidget {
   const DashboardCard({
     required this.title,
     required this.icon,
-    required this.count,
+    this.count = '',
     super.key,
     this.onTap,
   });
@@ -18,12 +18,16 @@ class DashboardCard extends StatelessWidget {
   static Widget buildHeaderCard(
     BuildContext context,
     String title,
-    String subtitle,
+    String subtitle, 
+  //   {
+  //   Widget? actionButton,
+  // }
   ) {
     final themeController = Get.find<ThemeController>();
 
     return Container(
-      padding: const EdgeInsets.all(16),
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
       decoration: themeController.currentThemeMode == AppThemeMode.dark ||
               (themeController.currentThemeMode == AppThemeMode.system &&
                   Theme.of(context).brightness == Brightness.dark)
@@ -60,23 +64,30 @@ class DashboardCard extends StatelessWidget {
                 ),
               ],
             ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          Text(
-            title,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                 ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            subtitle,
-            style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                  color: Theme.of(context).colorScheme.onSecondary,
+                const SizedBox(height: 8),
+                Text(
+                  subtitle,
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                        color: Theme.of(context).colorScheme.onSecondary,
+                      ),
                 ),
+              ],
+            ),
           ),
+          // if (actionButton != null) actionButton,
         ],
       ),
     );
@@ -139,8 +150,8 @@ class DashboardCard extends StatelessWidget {
                     colors: [
                       Theme.of(context)
                           .colorScheme
-                          .secondaryContainer
-                          .withOpacity(0.09),
+                          .primary
+                          .withOpacity(0.06),
                       Theme.of(context).colorScheme.secondary.withOpacity(0.3),
                     ],
                     begin: Alignment.topLeft,
@@ -151,17 +162,22 @@ class DashboardCard extends StatelessWidget {
                 child: Icon(
                   icon,
                   size: 32,
-                  color: Theme.of(context).colorScheme.secondaryContainer,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
-              const SizedBox(height: 8),
+               const SizedBox(height: 8),
+              if (count.isNotEmpty) ...[
+               
               Text(
                 count,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       color: Theme.of(context).colorScheme.onPrimary,
                       fontWeight: FontWeight.bold,
                     ),
-              ),
+              ) ,
+              ] else ...[
+                const SizedBox(height: 10),
+              ],
               const SizedBox(height: 4),
               Text(
                 title,

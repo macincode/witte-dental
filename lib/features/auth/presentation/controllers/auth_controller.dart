@@ -81,7 +81,7 @@ class AuthController extends GetxController {
         Get.offAllNamed(AppConstants.patientDashboard);
         break;
       case AppConstants.roleAdmin:
-        Get.offAllNamed(AppConstants.adminDashboard);
+        Get.offAllNamed(AppConstants.adminHomeScreen);
         break;
       default:
         Get.offAllNamed(AppConstants.loginRoute);

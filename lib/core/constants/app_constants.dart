@@ -22,10 +22,12 @@ class AppConstants {
   static const String patientDashboard = '/patient';
 
   // Admin Routes
-  static const String adminDashboard = '/admin';
+  static const String adminHomeScreen = '/admin';
+  static const String adminDashboard = '/admin_dashboard';
   static const String inquiryScreen = '/inquiries';
-  static const String categoryManagement = '/category-management';
-  static const String appointments = '/appointments';
+  static const String inquirylistManagement = '/inquiry-management';
+  static const String appointmentScreen = '/appointments';
+  static const String appointmentlistManagement = '/appointments-management';
   static const String billings = '/billings';
 
   // Validation

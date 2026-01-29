@@ -1,96 +1,27 @@
 import 'package:flutter/material.dart';
 
-class CategoryManagement extends StatefulWidget {
-  const CategoryManagement({super.key});
+class InquirylistManagement extends StatefulWidget {
+  const InquirylistManagement({super.key});
 
   @override
-  State<CategoryManagement> createState() => _CategoryManagementState();
+  State<InquirylistManagement> createState() => _InquirylistManagementState();
 }
 
-class _CategoryManagementState extends State<CategoryManagement> {
-  int? _selectedIndex;
-  final List<String> _options = [
-    'All Categories',
-    'Users',
-    'Accountants',
-    'Nurses',
-    'Pharmacists',
-    'Laboratorists',
-  ];
+class _InquirylistManagementState extends State<InquirylistManagement> {
+ 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text('Category Management'),
+        title: const Text('Inquiry List'),
         elevation: 0,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: List<Widget>.generate(
-                  _options.length,
-                  (int index) {
-                    final isSelected = _selectedIndex == index;
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 12),
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          boxShadow: isSelected
-                              ? [
-                                  BoxShadow(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .primary
-                                        .withOpacity(0.3),
-                                    blurRadius: 8,
-                                    offset: const Offset(0, 2),
-                                  ),
-                                ]
-                              : null,
-                        ),
-                        child: ChoiceChip(
-                          label: Text(
-                            _options[index],
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  color: isSelected
-                                      ? Colors.white
-                                      : Colors.grey[600],
-                                  fontWeight: isSelected
-                                      ? FontWeight.w600
-                                      : FontWeight.w500,
-                                ),
-                          ),
-                          selected: isSelected,
-                          selectedColor: Theme.of(context).colorScheme.primary,
-                          backgroundColor: Colors.grey[100],
-                          side: BorderSide.none,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 8,
-                          ),
-                          onSelected: (bool selected) {
-                            setState(() {
-                              _selectedIndex = selected ? index : null;
-                            });
-                          },
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ),
+          
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Row(
@@ -109,8 +40,8 @@ class _CategoryManagementState extends State<CategoryManagement> {
                     ),
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: 'Search categories...',
-                        hintStyle: TextStyle(color: Colors.grey[400]),
+                        hintText: 'Search by patient name,mobile...',
+                        hintStyle: TextStyle(color: Colors.grey[400],fontSize: 14),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide.none,
@@ -119,8 +50,8 @@ class _CategoryManagementState extends State<CategoryManagement> {
                         fillColor: Theme.of(context).colorScheme.surface,
                         prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
                         contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 14,
+                          horizontal:12,
+                          vertical: 10,
                         ),
                       ),
                     ),
@@ -141,17 +72,17 @@ class _CategoryManagementState extends State<CategoryManagement> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 8),
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: IconButton(
-                    onPressed: _showAddCategoryDialog,
-                    icon: const Icon(Icons.add, color: Colors.white),
-                  ),
-                ),
+                // const SizedBox(width: 8),
+                // DecoratedBox(
+                //   decoration: BoxDecoration(
+                //     color: Theme.of(context).colorScheme.primary,
+                //     borderRadius: BorderRadius.circular(12),
+                //   ),
+                //   child: IconButton(
+                //     onPressed: _showAddCategoryDialog,
+                //     icon: const Icon(Icons.add, color: Colors.white),
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -175,16 +106,16 @@ class _CategoryManagementState extends State<CategoryManagement> {
 
                 final categoryName = categories[index % categories.length];
                 final category = [
-                  'karthi@macincode.com',
-                  'ram@macincode.com',
+                  '9944262945',
+                  '9444262945',
                 ];
-                final categoryemail = category[index % categories.length];
+                final categorynum = category[index % categories.length];
 
-                final categoryRoles = [
-                  'Doctor',
-                  'Lab Technician',
+                final categoryService = [
+                  'Periodontics',
+                  'Oral Medicine and Pathology',
                 ];
-                final categoryRole = categoryRoles[index % categories.length];
+                final categoryServices = categoryService[index % categories.length];
 
                 final categoryIcon = icons[index % icons.length];
                 final categoryColor = colors[index % colors.length];
@@ -210,22 +141,26 @@ class _CategoryManagementState extends State<CategoryManagement> {
                         Row(
                           children: [
                             Container(
-                              width: 50,
-                              height: 50,
+                              padding: const EdgeInsets.all(18),
                               decoration: BoxDecoration(
+                                shape: BoxShape.circle,
                                 color: categoryColor.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(12),
+                                // borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Icon(
-                                categoryIcon,
-                                color: categoryColor,
-                                size: 24,
+                              child: Text(
+                                '${categoryName[0]}',
+                                style: TextStyle(
+                                  color: categoryColor,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
                               ),
                             ),
-                            const SizedBox(width: 12),
+                            ),
+                            SizedBox(width: 10,),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     categoryName,
@@ -237,42 +172,28 @@ class _CategoryManagementState extends State<CategoryManagement> {
                                         ),
                                   ),
                                   // const SizedBox(height: 2),
-                                  Text(
-                                    categoryemail,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(
-                                          color: Colors.grey[600],
-                                        ),
+                                  Row(
+                                    children: [
+                                      Icon( 
+                                        Icons.phone,
+                                        size: 14,
+                                        color: Colors.grey[600],
+                                      ),
+                                      const SizedBox(width: 4),
+                                      Text(
+                                        categorynum,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.copyWith(
+                                              color: Colors.grey[600],
+                                            ),
+                                      ),
+                                    ],
                                   ),
                                   const SizedBox(height: 4),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 8,
-                                      vertical: 4,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary
-                                          .withOpacity(0.09),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Text(
-                                      categoryRole,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 10,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary,
-                                          ),
-                                    ),
-                                  ),
+                                  
+                                  
                                 ],
                               ),
                             ),
@@ -294,7 +215,7 @@ class _CategoryManagementState extends State<CategoryManagement> {
                                     .textTheme
                                     .bodySmall
                                     ?.copyWith(
-                                      fontWeight: FontWeight.w400,
+                                      fontWeight: FontWeight.bold,
                                       fontSize: 10,
                                       color:
                                           Theme.of(context).colorScheme.primary,
@@ -303,53 +224,219 @@ class _CategoryManagementState extends State<CategoryManagement> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 12),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Expanded(
-                              child: OutlinedButton.icon(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.delete,
-                                  size: 18,
-                                  color: Colors.red,
-                                ),
-                                label: Text(
-                                  'Delete',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium
-                                      ?.copyWith(
-                                        fontWeight: FontWeight.w400,
-                                        color:
-                                            Theme.of(context).colorScheme.error,
+                         const SizedBox(height: 5),
+                        Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary
+                                          .withOpacity(0.09),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Text(
+                                      categoryServices,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 10,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
+                                          ),
+                                    ),
+                                  ),
+                         const SizedBox(height: 12),
+                        Container(
+                                      padding: const EdgeInsets.all(14),
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            Theme.of(context)
+                                                .colorScheme
+                                                .primary
+                                                .withOpacity(0.08),
+                                            Theme.of(context)
+                                                .colorScheme
+                                                .primary
+                                                .withOpacity(0.03),
+                                          ],
+                                        ),
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary
+                                              .withOpacity(0.2),
+                                        ),
                                       ),
-                                ),
-                                style: OutlinedButton.styleFrom(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: ElevatedButton.icon(
-                                onPressed: () => _showEditCategoryDialog(index),
-                                icon: const Icon(Icons.edit, size: 16),
-                                label: const Text('Edit'),
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            padding: const EdgeInsets.all(8),
+                                            decoration: BoxDecoration(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                              shape: BoxShape.circle,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary
+                                                      .withOpacity(0.3),
+                                                  blurRadius: 6,
+                                                  offset: const Offset(0, 2),
+                                                ),
+                                              ],
+                                            ),
+                                            child: const Icon(
+                                              Icons.schedule_outlined,
+                                              size: 16,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 12),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Appointment Date:',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodySmall
+                                                      ?.copyWith(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .onSecondary,
+                                                        fontSize: 11,
+                                                      ),
+                                                ),
+                                                Text(
+                                                  'Today, 10:${30 + index} AM',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium
+                                                      ?.copyWith(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .primary,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 8,
+                                              vertical: 4,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary
+                                                      .withOpacity(0.3),
+                                                  blurRadius: 4,
+                                                  offset: const Offset(0, 2),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Text(
+                                              '2.00 ${'PM'}',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodySmall
+                                                  ?.copyWith(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: 11,
+                                                  ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                        const SizedBox(height: 12),
+                       
+                                     Padding(
+                                        padding: const EdgeInsets.all(5),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  gradient: LinearGradient(
+                            colors: [
+                             
+                              Theme.of(context).colorScheme.secondary,
+                               Theme.of(context).colorScheme.primary,
+                            ],
+                            begin: Alignment.bottomLeft,
+                            end: Alignment.topRight,
+                          ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.blue
+                                                          .withOpacity(0.3),
+                                                      blurRadius: 6,
+                                                      offset:
+                                                          const Offset(0, 2),
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: ElevatedButton.icon(
+                                                  onPressed: () {},
+                                                  icon: const Icon(
+                                                      Icons.visibility_outlined,
+                                                      size: 16,
+                                                      color: Colors.white),
+                                                  label: const Text(
+                                                      'View Details',
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w600)),
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    shadowColor:
+                                                        Colors.transparent,
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        vertical: 12),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    
                       ],
                     ),
                   ),

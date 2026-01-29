@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
-import 'package:witte_dental_pms/features/admin/appointments.dart';
+import 'package:witte_dental_pms/features/admin/appointmentList_management.dart';
+import 'package:witte_dental_pms/features/admin/appointment_screen.dart';
 import 'package:witte_dental_pms/features/admin/billings.dart';
-import 'package:witte_dental_pms/features/admin/category_Management.dart';
+import 'package:witte_dental_pms/features/admin/home_screen.dart';
+import 'package:witte_dental_pms/features/admin/inquiryList_management.dart';
 import 'package:witte_dental_pms/features/admin/inquiries_screen.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../core/middleware/auth_middleware.dart';
-import '../../features/admin/admin_dashboard.dart';
+import '../../features/admin/dashboard.dart';
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/doctors/doctor_dashboard.dart';
 import '../../features/onboarding/presentation/pages/onboarding_screen.dart';
@@ -52,6 +54,10 @@ class AppPages {
     ),
 
     // Admin routes
+     GetPage(
+      name: AppConstants.adminHomeScreen,
+      page: () => const AdminHomeScreen(),
+    ),
     GetPage(
       name: AppConstants.adminDashboard,
       page: AdminDashboard.new,
@@ -63,13 +69,18 @@ class AppPages {
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
     GetPage(
-      name: AppConstants.categoryManagement,
-      page: () => const CategoryManagement(),
+      name: AppConstants.inquirylistManagement,
+      page: () => const InquirylistManagement(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
     GetPage(
-      name: AppConstants.appointments,
-      page: () => const AppointmentScreens(),
+      name: AppConstants.appointmentScreen,
+      page: () => const AppointmentScreen(),
+      middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+    ),
+    GetPage(
+      name: AppConstants.appointmentlistManagement,
+      page: () => const AppointmentlistManagement(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
     GetPage(
