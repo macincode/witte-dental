@@ -19,9 +19,9 @@ class DashboardCard extends StatelessWidget {
     BuildContext context,
     String title,
     String subtitle, 
-  //   {
-  //   Widget? actionButton,
-  // }
+    {
+    Widget? actionButton,
+  }
   ) {
     final themeController = Get.find<ThemeController>();
 
@@ -64,31 +64,28 @@ class DashboardCard extends StatelessWidget {
                 ),
               ],
             ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  subtitle,
-                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                        color: Theme.of(context).colorScheme.onSecondary,
-                      ),
-                ),
-              ],
+      child: Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
             ),
-          ),
-          // if (actionButton != null) actionButton,
-        ],
+            const SizedBox(height: 8),
+            Text(
+              subtitle,
+              style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                    color: Theme.of(context).colorScheme.onSecondary,
+                  ),
+            ),
+              const SizedBox(height: 8),
+            if (actionButton != null) actionButton,
+          ],
+        ),
       ),
     );
   }

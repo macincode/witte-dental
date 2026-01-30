@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:witte_dental_pms/core/constants/app_constants.dart';
 import 'package:witte_dental_pms/core/controllers/theme_controller.dart';
+import 'package:witte_dental_pms/features/admin/appointment_screen.dart';
 
 import '../../core/controllers/language_controller.dart';
 import '../auth/presentation/controllers/auth_controller.dart';
@@ -19,6 +20,17 @@ class AdminHomeScreen extends StatefulWidget {
 
 class _AdminHomeScreenState extends State<AdminHomeScreen> {
   final themeController = Get.find<ThemeController>();
+
+  IconData _getThemeIcon(AppThemeMode mode) {
+    switch (mode) {
+      case AppThemeMode.light:
+        return Icons.light_mode;
+      case AppThemeMode.dark:
+        return Icons.dark_mode;
+      case AppThemeMode.system:
+        return Icons.settings_suggest;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +54,63 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
             ],
           ),
           actions: [
+            Obx(
+              () => PopupMenuButton<AppThemeMode>(
+                icon: Icon(_getThemeIcon(themeController.currentThemeMode)),
+                tooltip: 'Theme Settings',
+                onSelected: themeController.setThemeMode,
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    value: AppThemeMode.light,
+                    child: Row(
+                      children: [
+                        const Icon(Icons.light_mode),
+                        const SizedBox(width: 8),
+                        const Text('Light'),
+                        if (themeController.currentThemeMode ==
+                            AppThemeMode.light)
+                          const Spacer(),
+                        if (themeController.currentThemeMode ==
+                            AppThemeMode.light)
+                          const Icon(Icons.check),
+                      ],
+                    ),
+                  ),
+                  PopupMenuItem(
+                    value: AppThemeMode.dark,
+                    child: Row(
+                      children: [
+                        const Icon(Icons.dark_mode),
+                        const SizedBox(width: 8),
+                        const Text('Dark'),
+                        if (themeController.currentThemeMode ==
+                            AppThemeMode.dark)
+                          const Spacer(),
+                        if (themeController.currentThemeMode ==
+                            AppThemeMode.dark)
+                          const Icon(Icons.check),
+                      ],
+                    ),
+                  ),
+                  PopupMenuItem(
+                    value: AppThemeMode.system,
+                    child: Row(
+                      children: [
+                        const Icon(Icons.settings_suggest),
+                        const SizedBox(width: 8),
+                        const Text('System'),
+                        if (themeController.currentThemeMode ==
+                            AppThemeMode.system)
+                          const Spacer(),
+                        if (themeController.currentThemeMode ==
+                            AppThemeMode.system)
+                          const Icon(Icons.check),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
             IconButton(
               onPressed: () =>
                   Get.find<LanguageController>().showLanguageDialog(),
@@ -121,7 +190,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                       children: [
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(left: 8),
+                            padding: const EdgeInsets.only(left: 8),
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
                                 colors: [
@@ -142,7 +211,8 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                             ),
                             child: ElevatedButton.icon(
                               onPressed: () {
-                                Get.toNamed(AppConstants.appointmentScreen);
+                                AppointmentDialogHelper.showBookingOptions(
+                                    context);
                               },
                               icon: const Icon(Icons.calendar_today_outlined,
                                   size: 16, color: Colors.white),
@@ -164,7 +234,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 16),
+                        const SizedBox(width: 16),
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
@@ -186,7 +256,9 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                               ],
                             ),
                             child: ElevatedButton.icon(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.toNamed(AppConstants.patientlistManagement);
+                              },
                               icon: const Icon(Icons.group,
                                   size: 16, color: Colors.white),
                               label: const Text('View Patients',
@@ -246,38 +318,44 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                       title: 'Patients',
                       icon: Icons.person,
                       // count: '434',
+                      onTap: () {
+                        Get.toNamed(AppConstants.patientScreen);
+                      },
                     ),
-                    DashboardCard(
+                     DashboardCard(
                       title: 'Doctor',
                       icon: Icons.medical_services,
                       // count: '434',
+                       onTap: () {
+                        Get.toNamed(AppConstants.doctorScreen);
+                      },
                     ),
-                    DashboardCard(
+                    const DashboardCard(
                       title: 'Staff',
                       icon: Icons.safety_check,
                       // count: '434',
                     ),
-                    DashboardCard(
+                    const DashboardCard(
                       title: 'Inventory',
                       icon: Icons.inventory,
                       // count: '434',
                     ),
-                    DashboardCard(
+                    const DashboardCard(
                       title: 'Pharmacy',
                       icon: Icons.local_pharmacy,
                       // count: '434',
                     ),
-                    DashboardCard(
+                    const DashboardCard(
                       title: 'Accounts',
                       icon: Icons.account_balance,
                       // count: '434',
                     ),
-                    DashboardCard(
+                    const DashboardCard(
                       title: 'Settings',
                       icon: Icons.settings,
                       // count: '132',
                     ),
-                    DashboardCard(
+                    const DashboardCard(
                       title: 'Events',
                       icon: Icons.event,
                       // count: '98%',

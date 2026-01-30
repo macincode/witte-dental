@@ -24,10 +24,14 @@ class AppConstants {
   // Admin Routes
   static const String adminHomeScreen = '/admin';
   static const String adminDashboard = '/admin_dashboard';
-  static const String inquiryScreen = '/inquiries';
-  static const String inquirylistManagement = '/inquiry-management';
-  static const String appointmentScreen = '/appointments';
-  static const String appointmentlistManagement = '/appointments-management';
+  static const String inquiryScreen = '/admin_inquiries';
+  static const String inquirylistManagement = '/admin_inquiry-management';
+  static const String appointmentScreen = '/admin_appointments';
+  static const String appointmentlistManagement = '/admin_appointments-management';
+  static const String patientScreen = '/admin_patients';
+  static const String patientlistManagement = '/admin_patients-management';
+  static const String doctorScreen = '/admin_doctors';
+  static const String doctorlistManagement = '/admin_doctors-management';
   static const String billings = '/billings';
 
   // Validation

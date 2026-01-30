@@ -8,8 +8,6 @@ class InquirylistManagement extends StatefulWidget {
 }
 
 class _InquirylistManagementState extends State<InquirylistManagement> {
- 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +19,6 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Row(
@@ -41,7 +38,8 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: 'Search by patient name,mobile...',
-                        hintStyle: TextStyle(color: Colors.grey[400],fontSize: 14),
+                        hintStyle:
+                            TextStyle(color: Colors.grey[400], fontSize: 14),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide.none,
@@ -50,7 +48,7 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
                         fillColor: Theme.of(context).colorScheme.surface,
                         prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
                         contentPadding: const EdgeInsets.symmetric(
-                          horizontal:12,
+                          horizontal: 12,
                           vertical: 10,
                         ),
                       ),
@@ -115,7 +113,8 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
                   'Periodontics',
                   'Oral Medicine and Pathology',
                 ];
-                final categoryServices = categoryService[index % categories.length];
+                final categoryServices =
+                    categoryService[index % categories.length];
 
                 final categoryIcon = icons[index % icons.length];
                 final categoryColor = colors[index % colors.length];
@@ -153,10 +152,12 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
                                   color: categoryColor,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 18,
+                                ),
                               ),
                             ),
+                            SizedBox(
+                              width: 10,
                             ),
-                            SizedBox(width: 10,),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -174,7 +175,7 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
                                   // const SizedBox(height: 2),
                                   Row(
                                     children: [
-                                      Icon( 
+                                      Icon(
                                         Icons.phone,
                                         size: 14,
                                         color: Colors.grey[600],
@@ -192,8 +193,6 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
                                     ],
                                   ),
                                   const SizedBox(height: 4),
-                                  
-                                  
                                 ],
                               ),
                             ),
@@ -224,219 +223,200 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
                             ),
                           ],
                         ),
-                         const SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 8,
-                                      vertical: 4,
-                                    ),
-                                    decoration: BoxDecoration(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withOpacity(0.09),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Text(
+                            categoryServices,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 10,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Container(
+                          padding: const EdgeInsets.all(14),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.08),
+                                Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.03),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withOpacity(0.2),
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
                                       color: Theme.of(context)
                                           .colorScheme
                                           .primary
-                                          .withOpacity(0.09),
-                                      borderRadius: BorderRadius.circular(10),
+                                          .withOpacity(0.3),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
                                     ),
-                                    child: Text(
-                                      categoryServices,
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.schedule_outlined,
+                                  size: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Appointment Date:',
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodySmall
                                           ?.copyWith(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 10,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondary,
+                                            fontSize: 11,
+                                          ),
+                                    ),
+                                    Text(
+                                      'Today, 10:${30 + index} AM',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(
                                             color: Theme.of(context)
                                                 .colorScheme
                                                 .primary,
+                                            fontWeight: FontWeight.w600,
                                           ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 4,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary
+                                          .withOpacity(0.3),
+                                      blurRadius: 4,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: Text(
+                                  '2.00 ${'PM'}',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 11,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Theme.of(context).colorScheme.secondary,
+                                        Theme.of(context).colorScheme.primary,
+                                      ],
+                                      begin: Alignment.bottomLeft,
+                                      end: Alignment.topRight,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.blue.withOpacity(0.3),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: ElevatedButton.icon(
+                                    onPressed: () {
+                                      showInquiryDetails(
+                                        context,
+                                        categoryName,
+                                        categorynum,
+                                        categoryServices,
+                                      );
+                                    },
+                                    icon: const Icon(Icons.visibility_outlined,
+                                        size: 16, color: Colors.white),
+                                    label: const Text('View Details',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600)),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 12),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
                                     ),
                                   ),
-                         const SizedBox(height: 12),
-                        Container(
-                                      padding: const EdgeInsets.all(14),
-                                      decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          colors: [
-                                            Theme.of(context)
-                                                .colorScheme
-                                                .primary
-                                                .withOpacity(0.08),
-                                            Theme.of(context)
-                                                .colorScheme
-                                                .primary
-                                                .withOpacity(0.03),
-                                          ],
-                                        ),
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary
-                                              .withOpacity(0.2),
-                                        ),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
-                                              shape: BoxShape.circle,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .primary
-                                                      .withOpacity(0.3),
-                                                  blurRadius: 6,
-                                                  offset: const Offset(0, 2),
-                                                ),
-                                              ],
-                                            ),
-                                            child: const Icon(
-                                              Icons.schedule_outlined,
-                                              size: 16,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          const SizedBox(width: 12),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Appointment Date:',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodySmall
-                                                      ?.copyWith(
-                                                        color: Theme.of(context)
-                                                            .colorScheme
-                                                            .onSecondary,
-                                                        fontSize: 11,
-                                                      ),
-                                                ),
-                                                Text(
-                                                  'Today, 10:${30 + index} AM',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyMedium
-                                                      ?.copyWith(
-                                                        color: Theme.of(context)
-                                                            .colorScheme
-                                                            .primary,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 8,
-                                              vertical: 4,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .primary
-                                                      .withOpacity(0.3),
-                                                  blurRadius: 4,
-                                                  offset: const Offset(0, 2),
-                                                ),
-                                              ],
-                                            ),
-                                            child: Text(
-                                              '2.00 ${'PM'}',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodySmall
-                                                  ?.copyWith(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w700,
-                                                    fontSize: 11,
-                                                  ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                        const SizedBox(height: 12),
-                       
-                                     Padding(
-                                        padding: const EdgeInsets.all(5),
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  gradient: LinearGradient(
-                            colors: [
-                             
-                              Theme.of(context).colorScheme.secondary,
-                               Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
                             ],
-                            begin: Alignment.bottomLeft,
-                            end: Alignment.topRight,
                           ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.blue
-                                                          .withOpacity(0.3),
-                                                      blurRadius: 6,
-                                                      offset:
-                                                          const Offset(0, 2),
-                                                    ),
-                                                  ],
-                                                ),
-                                                child: ElevatedButton.icon(
-                                                  onPressed: () {},
-                                                  icon: const Icon(
-                                                      Icons.visibility_outlined,
-                                                      size: 16,
-                                                      color: Colors.white),
-                                                  label: const Text(
-                                                      'View Details',
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w600)),
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    shadowColor:
-                                                        Colors.transparent,
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        vertical: 12),
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    
+                        ),
                       ],
                     ),
                   ),
@@ -981,6 +961,117 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
       filled: true,
       fillColor: Theme.of(context).colorScheme.surface,
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+    );
+  }
+
+  void showInquiryDetails(BuildContext context, String patientName,
+      String number, String service) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+          // contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+          // titlePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+          // actionsPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+          clipBehavior: Clip.hardEdge,
+
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          title: Row(
+            children: [
+              Text('Inquiry Details',
+                  style: TextStyle(fontWeight: FontWeight.w600)),
+              Spacer(),
+              IconButton(
+                onPressed: () => Navigator.of(context).pop(),
+                icon: Icon(
+                  Icons.close,
+                  color: Theme.of(context).colorScheme.onSecondary,
+                ),
+                padding: EdgeInsets.zero,
+                constraints: BoxConstraints(),
+              ),
+            ],
+          ),
+          content: Container(
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildDetailRow('Patient Name:', patientName),
+                _buildDetailRow('Mobile Number:', number),
+                _buildDetailRow('Service:', service),
+               
+                _buildDetailRow('Appointment Date:', 'Today'),
+               
+                SizedBox(height: 10),
+                Text(
+                  'Inquiry Message:-',
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge
+                      ?.copyWith(fontWeight: FontWeight.w600),
+                ),
+                SizedBox(height: 8),
+                Container(
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.background,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    children: [
+                      _buildDetailRow('', 'Test Entry'),
+                      
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(
+                'Close',
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildDetailRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        spacing: 15,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: Theme.of(context)
+                .textTheme
+                .labelLarge
+                ?.copyWith(fontWeight: FontWeight.w600),
+          ),
+          Expanded(
+              child: Text(
+            value,
+            style: Theme.of(context)
+                .textTheme
+                .displayMedium
+                ?.copyWith(fontWeight: FontWeight.w500),
+          )),
+        ],
+      ),
     );
   }
 }

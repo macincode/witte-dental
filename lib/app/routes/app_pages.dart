@@ -2,9 +2,13 @@ import 'package:get/get.dart';
 import 'package:witte_dental_pms/features/admin/appointmentList_management.dart';
 import 'package:witte_dental_pms/features/admin/appointment_screen.dart';
 import 'package:witte_dental_pms/features/admin/billings.dart';
+import 'package:witte_dental_pms/features/admin/doctorList_management.dart';
+import 'package:witte_dental_pms/features/admin/doctor_screen.dart';
 import 'package:witte_dental_pms/features/admin/home_screen.dart';
 import 'package:witte_dental_pms/features/admin/inquiryList_management.dart';
 import 'package:witte_dental_pms/features/admin/inquiries_screen.dart';
+import 'package:witte_dental_pms/features/admin/patientList_management.dart';
+import 'package:witte_dental_pms/features/admin/patient_screen.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../core/middleware/auth_middleware.dart';
@@ -81,6 +85,26 @@ class AppPages {
     GetPage(
       name: AppConstants.appointmentlistManagement,
       page: () => const AppointmentlistManagement(),
+      middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+    ),
+    GetPage(
+      name: AppConstants.patientScreen,
+      page: () => const PatientScreen(),
+      middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+    ),
+    GetPage(
+      name: AppConstants.patientlistManagement,
+      page: () => const PatientlistManagement(),
+      middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+    ),
+    GetPage(
+      name: AppConstants.doctorScreen,
+      page: () => const DoctorScreen(),
+      middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+    ),
+    GetPage(
+      name: AppConstants.doctorlistManagement,
+      page: () => const DoctorlistManagement(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
     GetPage(
