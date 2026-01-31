@@ -32,6 +32,12 @@ class AppConstants {
   static const String patientlistManagement = '/admin_patients-management';
   static const String doctorScreen = '/admin_doctors';
   static const String doctorlistManagement = '/admin_doctors-management';
+  static const String staffScreen = '/admin_staffs';
+  static const String stafflistManagement = '/admin_staffs-management';
+  static const String inventoryScreen = '/admin_inventory';
+  static const String inventorylistManagement = '/admin_inventory-management';
+  static const String pharmacyScreen = '/admin_pharmacy';
+  static const String pharmacylistManagement = '/admin_pharmacy-management';
   static const String billings = '/billings';
 
   // Validation

@@ -3,8 +3,8 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/constants/app_constants.dart';
-import '../../../../core/storage/hive_service.dart';
+import '../../core/constants/app_constants.dart';
+import '../../core/storage/hive_service.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -276,8 +276,8 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       animation: _glowAnimation,
       builder: (context, child) {
         return Container(
-          width: 100,
-          height: 100,
+          width: 95,
+          height: 95,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(

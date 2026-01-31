@@ -7,8 +7,14 @@ import 'package:witte_dental_pms/features/admin/doctor_screen.dart';
 import 'package:witte_dental_pms/features/admin/home_screen.dart';
 import 'package:witte_dental_pms/features/admin/inquiryList_management.dart';
 import 'package:witte_dental_pms/features/admin/inquiries_screen.dart';
+import 'package:witte_dental_pms/features/admin/inventoryList_management.dart';
+import 'package:witte_dental_pms/features/admin/inventory_screen.dart';
 import 'package:witte_dental_pms/features/admin/patientList_management.dart';
 import 'package:witte_dental_pms/features/admin/patient_screen.dart';
+import 'package:witte_dental_pms/features/admin/pharmacyList_management.dart';
+import 'package:witte_dental_pms/features/admin/pharmacy_screen.dart';
+import 'package:witte_dental_pms/features/admin/staffList_management.dart';
+import 'package:witte_dental_pms/features/admin/staff_screen.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../core/middleware/auth_middleware.dart';
@@ -18,15 +24,15 @@ import '../../features/doctors/doctor_dashboard.dart';
 import '../../features/onboarding/presentation/pages/onboarding_screen.dart';
 import '../../features/patients/patient_dashboard.dart';
 import '../../features/settings/app_icon_settings_page.dart';
-import '../../features/splash/bindings/splash_binding.dart';
-import '../../features/splash/presentation/pages/splash_page.dart';
+// import '../../features/splash/bindings/splash_binding.dart';
+import '../../features/splash/splash_page.dart';
 
 class AppPages {
   static final routes = [
     GetPage(
       name: AppConstants.splashRoute,
       page: () => const SplashPage(),
-      binding: SplashBinding(),
+      // binding: SplashBinding(),
     ),
     GetPage(
       name: AppConstants.onboardingRoute,
@@ -105,6 +111,36 @@ class AppPages {
     GetPage(
       name: AppConstants.doctorlistManagement,
       page: () => const DoctorlistManagement(),
+      middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+    ),
+    GetPage(
+      name: AppConstants.staffScreen,
+      page: () => const StaffScreen(),
+      middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+    ),
+    GetPage(
+      name: AppConstants.stafflistManagement,
+      page: () => const StafflistManagement(),
+      middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+    ),
+     GetPage(
+      name: AppConstants.inventoryScreen,
+      page: () => const InventoryScreen(),
+      middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+    ),
+    GetPage(
+      name: AppConstants.inventorylistManagement,
+      page: () => const InventorylistManagement(),
+      middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+    ),
+    GetPage(
+      name: AppConstants.pharmacyScreen,
+      page: () => const PharmacyScreen(),
+      middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+    ),
+    GetPage(
+      name: AppConstants.pharmacylistManagement,
+      page: () => const PharmacylistManagement(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
     GetPage(

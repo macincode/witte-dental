@@ -4,18 +4,20 @@ import 'package:witte_dental_pms/core/constants/app_constants.dart';
 import 'package:witte_dental_pms/core/controllers/theme_controller.dart';
 import 'package:witte_dental_pms/features/admin/details_card.dart';
 import 'package:witte_dental_pms/features/admin/doctorList_management.dart';
+import 'package:witte_dental_pms/features/admin/inventoryList_management.dart';
 import 'package:witte_dental_pms/features/admin/patientList_management.dart';
+import 'package:witte_dental_pms/features/admin/staffList_management.dart';
 
 import '../shared/widgets/network_aware_widget.dart';
 
-class DoctorScreen extends StatefulWidget {
-  const DoctorScreen({super.key});
+class InventoryScreen extends StatefulWidget {
+  const InventoryScreen({super.key});
 
   @override
-  State<DoctorScreen> createState() => _DoctorScreenState();
+  State<InventoryScreen> createState() => _InventoryScreenState();
 }
 
-class _DoctorScreenState extends State<DoctorScreen> {
+class _InventoryScreenState extends State<InventoryScreen> {
   @override
   Widget build(BuildContext context) {
     final themeController = Get.find<ThemeController>();
@@ -24,7 +26,7 @@ class _DoctorScreenState extends State<DoctorScreen> {
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: AppBar(
-          title: const Text('Doctors'),
+          title: const Text('Inventory'),
         ),
         body: Container(
           width: double.infinity,
@@ -34,8 +36,8 @@ class _DoctorScreenState extends State<DoctorScreen> {
             children: [
               DashboardCard.buildHeaderCard(
                 context,
-                'Doctor Management',
-                'Manage and track all doctors and medical staff ',
+                'Inventory Management',
+                'Manage and track all equipment and supplies Add Item',
                 actionButton: Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -50,10 +52,10 @@ class _DoctorScreenState extends State<DoctorScreen> {
                   ),
                   child: ElevatedButton.icon(
                     onPressed: () {
-                                   AddDoctorHelper.addDoctorSheet(context);
+                                   AddInventoryHelper.addInventorySheet(context);
                                   },
                     icon: const Icon(Icons.person_add, size: 18),
-                    label: const Text('Add Doctor'),
+                    label: const Text('Add Items'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent,
                       shadowColor: Colors.transparent,
@@ -71,26 +73,26 @@ class _DoctorScreenState extends State<DoctorScreen> {
                   mainAxisSpacing: 16,
                   children: [
                     DashboardCard(
-                      title: 'Total Doctors',
+                      title: 'Total Item',
                       icon: Icons.group,
                       count: '434',
                       onTap: () {
-                        Get.toNamed(AppConstants.doctorlistManagement);
+                        Get.toNamed(AppConstants.inventorylistManagement);
                       },
                     ),
                     const DashboardCard(
-                      title: 'Active Doctors',
+                      title: 'Low Stock',
                       icon: Icons.person_pin,
                       count: '24',
                     ),
                     const DashboardCard(
-                      title: 'Inactive Doctors',
-                      icon: Icons.person,
+                      title: 'Out of Stock',
+                      icon: Icons.list,
                       count: '132',
                     ),
                     const DashboardCard(
-                      title: 'Departments',
-                      icon: Icons.person_add,
+                      title: 'Categories',
+                      icon: Icons.category,
                       count: '132',
                     ),
                   ],

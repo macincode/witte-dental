@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class DoctorlistManagement extends StatefulWidget {
-  const DoctorlistManagement({super.key});
+class StafflistManagement extends StatefulWidget {
+  const StafflistManagement({super.key});
 
   @override
-  State<DoctorlistManagement> createState() => _DoctorlistManagementState();
+  State<StafflistManagement> createState() => _StafflistManagementState();
 }
 
-class _DoctorlistManagementState extends State<DoctorlistManagement> {
+class _StafflistManagementState extends State<StafflistManagement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text('Doctor List'),
+        title: const Text('Staff List'),
         elevation: 0,
       ),
       body: Column(
@@ -37,7 +37,7 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                     ),
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: 'Search by doctor name,mobile...',
+                        hintText: 'Search by staff name,mobile...',
                         hintStyle:
                             TextStyle(color: Colors.grey[400], fontSize: 14),
                         border: OutlineInputBorder(
@@ -212,7 +212,7 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Text(
-                                    'KDC-D0001',
+                                    'KDC-S0001',
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodySmall
@@ -367,56 +367,7 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                         Row(
                           spacing: 5,
                           children: [
-                            Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Theme.of(context)
-                                          .colorScheme
-                                          .onSecondary
-                                          .withOpacity(0.02),
-                                      Theme.of(context)
-                                          .colorScheme
-                                          .onSecondary
-                                          .withOpacity(0.5),
-                                    ],
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight,
-                                  ),
-                                  border: Border.all(
-                                      width: 0.5, color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.3),
-                                      blurRadius: 6,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: ElevatedButton.icon(
-                                  onPressed: () {
-                                    
-                                  },
-                                  icon: const Icon(Icons.visibility_outlined,
-                                      size: 16, color: Colors.white),
-                                  label: const Text('View',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600)),
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent,
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 12),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            
                             Expanded(
                               child: Container(
                                 decoration: BoxDecoration(
@@ -439,7 +390,7 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                                 ),
                                 child: ElevatedButton.icon(
                                   onPressed: () {
-                                   AddDoctorHelper.addDoctorSheet(context);
+                                   AddStaffHelper.addStaffSheet(context);
                                   },
                                   icon: const Icon(Icons.edit,
                                       size: 16, color: Colors.white),
@@ -459,52 +410,52 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                                 ),
                               ),
                             ),
-                            // Expanded(
-                            //   child: Container(
-                            //     decoration: BoxDecoration(
-                            //       gradient: LinearGradient(
-                            //         colors: [
-                            //           Theme.of(context)
-                            //               .colorScheme
-                            //               .error
-                            //               .withOpacity(0.4),
-                            //           Theme.of(context)
-                            //               .colorScheme
-                            //               .error
-                            //               .withOpacity(0.9),
-                            //         ],
-                            //         begin: Alignment.topLeft,
-                            //         end: Alignment.bottomRight,
-                            //       ),
-                            //       borderRadius: BorderRadius.circular(10),
-                            //       boxShadow: [
-                            //         BoxShadow(
-                            //           color: Colors.red.withOpacity(0.3),
-                            //           blurRadius: 6,
-                            //           offset: const Offset(0, 2),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //     child: ElevatedButton.icon(
-                            //       onPressed: () {},
-                            //       icon: const Icon(Icons.delete,
-                            //           size: 16, color: Colors.white),
-                            //       label: const Text('Delete',
-                            //           style: TextStyle(
-                            //               color: Colors.white,
-                            //               fontWeight: FontWeight.w600)),
-                            //       style: ElevatedButton.styleFrom(
-                            //         backgroundColor: Colors.transparent,
-                            //         shadowColor: Colors.transparent,
-                            //         padding: const EdgeInsets.symmetric(
-                            //             vertical: 12),
-                            //         shape: RoundedRectangleBorder(
-                            //           borderRadius: BorderRadius.circular(10),
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
+                            Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Theme.of(context)
+                                          .colorScheme
+                                          .error
+                                          .withOpacity(0.4),
+                                      Theme.of(context)
+                                          .colorScheme
+                                          .error
+                                          .withOpacity(0.9),
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.red.withOpacity(0.3),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: ElevatedButton.icon(
+                                  onPressed: () {},
+                                  icon: const Icon(Icons.delete,
+                                      size: 16, color: Colors.white),
+                                  label: const Text('Delete',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600)),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent,
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -523,9 +474,9 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
 }
 
 
-class AddDoctorHelper{
+class AddStaffHelper{
 
-   static void addDoctorSheet(BuildContext context) {
+   static void addStaffSheet(BuildContext context) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -576,7 +527,7 @@ class AddDoctorHelper{
                           ),
                           const SizedBox(width: 16),
                           Text(
-                            'Add Doctor',
+                            'Add Staff',
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall
@@ -628,7 +579,7 @@ class AddDoctorHelper{
                               ),
                               _buildFormField(context,
                                 
-                                'Specialist',
+                                'Staff Category',
                                 isRequired: true,
                                 child: TextField(
                                   decoration: _getInputDecoration(context,
@@ -718,40 +669,7 @@ class AddDoctorHelper{
                                       'Enter Address'),
                                 ),
                               ),
-                               _buildFormField(context,
-                                
-                                'Currently Practicing',
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                      'Enter current practice'),
-                                ),
-                              ),
-                              _buildFormField(context,
-                                
-                                'Experience (Years)',
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                      'Enter years of experience'),
-                                ),
-                              ),
-                              _buildFormField(context,
-                                
-                                'Awards & Achievements',
-                                child: TextField(
-                                   maxLines: 2,
-
-                                  decoration: _getInputDecoration(context,'Enter awards and achievements'),
-                                ),
-                              ),
                               
-                              _buildFormField(context,
-                                
-                                'Experience Journey',
-                                child: TextField(
-                                   maxLines: 2,
-                                  decoration: _getInputDecoration(context,'Describe your professional journey and experience'),
-                                ),
-                              ),
                               _buildFormField(context,
                                 
                                 'Password',

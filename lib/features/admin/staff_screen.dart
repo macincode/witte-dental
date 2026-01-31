@@ -5,17 +5,18 @@ import 'package:witte_dental_pms/core/controllers/theme_controller.dart';
 import 'package:witte_dental_pms/features/admin/details_card.dart';
 import 'package:witte_dental_pms/features/admin/doctorList_management.dart';
 import 'package:witte_dental_pms/features/admin/patientList_management.dart';
+import 'package:witte_dental_pms/features/admin/staffList_management.dart';
 
 import '../shared/widgets/network_aware_widget.dart';
 
-class DoctorScreen extends StatefulWidget {
-  const DoctorScreen({super.key});
+class StaffScreen extends StatefulWidget {
+  const StaffScreen({super.key});
 
   @override
-  State<DoctorScreen> createState() => _DoctorScreenState();
+  State<StaffScreen> createState() => _StaffScreenState();
 }
 
-class _DoctorScreenState extends State<DoctorScreen> {
+class _StaffScreenState extends State<StaffScreen> {
   @override
   Widget build(BuildContext context) {
     final themeController = Get.find<ThemeController>();
@@ -24,7 +25,7 @@ class _DoctorScreenState extends State<DoctorScreen> {
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: AppBar(
-          title: const Text('Doctors'),
+          title: const Text('Staff'),
         ),
         body: Container(
           width: double.infinity,
@@ -34,8 +35,8 @@ class _DoctorScreenState extends State<DoctorScreen> {
             children: [
               DashboardCard.buildHeaderCard(
                 context,
-                'Doctor Management',
-                'Manage and track all doctors and medical staff ',
+                'Staff Management',
+                'Manage and track all staff members',
                 actionButton: Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -50,10 +51,10 @@ class _DoctorScreenState extends State<DoctorScreen> {
                   ),
                   child: ElevatedButton.icon(
                     onPressed: () {
-                                   AddDoctorHelper.addDoctorSheet(context);
+                                   AddStaffHelper.addStaffSheet(context);
                                   },
                     icon: const Icon(Icons.person_add, size: 18),
-                    label: const Text('Add Doctor'),
+                    label: const Text('Add Staff'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent,
                       shadowColor: Colors.transparent,
@@ -71,25 +72,25 @@ class _DoctorScreenState extends State<DoctorScreen> {
                   mainAxisSpacing: 16,
                   children: [
                     DashboardCard(
-                      title: 'Total Doctors',
+                      title: 'Total Staff',
                       icon: Icons.group,
                       count: '434',
                       onTap: () {
-                        Get.toNamed(AppConstants.doctorlistManagement);
+                        Get.toNamed(AppConstants.stafflistManagement);
                       },
                     ),
                     const DashboardCard(
-                      title: 'Active Doctors',
+                      title: 'Active Staff',
                       icon: Icons.person_pin,
                       count: '24',
                     ),
                     const DashboardCard(
-                      title: 'Inactive Doctors',
+                      title: 'Inactive Staff',
                       icon: Icons.person,
                       count: '132',
                     ),
                     const DashboardCard(
-                      title: 'Departments',
+                      title: 'New (30 days)',
                       icon: Icons.person_add,
                       count: '132',
                     ),

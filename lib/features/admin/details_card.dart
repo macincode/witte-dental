@@ -64,10 +64,9 @@ class DashboardCard extends StatelessWidget {
                 ),
               ],
             ),
-      child: Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
             Text(
               title,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -84,8 +83,7 @@ class DashboardCard extends StatelessWidget {
             ),
               const SizedBox(height: 8),
             if (actionButton != null) actionButton,
-          ],
-        ),
+        ],
       ),
     );
   }

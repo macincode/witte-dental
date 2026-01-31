@@ -1,24 +1,96 @@
 import 'package:flutter/material.dart';
 
-class DoctorlistManagement extends StatefulWidget {
-  const DoctorlistManagement({super.key});
+class InventorylistManagement extends StatefulWidget {
+  const InventorylistManagement({super.key});
 
   @override
-  State<DoctorlistManagement> createState() => _DoctorlistManagementState();
+  State<InventorylistManagement> createState() => _InventorylistManagementState();
 }
 
-class _DoctorlistManagementState extends State<DoctorlistManagement> {
+class _InventorylistManagementState extends State<InventorylistManagement> {
+
+   int? _selectedIndex;
+  final List<String> _options = [
+    'All Items',
+    'Materials',
+    'Instruments',
+    'Equipments',
+    'Stationary',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text('Doctor List'),
+        title: const Text('Inventory List'),
         elevation: 0,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: List<Widget>.generate(
+                  _options.length,
+                  (int index) {
+                    final isSelected = _selectedIndex == index;
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 12.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          boxShadow:
+                               [
+                                  BoxShadow(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background,
+                                       
+                                    blurRadius: 8,
+                                    offset: const Offset(2, 2),
+                                  ),
+                                ]
+                             
+                        ),
+                        child: ChoiceChip(
+                          label: Text(
+                            _options[index],
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  color: isSelected
+                                      ? Colors.white
+                                      : Colors.grey[600],
+                                  fontWeight: isSelected
+                                      ? FontWeight.w600
+                                      : FontWeight.w500,
+                                ),
+                          ),
+                          selected: isSelected,
+                          checkmarkColor:Colors.white,
+                          selectedColor: Theme.of(context).colorScheme.primary,
+                          backgroundColor:Colors.grey[300],
+                          side: BorderSide.none,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
+                          onSelected: (bool selected) {
+                            setState(() {
+                              _selectedIndex = selected ? index : null;
+                            });
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Row(
@@ -37,7 +109,7 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                     ),
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: 'Search by doctor name,mobile...',
+                        hintText: 'Search by material name or make...',
                         hintStyle:
                             TextStyle(color: Colors.grey[400], fontSize: 14),
                         border: OutlineInputBorder(
@@ -90,8 +162,8 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
               itemCount: 20,
               itemBuilder: (context, index) {
                 final categories = [
-                  'Karthick K',
-                  'Ram',
+                  'ULTRADENT SILANE',
+                  'DPI PORCELAIN ETCH',
                 ];
                 final icons = [
                   Icons.medical_services,
@@ -104,8 +176,8 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
 
                 final categoryName = categories[index % categories.length];
                 final category = [
-                  '9944262945',
-                  '9444262945',
+                  'DPI',
+                  'RADIX',
                 ];
                 final categorynum = category[index % categories.length];
 
@@ -139,25 +211,7 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                       children: [
                         Row(
                           children: [
-                            Container(
-                              padding: const EdgeInsets.all(18),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: categoryColor.withOpacity(0.1),
-                                // borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Text(
-                                '${categoryName[0]}',
-                                style: TextStyle(
-                                  color: categoryColor,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
+                            
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -175,11 +229,16 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                                   // const SizedBox(height: 2),
                                   Row(
                                     children: [
-                                      Icon(
-                                        Icons.phone,
-                                        size: 14,
-                                        color: Colors.grey[600],
-                                      ),
+                                       
+                                  Text(
+                                    '•',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.copyWith(
+                                          color: Colors.grey[600],
+                                        ),
+                                  ),
                                       const SizedBox(width: 4),
                                       Text(
                                         categorynum,
@@ -196,227 +255,150 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                                 ],
                               ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .primary
-                                        .withOpacity(0.09),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Text(
-                                    'KDC-D0001',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 10,
-                                          color: Theme.of(context).colorScheme.primary,
-                                        ),
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .primary
-                                        .withOpacity(0.09),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Text(
-                                    'Active',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 10,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
-                                        ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            
                           ],
                         ),
                         const SizedBox(height: 5),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withOpacity(0.09),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Text(
-                            categoryServices,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 10,
-                                  color: Theme.of(context).colorScheme.primary,
+                        Row(
+                          spacing: 5,
+                          children: [
+                            Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .primary
+                                        .withOpacity(0.09),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Stock In:',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 10,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSecondary,
+                                            ),
+                                      ),
+                                      Text(
+                                        '1',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 10,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                          ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .primary
+                                        .withOpacity(0.09),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Stock Out:',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(
+                                             fontWeight: FontWeight.w500,
+                                              fontSize: 10,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSecondary,
+                                            ),
+                                      ),
+                                      Text(
+                                        '-1',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 10,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .primary
+                                        .withOpacity(0.09),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Available:',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 10,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSecondary,
+                                            ),
+                                      ),
+                                      Text(
+                                        'Active',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 10,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                          ],
                         ),
-                        const SizedBox(height: 12),
-                        Container(
-                          padding: const EdgeInsets.all(14),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Theme.of(context)
-                                    .colorScheme
-                                    .primary
-                                    .withOpacity(0.08),
-                                Theme.of(context)
-                                    .colorScheme
-                                    .primary
-                                    .withOpacity(0.03),
-                              ],
-                            ),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primary
-                                  .withOpacity(0.2),
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary
-                                          .withOpacity(0.3),
-                                      blurRadius: 6,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: const Icon(
-                                  Icons.grade_outlined,
-                                  size: 16,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Qualification :',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall
-                                          ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onSecondary,
-                                            fontSize: 11,
-                                          ),
-                                    ),
-                                    Text(
-                                      'M.D.S., (Perio), MFDS RCP',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium
-                                          ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              
-                            ],
-                          ),
-                        ),
+                        
                         const SizedBox(height: 12),
                         Row(
                           spacing: 5,
                           children: [
-                            Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Theme.of(context)
-                                          .colorScheme
-                                          .onSecondary
-                                          .withOpacity(0.02),
-                                      Theme.of(context)
-                                          .colorScheme
-                                          .onSecondary
-                                          .withOpacity(0.5),
-                                    ],
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight,
-                                  ),
-                                  border: Border.all(
-                                      width: 0.5, color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.3),
-                                      blurRadius: 6,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: ElevatedButton.icon(
-                                  onPressed: () {
-                                    
-                                  },
-                                  icon: const Icon(Icons.visibility_outlined,
-                                      size: 16, color: Colors.white),
-                                  label: const Text('View',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600)),
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent,
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 12),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            
                             Expanded(
                               child: Container(
                                 decoration: BoxDecoration(
@@ -439,7 +421,7 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                                 ),
                                 child: ElevatedButton.icon(
                                   onPressed: () {
-                                   AddDoctorHelper.addDoctorSheet(context);
+                                   AddInventoryHelper.addInventorySheet(context);
                                   },
                                   icon: const Icon(Icons.edit,
                                       size: 16, color: Colors.white),
@@ -459,52 +441,52 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                                 ),
                               ),
                             ),
-                            // Expanded(
-                            //   child: Container(
-                            //     decoration: BoxDecoration(
-                            //       gradient: LinearGradient(
-                            //         colors: [
-                            //           Theme.of(context)
-                            //               .colorScheme
-                            //               .error
-                            //               .withOpacity(0.4),
-                            //           Theme.of(context)
-                            //               .colorScheme
-                            //               .error
-                            //               .withOpacity(0.9),
-                            //         ],
-                            //         begin: Alignment.topLeft,
-                            //         end: Alignment.bottomRight,
-                            //       ),
-                            //       borderRadius: BorderRadius.circular(10),
-                            //       boxShadow: [
-                            //         BoxShadow(
-                            //           color: Colors.red.withOpacity(0.3),
-                            //           blurRadius: 6,
-                            //           offset: const Offset(0, 2),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //     child: ElevatedButton.icon(
-                            //       onPressed: () {},
-                            //       icon: const Icon(Icons.delete,
-                            //           size: 16, color: Colors.white),
-                            //       label: const Text('Delete',
-                            //           style: TextStyle(
-                            //               color: Colors.white,
-                            //               fontWeight: FontWeight.w600)),
-                            //       style: ElevatedButton.styleFrom(
-                            //         backgroundColor: Colors.transparent,
-                            //         shadowColor: Colors.transparent,
-                            //         padding: const EdgeInsets.symmetric(
-                            //             vertical: 12),
-                            //         shape: RoundedRectangleBorder(
-                            //           borderRadius: BorderRadius.circular(10),
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
+                            Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Theme.of(context)
+                                          .colorScheme
+                                          .error
+                                          .withOpacity(0.4),
+                                      Theme.of(context)
+                                          .colorScheme
+                                          .error
+                                          .withOpacity(0.9),
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.red.withOpacity(0.3),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: ElevatedButton.icon(
+                                  onPressed: () {},
+                                  icon: const Icon(Icons.delete,
+                                      size: 16, color: Colors.white),
+                                  label: const Text('Delete',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600)),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent,
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -523,9 +505,9 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
 }
 
 
-class AddDoctorHelper{
+class AddInventoryHelper{
 
-   static void addDoctorSheet(BuildContext context) {
+   static void addInventorySheet(BuildContext context) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -535,7 +517,7 @@ class AddDoctorHelper{
                 bottom: MediaQuery.of(context).viewInsets.bottom,
               ),
               child: Container(
-                height: MediaQuery.of(context).size.height * 0.85,
+                height: MediaQuery.of(context).size.height * 0.70,
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surface,
                   borderRadius: const BorderRadius.only(
@@ -576,7 +558,7 @@ class AddDoctorHelper{
                           ),
                           const SizedBox(width: 16),
                           Text(
-                            'Add Doctor',
+                            'Add New Inventory Item',
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall
@@ -594,99 +576,37 @@ class AddDoctorHelper{
                               
                               _buildFormField(
                                 context,
-                                'First Name',
+                                'Material Name',
                                 isRequired: true,
                                 child: TextField(
-                                  decoration: _getInputDecoration(context),
+                                  decoration: _getInputDecoration(context,'Enter material name'),
                                 ),
                               ),
                               _buildFormField(
                                 context,
-                                'Last Name',
+                                'Make',
                                 isRequired: true,
                                 child: TextField(
-                                  decoration: _getInputDecoration(context),
+                                  decoration: _getInputDecoration(context,'Enter make/brand'),
                                 ),
                               ),
                               _buildFormField(context,
                                 
-                                'Mobile Number',
+                                'Stock Quantity',
                                 isRequired: true,
                                 child: TextField(
                                   decoration: _getInputDecoration(context,
-                                      'Enter mobile number', Icons.phone),
+                                      'Enter stock quantity'),
                                 ),
                               ),
+                              
                               _buildFormField(context,
-                                
-                                'Qualification',
-                                isRequired: true,
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                      'Enter qualification'),
-                                ),
-                              ),
-                              _buildFormField(context,
-                                
-                                'Specialist',
-                                isRequired: true,
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                      'Enter specialist area'),
-                                ),
-                              ),
-                              _buildFormField(context,
-                                
-                                'Email',
-                                isRequired: true,
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                      'Enter mobile number', Icons.phone),
-                                ),
-                              ),
-                             
-                              _buildFormField(context,
-                                
-                                'Date of Birth',
-                                isRequired: true,
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                    'MM/DD/YYYY',
-                                    Icons.calendar_today,
-                                  ),
-                                  readOnly: true,
-                                  onTap: () async {
-                                    await showDatePicker(
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime(1900),
-                                      lastDate: DateTime.now()
-                                          .add(const Duration(days: 365)),
-                                    );
-                                  },
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: _buildFormField(context,
                                       
-                                      isRequired: true,
-                                      'Age',
-                                      child: TextField(
-                                        decoration: _getInputDecoration(context,),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: _buildFormField(context,
-                                      
-                                      'Gender',
+                                      'Category',
                                       isRequired: true,
                                       child: DropdownButtonFormField<String>(
                                         decoration: _getInputDecoration(context,),
-                                        items: ['Male', 'Female', 'Others']
+                                        items: ['Materials', 'Instruments', 'Stationary']
                                             .map(
                                               (e) => DropdownMenuItem(
                                                 value: e,
@@ -697,79 +617,7 @@ class AddDoctorHelper{
                                         onChanged: (value) {},
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              _buildFormField(context,
-                                
-                                'Aadhar Number',
-                                isRequired: true,
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                      'Enter Aadhar Number'),
-                                ),
-                              ),
-                              _buildFormField(context,
-                                
-                                'Address',
-                                isRequired: true,
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                      'Enter Address'),
-                                ),
-                              ),
-                               _buildFormField(context,
-                                
-                                'Currently Practicing',
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                      'Enter current practice'),
-                                ),
-                              ),
-                              _buildFormField(context,
-                                
-                                'Experience (Years)',
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                      'Enter years of experience'),
-                                ),
-                              ),
-                              _buildFormField(context,
-                                
-                                'Awards & Achievements',
-                                child: TextField(
-                                   maxLines: 2,
-
-                                  decoration: _getInputDecoration(context,'Enter awards and achievements'),
-                                ),
-                              ),
-                              
-                              _buildFormField(context,
-                                
-                                'Experience Journey',
-                                child: TextField(
-                                   maxLines: 2,
-                                  decoration: _getInputDecoration(context,'Describe your professional journey and experience'),
-                                ),
-                              ),
-                              _buildFormField(context,
-                                
-                                'Password',
-                                isRequired: true,
-                                child: TextField(
-                                  
-                                  decoration: _getInputDecoration(context,'Enter password'),
-                                ),
-                              ),
-                              _buildFormField(context,
-                                
-                                'Confirm Password',
-                                isRequired: true,
-                                child: TextField(
-                                  
-                                  decoration: _getInputDecoration(context,'Confirm password'),
-                                ),
-                              ),
+                             
                               const SizedBox(height: 24),
                               Row(
                                 children: [
@@ -847,7 +695,7 @@ class AddDoctorHelper{
                                                 BorderRadius.circular(12),
                                           ),
                                         ),
-                                        child: const Text('Submit'),
+                                        child: const Text('Add Item'),
                                       ),
                                     ),
                                   ),

@@ -330,20 +330,29 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                         Get.toNamed(AppConstants.doctorScreen);
                       },
                     ),
-                    const DashboardCard(
+                     DashboardCard(
                       title: 'Staff',
                       icon: Icons.safety_check,
                       // count: '434',
+                      onTap: () {
+                        Get.toNamed(AppConstants.staffScreen);
+                      },
                     ),
-                    const DashboardCard(
+                     DashboardCard(
                       title: 'Inventory',
                       icon: Icons.inventory,
                       // count: '434',
+                      onTap: () {
+                        Get.toNamed(AppConstants.inventoryScreen);
+                      },
                     ),
-                    const DashboardCard(
+                     DashboardCard(
                       title: 'Pharmacy',
                       icon: Icons.local_pharmacy,
                       // count: '434',
+                      onTap: () {
+                        Get.toNamed(AppConstants.pharmacyScreen);
+                      },
                     ),
                     const DashboardCard(
                       title: 'Accounts',
