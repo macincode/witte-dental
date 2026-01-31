@@ -202,21 +202,9 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
                                   ),
                                   child: Row(
                                     children: [
+                                      
                                       Text(
-                                        'Stock Available:',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall
-                                            ?.copyWith(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 10,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onSecondary,
-                                            ),
-                                      ),
-                                      Text(
-                                        '6',
+                                        'In Stock',
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodySmall
@@ -236,7 +224,7 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
                         ),
                         const SizedBox(height: 5),
                         Row(
-                          
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             
                                 Container(
@@ -282,12 +270,55 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
                                     ],
                                   ),
                                 ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .primary
+                                        .withOpacity(0.09),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Price (₹):',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 12,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSecondary,
+                                            ),
+                                      ),
+                                      Text(
+                                        '6',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                           ],
                         ),
                         
                         const SizedBox(height: 12),
                         Row(
-                          spacing: 5,
+                        spacing: 10,
                           children: [
                             
                             Expanded(
