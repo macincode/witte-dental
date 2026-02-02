@@ -1,0 +1,2210 @@
+{
+  "info": {
+    "_postman_id": "761d91d7-58e7-460d-94e4-e5b8e377708b",
+    "name": "Witte Dental PMS - Complete Admin API Collection",
+    "description": "Comprehensive API collection for Admin role in Witte Dental Practice Management System. Based on actual codebase analysis with all available endpoints, parameters, and authentication flows.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "8648285"
+  },
+  "item": [
+    {
+      "name": "🔐 Authentication",
+      "item": [
+        {
+          "name": "Admin Login (Enhanced)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"admin.main@witte.com\",\n    \"password\": \"password\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/admin/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "login"
+              ]
+            },
+            "description": "Enhanced admin login with business context and multi-tenant support"
+          },
+          "response": []
+        },
+        {
+          "name": "Regular Login (Phone)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"phone\": \"1234567890\",\n    \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/postlogin",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "postlogin"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/logout",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📊 Dashboard & Analytics",
+      "item": [
+        {
+          "name": "Admin Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "X-Business-ID",
+                "value": "1",
+                "description": "Optional: Business ID for multi-tenant context"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/admin/dashboard",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "dashboard"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Dashboard Home",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/dashboard/home?hospital_id=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "dashboard",
+                "home"
+              ],
+              "query": [
+                {
+                  "key": "hospital_id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Counts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/counts",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "counts"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "👨‍⚕️ Doctor Management",
+      "item": [
+        {
+          "name": "Get Doctor List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/doctor_list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "doctor_list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Doctor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"first_name\": \"Dr. John\",\n    \"surname\": \"Doe\",\n    \"email\": \"doctor@example.com\",\n    \"phone\": \"9876543210\",\n    \"aadhar_number\": \"123456789012\",\n    \"department_id\": 1,\n    \"password\": \"doctor123\",\n    \"confirm_password\": \"doctor123\",\n    \"dob\": \"1985-01-15\",\n    \"age\": 38,\n    \"gender\": \"Male\",\n    \"address\": \"123 Medical Street\",\n    \"qualification\": \"BDS, MDS\",\n    \"specialist\": \"Orthodontist\",\n    \"currently_practicing\": \"Yes\",\n    \"experience\": \"10 years\",\n    \"awards_achievements\": \"Best Dentist Award 2022\",\n    \"journey\": \"Passionate about dental care\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/store_doctor",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "store_doctor"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Doctor",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": 1,\n    \"first_name\": \"Dr. John Updated\",\n    \"surname\": \"Doe\",\n    \"email\": \"doctor.updated@example.com\",\n    \"phone\": \"9876543210\",\n    \"aadhar_number\": \"123456789012\",\n    \"department_id\": 1,\n    \"qualification\": \"BDS, MDS\",\n    \"specialist\": \"Orthodontist\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/update_doctor",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "update_doctor"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete/Toggle Doctor Status",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": 1,\n    \"isChecked\": false\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/delete_doctor",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "delete_doctor"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Doctor Departments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/doctor_departments",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "doctor_departments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Doctor Department",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Gynaecology\",\n    \"description\": \"The study and treatment of the diseases and medical problems of women.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/doctor_department_add",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "doctor_department_add"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🏥 Patient Management",
+      "item": [
+        {
+          "name": "Get Patient List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/patient_list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "patient_list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Patient",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"first_name\": \"John\",\n    \"surname\": \"Patient\",\n    \"email\": \"patient@example.com\",\n    \"phone\": \"9876543210\",\n    \"patient_reg_no\": \"KDC-P0001\",\n    \"dob\": \"1990-05-15\",\n    \"age\": 33,\n    \"gender\": \"Male\",\n    \"address\": \"123 Patient Street\",\n    \"profession\": \"Engineer\",\n    \"primary_contact_name\": \"Jane Patient\",\n    \"relationship\": \"Spouse\",\n    \"contact_mobile\": \"9876543211\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/store_patient",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "store_patient"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Patient",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": 1,\n    \"first_name\": \"John Updated\",\n    \"surname\": \"Patient\",\n    \"email\": \"patient.updated@example.com\",\n    \"phone\": \"9876543210\",\n    \"patient_reg_no\": \"KDC-P0001\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/update_patient",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "update_patient"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Patient",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/delete_patient",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "delete_patient"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "👥 Staff Management",
+      "item": [
+        {
+          "name": "Get Staff List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/staff_list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "staff_list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Staff",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"first_name\": \"Staff\",\n    \"surname\": \"Member\",\n    \"email\": \"staff@example.com\",\n    \"phone\": \"9876543220\",\n    \"aadhar_number\": \"123456789013\",\n    \"staff_category_id\": 1,\n    \"password\": \"staff123\",\n    \"confirm_password\": \"staff123\",\n    \"qualification\": \"Diploma in Dental Assistance\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/store_staff",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "store_staff"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Staff Categories",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/staff_category_list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "staff_category_list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Staff Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Dental Assistant\",\n    \"description\": \"Assists dentists during procedures\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/store_staff_category",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "store_staff_category"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📅 Appointment Management",
+      "item": [
+        {
+          "name": "Get Appointment List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/appointment_list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "appointment_list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Appointment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"patient_id\": 1,\n    \"doctor_id\": 1,\n    \"treatment_id\": 1,\n    \"service_id\": 1,\n    \"appointment_date\": \"2024-01-15\",\n    \"appointment_time\": \"10:00\",\n    \"tooth_id\": \"12\",\n    \"method_id\": 1,\n    \"treatment_name\": \"Root Canal\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/store_appointment",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "store_appointment"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Appointment",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": 1,\n    \"appointment_id\": \"#AP-123\",\n    \"patient_id\": 1,\n    \"doctor_id\": 1,\n    \"treatment_id\": 1,\n    \"appointment_date\": \"2024-01-16\",\n    \"appointment_time\": \"11:00\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/update_appointments",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "update_appointments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Appointment Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": 1,\n    \"appointment_status\": \"Completed\",\n    \"complete_date\": \"2024-01-15\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/appointment_status_update",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "appointment_status_update"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reschedule Appointment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": 1,\n    \"patient_id\": 1,\n    \"doctor_id\": 1,\n    \"treatment_id\": 1,\n    \"service_id\": 1,\n    \"appointment_date\": \"2024-01-20\",\n    \"appointment_time\": \"14:00\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/reschedule_appointment",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reschedule_appointment"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Upcoming Appointments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/upcoming_appointments",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "upcoming_appointments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Appointments by Date",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"date\": \"2026-01-31\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/appointment_custom_date",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "appointment_custom_date"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Appointment Summary",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"appointment_id\": 1,\n    \"summary\": \"Patient responded well to treatment\",\n    \"treatment_stage_id\": 1,\n    \"appointment_status\": \"Completed\",\n    \"complete_date\": \"2024-01-15\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/appointment_summary",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "appointment_summary"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "💊 Pharmacy Management",
+      "item": [
+        {
+          "name": "Get Pharmacy List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/pharmacy_list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "pharmacy_list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Pharmacy Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"medicine_name\": \"Paracetamol\",\n    \"category_id\": 1,\n    \"quantity\": 100,\n    \"price\": 50.00,\n    \"expiry_date\": \"2025-12-31\",\n    \"manufacturer\": \"ABC Pharma\",\n    \"batch_number\": \"BATCH001\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/store_pharmacy",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "store_pharmacy"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Pharmacy Item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": 1,\n    \"medicine_name\": \"Paracetamol Updated\",\n    \"quantity\": 150,\n    \"price\": 55.00\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/update_pharmacy",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "update_pharmacy"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Pharmacy Item",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/delete_pharmacy",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "delete_pharmacy"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Pharmacy Categories",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/pharmacy_category_list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "pharmacy_category_list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Pharmacy Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Pain Relief\",\n    \"description\": \"Medicines for pain management\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/store_pharmacy_category",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "store_pharmacy_category"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📦 Inventory Management",
+      "item": [
+        {
+          "name": "Get Inventory List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/inventory_list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "inventory_list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Inventory Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"item_name\": \"Dental Drill\",\n    \"category_id\": 1,\n    \"quantity\": 5,\n    \"price\": 15000.00,\n    \"supplier\": \"Dental Equipment Co\",\n    \"purchase_date\": \"2024-01-01\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/store_inventory",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "store_inventory"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Inventory Categories",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/inventory_category_list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "inventory_category_list"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "💰 Accounts & Financial Management",
+      "item": [
+        {
+          "name": "Get Accounts List",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"from_date\": \"2024-01-01\",\n    \"to_date\": \"2024-01-31\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/accountslist",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "accountslist"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Pharmacy Account Entry",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"date\": \"2024-01-15\",\n    \"amount\": 5000.00,\n    \"description\": \"Medicine purchase\",\n    \"type\": \"expense\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/store_pharmacy_account",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "store_pharmacy_account"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Inventory Account Entry",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"date\": \"2024-01-15\",\n    \"amount\": 25000.00,\n    \"description\": \"Equipment purchase\",\n    \"type\": \"expense\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/store_inventory_account",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "store_inventory_account"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Lab Account Entry",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"date\": \"2024-01-15\",\n    \"amount\": 3000.00,\n    \"description\": \"Lab test expenses\",\n    \"type\": \"expense\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/store_lab_account",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "store_lab_account"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Staff Salary",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"month\": \"2024-01\",\n    \"staff_id\": \"7\",\n    \"staff_type\": \"staff\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/get_staff_salary",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "get_staff_salary"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Staff Salary",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"staff_id\": 1,\n    \"month\": \"2024-01\",\n    \"basic_salary\": 25000.00,\n    \"allowances\": 5000.00,\n    \"deductions\": 2000.00,\n    \"net_salary\": 28000.00\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/store_staff_salary",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "store_staff_salary"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🏢 SaaS & Business Management",
+      "item": [
+        {
+          "name": "Get SaaS Plans",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/saas-plans",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "saas-plans"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create SaaS Plan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Premium Plan\",\n    \"description\": \"Full featured plan\",\n    \"price\": 999.00,\n    \"billing_cycle\": \"monthly\",\n    \"features\": {\n        \"patients\": 1000,\n        \"staff\": 50,\n        \"storage\": \"100GB\"\n    }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/saas-plans",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "saas-plans"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Business Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/business/profile",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "business",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Business Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Updated Dental Clinic\",\n    \"email\": \"updated@clinic.com\",\n    \"phone\": \"9876543210\",\n    \"address\": \"Updated Address\",\n    \"website\": \"https://updatedclinic.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/business/profile",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "business",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Available Hospitals",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/hospitals/available",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "hospitals",
+                "available"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Switch Hospital Context",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"hospital_id\": 2\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/hospital/switch",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "hospital",
+                "switch"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🔧 Hospital Settings",
+      "item": [
+        {
+          "name": "Get Hospital Settings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/hospital/settings?hospital_id=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "hospital",
+                "settings"
+              ],
+              "query": [
+                {
+                  "key": "hospital_id",
+                  "value": "1",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Payment Settings",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"razorpay_key\": \"rzp_test_key\",\n    \"razorpay_secret\": \"rzp_test_secret\",\n    \"payment_enabled\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/hospital/settings/payment",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "hospital",
+                "settings",
+                "payment"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update WhatsApp Settings",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"whatsapp_api_url\": \"https://api.whatsapp.com\",\n    \"whatsapp_token\": \"wa_token_123\",\n    \"whatsapp_enabled\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/hospital/settings/whatsapp",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "hospital",
+                "settings",
+                "whatsapp"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🔔 Notifications & Enquiries",
+      "item": [
+        {
+          "name": "Get Notifications",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"role\": \"admin_status\",\n    \"id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/get_notificationsList",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "get_notificationsList"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change Notification Status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"role\": \"admin_status\",\n    \"id\": 1,\n    \"notification_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/change_notification_status",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "change_notification_status"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Store Enquiry",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"patient_id\": 1,\n    \"date\": \"2024-01-15\",\n    \"enquiry\": \"Patient inquiry about treatment options\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/store_enquiry",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "store_enquiry"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Enquiry List",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"role\": \"admin_status\",\n    \"id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/get_enquiry_list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "get_enquiry_list"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🏥 DICOM & Medical Imaging",
+      "item": [
+        {
+          "name": "Upload DICOM File",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "dicom_file",
+                  "type": "file",
+                  "value": null
+                },
+                {
+                  "key": "patient_id",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "study_description",
+                  "value": "Dental X-Ray",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/dicom/upload",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "dicom",
+                "upload"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Patient DICOM Files",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/dicom/patient/1/files",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "dicom",
+                "patient",
+                "1",
+                "files"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get DICOM File Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/dicom/file/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "dicom",
+                "file",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Save DICOM Annotations",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"dicom_file_id\": 1,\n    \"annotation_type\": \"text\",\n    \"annotation_data\": {\n        \"text\": \"Cavity detected\",\n        \"position\": {\"x\": 100, \"y\": 150}\n    }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/dicom/annotations",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "dicom",
+                "annotations"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📋 Treatment & Medical Records",
+      "item": [
+        {
+          "name": "Get Treatment List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/treatment_list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "treatment_list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Categories",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/category_list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "category_list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Orthodontics\",\n    \"description\": \"Teeth alignment treatments\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/store_category",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "store_category"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Treatment Methods",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/treatmentmethodList",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "treatmentmethodList"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Treatment Method",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"treatment_procedure_id\": 1,\n    \"treatment_method\": \"Root Canal Therapy\",\n    \"method_price\": 5000.00,\n    \"description\": \"Complete root canal treatment\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/storetreatmentmethod",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "storetreatmentmethod"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Medical Records",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/medical_record_list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "medical_record_list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Medical Record",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"patient_id\": 1,\n    \"doctor_id\": 1,\n    \"record_date\": \"2024-01-15\",\n    \"diagnosis\": \"Dental caries\",\n    \"treatment_provided\": \"Filling\",\n    \"notes\": \"Patient responded well to treatment\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/store_medical_record",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "store_medical_record"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📊 Reports & Analytics",
+      "item": [
+        {
+          "name": "Get Payment List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/payment_list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "payment_list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"patient_id\": 1,\n    \"amount\": 5000.00,\n    \"payment_method\": \"cash\",\n    \"payment_date\": \"2024-01-15\",\n    \"description\": \"Treatment payment\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/store_payment",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "store_payment"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Doctor Complete Appointments",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"doctor_id\": 1,\n    \"from_date\": \"2024-01-01\",\n    \"to_date\": \"2024-01-31\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/doctor_complete_appointments",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "doctor_complete_appointments"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "⚙️ System Management",
+      "item": [
+        {
+          "name": "Update Employee Number",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"user_id\": 1,\n    \"employee_number\": \"EMP001\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/update_employee_number",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "update_employee_number"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Active/Inactive Status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": 1,\n    \"status\": 1,\n    \"table\": \"users\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/active_inactive",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "active_inactive"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Global Search",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{api_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"search_term\": \"john\",\n    \"search_type\": \"patient\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/global",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "global"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{api_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000",
+      "type": "string"
+    },
+    {
+      "key": "api_token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}

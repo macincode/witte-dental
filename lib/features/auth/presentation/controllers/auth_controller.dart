@@ -1,35 +1,36 @@
 import 'package:get/get.dart';
-
+import 'package:witte_dental_pms/core/storage/hive_service.dart';
+import 'package:witte_dental_pms/features/auth/data/models/admin_login_response.dart';
+import 'package:witte_dental_pms/features/auth/data/models/business_model.dart';
+import 'package:witte_dental_pms/features/auth/data/models/hospital_model.dart';
+import 'package:witte_dental_pms/features/auth/data/models/user_model.dart';
+import 'package:witte_dental_pms/features/auth/domain/repositories/auth_repository.dart';
 import '../../../../core/constants/app_constants.dart';
-import '../../../../core/storage/hive_service.dart';
-import '../../domain/entities/user.dart';
 
 class AuthController extends GetxController {
-  final Rx<User?> _currentUser = Rx<User?>(null);
+  AuthController(this._authRepository);
+  final AuthRepository _authRepository;
+
+  final Rx<AdminLoginResponse?> _authResponse = Rx<AdminLoginResponse?>(null);
   final RxBool _isLoading = false.obs;
   final RxString _errorMessage = ''.obs;
 
-  User? get currentUser => _currentUser.value;
+  User? get currentUser => _authResponse.value?.data;
+  Business? get currentBusiness => _authResponse.value?.currentBusiness;
+  Hospital? get currentHospital => _authResponse.value?.currentHospital;
+  List<Business>? get businesses => _authResponse.value?.businesses;
+  String? get userType => _authResponse.value?.userType;
+  String? get token => _authResponse.value?.token;
   bool get isLoading => _isLoading.value;
   String get errorMessage => _errorMessage.value;
-  bool get isLoggedIn => HiveService.isLoggedIn && _currentUser.value != null;
+  bool get isLoggedIn => _authRepository.isLoggedIn();
 
   void checkAuthStatus() {
-    if (HiveService.isLoggedIn) {
-      final userRole = HiveService.userRole;
-      final userId = HiveService.getUserData<String>('user_id');
-
-      if (userRole != null && userId != null) {
-        // Create user from stored data
-        _currentUser.value = User(
-          id: userId,
-          email: HiveService.getUserData<String>('user_email') ?? '',
-          name: HiveService.getUserData<String>('user_name') ?? '',
-          role: userRole,
-          isActive: true,
-          createdAt: DateTime.now(),
-        );
-        _navigateBasedOnRole(userRole);
+    if (isLoggedIn) {
+      final authResponse = _authRepository.getAuthResponse();
+      if (authResponse != null) {
+        _authResponse.value = authResponse;
+        // Don't auto-navigate on checkAuthStatus, let the caller decide
       }
     }
   }
@@ -39,32 +40,14 @@ class AuthController extends GetxController {
       _isLoading.value = true;
       _errorMessage.value = '';
 
-      // Simulate API call - replace with actual implementation
-      await Future.delayed(const Duration(seconds: 2));
+      final response = await _authRepository.login(email, password);
 
-      // Mock user data - replace with API response
-      final user = User(
-        id: '123',
-        email: email,
-        name: 'Dr. John Doe',
-        role: AppConstants.roleAdmin,
-        // AppConstants.roleDoctor,
-        // AppConstants.rolePatient,
-        isActive: true,
-        createdAt: DateTime.now(),
-      );
-
-      await HiveService.saveAuthData(
-        userId: user.id,
-        userRole: user.role,
-        token: 'mock_token_123',
-      );
-
-      await HiveService.saveUserData('user_email', user.email);
-      await HiveService.saveUserData('user_name', user.name);
-
-      _currentUser.value = user;
-      _navigateBasedOnRole(user.role);
+      if (response.success) {
+        _authResponse.value = response;
+        navigateBasedOnRole(response.userType);
+      } else {
+        _errorMessage.value = response.message;
+      }
     } catch (e) {
       _errorMessage.value = 'Login failed: $e';
     } finally {
@@ -72,27 +55,43 @@ class AuthController extends GetxController {
     }
   }
 
-  void _navigateBasedOnRole(String role) {
-    switch (role) {
-      case AppConstants.roleDoctor:
+  void navigateBasedOnRole(String? userType) {
+    switch (userType) {
+      case 'admin':
+        Get.offAllNamed(AppConstants.adminHomeScreen);
+        break;
+      case 'doctor':
         Get.offAllNamed(AppConstants.doctorDashboard);
         break;
-      case AppConstants.rolePatient:
+      case 'patient':
         Get.offAllNamed(AppConstants.patientDashboard);
-        break;
-      case AppConstants.roleAdmin:
-        Get.offAllNamed(AppConstants.adminDashboard);
         break;
       default:
         Get.offAllNamed(AppConstants.loginRoute);
     }
   }
 
+  String getRoleFromRoleId(int roleId) {
+    switch (roleId) {
+      case 1:
+        return AppConstants.rolePatient;
+      case 2:
+        return AppConstants.roleAdmin;
+      case 3:
+        return AppConstants.roleDoctor;
+      case 4:
+        return AppConstants.roleStaff;
+      default:
+        return 'user';
+    }
+  }
+
   Future<void> logout() async {
     try {
       _isLoading.value = true;
-      await HiveService.logout();
-      _currentUser.value = null;
+      await _authRepository.logout();
+      await HiveService.clearAllData();
+      _authResponse.value = null;
       await Get.offAllNamed(AppConstants.loginRoute);
     } finally {
       _isLoading.value = false;

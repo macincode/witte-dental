@@ -101,17 +101,9 @@ class _LoginPageState extends State<LoginPage> {
                     width: MediaQuery.of(context).size.width * 0.5,
                     height: 100,
                     decoration: const BoxDecoration(),
-                    child: Obx(
-                      () => Image.asset(
-                        themeController.currentThemeMode == AppThemeMode.dark ||
-                                (themeController.currentThemeMode ==
-                                        AppThemeMode.system &&
-                                    Theme.of(context).brightness ==
-                                        Brightness.dark)
-                            ? 'assets/images/app_logo_dark.png'
-                            : 'assets/images/app_logo_light.png',
-                        fit: BoxFit.contain,
-                      ),
+                    child: Image.asset(
+                      'assets/images/login_logo.png',
+                      fit: BoxFit.contain,
                     ),
                   ),
                   // const SizedBox(height: 5),
@@ -294,37 +286,57 @@ class _LoginPageState extends State<LoginPage> {
                     () => SizedBox(
                       width: double.infinity,
                       height: 48,
-                      child: ElevatedButton(
-                        onPressed: authController.isLoading
-                            ? null
-                            : () {
-                                authController
-                                  ..clearError()
-                                  ..login(
-                                    emailController.text.trim(),
-                                    passwordController.text,
-                                    // selectedRole: selectedRole,
-                                  );
-                              },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
                               Theme.of(context).colorScheme.secondary,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                              Theme.of(context).colorScheme.primary,
+                            ],
+                            begin: Alignment.bottomLeft,
+                            end: Alignment.topRight,
                           ),
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        child: authController.isLoading
-                            ? SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    Theme.of(context).colorScheme.secondary,
+                        child: ElevatedButton(
+                          onPressed: authController.isLoading
+                              ? null
+                              : () {
+                                  authController
+                                    ..clearError()
+                                    ..login(
+                                      emailController.text.trim(),
+                                      passwordController.text,
+                                      // selectedRole: selectedRole,
+                                    );
+                                },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            shadowColor: Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          child: authController.isLoading
+                              ? const SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.white,
+                                    ),
+                                  ),
+                                )
+                              : Text(
+                                  'login'.tr,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                    color: Colors.white,
                                   ),
                                 ),
-                              )
-                            : Text('login'.tr),
+                        ),
                       ),
                     ),
                   ),

@@ -1,97 +1,55 @@
-import '../config/hive_config.dart';
-import '../constants/storage_keys.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:witte_dental_pms/core/config/hive_config.dart';
+import 'package:witte_dental_pms/features/auth/data/models/admin_login_response.dart';
 
 class HiveService {
-  // User data operations
-  static Future<void> saveUserData(String key, dynamic value) async {
-    await HiveConfig.userBox.put(key, value);
+  static const String authBoxName = 'authBox';
+
+  Future<void> init() async {
+    await Hive.initFlutter();
+    // Register adapters here
+    // Hive.registerAdapter(AdminLoginResponseAdapter());
+    // ... other adapters
+
+    // Check if box is already open
+    if (!Hive.isBoxOpen(authBoxName)) {
+      await Hive.openBox<AdminLoginResponse>(authBoxName);
+    }
   }
 
-  static T? getUserData<T>(String key) {
-    return HiveConfig.userBox.get(key);
+  Future<void> saveAuthResponse(AdminLoginResponse response) async {
+    final box = Hive.box<AdminLoginResponse>(authBoxName);
+    await box.put('auth', response);
   }
 
-  static Future<void> clearUserData() async {
-    await HiveConfig.userBox.clear();
+  AdminLoginResponse? getAuthResponse() {
+    final box = Hive.box<AdminLoginResponse>(authBoxName);
+    return box.get('auth');
   }
 
-  // Settings operations
-  static Future<void> saveSetting(String key, dynamic value) async {
-    await HiveConfig.settingsBox.put(key, value);
+  Future<void> clearAuthBox() async {
+    final box = Hive.box<AdminLoginResponse>(authBoxName);
+    await box.clear();
   }
 
+  // Clear all app data on logout
+  static Future<void> clearAllData() async {
+    await HiveConfig.settingsBox.clear();
+    // Keep onboarding_completed setting
+    final onboardingCompleted =
+        HiveConfig.settingsBox.get('onboarding_completed');
+    if (onboardingCompleted != null) {
+      await HiveConfig.settingsBox
+          .put('onboarding_completed', onboardingCompleted);
+    }
+  }
+
+  // Settings operations (kept for onboarding check)
   static T? getSetting<T>(String key) {
     return HiveConfig.settingsBox.get(key);
   }
 
-  // Cache operations with TTL
-  static Future<void> cacheData(
-    String key,
-    dynamic value, {
-    Duration? ttl,
-  }) async {
-    final cacheItem = {
-      'data': value,
-      'timestamp': DateTime.now().millisecondsSinceEpoch,
-      'ttl': ttl?.inMilliseconds,
-    };
-    await HiveConfig.cacheBox.put(key, cacheItem);
-  }
-
-  static T? getCachedData<T>(String key) {
-    final cacheItem = HiveConfig.cacheBox.get(key);
-    if (cacheItem == null) return null;
-
-    final timestamp = cacheItem['timestamp'] as int;
-    final ttl = cacheItem['ttl'] as int?;
-
-    if (ttl != null) {
-      final now = DateTime.now().millisecondsSinceEpoch;
-      if (now - timestamp > ttl) {
-        HiveConfig.cacheBox.delete(key);
-        return null;
-      }
-    }
-
-    return cacheItem['data'] as T;
-  }
-
-  // Secure data operations (for tokens, sensitive info)
-  static Future<void> saveSecureData(String key, String value) async {
-    await HiveConfig.secureBox.put(key, value);
-  }
-
-  static String? getSecureData(String key) {
-    return HiveConfig.secureBox.get(key);
-  }
-
-  static Future<void> deleteSecureData(String key) async {
-    await HiveConfig.secureBox.delete(key);
-  }
-
-  // Authentication helpers
-  static Future<void> saveAuthData({
-    required String userId,
-    required String userRole,
-    required String token,
-    String? refreshToken,
-  }) async {
-    await saveUserData(StorageKeys.userId, userId);
-    await saveUserData(StorageKeys.userRole, userRole);
-    await saveUserData(StorageKeys.isLoggedIn, true);
-    await saveSecureData(StorageKeys.userToken, token);
-    if (refreshToken != null) {
-      await saveSecureData(StorageKeys.refreshToken, refreshToken);
-    }
-  }
-
-  static bool get isLoggedIn =>
-      getUserData<bool>(StorageKeys.isLoggedIn) ?? false;
-  static String? get userRole => getUserData<String>(StorageKeys.userRole);
-  static String? get userToken => getSecureData(StorageKeys.userToken);
-
-  static Future<void> logout() async {
-    await clearUserData();
-    await HiveConfig.secureBox.clear();
+  static Future<void> saveSetting(String key, dynamic value) async {
+    await HiveConfig.settingsBox.put(key, value);
   }
 }

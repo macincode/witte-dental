@@ -81,12 +81,12 @@ class RoleBasedNavigation {
       NavigationItem(
         title: 'Users',
         icon: Icons.people,
-        route: AppConstants.categoryManagement,
+        route: AppConstants.inquiryListManagement,
       ),
       NavigationItem(
         title: 'Appointments',
         icon: Icons.calendar_today,
-        route: AppConstants.appointments,
+        route: AppConstants.appointmentScreen,
       ),
       NavigationItem(
         title: 'Billings',

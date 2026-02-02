@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const Color primaryColor = Color(0xFF2b8cee);
-  static const Color secondaryColor = Color(0xFF18a19a);
-  static const Color secondaryContainerColor = Color(0xFF179b97);
+  static const Color primaryColor = Color(0xFF145bd9);
+  static const Color secondaryColor = Color(0xFF06bdff);
+  static const Color secondaryContainerColor = Color(0xFF06A8E6);
   static const Color tertiaryColor = Color(0xFF8b35eb);
   static const Color errorColor = Color(0xFFD32F2F);
   static const Color buttonColor = Color(0xFF1faf1d);
@@ -19,7 +19,7 @@ class AppTheme {
     colorScheme: const ColorScheme.light(
       primary: primaryColor,
       secondary: secondaryColor,
-      secondaryContainer: secondaryContainerColor,
+      // secondaryContainer: secondaryContainerColor,
       tertiary: tertiaryColor,
       error: errorColor,
       onPrimary: lightThemePrimaryText,
@@ -115,7 +115,7 @@ class AppTheme {
       error: errorColor,
       onPrimary: darkThemePrimaryText,
       onSecondary: darkThemeSecondaryText,
-      secondaryContainer: secondaryContainerColor,
+      // secondaryContainer: secondaryContainerColor,
       surface: darkThemeSurfaceColor,
     ),
     appBarTheme: const AppBarTheme(

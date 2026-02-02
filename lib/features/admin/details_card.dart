@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wittehms/core/controllers/theme_controller.dart';
+import 'package:witte_dental_pms/core/controllers/theme_controller.dart';
 
 class DashboardCard extends StatelessWidget {
   const DashboardCard({
     required this.title,
     required this.icon,
-    required this.count,
+    this.count = '',
     super.key,
     this.onTap,
   });
@@ -18,12 +18,14 @@ class DashboardCard extends StatelessWidget {
   static Widget buildHeaderCard(
     BuildContext context,
     String title,
-    String subtitle,
-  ) {
+    String subtitle, {
+    Widget? actionButton,
+  }) {
     final themeController = Get.find<ThemeController>();
 
     return Container(
-      padding: const EdgeInsets.all(16),
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       decoration: themeController.currentThemeMode == AppThemeMode.dark ||
               (themeController.currentThemeMode == AppThemeMode.system &&
                   Theme.of(context).brightness == Brightness.dark)
@@ -77,6 +79,8 @@ class DashboardCard extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onSecondary,
                 ),
           ),
+          const SizedBox(height: 8),
+          if (actionButton != null) actionButton,
         ],
       ),
     );
@@ -137,10 +141,7 @@ class DashboardCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Theme.of(context)
-                          .colorScheme
-                          .secondaryContainer
-                          .withOpacity(0.09),
+                      Theme.of(context).colorScheme.primary.withOpacity(0.06),
                       Theme.of(context).colorScheme.secondary.withOpacity(0.3),
                     ],
                     begin: Alignment.topLeft,
@@ -151,17 +152,21 @@ class DashboardCard extends StatelessWidget {
                 child: Icon(
                   icon,
                   size: 32,
-                  color: Theme.of(context).colorScheme.secondaryContainer,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
               const SizedBox(height: 8),
-              Text(
-                count,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
+              if (count.isNotEmpty) ...[
+                Text(
+                  count,
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ] else ...[
+                const SizedBox(height: 10),
+              ],
               const SizedBox(height: 4),
               Text(
                 title,
