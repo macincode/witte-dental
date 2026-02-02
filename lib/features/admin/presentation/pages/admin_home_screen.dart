@@ -5,7 +5,6 @@ import 'package:witte_dental_pms/core/controllers/theme_controller.dart';
 import 'package:witte_dental_pms/features/admin/presentation/controllers/admin_dashboard_controller.dart';
 import 'package:witte_dental_pms/features/admin/presentation/widgets/admin_dashboard_tab.dart';
 import 'package:witte_dental_pms/features/admin/presentation/widgets/hospital_dashboard_tab.dart';
-import 'package:witte_dental_pms/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:witte_dental_pms/features/shared/widgets/network_aware_widget.dart';
 import 'package:witte_dental_pms/features/shared/widgets/role_based_drawer.dart';
 

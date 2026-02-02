@@ -9,8 +9,12 @@ class AppointmentlistManagement extends StatefulWidget {
 }
 
 class _AppointmentlistManagementState extends State<AppointmentlistManagement> {
-  void _showAppointmentDetails(BuildContext context, String patientName,
-      String doctorName, String appointmentId) {
+  void _showAppointmentDetails(
+    BuildContext context,
+    String patientName,
+    String doctorName,
+    String appointmentId,
+  ) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -25,8 +29,10 @@ class _AppointmentlistManagementState extends State<AppointmentlistManagement> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           title: Row(
             children: [
-              const Text('Appointment Details',
-                  style: TextStyle(fontWeight: FontWeight.w600)),
+              const Text(
+                'Appointment Details',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
               const Spacer(),
               IconButton(
                 onPressed: () => Navigator.of(context).pop(),

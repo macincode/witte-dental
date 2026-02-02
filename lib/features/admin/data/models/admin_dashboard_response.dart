@@ -1,7 +1,4 @@
 class AdminDashboardResponse {
-  final bool success;
-  final AdminDashboardData data;
-
   AdminDashboardResponse({
     required this.success,
     required this.data,
@@ -13,13 +10,11 @@ class AdminDashboardResponse {
       data: AdminDashboardData.fromJson(json['data']),
     );
   }
+  final bool success;
+  final AdminDashboardData data;
 }
 
 class AdminDashboardData {
-  final BusinessInfo business;
-  final DashboardStats stats;
-  final List<HospitalInfo> hospitals;
-
   AdminDashboardData({
     required this.business,
     required this.stats,
@@ -35,15 +30,12 @@ class AdminDashboardData {
           .toList(),
     );
   }
+  final BusinessInfo business;
+  final DashboardStats stats;
+  final List<HospitalInfo> hospitals;
 }
 
 class BusinessInfo {
-  final int id;
-  final String name;
-  final String businessType;
-  final String ownerName;
-  final List<HospitalInfo> hospitals;
-
   BusinessInfo({
     required this.id,
     required this.name,
@@ -63,17 +55,14 @@ class BusinessInfo {
           .toList(),
     );
   }
+  final int id;
+  final String name;
+  final String businessType;
+  final String ownerName;
+  final List<HospitalInfo> hospitals;
 }
 
 class HospitalInfo {
-  final int id;
-  final String name;
-  final String code;
-  final String phone;
-  final String email;
-  final bool isMain;
-  final String status;
-
   HospitalInfo({
     required this.id,
     required this.name,
@@ -95,14 +84,16 @@ class HospitalInfo {
       status: json['status'],
     );
   }
+  final int id;
+  final String name;
+  final String code;
+  final String phone;
+  final String email;
+  final bool isMain;
+  final String status;
 }
 
 class DashboardStats {
-  final int totalHospitals;
-  final int totalPatients;
-  final int totalStaff;
-  final int appointmentsToday;
-
   DashboardStats({
     required this.totalHospitals,
     required this.totalPatients,
@@ -118,4 +109,8 @@ class DashboardStats {
       appointmentsToday: json['appointments_today'],
     );
   }
+  final int totalHospitals;
+  final int totalPatients;
+  final int totalStaff;
+  final int appointmentsToday;
 }

@@ -6,24 +6,6 @@ part 'business_model.g.dart';
 
 @HiveType(typeId: 2)
 class Business extends HiveObject {
-  @HiveField(0)
-  final int id;
-
-  @HiveField(1)
-  final String name;
-
-  @HiveField(2)
-  final String businessType;
-
-  @HiveField(3)
-  final String role;
-
-  @HiveField(4)
-  final Subscription? subscription;
-
-  @HiveField(5)
-  final List<Hospital>? hospitals;
-
   Business({
     required this.id,
     required this.name,
@@ -49,4 +31,21 @@ class Business extends HiveObject {
           : null,
     );
   }
+  @HiveField(0)
+  final int id;
+
+  @HiveField(1)
+  final String name;
+
+  @HiveField(2)
+  final String businessType;
+
+  @HiveField(3)
+  final String role;
+
+  @HiveField(4)
+  final Subscription? subscription;
+
+  @HiveField(5)
+  final List<Hospital>? hospitals;
 }

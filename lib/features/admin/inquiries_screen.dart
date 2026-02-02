@@ -47,7 +47,7 @@ class _InquiryScreenState extends State<InquiryScreen> {
                       icon: Icons.group,
                       count: '434',
                       onTap: () {
-                        Get.toNamed(AppConstants.inquirylistManagement);
+                        Get.toNamed(AppConstants.inquiryListManagement);
                       },
                     ),
                     const DashboardCard(

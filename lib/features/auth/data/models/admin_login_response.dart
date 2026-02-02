@@ -8,33 +8,6 @@ part 'admin_login_response.g.dart';
 
 @HiveType(typeId: 0)
 class AdminLoginResponse extends HiveObject {
-  @HiveField(0)
-  final bool success;
-
-  @HiveField(1)
-  final String message;
-
-  @HiveField(2)
-  final String userType;
-
-  @HiveField(3)
-  final User? data;
-
-  @HiveField(4)
-  final String? token;
-
-  @HiveField(5)
-  final List<Business>? businesses;
-
-  @HiveField(6)
-  final Business? currentBusiness;
-
-  @HiveField(7)
-  final Hospital? currentHospital;
-
-  @HiveField(8)
-  final SettingsAccess? settingsAccess;
-
   AdminLoginResponse({
     required this.success,
     required this.message,
@@ -70,4 +43,30 @@ class AdminLoginResponse extends HiveObject {
           : null,
     );
   }
+  @HiveField(0)
+  final bool success;
+
+  @HiveField(1)
+  final String message;
+
+  @HiveField(2)
+  final String userType;
+
+  @HiveField(3)
+  final User? data;
+
+  @HiveField(4)
+  final String? token;
+
+  @HiveField(5)
+  final List<Business>? businesses;
+
+  @HiveField(6)
+  final Business? currentBusiness;
+
+  @HiveField(7)
+  final Hospital? currentHospital;
+
+  @HiveField(8)
+  final SettingsAccess? settingsAccess;
 }

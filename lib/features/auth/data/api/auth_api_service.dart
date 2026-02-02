@@ -3,9 +3,8 @@ import 'package:witte_dental_pms/core/services/dio_service.dart';
 import 'package:witte_dental_pms/features/auth/data/models/admin_login_response.dart';
 
 class AuthApiService {
-  final DioService _dioService;
-
   AuthApiService(this._dioService);
+  final DioService _dioService;
 
   Future<AdminLoginResponse> adminLogin(String email, String password) async {
     final response = await _dioService.post(

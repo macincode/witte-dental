@@ -81,7 +81,7 @@ class RoleBasedNavigation {
       NavigationItem(
         title: 'Users',
         icon: Icons.people,
-        route: AppConstants.inquirylistManagement,
+        route: AppConstants.inquiryListManagement,
       ),
       NavigationItem(
         title: 'Appointments',

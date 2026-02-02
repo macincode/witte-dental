@@ -76,7 +76,7 @@ class _PharmacyScreenState extends State<PharmacyScreen> {
                       icon: Icons.group,
                       count: '434',
                       onTap: () {
-                        Get.toNamed(AppConstants.pharmacylistManagement);
+                        Get.toNamed(AppConstants.pharmacyListManagement);
                       },
                     ),
                     const DashboardCard(

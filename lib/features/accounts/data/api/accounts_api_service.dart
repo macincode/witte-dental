@@ -37,7 +37,10 @@ class AccountsApiService {
   }
 
   Future<void> getStaffSalary(
-      String month, String staffId, String staffType) async {
+    String month,
+    String staffId,
+    String staffType,
+  ) async {
     await _dioService.post(
       ApiEndpoints.getStaffSalary,
       data: {

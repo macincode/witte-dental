@@ -25,20 +25,20 @@ class AppConstants {
   static const String adminHomeScreen = '/admin';
   static const String adminDashboard = '/admin_dashboard';
   static const String inquiryScreen = '/admin_inquiries';
-  static const String inquirylistManagement = '/admin_inquiry-management';
+  static const String inquiryListManagement = '/admin_inquiry-management';
   static const String appointmentScreen = '/admin_appointments';
-  static const String appointmentlistManagement =
+  static const String appointmentListManagement =
       '/admin_appointments-management';
   static const String patientScreen = '/admin_patients';
-  static const String patientlistManagement = '/admin_patients-management';
+  static const String patientListManagement = '/admin_patients-management';
   static const String doctorScreen = '/admin_doctors';
-  static const String doctorlistManagement = '/admin_doctors-management';
+  static const String doctorListManagement = '/admin_doctors-management';
   static const String staffScreen = '/admin_staffs';
-  static const String stafflistManagement = '/admin_staffs-management';
+  static const String staffListManagement = '/admin_staffs-management';
   static const String inventoryScreen = '/admin_inventory';
-  static const String inventorylistManagement = '/admin_inventory-management';
+  static const String inventoryListManagement = '/admin_inventory-management';
   static const String pharmacyScreen = '/admin_pharmacy';
-  static const String pharmacylistManagement = '/admin_pharmacy-management';
+  static const String pharmacyListManagement = '/admin_pharmacy-management';
   static const String billings = '/billings';
 
   // Validation

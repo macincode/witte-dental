@@ -76,7 +76,7 @@ class _PatientScreenState extends State<PatientScreen> {
                       icon: Icons.group,
                       count: '434',
                       onTap: () {
-                        Get.toNamed(AppConstants.patientlistManagement);
+                        Get.toNamed(AppConstants.patientListManagement);
                       },
                     ),
                     const DashboardCard(

@@ -4,9 +4,8 @@ import '../models/admin_dashboard_response.dart';
 import '../models/hospital_dashboard_response.dart';
 
 class AdminApiService {
-  final DioService _dioService;
-
   AdminApiService(this._dioService);
+  final DioService _dioService;
 
   Future<AdminDashboardResponse> getAdminDashboard() async {
     final response = await _dioService.get(ApiEndpoints.adminDashboard);

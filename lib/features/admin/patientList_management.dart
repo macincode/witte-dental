@@ -911,8 +911,11 @@ class AddPatientHelper {
     );
   }
 
-  static InputDecoration _getInputDecoration(BuildContext context,
-      [String? label, IconData? icon]) {
+  static InputDecoration _getInputDecoration(
+    BuildContext context, [
+    String? label,
+    IconData? icon,
+  ]) {
     return InputDecoration(
       hintText: label,
       hintStyle: label != null

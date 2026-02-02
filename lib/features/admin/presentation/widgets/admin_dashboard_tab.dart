@@ -95,7 +95,7 @@ class AdminDashboardTab extends StatelessWidget {
                 ),
                 _buildStatCard(
                   context,
-                  'Today\'s Appointments',
+                  "Today's Appointments",
                   data.stats.appointmentsToday.toString(),
                   Icons.calendar_today,
                   const Color(0xFF9370DB),
@@ -112,54 +112,56 @@ class AdminDashboardTab extends StatelessWidget {
                   ),
             ),
             const SizedBox(height: 12),
-            ...data.hospitals.map((hospital) => Card(
-                  margin: const EdgeInsets.only(bottom: 8),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: hospital.isMain
-                          ? const Color(0xFF07BDFF)
-                          : const Color(0xFF145BD9),
-                      child: Icon(
-                        hospital.isMain ? Icons.star : Icons.local_hospital,
-                        color: Colors.white,
-                      ),
+            ...data.hospitals.map(
+              (hospital) => Card(
+                margin: const EdgeInsets.only(bottom: 8),
+                child: ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: hospital.isMain
+                        ? const Color(0xFF07BDFF)
+                        : const Color(0xFF145BD9),
+                    child: Icon(
+                      hospital.isMain ? Icons.star : Icons.local_hospital,
+                      color: Colors.white,
                     ),
-                    title: Text(
-                      hospital.name,
-                      style: const TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Code: ${hospital.code}'),
-                        Text('Phone: ${hospital.phone}'),
-                      ],
-                    ),
-                    trailing: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: hospital.status == 'active'
-                            ? Colors.green.withOpacity(0.1)
-                            : Colors.red.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        hospital.status.toUpperCase(),
-                        style: TextStyle(
-                          color: hospital.status == 'active'
-                              ? Colors.green
-                              : Colors.red,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    isThreeLine: true,
                   ),
-                )),
+                  title: Text(
+                    hospital.name,
+                    style: const TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Code: ${hospital.code}'),
+                      Text('Phone: ${hospital.phone}'),
+                    ],
+                  ),
+                  trailing: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: hospital.status == 'active'
+                          ? Colors.green.withOpacity(0.1)
+                          : Colors.red.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      hospital.status.toUpperCase(),
+                      style: TextStyle(
+                        color: hospital.status == 'active'
+                            ? Colors.green
+                            : Colors.red,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  isThreeLine: true,
+                ),
+              ),
+            ),
           ],
         ),
       );

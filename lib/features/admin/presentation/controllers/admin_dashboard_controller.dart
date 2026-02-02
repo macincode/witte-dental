@@ -4,9 +4,8 @@ import '../../data/models/hospital_dashboard_response.dart';
 import '../../data/services/admin_api_service.dart';
 
 class AdminDashboardController extends GetxController {
-  final AdminApiService _apiService;
-
   AdminDashboardController(this._apiService);
+  final AdminApiService _apiService;
 
   final RxBool _isLoading = false.obs;
   final RxString _errorMessage = ''.obs;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:witte_dental_pms/core/constants/app_constants.dart';
-import 'package:witte_dental_pms/core/controllers/theme_controller.dart';
+// import 'package:witte_dental_pms/core/controllers/theme_controller.dart';
 import 'package:witte_dental_pms/features/admin/details_card.dart';
 
 import '../shared/widgets/network_aware_widget.dart';
@@ -16,7 +16,7 @@ class AppointmentScreen extends StatefulWidget {
 class _AppointmentScreenState extends State<AppointmentScreen> {
   @override
   Widget build(BuildContext context) {
-    final themeController = Get.find<ThemeController>();
+    // final themeController = Get.find<ThemeController>();
 
     return NetworkAwareWidget(
       child: Scaffold(
@@ -74,7 +74,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                       icon: Icons.group,
                       count: '434',
                       onTap: () {
-                        Get.toNamed(AppConstants.appointmentlistManagement);
+                        Get.toNamed(AppConstants.appointmentListManagement);
                       },
                     ),
                     const DashboardCard(
@@ -698,8 +698,11 @@ class AppointmentDialogHelper {
     );
   }
 
-  static InputDecoration _getInputDecoration(BuildContext context,
-      [String? label, IconData? icon]) {
+  static InputDecoration _getInputDecoration(
+    BuildContext context, [
+    String? label,
+    IconData? icon,
+  ]) {
     return InputDecoration(
       hintText: label,
       hintStyle: label != null

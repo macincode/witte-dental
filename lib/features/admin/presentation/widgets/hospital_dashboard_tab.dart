@@ -35,7 +35,7 @@ class HospitalDashboardTab extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     DropdownButtonFormField<int>(
-                      value: controller.selectedHospitalId,
+                      initialValue: controller.selectedHospitalId,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
@@ -103,7 +103,7 @@ class HospitalDashboardTab extends StatelessWidget {
                   ),
                   _buildStatCard(
                     context,
-                    'Today\'s Appointments',
+                    "Today's Appointments",
                     hospitalData.stats.todayAppointments.toString(),
                     Icons.calendar_today,
                     const Color(0xFF145BD9),

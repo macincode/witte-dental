@@ -4,21 +4,6 @@ part 'user_model.g.dart';
 
 @HiveType(typeId: 1)
 class User extends HiveObject {
-  @HiveField(0)
-  final int id;
-
-  @HiveField(1)
-  final String name;
-
-  @HiveField(2)
-  final String email;
-
-  @HiveField(3)
-  final String phone;
-
-  @HiveField(4)
-  final int roleId;
-
   User({
     required this.id,
     required this.name,
@@ -36,4 +21,18 @@ class User extends HiveObject {
       roleId: json['role_id'],
     );
   }
+  @HiveField(0)
+  final int id;
+
+  @HiveField(1)
+  final String name;
+
+  @HiveField(2)
+  final String email;
+
+  @HiveField(3)
+  final String phone;
+
+  @HiveField(4)
+  final int roleId;
 }

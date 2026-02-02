@@ -3,10 +3,9 @@ import 'package:witte_dental_pms/features/auth/data/api/auth_api_service.dart';
 import 'package:witte_dental_pms/features/auth/data/models/admin_login_response.dart';
 
 class AuthRepository {
+  AuthRepository(this._apiService, this._hiveService);
   final AuthApiService _apiService;
   final HiveService _hiveService;
-
-  AuthRepository(this._apiService, this._hiveService);
 
   Future<AdminLoginResponse> login(String email, String password) async {
     final response = await _apiService.adminLogin(email, password);

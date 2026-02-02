@@ -515,7 +515,9 @@ class AddPharmacyHelper {
                           isRequired: true,
                           child: TextField(
                             decoration: _getInputDecoration(
-                                context, 'Enter medicine name'),
+                              context,
+                              'Enter medicine name',
+                            ),
                           ),
                         ),
                         _buildFormField(
@@ -672,8 +674,11 @@ class AddPharmacyHelper {
     );
   }
 
-  static InputDecoration _getInputDecoration(BuildContext context,
-      [String? label, IconData? icon]) {
+  static InputDecoration _getInputDecoration(
+    BuildContext context, [
+    String? label,
+    IconData? icon,
+  ]) {
     return InputDecoration(
       hintText: label,
       hintStyle: label != null

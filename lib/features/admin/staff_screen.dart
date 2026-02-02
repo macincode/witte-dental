@@ -76,7 +76,7 @@ class _StaffScreenState extends State<StaffScreen> {
                       icon: Icons.group,
                       count: '434',
                       onTap: () {
-                        Get.toNamed(AppConstants.stafflistManagement);
+                        Get.toNamed(AppConstants.staffListManagement);
                       },
                     ),
                     const DashboardCard(

@@ -1,8 +1,4 @@
 class HospitalDashboardResponse {
-  final bool status;
-  final String message;
-  final HospitalDashboardData data;
-
   HospitalDashboardResponse({
     required this.status,
     required this.message,
@@ -16,13 +12,12 @@ class HospitalDashboardResponse {
       data: HospitalDashboardData.fromJson(json['data']),
     );
   }
+  final bool status;
+  final String message;
+  final HospitalDashboardData data;
 }
 
 class HospitalDashboardData {
-  final String hospitalId;
-  final HospitalStats stats;
-  final List<RecentActivity> recentActivities;
-
   HospitalDashboardData({
     required this.hospitalId,
     required this.stats,
@@ -38,18 +33,12 @@ class HospitalDashboardData {
           .toList(),
     );
   }
+  final String hospitalId;
+  final HospitalStats stats;
+  final List<RecentActivity> recentActivities;
 }
 
 class HospitalStats {
-  final int totalPatients;
-  final int todayAppointments;
-  final double monthlyRevenue;
-  final int monthlyAppointments;
-  final int activeStaff;
-  final int pendingAppointments;
-  final int completedTreatments;
-  final StatsTrends trends;
-
   HospitalStats({
     required this.totalPatients,
     required this.todayAppointments,
@@ -73,13 +62,17 @@ class HospitalStats {
       trends: StatsTrends.fromJson(json['trends']),
     );
   }
+  final int totalPatients;
+  final int todayAppointments;
+  final double monthlyRevenue;
+  final int monthlyAppointments;
+  final int activeStaff;
+  final int pendingAppointments;
+  final int completedTreatments;
+  final StatsTrends trends;
 }
 
 class StatsTrends {
-  final TrendData patients;
-  final TrendData appointments;
-  final TrendData revenue;
-
   StatsTrends({
     required this.patients,
     required this.appointments,
@@ -93,12 +86,12 @@ class StatsTrends {
       revenue: TrendData.fromJson(json['revenue']),
     );
   }
+  final TrendData patients;
+  final TrendData appointments;
+  final TrendData revenue;
 }
 
 class TrendData {
-  final int value;
-  final String direction;
-
   TrendData({
     required this.value,
     required this.direction,
@@ -110,14 +103,11 @@ class TrendData {
       direction: json['direction'],
     );
   }
+  final int value;
+  final String direction;
 }
 
 class RecentActivity {
-  final String type;
-  final String message;
-  final String time;
-  final String icon;
-
   RecentActivity({
     required this.type,
     required this.message,
@@ -133,4 +123,8 @@ class RecentActivity {
       icon: json['icon'],
     );
   }
+  final String type;
+  final String message;
+  final String time;
+  final String icon;
 }

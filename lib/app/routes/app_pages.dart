@@ -79,7 +79,7 @@ class AppPages {
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
     GetPage(
-      name: AppConstants.inquirylistManagement,
+      name: AppConstants.inquiryListManagement,
       page: () => const InquirylistManagement(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
@@ -89,7 +89,7 @@ class AppPages {
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
     GetPage(
-      name: AppConstants.appointmentlistManagement,
+      name: AppConstants.appointmentListManagement,
       page: () => const AppointmentlistManagement(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
@@ -99,7 +99,7 @@ class AppPages {
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
     GetPage(
-      name: AppConstants.patientlistManagement,
+      name: AppConstants.patientListManagement,
       page: () => const PatientlistManagement(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
@@ -109,7 +109,7 @@ class AppPages {
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
     GetPage(
-      name: AppConstants.doctorlistManagement,
+      name: AppConstants.doctorListManagement,
       page: () => const DoctorlistManagement(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
@@ -119,7 +119,7 @@ class AppPages {
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
     GetPage(
-      name: AppConstants.stafflistManagement,
+      name: AppConstants.staffListManagement,
       page: () => const StafflistManagement(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
@@ -129,7 +129,7 @@ class AppPages {
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
     GetPage(
-      name: AppConstants.inventorylistManagement,
+      name: AppConstants.inventoryListManagement,
       page: () => const InventorylistManagement(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
@@ -139,7 +139,7 @@ class AppPages {
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
     GetPage(
-      name: AppConstants.pharmacylistManagement,
+      name: AppConstants.pharmacyListManagement,
       page: () => const PharmacylistManagement(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),

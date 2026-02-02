@@ -414,7 +414,8 @@ class _InventorylistManagementState extends State<InventorylistManagement> {
                                 child: ElevatedButton.icon(
                                   onPressed: () {
                                     AddInventoryHelper.addInventorySheet(
-                                        context);
+                                      context,
+                                    );
                                   },
                                   icon: const Icon(
                                     Icons.edit,
@@ -580,7 +581,9 @@ class AddInventoryHelper {
                           isRequired: true,
                           child: TextField(
                             decoration: _getInputDecoration(
-                                context, 'Enter material name'),
+                              context,
+                              'Enter material name',
+                            ),
                           ),
                         ),
                         _buildFormField(
@@ -589,7 +592,9 @@ class AddInventoryHelper {
                           isRequired: true,
                           child: TextField(
                             decoration: _getInputDecoration(
-                                context, 'Enter make/brand'),
+                              context,
+                              'Enter make/brand',
+                            ),
                           ),
                         ),
                         _buildFormField(
@@ -754,8 +759,11 @@ class AddInventoryHelper {
     );
   }
 
-  static InputDecoration _getInputDecoration(BuildContext context,
-      [String? label, IconData? icon]) {
+  static InputDecoration _getInputDecoration(
+    BuildContext context, [
+    String? label,
+    IconData? icon,
+  ]) {
     return InputDecoration(
       hintText: label,
       hintStyle: label != null

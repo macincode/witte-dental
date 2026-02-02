@@ -76,7 +76,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                       icon: Icons.group,
                       count: '434',
                       onTap: () {
-                        Get.toNamed(AppConstants.inventorylistManagement);
+                        Get.toNamed(AppConstants.inventoryListManagement);
                       },
                     ),
                     const DashboardCard(

@@ -770,7 +770,9 @@ class AddDoctorHelper {
                           child: TextField(
                             maxLines: 2,
                             decoration: _getInputDecoration(
-                                context, 'Enter awards and achievements'),
+                              context,
+                              'Enter awards and achievements',
+                            ),
                           ),
                         ),
                         _buildFormField(
@@ -778,8 +780,10 @@ class AddDoctorHelper {
                           'Experience Journey',
                           child: TextField(
                             maxLines: 2,
-                            decoration: _getInputDecoration(context,
-                                'Describe your professional journey and experience'),
+                            decoration: _getInputDecoration(
+                              context,
+                              'Describe your professional journey and experience',
+                            ),
                           ),
                         ),
                         _buildFormField(
@@ -797,7 +801,9 @@ class AddDoctorHelper {
                           isRequired: true,
                           child: TextField(
                             decoration: _getInputDecoration(
-                                context, 'Confirm password'),
+                              context,
+                              'Confirm password',
+                            ),
                           ),
                         ),
                         const SizedBox(height: 24),
@@ -932,8 +938,11 @@ class AddDoctorHelper {
     );
   }
 
-  static InputDecoration _getInputDecoration(BuildContext context,
-      [String? label, IconData? icon]) {
+  static InputDecoration _getInputDecoration(
+    BuildContext context, [
+    String? label,
+    IconData? icon,
+  ]) {
     return InputDecoration(
       hintText: label,
       hintStyle: label != null

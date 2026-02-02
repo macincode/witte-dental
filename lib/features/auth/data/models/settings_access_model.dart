@@ -4,24 +4,6 @@ part 'settings_access_model.g.dart';
 
 @HiveType(typeId: 5)
 class SettingsAccess extends HiveObject {
-  @HiveField(0)
-  final bool saasManagement;
-
-  @HiveField(1)
-  final bool businessManagement;
-
-  @HiveField(2)
-  final bool hospitalManagement;
-
-  @HiveField(3)
-  final bool subscriptionManagement;
-
-  @HiveField(4)
-  final bool teamManagement;
-
-  @HiveField(5)
-  final bool membershipPlans;
-
   SettingsAccess({
     required this.saasManagement,
     required this.businessManagement,
@@ -41,4 +23,21 @@ class SettingsAccess extends HiveObject {
       membershipPlans: json['membership_plans'],
     );
   }
+  @HiveField(0)
+  final bool saasManagement;
+
+  @HiveField(1)
+  final bool businessManagement;
+
+  @HiveField(2)
+  final bool hospitalManagement;
+
+  @HiveField(3)
+  final bool subscriptionManagement;
+
+  @HiveField(4)
+  final bool teamManagement;
+
+  @HiveField(5)
+  final bool membershipPlans;
 }

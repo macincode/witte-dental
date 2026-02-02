@@ -32,11 +32,23 @@ class AdminDashboard extends StatelessWidget {
                     const SizedBox(width: 10),
                     _buildCard(context, 'Total Patients', Icons.person, '20'),
                     _buildCard(
-                        context, 'Appointments', Icons.calendar_today, '15'),
+                      context,
+                      'Appointments',
+                      Icons.calendar_today,
+                      '15',
+                    ),
                     _buildCard(
-                        context, 'Treatments', Icons.medical_services, '8'),
+                      context,
+                      'Treatments',
+                      Icons.medical_services,
+                      '8',
+                    ),
                     _buildCard(
-                        context, 'Revenue', Icons.attach_money, r'$2,500'),
+                      context,
+                      'Revenue',
+                      Icons.attach_money,
+                      r'$2,500',
+                    ),
                     _buildCard(context, 'Staff', Icons.group, '5'),
                     _buildCard(context, 'Equipment', Icons.build, '12'),
                     _buildCard(context, 'Reports', Icons.analytics, '3'),
@@ -52,7 +64,11 @@ class AdminDashboard extends StatelessWidget {
   }
 
   Widget _buildCard(
-      BuildContext context, String title, IconData icon, String value) {
+    BuildContext context,
+    String title,
+    IconData icon,
+    String value,
+  ) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: themeController.currentThemeMode == AppThemeMode.dark ||
