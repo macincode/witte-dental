@@ -3,10 +3,7 @@ import 'package:get/get.dart';
 import 'package:witte_dental_pms/core/constants/app_constants.dart';
 import 'package:witte_dental_pms/core/controllers/theme_controller.dart';
 import 'package:witte_dental_pms/features/admin/details_card.dart';
-import 'package:witte_dental_pms/features/admin/doctorList_management.dart';
 import 'package:witte_dental_pms/features/admin/inventoryList_management.dart';
-import 'package:witte_dental_pms/features/admin/patientList_management.dart';
-import 'package:witte_dental_pms/features/admin/staffList_management.dart';
 
 import '../shared/widgets/network_aware_widget.dart';
 
@@ -38,7 +35,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                 context,
                 'Inventory Management',
                 'Manage and track all equipment and supplies Add Item',
-                actionButton: Container(
+                actionButton: DecoratedBox(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
@@ -52,15 +49,17 @@ class _InventoryScreenState extends State<InventoryScreen> {
                   ),
                   child: ElevatedButton.icon(
                     onPressed: () {
-                                   AddInventoryHelper.addInventorySheet(context);
-                                  },
+                      AddInventoryHelper.addInventorySheet(context);
+                    },
                     icon: const Icon(Icons.person_add, size: 18),
                     label: const Text('Add Items'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent,
                       shadowColor: Colors.transparent,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
                     ),
                   ),
                 ),

@@ -101,12 +101,10 @@ class _LoginPageState extends State<LoginPage> {
                     width: MediaQuery.of(context).size.width * 0.5,
                     height: 100,
                     decoration: const BoxDecoration(),
-                    child:  Image.asset(
-                        
-                             'assets/images/login_logo.png',
-                        fit: BoxFit.contain,
-                      ),
-                    
+                    child: Image.asset(
+                      'assets/images/login_logo.png',
+                      fit: BoxFit.contain,
+                    ),
                   ),
                   // const SizedBox(height: 5),
 //                 ShaderMask(
@@ -288,13 +286,12 @@ class _LoginPageState extends State<LoginPage> {
                     () => SizedBox(
                       width: double.infinity,
                       height: 48,
-                      child: Container(
+                      child: DecoratedBox(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
-                             
                               Theme.of(context).colorScheme.secondary,
-                               Theme.of(context).colorScheme.primary,
+                              Theme.of(context).colorScheme.primary,
                             ],
                             begin: Alignment.bottomLeft,
                             end: Alignment.topRight,
@@ -321,7 +318,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           child: authController.isLoading
-                              ? SizedBox(
+                              ? const SizedBox(
                                   height: 20,
                                   width: 20,
                                   child: CircularProgressIndicator(
@@ -333,7 +330,7 @@ class _LoginPageState extends State<LoginPage> {
                                 )
                               : Text(
                                   'login'.tr,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 16,
                                     color: Colors.white,

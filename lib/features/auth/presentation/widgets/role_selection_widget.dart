@@ -84,7 +84,6 @@ class RoleSelectionWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          
           color: isSelected
               ? color.withOpacity(0.1)
               : Theme.of(context)

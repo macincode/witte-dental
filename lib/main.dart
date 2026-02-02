@@ -2,6 +2,11 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:witte_dental_pms/core/services/dio_service.dart';
+import 'package:witte_dental_pms/core/storage/hive_service.dart';
+import 'package:witte_dental_pms/features/auth/data/api/auth_api_service.dart';
+import 'package:witte_dental_pms/features/auth/domain/repositories/auth_repository.dart';
+import 'package:witte_dental_pms/features/admin/data/services/admin_api_service.dart';
 import 'package:witte_dental_pms/features/shared/widgets/global_widgets.dart';
 
 import 'app/routes/app_pages.dart';
@@ -47,12 +52,23 @@ Future<void> _initializeServices() async {
     // Initialize Hive
     await HiveConfig.init();
 
+    // Initialize HiveService after HiveConfig
+    final hiveService = HiveService();
+    await hiveService.init();
+
     // Initialize GetX dependencies
     Get
+      ..put(DioService())
+      ..put(hiveService)
+      ..put(AuthApiService(Get.find()))
+      ..put(AdminApiService(Get.find()))
+      ..put(AuthRepository(Get.find(), Get.find()))
       ..put(NetworkController())
       ..put(ThemeController())
       ..put(LanguageController())
-      ..put(AuthController());
+      ..put(AuthController(Get.find()));
+
+    Get.find<AuthController>().checkAuthStatus();
 
     // Set system UI overlay style
     SystemChrome.setSystemUIOverlayStyle(

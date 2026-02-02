@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:witte_dental_pms/core/controllers/theme_controller.dart';
 
-import '../../core/controllers/language_controller.dart';
-import '../auth/presentation/controllers/auth_controller.dart';
 import '../shared/widgets/network_aware_widget.dart';
-import '../shared/widgets/role_based_drawer.dart';
-import '../shared/widgets/theme_aware_app_bar.dart';
-import 'details_card.dart';
 
 class AdminDashboard extends StatelessWidget {
   AdminDashboard({super.key});
@@ -18,12 +13,12 @@ class AdminDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return NetworkAwareWidget(
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         // drawer: const RoleBasedDrawer(),
         appBar: AppBar(
           title: Text('Dashboard'.tr),
         ),
-        body: Container(
+        body: SizedBox(
           width: double.infinity,
           // padding: const EdgeInsets.all(20),
           child: Column(
@@ -32,21 +27,23 @@ class AdminDashboard extends StatelessWidget {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  spacing:10,
+                  spacing: 10,
                   children: [
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     _buildCard(context, 'Total Patients', Icons.person, '20'),
-                    _buildCard(context, 'Appointments', Icons.calendar_today, '15'),
-                    _buildCard(context, 'Treatments', Icons.medical_services, '8'),
-                    _buildCard(context, 'Revenue', Icons.attach_money, '\$2,500'),
+                    _buildCard(
+                        context, 'Appointments', Icons.calendar_today, '15'),
+                    _buildCard(
+                        context, 'Treatments', Icons.medical_services, '8'),
+                    _buildCard(
+                        context, 'Revenue', Icons.attach_money, r'$2,500'),
                     _buildCard(context, 'Staff', Icons.group, '5'),
                     _buildCard(context, 'Equipment', Icons.build, '12'),
                     _buildCard(context, 'Reports', Icons.analytics, '3'),
-                     SizedBox(width: 10),
+                    const SizedBox(width: 10),
                   ],
                 ),
-              )
-              
+              ),
             ],
           ),
         ),
@@ -54,9 +51,10 @@ class AdminDashboard extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(BuildContext context, String title, IconData icon, String value) {
+  Widget _buildCard(
+      BuildContext context, String title, IconData icon, String value) {
     return Container(
-       padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: themeController.currentThemeMode == AppThemeMode.dark ||
               (themeController.currentThemeMode == AppThemeMode.system &&
                   Theme.of(context).brightness == Brightness.dark)
@@ -93,33 +91,31 @@ class AdminDashboard extends StatelessWidget {
                 ),
               ],
             ),
-      child: Row(children: [
-        Container(
-                padding: const EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Theme.of(context)
-                          .colorScheme
-                          .primary
-                          .withOpacity(0.06),
-                      Theme.of(context).colorScheme.secondary.withOpacity(0.3),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Icon(
-                  icon,
-                  size: 32,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Theme.of(context).colorScheme.primary.withOpacity(0.06),
+                  Theme.of(context).colorScheme.secondary.withOpacity(0.3),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
-              SizedBox(width: 20),
-         Column(
-          children: [
-                   Text(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Icon(
+              icon,
+              size: 32,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+          ),
+          const SizedBox(width: 20),
+          Column(
+            children: [
+              Text(
                 title,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Theme.of(context).colorScheme.onSecondary,
@@ -127,21 +123,20 @@ class AdminDashboard extends StatelessWidget {
                     ),
                 textAlign: TextAlign.center,
               ),
-            
-                       
-            const SizedBox(height: 2,),
-                        
-                Text(
+              const SizedBox(
+                height: 2,
+              ),
+              Text(
                 value,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       color: Theme.of(context).colorScheme.onPrimary,
                       fontWeight: FontWeight.bold,
                     ),
-              ) ,   
-              
-          ],
-         )
-      ],)
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

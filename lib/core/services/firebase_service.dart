@@ -119,7 +119,7 @@ class FirebaseService {
         'min_app_version': '1.0.0',
         'feature_chat_enabled': true,
         'feature_telemedicine_enabled': false,
-        'api_base_url': 'https://api.wittedental.com',
+        'api_base_url': 'https://witteapp..macincode.com/api',
       });
 
       await _remoteConfig!.fetchAndActivate();

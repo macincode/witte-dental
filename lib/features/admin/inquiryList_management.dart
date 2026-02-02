@@ -11,7 +11,7 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: const Text('Inquiry List'),
         elevation: 0,
@@ -147,7 +147,7 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
                                 // borderRadius: BorderRadius.circular(10),
                               ),
                               child: Text(
-                                '${categoryName[0]}',
+                                categoryName[0],
                                 style: TextStyle(
                                   color: categoryColor,
                                   fontWeight: FontWeight.w600,
@@ -155,7 +155,7 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Expanded(
@@ -368,7 +368,7 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
                           child: Row(
                             children: [
                               Expanded(
-                                child: Container(
+                                child: DecoratedBox(
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
                                       colors: [
@@ -396,17 +396,24 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
                                         categoryServices,
                                       );
                                     },
-                                    icon: const Icon(Icons.visibility_outlined,
-                                        size: 16, color: Colors.white),
-                                    label: const Text('View Details',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600)),
+                                    icon: const Icon(
+                                      Icons.visibility_outlined,
+                                      size: 16,
+                                      color: Colors.white,
+                                    ),
+                                    label: const Text(
+                                      'View Details',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.transparent,
                                       shadowColor: Colors.transparent,
                                       padding: const EdgeInsets.symmetric(
-                                          vertical: 12),
+                                        vertical: 12,
+                                      ),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10),
                                       ),
@@ -964,14 +971,17 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
     );
   }
 
-  void showInquiryDetails(BuildContext context, String patientName,
-      String number, String service) {
+  void showInquiryDetails(
+    BuildContext context,
+    String patientName,
+    String number,
+    String service,
+  ) {
     showDialog(
       context: context,
-      barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
-          insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+          insetPadding: const EdgeInsets.symmetric(horizontal: 20),
           // contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
           // titlePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
           // actionsPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
@@ -981,9 +991,11 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           title: Row(
             children: [
-              Text('Inquiry Details',
-                  style: TextStyle(fontWeight: FontWeight.w600)),
-              Spacer(),
+              const Text(
+                'Inquiry Details',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              const Spacer(),
               IconButton(
                 onPressed: () => Navigator.of(context).pop(),
                 icon: Icon(
@@ -991,11 +1003,11 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
                   color: Theme.of(context).colorScheme.onSecondary,
                 ),
                 padding: EdgeInsets.zero,
-                constraints: BoxConstraints(),
+                constraints: const BoxConstraints(),
               ),
             ],
           ),
-          content: Container(
+          content: SizedBox(
             width: MediaQuery.of(context).size.width,
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -1004,10 +1016,8 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
                 _buildDetailRow('Patient Name:', patientName),
                 _buildDetailRow('Mobile Number:', number),
                 _buildDetailRow('Service:', service),
-               
                 _buildDetailRow('Appointment Date:', 'Today'),
-               
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
                   'Inquiry Message:-',
                   style: Theme.of(context)
@@ -1015,20 +1025,19 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
                       .labelLarge
                       ?.copyWith(fontWeight: FontWeight.w600),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Container(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.background,
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
                     children: [
                       _buildDetailRow('', 'Test Entry'),
-                      
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -1038,8 +1047,9 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
               child: Text(
                 'Close',
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.w600),
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
             ),
           ],
@@ -1063,13 +1073,14 @@ class _InquirylistManagementState extends State<InquirylistManagement> {
                 ?.copyWith(fontWeight: FontWeight.w600),
           ),
           Expanded(
-              child: Text(
-            value,
-            style: Theme.of(context)
-                .textTheme
-                .displayMedium
-                ?.copyWith(fontWeight: FontWeight.w500),
-          )),
+            child: Text(
+              value,
+              style: Theme.of(context)
+                  .textTheme
+                  .displayMedium
+                  ?.copyWith(fontWeight: FontWeight.w500),
+            ),
+          ),
         ],
       ),
     );

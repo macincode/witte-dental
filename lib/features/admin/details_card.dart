@@ -18,16 +18,14 @@ class DashboardCard extends StatelessWidget {
   static Widget buildHeaderCard(
     BuildContext context,
     String title,
-    String subtitle, 
-    {
+    String subtitle, {
     Widget? actionButton,
-  }
-  ) {
+  }) {
     final themeController = Get.find<ThemeController>();
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       decoration: themeController.currentThemeMode == AppThemeMode.dark ||
               (themeController.currentThemeMode == AppThemeMode.system &&
                   Theme.of(context).brightness == Brightness.dark)
@@ -67,22 +65,22 @@ class DashboardCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-            Text(
-              title,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              subtitle,
-              style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onSecondary,
-                  ),
-            ),
-              const SizedBox(height: 8),
-            if (actionButton != null) actionButton,
+          Text(
+            title,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            subtitle,
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onSecondary,
+                ),
+          ),
+          const SizedBox(height: 8),
+          if (actionButton != null) actionButton,
         ],
       ),
     );
@@ -143,10 +141,7 @@ class DashboardCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Theme.of(context)
-                          .colorScheme
-                          .primary
-                          .withOpacity(0.06),
+                      Theme.of(context).colorScheme.primary.withOpacity(0.06),
                       Theme.of(context).colorScheme.secondary.withOpacity(0.3),
                     ],
                     begin: Alignment.topLeft,
@@ -160,16 +155,15 @@ class DashboardCard extends StatelessWidget {
                   color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
-               const SizedBox(height: 8),
+              const SizedBox(height: 8),
               if (count.isNotEmpty) ...[
-               
-              Text(
-                count,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontWeight: FontWeight.bold,
-                    ),
-              ) ,
+                Text(
+                  count,
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
               ] else ...[
                 const SizedBox(height: 10),
               ],

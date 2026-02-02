@@ -4,15 +4,15 @@ import 'package:witte_dental_pms/features/admin/appointment_screen.dart';
 import 'package:witte_dental_pms/features/admin/billings.dart';
 import 'package:witte_dental_pms/features/admin/doctorList_management.dart';
 import 'package:witte_dental_pms/features/admin/doctor_screen.dart';
-import 'package:witte_dental_pms/features/admin/home_screen.dart';
-import 'package:witte_dental_pms/features/admin/inquiryList_management.dart';
 import 'package:witte_dental_pms/features/admin/inquiries_screen.dart';
+import 'package:witte_dental_pms/features/admin/inquiryList_management.dart';
 import 'package:witte_dental_pms/features/admin/inventoryList_management.dart';
 import 'package:witte_dental_pms/features/admin/inventory_screen.dart';
 import 'package:witte_dental_pms/features/admin/patientList_management.dart';
 import 'package:witte_dental_pms/features/admin/patient_screen.dart';
 import 'package:witte_dental_pms/features/admin/pharmacyList_management.dart';
 import 'package:witte_dental_pms/features/admin/pharmacy_screen.dart';
+import 'package:witte_dental_pms/features/admin/presentation/pages/admin_home_screen.dart';
 import 'package:witte_dental_pms/features/admin/staffList_management.dart';
 import 'package:witte_dental_pms/features/admin/staff_screen.dart';
 
@@ -64,7 +64,7 @@ class AppPages {
     ),
 
     // Admin routes
-     GetPage(
+    GetPage(
       name: AppConstants.adminHomeScreen,
       page: () => const AdminHomeScreen(),
     ),
@@ -123,7 +123,7 @@ class AppPages {
       page: () => const StafflistManagement(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
-     GetPage(
+    GetPage(
       name: AppConstants.inventoryScreen,
       page: () => const InventoryScreen(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],

@@ -3,11 +3,11 @@ class AppConstants {
   static const String appName = 'WITTE';
   static const String appVersion = '1.0.0';
 
-  // User Roles
-  static const String roleDoctor = 'doctor';
-  static const String rolePatient = 'patient';
-  static const String roleAdmin = 'admin';
-  static const String roleStaff = 'staff';
+  // User Roles (matching API role_id values)
+  static const String rolePatient = 'patient'; // role_id: 1
+  static const String roleAdmin = 'admin'; // role_id: 2
+  static const String roleDoctor = 'doctor'; // role_id: 3
+  static const String roleStaff = 'staff'; // role_id: 4
 
   // Routes
   static const String splashRoute = '/splash';
@@ -27,7 +27,8 @@ class AppConstants {
   static const String inquiryScreen = '/admin_inquiries';
   static const String inquirylistManagement = '/admin_inquiry-management';
   static const String appointmentScreen = '/admin_appointments';
-  static const String appointmentlistManagement = '/admin_appointments-management';
+  static const String appointmentlistManagement =
+      '/admin_appointments-management';
   static const String patientScreen = '/admin_patients';
   static const String patientlistManagement = '/admin_patients-management';
   static const String doctorScreen = '/admin_doctors';

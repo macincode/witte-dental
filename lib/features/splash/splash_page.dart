@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:witte_dental_pms/features/auth/presentation/controllers/auth_controller.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../core/storage/hive_service.dart';
@@ -109,18 +110,26 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       _ctaController.forward();
 
       // Wait for animations to be visible
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 3));
 
-      // Check if onboarding is completed
-      final onboardingCompleted =
-          HiveService.getSetting<bool>('onboarding_completed') ?? false;
+      // Check authentication status
+      final authController = Get.find<AuthController>();
+      authController.checkAuthStatus();
 
-      // Navigate to appropriate screen
-      if (mounted) {
-        if (onboardingCompleted) {
-          Get.offAllNamed(AppConstants.loginRoute);
-        } else {
-          Get.offAllNamed(AppConstants.onboardingRoute);
+      if (authController.isLoggedIn && authController.currentUser != null) {
+        // User is logged in, navigate based on role
+        authController.navigateBasedOnRole(authController.userType);
+      } else {
+        // User not logged in, check onboarding
+        final onboardingCompleted =
+            HiveService.getSetting<bool>('onboarding_completed') ?? false;
+
+        if (mounted) {
+          if (onboardingCompleted) {
+            Get.offAllNamed(AppConstants.loginRoute);
+          } else {
+            Get.offAllNamed(AppConstants.onboardingRoute);
+          }
         }
       }
     } catch (e) {

@@ -35,7 +35,7 @@ class _PatientScreenState extends State<PatientScreen> {
                 context,
                 'Patient Management',
                 'Manage and track all patient records',
-                actionButton: Container(
+                actionButton: DecoratedBox(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
@@ -49,15 +49,17 @@ class _PatientScreenState extends State<PatientScreen> {
                   ),
                   child: ElevatedButton.icon(
                     onPressed: () {
-                                   AddPatientHelper.addPatientSheet(context);
-                                  },
+                      AddPatientHelper.addPatientSheet(context);
+                    },
                     icon: const Icon(Icons.person_add, size: 18),
                     label: const Text('Add Patient'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent,
                       shadowColor: Colors.transparent,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
                     ),
                   ),
                 ),

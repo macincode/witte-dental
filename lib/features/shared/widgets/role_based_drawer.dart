@@ -16,7 +16,9 @@ class RoleBasedDrawer extends StatelessWidget {
       final user = authController.currentUser;
       if (user == null) return const SizedBox.shrink();
 
-      final navigationItems = RoleBasedNavigation.getNavigationItems(user.role);
+      final navigationItems = RoleBasedNavigation.getNavigationItems(
+        authController.getRoleFromRoleId(user.roleId),
+      );
 
       return SizedBox(
         width: 260,
@@ -78,7 +80,10 @@ class RoleBasedDrawer extends StatelessWidget {
                                   ),
                                 ),
                                 child: Text(
-                                  _getRoleDisplayName(user.role),
+                                  _getRoleDisplayName(
+                                    authController
+                                        .getRoleFromRoleId(user.roleId),
+                                  ),
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 10,
@@ -112,7 +117,10 @@ class RoleBasedDrawer extends StatelessWidget {
                                       ? user.name[0].toUpperCase()
                                       : 'U',
                                   style: TextStyle(
-                                    color: _getRoleColor(user.role),
+                                    color: _getRoleColor(
+                                      authController
+                                          .getRoleFromRoleId(user.roleId),
+                                    ),
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -126,13 +134,19 @@ class RoleBasedDrawer extends StatelessWidget {
                                 width: 18,
                                 height: 18,
                                 decoration: BoxDecoration(
-                                  color: _getRoleColor(user.role),
+                                  color: _getRoleColor(
+                                    authController
+                                        .getRoleFromRoleId(user.roleId),
+                                  ),
                                   shape: BoxShape.circle,
                                   border:
                                       Border.all(color: Colors.white, width: 2),
                                 ),
                                 child: Icon(
-                                  _getRoleIcon(user.role),
+                                  _getRoleIcon(
+                                    authController
+                                        .getRoleFromRoleId(user.roleId),
+                                  ),
                                   color: Colors.white,
                                   size: 10,
                                 ),

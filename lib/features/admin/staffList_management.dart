@@ -11,7 +11,7 @@ class _StafflistManagementState extends State<StafflistManagement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: const Text('Staff List'),
         elevation: 0,
@@ -147,7 +147,7 @@ class _StafflistManagementState extends State<StafflistManagement> {
                                 // borderRadius: BorderRadius.circular(10),
                               ),
                               child: Text(
-                                '${categoryName[0]}',
+                                categoryName[0],
                                 style: TextStyle(
                                   color: categoryColor,
                                   fontWeight: FontWeight.w600,
@@ -155,7 +155,7 @@ class _StafflistManagementState extends State<StafflistManagement> {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Expanded(
@@ -219,7 +219,9 @@ class _StafflistManagementState extends State<StafflistManagement> {
                                         ?.copyWith(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 10,
-                                          color: Theme.of(context).colorScheme.primary,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
                                         ),
                                   ),
                                 ),
@@ -359,7 +361,6 @@ class _StafflistManagementState extends State<StafflistManagement> {
                                   ],
                                 ),
                               ),
-                              
                             ],
                           ),
                         ),
@@ -367,9 +368,8 @@ class _StafflistManagementState extends State<StafflistManagement> {
                         Row(
                           spacing: 5,
                           children: [
-                            
                             Expanded(
-                              child: Container(
+                              child: DecoratedBox(
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
@@ -390,19 +390,26 @@ class _StafflistManagementState extends State<StafflistManagement> {
                                 ),
                                 child: ElevatedButton.icon(
                                   onPressed: () {
-                                   AddStaffHelper.addStaffSheet(context);
+                                    AddStaffHelper.addStaffSheet(context);
                                   },
-                                  icon: const Icon(Icons.edit,
-                                      size: 16, color: Colors.white),
-                                  label: const Text('Edit',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600)),
+                                  icon: const Icon(
+                                    Icons.edit,
+                                    size: 16,
+                                    color: Colors.white,
+                                  ),
+                                  label: const Text(
+                                    'Edit',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent,
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: 12),
+                                      vertical: 12,
+                                    ),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),
@@ -411,7 +418,7 @@ class _StafflistManagementState extends State<StafflistManagement> {
                               ),
                             ),
                             Expanded(
-                              child: Container(
+                              child: DecoratedBox(
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
@@ -438,17 +445,24 @@ class _StafflistManagementState extends State<StafflistManagement> {
                                 ),
                                 child: ElevatedButton.icon(
                                   onPressed: () {},
-                                  icon: const Icon(Icons.delete,
-                                      size: 16, color: Colors.white),
-                                  label: const Text('Delete',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600)),
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    size: 16,
+                                    color: Colors.white,
+                                  ),
+                                  label: const Text(
+                                    'Delete',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent,
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: 12),
+                                      vertical: 12,
+                                    ),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),
@@ -469,230 +483,240 @@ class _StafflistManagementState extends State<StafflistManagement> {
       ),
     );
   }
-   
-  
 }
 
-
-class AddStaffHelper{
-
-   static void addStaffSheet(BuildContext context) {
+class AddStaffHelper {
+  static void addStaffSheet(BuildContext context) {
     showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        backgroundColor: Colors.transparent,
-        builder: (context) => Padding(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom,
-              ),
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.85,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(24),
-                    topRight: Radius.circular(24),
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.85,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(24),
+              topRight: Radius.circular(24),
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(2),
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      Container(
-                        width: 40,
-                        height: 4,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(2),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .primary
+                            .withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      Row(
-                        children: [
-                          DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primary
-                                  .withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: IconButton(
-                              onPressed: () => Navigator.pop(context),
-                              icon: Icon(
-                                Icons.arrow_back,
-                                color: Theme.of(context).colorScheme.primary,
+                    ),
+                    const SizedBox(width: 16),
+                    Text(
+                      'Add Staff',
+                      style:
+                          Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                fontWeight: FontWeight.w600,
                               ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        _buildFormField(
+                          context,
+                          'First Name',
+                          isRequired: true,
+                          child: TextField(
+                            decoration: _getInputDecoration(context),
+                          ),
+                        ),
+                        _buildFormField(
+                          context,
+                          'Last Name',
+                          isRequired: true,
+                          child: TextField(
+                            decoration: _getInputDecoration(context),
+                          ),
+                        ),
+                        _buildFormField(
+                          context,
+                          'Mobile Number',
+                          isRequired: true,
+                          child: TextField(
+                            decoration: _getInputDecoration(
+                              context,
+                              'Enter mobile number',
+                              Icons.phone,
                             ),
                           ),
-                          const SizedBox(width: 16),
-                          Text(
-                            'Add Staff',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineSmall
-                                ?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                ),
+                        ),
+                        _buildFormField(
+                          context,
+                          'Qualification',
+                          isRequired: true,
+                          child: TextField(
+                            decoration: _getInputDecoration(
+                              context,
+                              'Enter qualification',
+                            ),
                           ),
-                        ],
-                      ),
-                      const SizedBox(height: 24),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              
-                              _buildFormField(
+                        ),
+                        _buildFormField(
+                          context,
+                          'Staff Category',
+                          isRequired: true,
+                          child: TextField(
+                            decoration: _getInputDecoration(
+                              context,
+                              'Enter specialist area',
+                            ),
+                          ),
+                        ),
+                        _buildFormField(
+                          context,
+                          'Email',
+                          isRequired: true,
+                          child: TextField(
+                            decoration: _getInputDecoration(
+                              context,
+                              'Enter mobile number',
+                              Icons.phone,
+                            ),
+                          ),
+                        ),
+                        _buildFormField(
+                          context,
+                          'Date of Birth',
+                          isRequired: true,
+                          child: TextField(
+                            decoration: _getInputDecoration(
+                              context,
+                              'MM/DD/YYYY',
+                              Icons.calendar_today,
+                            ),
+                            readOnly: true,
+                            onTap: () async {
+                              await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime.now()
+                                    .add(const Duration(days: 365)),
+                              );
+                            },
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: _buildFormField(
                                 context,
-                                'First Name',
                                 isRequired: true,
+                                'Age',
                                 child: TextField(
-                                  decoration: _getInputDecoration(context),
+                                  decoration: _getInputDecoration(
+                                    context,
+                                  ),
                                 ),
                               ),
-                              _buildFormField(
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: _buildFormField(
                                 context,
-                                'Last Name',
+                                'Gender',
                                 isRequired: true,
-                                child: TextField(
-                                  decoration: _getInputDecoration(context),
-                                ),
-                              ),
-                              _buildFormField(context,
-                                
-                                'Mobile Number',
-                                isRequired: true,
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                      'Enter mobile number', Icons.phone),
-                                ),
-                              ),
-                              _buildFormField(context,
-                                
-                                'Qualification',
-                                isRequired: true,
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                      'Enter qualification'),
-                                ),
-                              ),
-                              _buildFormField(context,
-                                
-                                'Staff Category',
-                                isRequired: true,
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                      'Enter specialist area'),
-                                ),
-                              ),
-                              _buildFormField(context,
-                                
-                                'Email',
-                                isRequired: true,
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                      'Enter mobile number', Icons.phone),
-                                ),
-                              ),
-                             
-                              _buildFormField(context,
-                                
-                                'Date of Birth',
-                                isRequired: true,
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                    'MM/DD/YYYY',
-                                    Icons.calendar_today,
+                                child: DropdownButtonFormField<String>(
+                                  decoration: _getInputDecoration(
+                                    context,
                                   ),
-                                  readOnly: true,
-                                  onTap: () async {
-                                    await showDatePicker(
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime(1900),
-                                      lastDate: DateTime.now()
-                                          .add(const Duration(days: 365)),
-                                    );
-                                  },
+                                  items: ['Male', 'Female', 'Others']
+                                      .map(
+                                        (e) => DropdownMenuItem(
+                                          value: e,
+                                          child: Text(e),
+                                        ),
+                                      )
+                                      .toList(),
+                                  onChanged: (value) {},
                                 ),
                               ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: _buildFormField(context,
-                                      
-                                      isRequired: true,
-                                      'Age',
-                                      child: TextField(
-                                        decoration: _getInputDecoration(context,),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: _buildFormField(context,
-                                      
-                                      'Gender',
-                                      isRequired: true,
-                                      child: DropdownButtonFormField<String>(
-                                        decoration: _getInputDecoration(context,),
-                                        items: ['Male', 'Female', 'Others']
-                                            .map(
-                                              (e) => DropdownMenuItem(
-                                                value: e,
-                                                child: Text(e),
-                                              ),
-                                            )
-                                            .toList(),
-                                        onChanged: (value) {},
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              _buildFormField(context,
-                                
-                                'Aadhar Number',
-                                isRequired: true,
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                      'Enter Aadhar Number'),
-                                ),
-                              ),
-                              _buildFormField(context,
-                                
-                                'Address',
-                                isRequired: true,
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                      'Enter Address'),
-                                ),
-                              ),
-                              
-                              _buildFormField(context,
-                                
-                                'Password',
-                                isRequired: true,
-                                child: TextField(
-                                  
-                                  decoration: _getInputDecoration(context,'Enter password'),
-                                ),
-                              ),
-                              _buildFormField(context,
-                                
-                                'Confirm Password',
-                                isRequired: true,
-                                child: TextField(
-                                  
-                                  decoration: _getInputDecoration(context,'Confirm password'),
-                                ),
-                              ),
-                              const SizedBox(height: 24),
-                              Row(
-                                children: [
-                                  Expanded(
-                              child: Container(
+                            ),
+                          ],
+                        ),
+                        _buildFormField(
+                          context,
+                          'Aadhar Number',
+                          isRequired: true,
+                          child: TextField(
+                            decoration: _getInputDecoration(
+                              context,
+                              'Enter Aadhar Number',
+                            ),
+                          ),
+                        ),
+                        _buildFormField(
+                          context,
+                          'Address',
+                          isRequired: true,
+                          child: TextField(
+                            decoration: _getInputDecoration(
+                              context,
+                              'Enter Address',
+                            ),
+                          ),
+                        ),
+                        _buildFormField(
+                          context,
+                          'Password',
+                          isRequired: true,
+                          child: TextField(
+                            decoration:
+                                _getInputDecoration(context, 'Enter password'),
+                          ),
+                        ),
+                        _buildFormField(
+                          context,
+                          'Confirm Password',
+                          isRequired: true,
+                          child: TextField(
+                            decoration: _getInputDecoration(
+                                context, 'Confirm password'),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: DecoratedBox(
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
@@ -709,24 +733,26 @@ class AddStaffHelper{
                                     end: Alignment.bottomRight,
                                   ),
                                   border: Border.all(
-                                      width: 0.5, color: Colors.grey),
+                                    width: 0.5,
+                                    color: Colors.grey,
+                                  ),
                                   borderRadius: BorderRadius.circular(50),
-                                  
                                 ),
                                 child: ElevatedButton.icon(
-                                  onPressed: () {
-                                    
-                                  },
-                                  
-                                  label: const Text('Cancel',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600)),
+                                  onPressed: () {},
+                                  label: const Text(
+                                    'Cancel',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent,
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: 16),
+                                      vertical: 16,
+                                    ),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(12),
                                     ),
@@ -734,56 +760,56 @@ class AddStaffHelper{
                                 ),
                               ),
                             ),
-                                  
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          colors: [
-                                            Theme.of(context)
-                                                .colorScheme
-                                                .secondary,
-                                            Theme.of(context)
-                                                .colorScheme
-                                                .primary,
-                                          ],
-                                          begin: Alignment.bottomLeft,
-                                          end: Alignment.topRight,
-                                        ),
-                                        borderRadius: BorderRadius.circular(50),
-                                      ),
-                                      child: ElevatedButton(
-                                        onPressed: () => Navigator.pop(context),
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.transparent,
-                                          shadowColor: Colors.transparent,
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 16),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                          ),
-                                        ),
-                                        child: const Text('Submit'),
-                                      ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Theme.of(context).colorScheme.secondary,
+                                      Theme.of(context).colorScheme.primary,
+                                    ],
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.topRight,
+                                  ),
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                                child: ElevatedButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent,
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 16,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
                                     ),
                                   ),
-                                ],
+                                  child: const Text('Submit'),
+                                ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ));
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
-  static Widget _buildFormField( BuildContext context,String title,
-      {required Widget child, bool isRequired = false}) {
+  static Widget _buildFormField(
+    BuildContext context,
+    String title, {
+    required Widget child,
+    bool isRequired = false,
+  }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       child: Column(
@@ -818,14 +844,16 @@ class AddStaffHelper{
     );
   }
 
-   static InputDecoration _getInputDecoration(BuildContext context,[String? label, IconData? icon]) {
+  static InputDecoration _getInputDecoration(BuildContext context,
+      [String? label, IconData? icon]) {
     return InputDecoration(
       hintText: label,
       hintStyle: label != null
           ? TextStyle(
               color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.5),
               fontSize: 14,
-              fontWeight: FontWeight.w600)
+              fontWeight: FontWeight.w600,
+            )
           : null,
       prefixIcon: icon != null
           ? Icon(
@@ -850,5 +878,4 @@ class AddStaffHelper{
       contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
     );
   }
-
 }

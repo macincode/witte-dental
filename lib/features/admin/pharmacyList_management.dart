@@ -8,8 +8,7 @@ class PharmacylistManagement extends StatefulWidget {
 }
 
 class _PharmacylistManagementState extends State<PharmacylistManagement> {
-
-   int? _selectedIndex;
+  int? _selectedIndex;
   final List<String> _options = [
     'All Items',
     'Materials',
@@ -21,7 +20,7 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: const Text('All Medicines List'),
         elevation: 0,
@@ -29,7 +28,6 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Row(
@@ -120,10 +118,6 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
                 ];
                 final categorynum = category[index % categories.length];
 
-               
-                
-
-
                 return Container(
                   margin: const EdgeInsets.only(bottom: 12),
                   decoration: BoxDecoration(
@@ -144,7 +138,6 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
                       children: [
                         Row(
                           children: [
-                            
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,16 +155,15 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
                                   // const SizedBox(height: 2),
                                   Row(
                                     children: [
-                                       
-                                  Text(
-                                    '•',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(
-                                          color: Colors.grey[600],
-                                        ),
-                                  ),
+                                      Text(
+                                        '•',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.copyWith(
+                                              color: Colors.grey[600],
+                                            ),
+                                      ),
                                       const SizedBox(width: 4),
                                       Text(
                                         categorynum,
@@ -188,141 +180,136 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
                                 ],
                               ),
                             ),
-                             Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.09),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'In Stock',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 10,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                        ),
                                   ),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .primary
-                                        .withOpacity(0.09),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      
-                                      Text(
-                                        'In Stock',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall
-                                            ?.copyWith(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 10,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                            
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 5),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.09),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Stock Available:',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 10,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondary,
+                                        ),
                                   ),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .primary
-                                        .withOpacity(0.09),
-                                    borderRadius: BorderRadius.circular(10),
+                                  Text(
+                                    '6',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 10,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                        ),
                                   ),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        'Stock Available:',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall
-                                            ?.copyWith(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 10,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onSecondary,
-                                            ),
-                                      ),
-                                      Text(
-                                        '6',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall
-                                            ?.copyWith(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 10,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
-                                            ),
-                                      ),
-                                    ],
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.09),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Price (₹):',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondary,
+                                        ),
                                   ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
+                                  Text(
+                                    '6',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                        ),
                                   ),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .primary
-                                        .withOpacity(0.09),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        'Price (₹):',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall
-                                            ?.copyWith(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 12,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onSecondary,
-                                            ),
-                                      ),
-                                      Text(
-                                        '6',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall
-                                            ?.copyWith(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
-                        
                         const SizedBox(height: 12),
                         Row(
-                        spacing: 10,
+                          spacing: 10,
                           children: [
-                            
                             Expanded(
-                              child: Container(
+                              child: DecoratedBox(
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
@@ -343,19 +330,26 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
                                 ),
                                 child: ElevatedButton.icon(
                                   onPressed: () {
-                                   AddPharmacyHelper.addPharmacySheet(context);
+                                    AddPharmacyHelper.addPharmacySheet(context);
                                   },
-                                  icon: const Icon(Icons.edit,
-                                      size: 16, color: Colors.white),
-                                  label: const Text('Edit',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600)),
+                                  icon: const Icon(
+                                    Icons.edit,
+                                    size: 16,
+                                    color: Colors.white,
+                                  ),
+                                  label: const Text(
+                                    'Edit',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent,
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: 12),
+                                      vertical: 12,
+                                    ),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),
@@ -364,7 +358,7 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
                               ),
                             ),
                             Expanded(
-                              child: Container(
+                              child: DecoratedBox(
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
@@ -391,17 +385,24 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
                                 ),
                                 child: ElevatedButton.icon(
                                   onPressed: () {},
-                                  icon: const Icon(Icons.delete,
-                                      size: 16, color: Colors.white),
-                                  label: const Text('Delete',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600)),
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    size: 16,
+                                    color: Colors.white,
+                                  ),
+                                  label: const Text(
+                                    'Delete',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent,
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: 12),
+                                      vertical: 12,
+                                    ),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),
@@ -422,130 +423,128 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
       ),
     );
   }
-   
-  
 }
 
-
-class AddPharmacyHelper{
-
-   static void addPharmacySheet(BuildContext context) {
+class AddPharmacyHelper {
+  static void addPharmacySheet(BuildContext context) {
     showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        backgroundColor: Colors.transparent,
-        builder: (context) => Padding(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom,
-              ),
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.70,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(24),
-                    topRight: Radius.circular(24),
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.70,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(24),
+              topRight: Radius.circular(24),
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(2),
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      Container(
-                        width: 40,
-                        height: 4,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(2),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .primary
+                            .withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      Row(
-                        children: [
-                          DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primary
-                                  .withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: IconButton(
-                              onPressed: () => Navigator.pop(context),
-                              icon: Icon(
-                                Icons.arrow_back,
-                                color: Theme.of(context).colorScheme.primary,
+                    ),
+                    const SizedBox(width: 16),
+                    Text(
+                      'Add New Medicine',
+                      style:
+                          Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                fontWeight: FontWeight.w600,
                               ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        _buildFormField(
+                          context,
+                          'Category',
+                          isRequired: true,
+                          child: DropdownButtonFormField<String>(
+                            decoration: _getInputDecoration(
+                              context,
+                            ),
+                            items: ['Antibiotics', 'Steroids']
+                                .map(
+                                  (e) => DropdownMenuItem(
+                                    value: e,
+                                    child: Text(e),
+                                  ),
+                                )
+                                .toList(),
+                            onChanged: (value) {},
+                          ),
+                        ),
+                        _buildFormField(
+                          context,
+                          'Medicine Name',
+                          isRequired: true,
+                          child: TextField(
+                            decoration: _getInputDecoration(
+                                context, 'Enter medicine name'),
+                          ),
+                        ),
+                        _buildFormField(
+                          context,
+                          'Stock Quantity',
+                          isRequired: true,
+                          child: TextField(
+                            decoration: _getInputDecoration(
+                              context,
+                              'Enter stock quantity',
                             ),
                           ),
-                          const SizedBox(width: 16),
-                          Text(
-                            'Add New Medicine',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineSmall
-                                ?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                ),
+                        ),
+                        _buildFormField(
+                          context,
+                          'Price (₹) ',
+                          isRequired: true,
+                          child: TextField(
+                            decoration: _getInputDecoration(
+                              context,
+                              'Enter price',
+                            ),
                           ),
-                        ],
-                      ),
-                      const SizedBox(height: 24),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              
-                              _buildFormField(context,
-                                      
-                                      'Category',
-                                      isRequired: true,
-                                      child: DropdownButtonFormField<String>(
-                                        decoration: _getInputDecoration(context,),
-                                        items: ['Antibiotics', 'Steroids']
-                                            .map(
-                                              (e) => DropdownMenuItem(
-                                                value: e,
-                                                child: Text(e),
-                                              ),
-                                            )
-                                            .toList(),
-                                        onChanged: (value) {},
-                                      ),
-                                    ),
-                              _buildFormField(
-                                context,
-                                'Medicine Name',
-                                isRequired: true,
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,'Enter medicine name'),
-                                ),
-                              ),
-                              _buildFormField(context,
-                                
-                                'Stock Quantity',
-                                isRequired: true,
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                      'Enter stock quantity'),
-                                ),
-                              ),
-                              
-                              _buildFormField(context,
-                                
-                                'Price (₹) ',
-                                isRequired: true,
-                                child: TextField(
-                                  decoration: _getInputDecoration(context,
-                                      'Enter price'),
-                                ),
-                              ),
-                             
-                              const SizedBox(height: 24),
-                              Row(
-                                children: [
-                                  Expanded(
-                              child: Container(
+                        ),
+                        const SizedBox(height: 24),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: DecoratedBox(
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
@@ -562,24 +561,26 @@ class AddPharmacyHelper{
                                     end: Alignment.bottomRight,
                                   ),
                                   border: Border.all(
-                                      width: 0.5, color: Colors.grey),
+                                    width: 0.5,
+                                    color: Colors.grey,
+                                  ),
                                   borderRadius: BorderRadius.circular(50),
-                                  
                                 ),
                                 child: ElevatedButton.icon(
-                                  onPressed: () {
-                                    
-                                  },
-                                  
-                                  label: const Text('Cancel',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600)),
+                                  onPressed: () {},
+                                  label: const Text(
+                                    'Cancel',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent,
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: 16),
+                                      vertical: 16,
+                                    ),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(12),
                                     ),
@@ -587,56 +588,56 @@ class AddPharmacyHelper{
                                 ),
                               ),
                             ),
-                                  
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          colors: [
-                                            Theme.of(context)
-                                                .colorScheme
-                                                .secondary,
-                                            Theme.of(context)
-                                                .colorScheme
-                                                .primary,
-                                          ],
-                                          begin: Alignment.bottomLeft,
-                                          end: Alignment.topRight,
-                                        ),
-                                        borderRadius: BorderRadius.circular(50),
-                                      ),
-                                      child: ElevatedButton(
-                                        onPressed: () => Navigator.pop(context),
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.transparent,
-                                          shadowColor: Colors.transparent,
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 16),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                          ),
-                                        ),
-                                        child: const Text('Submit'),
-                                      ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Theme.of(context).colorScheme.secondary,
+                                      Theme.of(context).colorScheme.primary,
+                                    ],
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.topRight,
+                                  ),
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                                child: ElevatedButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent,
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 16,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
                                     ),
                                   ),
-                                ],
+                                  child: const Text('Submit'),
+                                ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ));
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
-  static Widget _buildFormField( BuildContext context,String title,
-      {required Widget child, bool isRequired = false}) {
+  static Widget _buildFormField(
+    BuildContext context,
+    String title, {
+    required Widget child,
+    bool isRequired = false,
+  }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       child: Column(
@@ -671,14 +672,16 @@ class AddPharmacyHelper{
     );
   }
 
-   static InputDecoration _getInputDecoration(BuildContext context,[String? label, IconData? icon]) {
+  static InputDecoration _getInputDecoration(BuildContext context,
+      [String? label, IconData? icon]) {
     return InputDecoration(
       hintText: label,
       hintStyle: label != null
           ? TextStyle(
               color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.5),
               fontSize: 14,
-              fontWeight: FontWeight.w600)
+              fontWeight: FontWeight.w600,
+            )
           : null,
       prefixIcon: icon != null
           ? Icon(
@@ -703,5 +706,4 @@ class AddPharmacyHelper{
       contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
     );
   }
-
 }
