@@ -58,7 +58,7 @@ Future<void> _initializeServices() async {
 
     // Initialize GetX dependencies
     Get
-      ..put(DioService())
+      ..put(ApiServices())
       ..put(hiveService)
       ..put(AuthApiService(Get.find()))
       ..put(AdminApiService(Get.find()))

@@ -2,11 +2,11 @@ import 'package:witte_dental_pms/core/constants/api_constants.dart';
 import 'package:witte_dental_pms/core/services/dio_service.dart';
 
 class AccountsApiService {
-  AccountsApiService(this._dioService);
-  final DioService _dioService;
+  AccountsApiService(this._apiService);
+  final ApiServices _apiService;
 
   Future<void> getAccountsList(String fromDate, String toDate) async {
-    await _dioService.post(
+    await _apiService.post(
       ApiEndpoints.getAccountsList,
       data: {
         'from_date': fromDate,
@@ -16,21 +16,21 @@ class AccountsApiService {
   }
 
   Future<void> addPharmacyAccountEntry(Map<String, dynamic> entryData) async {
-    await _dioService.post(
+    await _apiService.post(
       ApiEndpoints.storePharmacyAccountEntry,
       data: entryData,
     );
   }
 
   Future<void> addInventoryAccountEntry(Map<String, dynamic> entryData) async {
-    await _dioService.post(
+    await _apiService.post(
       ApiEndpoints.storeInventoryAccountEntry,
       data: entryData,
     );
   }
 
   Future<void> addLabAccountEntry(Map<String, dynamic> entryData) async {
-    await _dioService.post(
+    await _apiService.post(
       ApiEndpoints.storeLabAccountEntry,
       data: entryData,
     );
@@ -41,7 +41,7 @@ class AccountsApiService {
     String staffId,
     String staffType,
   ) async {
-    await _dioService.post(
+    await _apiService.post(
       ApiEndpoints.getStaffSalary,
       data: {
         'month': month,
@@ -52,7 +52,7 @@ class AccountsApiService {
   }
 
   Future<void> addStaffSalary(Map<String, dynamic> salaryData) async {
-    await _dioService.post(
+    await _apiService.post(
       ApiEndpoints.storeStaffSalary,
       data: salaryData,
     );

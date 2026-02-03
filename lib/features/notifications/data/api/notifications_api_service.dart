@@ -2,11 +2,11 @@ import 'package:witte_dental_pms/core/constants/api_constants.dart';
 import 'package:witte_dental_pms/core/services/dio_service.dart';
 
 class NotificationsApiService {
-  NotificationsApiService(this._dioService);
-  final DioService _dioService;
+  NotificationsApiService(this._apiService);
+  final ApiServices _apiService;
 
   Future<void> getNotifications(String role, int id) async {
-    await _dioService.post(
+    await _apiService.post(
       ApiEndpoints.getNotifications,
       data: {
         'role': role,
@@ -20,7 +20,7 @@ class NotificationsApiService {
     int id,
     int notificationId,
   ) async {
-    await _dioService.post(
+    await _apiService.post(
       ApiEndpoints.changeNotificationStatus,
       data: {
         'role': role,
@@ -31,14 +31,14 @@ class NotificationsApiService {
   }
 
   Future<void> storeEnquiry(Map<String, dynamic> enquiryData) async {
-    await _dioService.post(
+    await _apiService.post(
       ApiEndpoints.storeEnquiry,
       data: enquiryData,
     );
   }
 
   Future<void> getEnquiryList(String role, int id) async {
-    await _dioService.post(
+    await _apiService.post(
       ApiEndpoints.getEnquiryList,
       data: {
         'role': role,

@@ -4,16 +4,16 @@ import '../models/admin_dashboard_response.dart';
 import '../models/hospital_dashboard_response.dart';
 
 class AdminApiService {
-  AdminApiService(this._dioService);
-  final DioService _dioService;
+  AdminApiService(this._apiService);
+  final ApiServices _apiService;
 
   Future<AdminDashboardResponse> getAdminDashboard() async {
-    final response = await _dioService.get(ApiEndpoints.adminDashboard);
+    final response = await _apiService.get(ApiEndpoints.adminDashboard);
     return AdminDashboardResponse.fromJson(response.data);
   }
 
   Future<HospitalDashboardResponse> getHospitalDashboard(int hospitalId) async {
-    final response = await _dioService.get(
+    final response = await _apiService.get(
       '${ApiEndpoints.dashboardHome}?hospital_id=$hospitalId',
     );
     return HospitalDashboardResponse.fromJson(response.data);

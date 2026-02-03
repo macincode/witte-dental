@@ -2,22 +2,22 @@ import 'package:witte_dental_pms/core/constants/api_constants.dart';
 import 'package:witte_dental_pms/core/services/dio_service.dart';
 
 class AppointmentApiService {
-  AppointmentApiService(this._dioService);
-  final DioService _dioService;
+  AppointmentApiService(this._apiService);
+  final ApiServices _apiService;
 
   Future<void> getAppointmentList() async {
-    await _dioService.get(ApiEndpoints.getAppointmentList);
+    await _apiService.get(ApiEndpoints.getAppointmentList);
   }
 
   Future<void> createAppointment(Map<String, dynamic> appointmentData) async {
-    await _dioService.post(
+    await _apiService.post(
       ApiEndpoints.storeAppointment,
       data: appointmentData,
     );
   }
 
   Future<void> updateAppointment(Map<String, dynamic> appointmentData) async {
-    await _dioService.put(
+    await _apiService.put(
       ApiEndpoints.updateAppointments,
       data: appointmentData,
     );
@@ -28,7 +28,7 @@ class AppointmentApiService {
     String status,
     String completeDate,
   ) async {
-    await _dioService.put(
+    await _apiService.put(
       ApiEndpoints.appointmentStatusUpdate,
       data: {
         'id': id,
@@ -41,18 +41,18 @@ class AppointmentApiService {
   Future<void> rescheduleAppointment(
     Map<String, dynamic> appointmentData,
   ) async {
-    await _dioService.post(
+    await _apiService.post(
       ApiEndpoints.rescheduleAppointment,
       data: appointmentData,
     );
   }
 
   Future<void> getUpcomingAppointments() async {
-    await _dioService.get(ApiEndpoints.getUpcomingAppointments);
+    await _apiService.get(ApiEndpoints.getUpcomingAppointments);
   }
 
   Future<void> getAppointmentsByDate(String date) async {
-    await _dioService.post(
+    await _apiService.post(
       ApiEndpoints.getAppointmentsByDate,
       data: {'date': date},
     );
@@ -61,7 +61,7 @@ class AppointmentApiService {
   Future<void> addAppointmentSummary(
     Map<String, dynamic> summaryData,
   ) async {
-    await _dioService.post(
+    await _apiService.post(
       ApiEndpoints.addAppointmentSummary,
       data: summaryData,
     );

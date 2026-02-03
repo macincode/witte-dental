@@ -2,40 +2,40 @@ import 'package:witte_dental_pms/core/constants/api_constants.dart';
 import 'package:witte_dental_pms/core/services/dio_service.dart';
 
 class PharmacyApiService {
-  PharmacyApiService(this._dioService);
-  final DioService _dioService;
+  PharmacyApiService(this._apiService);
+  final ApiServices _apiService;
 
   Future<void> getPharmacyList() async {
-    await _dioService.get(ApiEndpoints.getPharmacyList);
+    await _apiService.get(ApiEndpoints.getPharmacyList);
   }
 
   Future<void> addPharmacyItem(Map<String, dynamic> itemData) async {
-    await _dioService.post(
+    await _apiService.post(
       ApiEndpoints.storePharmacyItem,
       data: itemData,
     );
   }
 
   Future<void> updatePharmacyItem(Map<String, dynamic> itemData) async {
-    await _dioService.put(
+    await _apiService.put(
       ApiEndpoints.updatePharmacyItem,
       data: itemData,
     );
   }
 
   Future<void> deletePharmacyItem(int id) async {
-    await _dioService.delete(
+    await _apiService.delete(
       ApiEndpoints.deletePharmacyItem,
       data: {'id': id},
     );
   }
 
   Future<void> getPharmacyCategories() async {
-    await _dioService.get(ApiEndpoints.getPharmacyCategories);
+    await _apiService.get(ApiEndpoints.getPharmacyCategories);
   }
 
   Future<void> addPharmacyCategory(String name, String description) async {
-    await _dioService.post(
+    await _apiService.post(
       ApiEndpoints.storePharmacyCategory,
       data: {
         'name': name,
