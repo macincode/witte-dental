@@ -211,7 +211,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          greeting + ', ' + (ownerName ?? 'Admin'),
+          '$greeting, ${ownerName ?? 'Admin'}',
           style: TextStyle(
             color: Theme.of(context).textTheme.bodySmall?.color,
             fontSize: 18,
@@ -228,13 +228,13 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
     final planName = sub?.plan?.name ?? 'Standard Plan';
     final status = sub?.status ?? 'inactive';
     final isActive = status == 'active';
-    
+
     // Parse date safely
-    String expiryText = 'N/A';
+    var expiryText = 'N/A';
     if (sub?.currentPeriodEnd != null) {
       final date = DateTime.tryParse(sub.currentPeriodEnd.toString());
       if (date != null) {
-        expiryText = "${date.day}/${date.month}/${date.year}";
+        expiryText = '${date.day}/${date.month}/${date.year}';
       }
     }
 
@@ -277,33 +277,50 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
-                        (business.businessType ?? 'Business').toString().toUpperCase().replaceAll('_', ' '),
-                        style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                        (business.businessType ?? 'Business')
+                            .toString()
+                            .toUpperCase()
+                            .replaceAll('_', ' '),
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                     // Subscription Status Badge
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 4),
                       decoration: BoxDecoration(
-                        color: isActive ? Colors.greenAccent.shade400 : Colors.orangeAccent,
+                        color: isActive
+                            ? Colors.greenAccent.shade400
+                            : Colors.orangeAccent,
                         borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                           BoxShadow(color: Colors.black12, blurRadius: 4, offset: const Offset(0,2))
-                        ]
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 4,
+                              offset: Offset(0, 2)),
+                        ],
                       ),
                       child: Row(
                         children: [
-                          Icon(isActive ? Icons.check_circle : Icons.warning, size: 12, color: Colors.black87),
+                          Icon(isActive ? Icons.check_circle : Icons.warning,
+                              size: 12, color: Colors.black87),
                           const SizedBox(width: 4),
                           Text(
                             status.toString().toUpperCase(),
-                            style: const TextStyle(color: Colors.black87, fontSize: 10, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                                color: Colors.black87,
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -311,7 +328,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                
+
                 // Business Name
                 Text(
                   business.name ?? 'Unknown Business',
@@ -322,19 +339,21 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                   ),
                 ),
                 const SizedBox(height: 4),
-                
+
                 // Owner Info
                 Row(
                   children: [
-                    const Icon(Icons.verified_user_outlined, color: Colors.white70, size: 16),
+                    const Icon(Icons.verified_user_outlined,
+                        color: Colors.white70, size: 16),
                     const SizedBox(width: 6),
                     Text(
                       'Owner: ${business.ownerName ?? 'N/A'}',
-                      style: const TextStyle(color: Colors.white70, fontSize: 14),
+                      style:
+                          const TextStyle(color: Colors.white70, fontSize: 14),
                     ),
                   ],
                 ),
-                
+
                 const SizedBox(height: 20),
                 Divider(color: Colors.white.withOpacity(0.2)),
                 const SizedBox(height: 10),
@@ -346,21 +365,37 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('CURRENT PLAN', style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 10, fontWeight: FontWeight.bold)),
+                        Text('CURRENT PLAN',
+                            style: TextStyle(
+                                color: Colors.white.withOpacity(0.6),
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold)),
                         const SizedBox(height: 2),
-                        Text(planName, style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w600)),
+                        Text(planName,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600)),
                       ],
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text('RENEWS ON', style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 10, fontWeight: FontWeight.bold)),
+                        Text('RENEWS ON',
+                            style: TextStyle(
+                                color: Colors.white.withOpacity(0.6),
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold)),
                         const SizedBox(height: 2),
-                        Text(expiryText, style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w600)),
+                        Text(expiryText,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600)),
                       ],
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),
@@ -506,7 +541,8 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
     );
   }
 
-  Widget _buildHospitalsList(BuildContext context, List<dynamic> hospitals, bool isDark) {
+  Widget _buildHospitalsList(
+      BuildContext context, List<dynamic> hospitals, bool isDark) {
     return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -514,14 +550,14 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
       separatorBuilder: (c, i) => const SizedBox(height: 12),
       itemBuilder: (context, index) {
         final hospital = hospitals[index];
-        
+
         // Handle both Hospital objects and Map<String, dynamic>
         final bool isMain;
         final String city;
         final String state;
         final int hospitalId;
         final String hospitalName;
-        
+
         if (hospital is Map<String, dynamic>) {
           isMain = hospital['is_main'] ?? false;
           final address = hospital['address'] as Map<String, dynamic>?;
@@ -537,13 +573,14 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
           hospitalId = hospital.id;
           hospitalName = hospital.name;
         }
-        
-        return Container(
+
+        return DecoratedBox(
           decoration: BoxDecoration(
             color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: isMain ? _primaryBlue.withOpacity(0.3) : Colors.transparent,
+              color:
+                  isMain ? _primaryBlue.withOpacity(0.3) : Colors.transparent,
               width: 1.5,
             ),
             boxShadow: [
@@ -560,10 +597,12 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
             child: InkWell(
               borderRadius: BorderRadius.circular(16),
               onTap: () {
-                Get.to(() => HospitalDashboardScreen(
-                      hospitalId: hospitalId,
-                      hospitalName: hospitalName,
-                    ));
+                Get.to(
+                  () => HospitalDashboardScreen(
+                    hospitalId: hospitalId,
+                    hospitalName: hospitalName,
+                  ),
+                );
               },
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -574,12 +613,16 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                       width: 50,
                       height: 50,
                       decoration: BoxDecoration(
-                        color: isMain ? _primaryBlue.withOpacity(0.1) : _lightBlue.withOpacity(0.1),
+                        color: isMain
+                            ? _primaryBlue.withOpacity(0.1)
+                            : _lightBlue.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Center(
                         child: Icon(
-                          isMain ? Icons.star_rounded : Icons.local_hospital_rounded,
+                          isMain
+                              ? Icons.star_rounded
+                              : Icons.local_hospital_rounded,
                           color: isMain ? _primaryBlue : _lightBlue,
                           size: 26,
                         ),
@@ -606,27 +649,38 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                               if (isMain) ...[
                                 const SizedBox(width: 8),
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 6, vertical: 2),
                                   decoration: BoxDecoration(
                                     color: _primaryBlue,
                                     borderRadius: BorderRadius.circular(4),
                                   ),
-                                  child: const Text('MAIN', style: TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.bold)),
-                                )
-                              ]
+                                  child: const Text('MAIN',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 9,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                              ],
                             ],
                           ),
                           const SizedBox(height: 4),
                           // Location Row
                           Row(
                             children: [
-                              Icon(Icons.location_on_outlined, size: 12, color: isDark ? Colors.grey[400] : Colors.grey[600]),
+                              Icon(Icons.location_on_outlined,
+                                  size: 12,
+                                  color: isDark
+                                      ? Colors.grey[400]
+                                      : Colors.grey[600]),
                               const SizedBox(width: 4),
                               Expanded(
                                 child: Text(
-                                  "$city, $state", 
+                                  '$city, $state',
                                   style: TextStyle(
-                                    color: isDark ? Colors.grey[400] : Colors.grey[600],
+                                    color: isDark
+                                        ? Colors.grey[400]
+                                        : Colors.grey[600],
                                     fontSize: 12,
                                   ),
                                   overflow: TextOverflow.ellipsis,
@@ -639,7 +693,8 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                           Text(
                             'Code: ${hospital.code}',
                             style: TextStyle(
-                              color: isDark ? Colors.grey[500] : Colors.grey[500],
+                              color:
+                                  isDark ? Colors.grey[500] : Colors.grey[500],
                               fontSize: 11,
                             ),
                           ),
