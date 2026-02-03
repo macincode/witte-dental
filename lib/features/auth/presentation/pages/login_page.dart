@@ -302,13 +302,20 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: authController.isLoading
                               ? null
                               : () {
-                                  authController
-                                    ..clearError()
-                                    ..login(
-                                      emailController.text.trim(),
-                                      passwordController.text,
-                                      // selectedRole: selectedRole,
-                                    );
+                                  authController.clearError();
+
+                                  final email = emailController.text.trim();
+                                  final password = passwordController.text;
+
+                                  if (email.isEmpty || password.isEmpty) {
+                                    // Handle validation
+                                    return;
+                                  }
+
+                                  // Use business admin login as default
+                                  // In a real app, you'd determine this based on role selection
+                                  authController.businessAdminLogin(
+                                      email, password);
                                 },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent,

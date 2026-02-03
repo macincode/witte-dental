@@ -3,10 +3,13 @@ class ApiEndpoints {
   static const String baseUrl = 'http://192.168.29.198:8000/api';
 
   // Auth
+  static const String superAdminLogin = '/superadmin/login';
   static const String adminLogin = '/admin/login';
+  static const String staffLogin = '/login';
   static const String logout = '/logout';
 
   // Dashboard & Analytics
+  static const String superAdminDashboard = '/superadmin/dashboard';
   static const String adminDashboard = '/admin/dashboard';
   static const String dashboardHome = '/dashboard/home';
   static const String getCounts = '/counts';

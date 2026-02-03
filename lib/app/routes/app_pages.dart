@@ -18,7 +18,6 @@ import 'package:witte_dental_pms/features/admin/staff_screen.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../core/middleware/auth_middleware.dart';
-import '../../features/admin/dashboard.dart';
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/doctors/doctor_dashboard.dart';
 import '../../features/onboarding/presentation/pages/onboarding_screen.dart';
@@ -70,7 +69,7 @@ class AppPages {
     ),
     GetPage(
       name: AppConstants.adminDashboard,
-      page: AdminDashboard.new,
+      page: AdminHomeScreen.new,
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
     ),
     GetPage(

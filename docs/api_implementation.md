@@ -1,6 +1,91 @@
-- /api/admin/dashboard
+- api/admin/login
 
-response:
+{
+    "success": true,
+    "message": "Admin login successful",
+    "user_type": "admin",
+    "data": {
+        "id": 2,
+        "name": "Admin Main",
+        "email": "admin.main@witte.com",
+        "phone": "9876543211",
+        "role_id": 2
+    },
+    "token": "48|DmuMlqOhcdBgu44MWZM9R7vW0GSuPiDy8eWQjmOP14a38728",
+    "businesses": [
+        {
+            "id": 1,
+            "name": "Witte Dental Chain",
+            "business_type": "multi_hospital",
+            "role": "admin",
+            "subscription": {
+                "plan_name": "Enterprise Plan (Yearly)",
+                "status": "active",
+                "trial_ends_at": null
+            },
+            "hospitals": [
+                {
+                    "id": 1,
+                    "name": "Witte Dental Main Branch",
+                    "code": "WDM001",
+                    "is_main": true,
+                    "has_access": true
+                },
+                {
+                    "id": 2,
+                    "name": "Witte Dental Branch 2",
+                    "code": "WDB002",
+                    "is_main": false,
+                    "has_access": false
+                }
+            ]
+        }
+    ],
+    "current_business": {
+        "id": 1,
+        "name": "Witte Dental Chain",
+        "business_type": "multi_hospital",
+        "role": "admin",
+        "subscription": {
+            "plan_name": "Enterprise Plan (Yearly)",
+            "status": "active",
+            "trial_ends_at": null
+        },
+        "hospitals": [
+            {
+                "id": 1,
+                "name": "Witte Dental Main Branch",
+                "code": "WDM001",
+                "is_main": true,
+                "has_access": true
+            },
+            {
+                "id": 2,
+                "name": "Witte Dental Branch 2",
+                "code": "WDB002",
+                "is_main": false,
+                "has_access": false
+            }
+        ]
+    },
+    "current_hospital": {
+        "id": 1,
+        "name": "Witte Dental Main Branch",
+        "code": "WDM001",
+        "is_main": true,
+        "has_access": true
+    },
+    "settings_access": {
+        "saas_management": false,
+        "business_management": true,
+        "hospital_management": true,
+        "subscription_management": true,
+        "team_management": true,
+        "membership_plans": true
+    }
+}
+
+- api/admin/dashboard
 {
     "success": true,
     "data": {
@@ -31,6 +116,7 @@ response:
                     "id": 1,
                     "business_id": 1,
                     "name": "Witte Dental Main Branch",
+                    "patient_reg_prefix": "WDC",
                     "code": "WDM001",
                     "address": {
                         "street": "123 Main Street",
@@ -56,6 +142,7 @@ response:
                     "id": 2,
                     "business_id": 1,
                     "name": "Witte Dental Branch 2",
+                    "patient_reg_prefix": "WDC",
                     "code": "WDB002",
                     "address": {
                         "street": "456 Second Street",
@@ -137,6 +224,7 @@ response:
                 "id": 1,
                 "business_id": 1,
                 "name": "Witte Dental Main Branch",
+                "patient_reg_prefix": "WDC",
                 "code": "WDM001",
                 "address": {
                     "street": "123 Main Street",
@@ -162,6 +250,7 @@ response:
                 "id": 2,
                 "business_id": 1,
                 "name": "Witte Dental Branch 2",
+                "patient_reg_prefix": "WDC",
                 "code": "WDB002",
                 "address": {
                     "street": "456 Second Street",
@@ -187,9 +276,7 @@ response:
     }
 }
 
-
-- /api/dashboard/home?hospital_id=1
-response:
+- api/dashboard/home?hospital_id=1
 
 {
     "status": true,
@@ -225,7 +312,7 @@ response:
             {
                 "type": "patient_registration",
                 "message": "New patient Patient One registered",
-                "time": "1 day ago",
+                "time": "2 days ago",
                 "icon": "user-plus"
             }
         ],
@@ -302,7 +389,7 @@ response:
             "on_time_percentage": 100
         },
         "meta": {
-            "last_updated": "2026-02-02T05:49:57.410293Z",
+            "last_updated": "2026-02-03T06:30:13.531512Z",
             "refresh_interval": 300,
             "timezone": "Asia/Kolkata"
         }

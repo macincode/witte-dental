@@ -1,6 +1,4 @@
 import 'package:hive/hive.dart';
-import 'package:witte_dental_pms/features/auth/data/models/business_model.dart';
-import 'package:witte_dental_pms/features/auth/data/models/hospital_model.dart';
 import 'package:witte_dental_pms/features/auth/data/models/settings_access_model.dart';
 import 'package:witte_dental_pms/features/auth/data/models/user_model.dart';
 
@@ -9,64 +7,59 @@ part 'admin_login_response.g.dart';
 @HiveType(typeId: 0)
 class AdminLoginResponse extends HiveObject {
   AdminLoginResponse({
-    required this.success,
+    this.success,
+    this.status,
     required this.message,
-    required this.userType,
+    this.userType,
     this.data,
     this.token,
+    this.settingsAccess,
+    // Non-Hive fields
     this.businesses,
     this.currentBusiness,
     this.currentHospital,
-    this.settingsAccess,
   });
 
   factory AdminLoginResponse.fromJson(Map<String, dynamic> json) {
     return AdminLoginResponse(
       success: json['success'],
+      status: json['status'],
       message: json['message'],
       userType: json['user_type'],
       data: json['data'] != null ? User.fromJson(json['data']) : null,
       token: json['token'],
-      businesses: json['businesses'] != null
-          ? (json['businesses'] as List)
-              .map((e) => Business.fromJson(e))
-              .toList()
-          : null,
-      currentBusiness: json['current_business'] != null
-          ? Business.fromJson(json['current_business'])
-          : null,
-      currentHospital: json['current_hospital'] != null
-          ? Hospital.fromJson(json['current_hospital'])
-          : null,
       settingsAccess: json['settings_access'] != null
           ? SettingsAccess.fromJson(json['settings_access'])
           : null,
+      businesses: json['businesses'],
+      currentBusiness: json['current_business'],
+      currentHospital: json['current_hospital'],
     );
   }
+
   @HiveField(0)
-  final bool success;
+  final bool? success;
 
   @HiveField(1)
-  final String message;
+  final bool? status;
 
   @HiveField(2)
-  final String userType;
+  final String message;
 
   @HiveField(3)
-  final User? data;
+  final String? userType;
 
   @HiveField(4)
-  final String? token;
+  final User? data;
 
   @HiveField(5)
-  final List<Business>? businesses;
+  final String? token;
 
   @HiveField(6)
-  final Business? currentBusiness;
-
-  @HiveField(7)
-  final Hospital? currentHospital;
-
-  @HiveField(8)
   final SettingsAccess? settingsAccess;
+
+  // Non-Hive fields for API compatibility (stored as dynamic to avoid adapter issues)
+  final List<dynamic>? businesses;
+  final dynamic currentBusiness;
+  final dynamic currentHospital;
 }

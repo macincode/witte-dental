@@ -24,15 +24,13 @@ class ApiServices {
             },
           ),
         ) {
-    // Configure for localhost and HTTP
-    final ioAdapter = _dio.httpClientAdapter as IOHttpClientAdapter
-      ..createHttpClient = () {
-        final client = HttpClient()
-          ..badCertificateCallback = (cert, host, port) => true;
-        client.findProxy = (uri) => 'DIRECT';
-        return client;
-      };
-    dPrint(ioAdapter);
+    // Configure for localhost and HTTP with proper threading
+    (_dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
+      final client = HttpClient()
+        ..badCertificateCallback = (cert, host, port) => true;
+      client.findProxy = (uri) => 'DIRECT';
+      return client;
+    };
 
     _dio.interceptors.add(
       InterceptorsWrapper(
@@ -45,13 +43,25 @@ class ApiServices {
           }
 
           if (!options.path.contains('/admin/login') &&
-              !options.path.contains('/auth/users/tokens') &&
-              !options.path.contains('/auth/users') &&
-              !options.path.contains('/auth/google/mobile')) {
+              !options.path.contains('/logout')) {
             if (authResponse?.token != null) {
               options.headers['Authorization'] =
                   'Bearer ${authResponse!.token}';
               dPrint('Added Authorization header with Bearer token');
+
+              // Add X-Business-ID header for admin dashboard requests
+              if (options.path.contains('/admin/dashboard')) {
+                // First try to get from currentBusiness, then use default fallback
+                String? businessId;
+                if (authResponse.currentBusiness != null) {
+                  businessId = authResponse.currentBusiness['id']?.toString();
+                } else {
+                  businessId = '1'; // Default fallback
+                }
+
+                options.headers['X-Business-ID'] = businessId;
+                dPrint('Added X-Business-ID header: $businessId');
+              }
             } else {
               dPrint(
                 'WARNING: Token is empty or null, skipping Authorization header',
@@ -60,12 +70,11 @@ class ApiServices {
 
             dPrint('Request: ${options.method} ${options.path}');
             dPrint('Headers: ${options.headers}');
-            dPrint('Data: ${options.data}');
           }
           return handler.next(options);
         },
         onResponse: (response, handler) {
-          dPrint('Response: ${response.statusCode} ${response.data}');
+          dPrint('Output Response: ${response.statusCode} ${response.data}');
           return handler.next(response);
         },
       ),
@@ -91,6 +100,7 @@ class ApiServices {
     String path, {
     Map<String, dynamic>? queryParameters,
     Options? options,
+    Map<String, String>? headers,
   }) async {
     try {
       final response = await _dio.get(
@@ -101,6 +111,7 @@ class ApiServices {
               validateStatus: (status) => status != null && status <= 422,
               sendTimeout: const Duration(seconds: 60),
               receiveTimeout: const Duration(seconds: 60),
+              headers: headers,
             ),
       );
       return response;

@@ -1,5 +1,6 @@
 import 'package:witte_dental_pms/core/constants/api_constants.dart';
 import 'package:witte_dental_pms/core/services/dio_service.dart';
+import 'package:witte_dental_pms/features/shared/widgets/global_widgets.dart';
 import '../models/admin_dashboard_response.dart';
 import '../models/hospital_dashboard_response.dart';
 
@@ -9,6 +10,8 @@ class AdminApiService {
 
   Future<AdminDashboardResponse> getAdminDashboard() async {
     final response = await _apiService.get(ApiEndpoints.adminDashboard);
+    dPrint('Raw response data: ${response.data}');
+    dPrint('Response data type: ${response.data.runtimeType}');
     return AdminDashboardResponse.fromJson(response.data);
   }
 

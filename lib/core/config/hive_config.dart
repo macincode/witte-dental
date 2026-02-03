@@ -1,12 +1,9 @@
 import 'dart:convert';
-
 import 'package:crypto/crypto.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:witte_dental_pms/features/auth/data/models/admin_login_response.dart';
-import 'package:witte_dental_pms/features/auth/data/models/business_model.dart';
-import 'package:witte_dental_pms/features/auth/data/models/hospital_model.dart';
 import 'package:witte_dental_pms/features/auth/data/models/settings_access_model.dart';
-import 'package:witte_dental_pms/features/auth/data/models/subscription_model.dart';
 import 'package:witte_dental_pms/features/auth/data/models/user_model.dart';
 
 import '../constants/storage_keys.dart';
@@ -20,6 +17,12 @@ class HiveConfig {
   static Future<void> init() async {
     await Hive.initFlutter();
 
+    // Clear all existing data to resolve typeId conflicts
+    await Hive.deleteBoxFromDisk(StorageKeys.userBox);
+    await Hive.deleteBoxFromDisk(StorageKeys.settingsBox);
+    await Hive.deleteBoxFromDisk(StorageKeys.cacheBox);
+    await Hive.deleteBoxFromDisk(StorageKeys.secureBox);
+
     // Generate encryption key for sensitive data
     final encryptionKey = _generateEncryptionKey();
 
@@ -27,9 +30,6 @@ class HiveConfig {
     Hive
       ..registerAdapter(AdminLoginResponseAdapter())
       ..registerAdapter(UserAdapter())
-      ..registerAdapter(BusinessAdapter())
-      ..registerAdapter(HospitalAdapter())
-      ..registerAdapter(SubscriptionAdapter())
       ..registerAdapter(SettingsAccessAdapter());
 
     // Open boxes

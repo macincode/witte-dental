@@ -4,10 +4,11 @@ class AppConstants {
   static const String appVersion = '1.0.0';
 
   // User Roles (matching API role_id values)
-  static const String rolePatient = 'patient'; // role_id: 1
+  static const String roleSuperAdmin = 'superadmin'; // role_id: 1
   static const String roleAdmin = 'admin'; // role_id: 2
   static const String roleDoctor = 'doctor'; // role_id: 3
   static const String roleStaff = 'staff'; // role_id: 4
+  static const String rolePatient = 'patient'; // role_id: 5
 
   // Routes
   static const String splashRoute = '/splash';
@@ -15,10 +16,16 @@ class AppConstants {
   static const String loginRoute = '/login';
   static const String appIconSettings = '/app-icon-settings';
 
+  // Super Admin Routes
+  static const String superAdminDashboard = '/superadmin';
+
   // Doctor Routes
   static const String doctorDashboard = '/doctor';
 
-  // patient Routes
+  // Staff Routes
+  static const String staffDashboard = '/staff';
+
+  // Patient Routes
   static const String patientDashboard = '/patient';
 
   // Admin Routes

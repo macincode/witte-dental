@@ -116,9 +116,17 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       final authController = Get.find<AuthController>();
       authController.checkAuthStatus();
 
-      if (authController.isLoggedIn && authController.currentUser != null) {
+      if (authController.token != null && authController.currentUser != null) {
         // User is logged in, navigate based on role
-        authController.navigateBasedOnRole(authController.userType);
+        final userType = authController.userType ??
+            authController
+                .getRoleFromRoleId(authController.currentUser?.roleId ?? 0);
+
+        if (userType == 'admin') {
+          Get.offAllNamed(AppConstants.adminHomeScreen);
+        } else {
+          authController.navigateBasedOnUserType(userType);
+        }
       } else {
         // User not logged in, check onboarding
         final onboardingCompleted =
