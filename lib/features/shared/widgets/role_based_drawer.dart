@@ -28,7 +28,7 @@ class RoleBasedDrawer extends StatelessWidget {
             children: [
               // Modern Header with Gradient
               Container(
-                height: 160,
+                height: 180,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,

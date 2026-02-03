@@ -278,7 +278,9 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 4),
+                        horizontal: 10,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(20),
@@ -289,15 +291,18 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                             .toUpperCase()
                             .replaceAll('_', ' '),
                         style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold),
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     // Subscription Status Badge
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 4),
+                        horizontal: 12,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: isActive
                             ? Colors.greenAccent.shade400
@@ -305,22 +310,27 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: const [
                           BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 4,
-                              offset: Offset(0, 2)),
+                            color: Colors.black12,
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
                         ],
                       ),
                       child: Row(
                         children: [
-                          Icon(isActive ? Icons.check_circle : Icons.warning,
-                              size: 12, color: Colors.black87),
+                          Icon(
+                            isActive ? Icons.check_circle : Icons.warning,
+                            size: 12,
+                            color: Colors.black87,
+                          ),
                           const SizedBox(width: 4),
                           Text(
                             status.toString().toUpperCase(),
                             style: const TextStyle(
-                                color: Colors.black87,
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold),
+                              color: Colors.black87,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ],
                       ),
@@ -343,8 +353,11 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                 // Owner Info
                 Row(
                   children: [
-                    const Icon(Icons.verified_user_outlined,
-                        color: Colors.white70, size: 16),
+                    const Icon(
+                      Icons.verified_user_outlined,
+                      color: Colors.white70,
+                      size: 16,
+                    ),
                     const SizedBox(width: 6),
                     Text(
                       'Owner: ${business.ownerName ?? 'N/A'}',
@@ -365,33 +378,45 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('CURRENT PLAN',
-                            style: TextStyle(
-                                color: Colors.white.withOpacity(0.6),
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold)),
+                        Text(
+                          'CURRENT PLAN',
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.6),
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         const SizedBox(height: 2),
-                        Text(planName,
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600)),
+                        Text(
+                          planName,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ],
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text('RENEWS ON',
-                            style: TextStyle(
-                                color: Colors.white.withOpacity(0.6),
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold)),
+                        Text(
+                          'RENEWS ON',
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.6),
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         const SizedBox(height: 2),
-                        Text(expiryText,
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600)),
+                        Text(
+                          expiryText,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -476,73 +501,85 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
     Color accentColor,
     bool isDark,
   ) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          if (!isDark)
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.08),
-              blurRadius: 15,
-              offset: const Offset(0, 5),
+    return GestureDetector(
+      onTap: () {
+        if (title == 'Patients') {
+          Get.toNamed('/patient-list');
+        } else if (title == 'Staff') {
+          Get.toNamed('/staff-list');
+        }
+      },
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            if (!isDark)
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.08),
+                blurRadius: 15,
+                offset: const Offset(0, 5),
+              ),
+          ],
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              right: -10,
+              bottom: -10,
+              child: Icon(
+                icon,
+                size: 60,
+                color: accentColor.withOpacity(0.1),
+              ),
             ),
-        ],
-      ),
-      child: Stack(
-        children: [
-          Positioned(
-            right: -10,
-            bottom: -10,
-            child: Icon(
-              icon,
-              size: 60,
-              color: accentColor.withOpacity(0.1),
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: accentColor.withOpacity(0.1),
-                  shape: BoxShape.circle,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: accentColor.withOpacity(0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(icon, color: accentColor, size: 20),
                 ),
-                child: Icon(icon, color: accentColor, size: 20),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    value,
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: isDark ? Colors.white : Colors.black87,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      value,
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: isDark ? Colors.white : Colors.black87,
+                      ),
                     ),
-                  ),
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: isDark ? Colors.grey[400] : Colors.grey[600],
-                      fontWeight: FontWeight.w500,
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: isDark ? Colors.grey[400] : Colors.grey[600],
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildHospitalsList(
-      BuildContext context, List<dynamic> hospitals, bool isDark) {
+    BuildContext context,
+    List<dynamic> hospitals,
+    bool isDark,
+  ) {
     return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -650,16 +687,21 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                 const SizedBox(width: 8),
                                 Container(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 6, vertical: 2),
+                                    horizontal: 6,
+                                    vertical: 2,
+                                  ),
                                   decoration: BoxDecoration(
                                     color: _primaryBlue,
                                     borderRadius: BorderRadius.circular(4),
                                   ),
-                                  child: const Text('MAIN',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 9,
-                                          fontWeight: FontWeight.bold)),
+                                  child: const Text(
+                                    'MAIN',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 9,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ],
@@ -668,11 +710,13 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                           // Location Row
                           Row(
                             children: [
-                              Icon(Icons.location_on_outlined,
-                                  size: 12,
-                                  color: isDark
-                                      ? Colors.grey[400]
-                                      : Colors.grey[600]),
+                              Icon(
+                                Icons.location_on_outlined,
+                                size: 12,
+                                color: isDark
+                                    ? Colors.grey[400]
+                                    : Colors.grey[600],
+                              ),
                               const SizedBox(width: 4),
                               Expanded(
                                 child: Text(

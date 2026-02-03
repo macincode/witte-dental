@@ -1,12 +1,14 @@
 import 'package:witte_dental_pms/core/constants/api_constants.dart';
 import 'package:witte_dental_pms/core/services/dio_service.dart';
+import '../models/staff_model.dart';
 
 class StaffApiService {
   StaffApiService(this._apiService);
   final ApiServices _apiService;
 
-  Future<void> getStaffList() async {
-    await _apiService.get(ApiEndpoints.getStaffList);
+  Future<StaffListResponse> getStaffList() async {
+    final response = await _apiService.get(ApiEndpoints.getStaffList);
+    return StaffListResponse.fromJson(response.data);
   }
 
   Future<void> addStaff(Map<String, dynamic> staffData) async {

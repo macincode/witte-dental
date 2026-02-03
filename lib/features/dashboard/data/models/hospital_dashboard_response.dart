@@ -49,12 +49,21 @@ class HospitalDashboardData {
       calendarData: CalendarData.fromJson(json['calendar_data'] ?? {}),
       revenueChart: RevenueChart.fromJson(json['revenue_chart'] ?? {}),
       quickStats: QuickStats.fromJson(json['quick_stats'] ?? {}),
-      topTreatments: json['top_treatments'] ?? [],
-      doctorPerformance: json['doctor_performance'] ?? [],
+      topTreatments: (json['top_treatments'] as List?)
+              ?.map((e) => TopTreatment.fromJson(e))
+              .toList() ??
+          [],
+      doctorPerformance: (json['doctor_performance'] as List?)
+              ?.map((e) => DoctorPerformance.fromJson(e))
+              .toList() ??
+          [],
       patientRetention:
           PatientRetention.fromJson(json['patient_retention'] ?? {}),
       paymentStats: PaymentStats.fromJson(json['payment_stats'] ?? {}),
-      peakHours: json['peak_hours'] ?? [],
+      peakHours: (json['peak_hours'] as List?)
+              ?.map((e) => PeakHour.fromJson(e))
+              .toList() ??
+          [],
       delayStats: DelayStats.fromJson(json['delay_stats'] ?? {}),
       meta: Meta.fromJson(json['meta'] ?? {}),
     );
@@ -67,11 +76,11 @@ class HospitalDashboardData {
   final CalendarData calendarData;
   final RevenueChart revenueChart;
   final QuickStats quickStats;
-  final List<dynamic> topTreatments;
-  final List<dynamic> doctorPerformance;
+  final List<TopTreatment> topTreatments;
+  final List<DoctorPerformance> doctorPerformance;
   final PatientRetention patientRetention;
   final PaymentStats paymentStats;
-  final List<dynamic> peakHours;
+  final List<PeakHour> peakHours;
   final DelayStats delayStats;
   final Meta meta;
 }
@@ -187,6 +196,7 @@ class RevenueChart {
   RevenueChart({
     required this.monthlyData,
     required this.totalRevenue,
+    required this.growthPercentage,
   });
 
   factory RevenueChart.fromJson(Map<String, dynamic> json) {
@@ -196,10 +206,12 @@ class RevenueChart {
               .toList() ??
           [],
       totalRevenue: (json['total_revenue'] ?? 0).toDouble(),
+      growthPercentage: (json['growth_percentage'] ?? 0).toDouble(),
     );
   }
   final List<MonthlyData> monthlyData;
   final double totalRevenue;
+  final double growthPercentage;
 }
 
 class MonthlyData {
@@ -224,28 +236,40 @@ class MonthlyData {
 class QuickStats {
   QuickStats({
     required this.patientDemographics,
+    required this.popularTreatments,
   });
 
   factory QuickStats.fromJson(Map<String, dynamic> json) {
     return QuickStats(
       patientDemographics:
           PatientDemographics.fromJson(json['patient_demographics'] ?? {}),
+      popularTreatments: (json['popular_treatments'] as List?)
+              ?.map((e) => PopularTreatment.fromJson(e))
+              .toList() ??
+          [],
     );
   }
   final PatientDemographics patientDemographics;
+  final List<PopularTreatment> popularTreatments;
 }
 
 class PatientDemographics {
   PatientDemographics({
+    required this.ageGroups,
     required this.genderDistribution,
   });
 
   factory PatientDemographics.fromJson(Map<String, dynamic> json) {
     return PatientDemographics(
+      ageGroups: (json['age_groups'] as List?)
+              ?.map((e) => AgeGroup.fromJson(e))
+              .toList() ??
+          [],
       genderDistribution:
           GenderDistribution.fromJson(json['gender_distribution'] ?? {}),
     );
   }
+  final List<AgeGroup> ageGroups;
   final GenderDistribution genderDistribution;
 }
 
@@ -274,27 +298,30 @@ class GenderData {
   factory GenderData.fromJson(Map<String, dynamic> json) {
     return GenderData(
       count: json['count'] ?? 0,
-      percentage: json['percentage'] ?? 0,
+      percentage: (json['percentage'] ?? 0).toDouble(),
     );
   }
   final int count;
-  final int percentage;
+  final double percentage;
 }
 
 class PatientRetention {
   PatientRetention({
     required this.newPatientsThisMonth,
+    required this.returningPatients,
     required this.retentionRate,
   });
 
   factory PatientRetention.fromJson(Map<String, dynamic> json) {
     return PatientRetention(
       newPatientsThisMonth: json['new_patients_this_month'] ?? 0,
-      retentionRate: json['retention_rate'] ?? 0,
+      returningPatients: json['returning_patients'] ?? 0,
+      retentionRate: (json['retention_rate'] ?? 0).toDouble(),
     );
   }
   final int newPatientsThisMonth;
-  final int retentionRate;
+  final int returningPatients;
+  final double retentionRate;
 }
 
 class PaymentStats {
@@ -308,12 +335,107 @@ class PaymentStats {
     return PaymentStats(
       collectedThisMonth: (json['collected_this_month'] ?? 0).toDouble(),
       pendingPayments: (json['pending_payments'] ?? 0).toDouble(),
-      collectionRate: json['collection_rate'] ?? 0,
+      collectionRate: (json['collection_rate'] ?? 0).toDouble(),
     );
   }
   final double collectedThisMonth;
   final double pendingPayments;
-  final int collectionRate;
+  final double collectionRate;
+}
+
+class AgeGroup {
+  AgeGroup({
+    required this.range,
+    required this.count,
+    required this.percentage,
+  });
+
+  factory AgeGroup.fromJson(Map<String, dynamic> json) {
+    return AgeGroup(
+      range: json['range'] ?? '',
+      count: json['count'] ?? 0,
+      percentage: (json['percentage'] ?? 0).toDouble(),
+    );
+  }
+  final String range;
+  final int count;
+  final double percentage;
+}
+
+class PopularTreatment {
+  PopularTreatment({
+    required this.name,
+    required this.count,
+    required this.percentage,
+  });
+
+  factory PopularTreatment.fromJson(Map<String, dynamic> json) {
+    return PopularTreatment(
+      name: json['name'] ?? '',
+      count: json['count'] ?? 0,
+      percentage: (json['percentage'] ?? 0).toDouble(),
+    );
+  }
+  final String name;
+  final int count;
+  final double percentage;
+}
+
+class TopTreatment {
+  TopTreatment({
+    required this.name,
+    required this.count,
+    required this.revenue,
+  });
+
+  factory TopTreatment.fromJson(Map<String, dynamic> json) {
+    return TopTreatment(
+      name: json['name'] ?? '',
+      count: json['count'] ?? 0,
+      revenue: (json['revenue'] ?? 0).toDouble(),
+    );
+  }
+  final String name;
+  final int count;
+  final double revenue;
+}
+
+class DoctorPerformance {
+  DoctorPerformance({
+    required this.name,
+    required this.patientsTreated,
+    required this.revenue,
+    required this.rating,
+  });
+
+  factory DoctorPerformance.fromJson(Map<String, dynamic> json) {
+    return DoctorPerformance(
+      name: json['name'] ?? '',
+      patientsTreated: json['patients_treated'] ?? 0,
+      revenue: (json['revenue'] ?? 0).toDouble(),
+      rating: (json['rating'] ?? 0).toDouble(),
+    );
+  }
+  final String name;
+  final int patientsTreated;
+  final double revenue;
+  final double rating;
+}
+
+class PeakHour {
+  PeakHour({
+    required this.time,
+    required this.appointments,
+  });
+
+  factory PeakHour.fromJson(Map<String, dynamic> json) {
+    return PeakHour(
+      time: json['time'] ?? '',
+      appointments: json['appointments'] ?? 0,
+    );
+  }
+  final String time;
+  final int appointments;
 }
 
 class DelayStats {

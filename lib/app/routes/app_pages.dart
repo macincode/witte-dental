@@ -15,6 +15,10 @@ import 'package:witte_dental_pms/features/admin/pharmacy_screen.dart';
 import 'package:witte_dental_pms/features/admin/presentation/pages/admin_home_screen.dart';
 import 'package:witte_dental_pms/features/admin/staffList_management.dart';
 import 'package:witte_dental_pms/features/admin/staff_screen.dart';
+import 'package:witte_dental_pms/features/patients/presentation/screens/patient_details_screen.dart';
+import 'package:witte_dental_pms/features/patients/presentation/screens/patient_list_screen.dart';
+import 'package:witte_dental_pms/features/staff/presentation/screens/staff_details_screen.dart';
+import 'package:witte_dental_pms/features/staff/presentation/screens/staff_list_screen.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../core/middleware/auth_middleware.dart';
@@ -141,6 +145,26 @@ class AppPages {
       name: AppConstants.pharmacyListManagement,
       page: () => const PharmacylistManagement(),
       middlewares: [RoleMiddleware(requiredRole: AppConstants.roleAdmin)],
+    ),
+    GetPage(
+      name: '/patient-list',
+      page: () => const PatientListScreen(),
+      middlewares: [AuthMiddleware()],
+    ),
+    GetPage(
+      name: '/patient-details',
+      page: () => const PatientDetailsScreen(),
+      middlewares: [AuthMiddleware()],
+    ),
+    GetPage(
+      name: '/staff-list',
+      page: () => const StaffListScreen(),
+      middlewares: [AuthMiddleware()],
+    ),
+    GetPage(
+      name: '/staff-details',
+      page: () => const StaffDetailsScreen(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: AppConstants.billings,

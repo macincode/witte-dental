@@ -119,7 +119,7 @@ class _HospitalDashboardScreenState extends State<HospitalDashboardScreen> {
                             'Collection Rate',
                             '${data.paymentStats.collectionRate}%',
                             _primaryBlue,
-                            data.paymentStats.collectionRate.toDouble() / 100,
+                            data.paymentStats.collectionRate / 100,
                             cardColor,
                             textColor,
                           ),
@@ -562,9 +562,9 @@ class _HospitalDashboardScreenState extends State<HospitalDashboardScreen> {
   ) {
     final male = demographics.genderDistribution.male;
     final female = demographics.genderDistribution.female;
+    final ageGroups = demographics.ageGroups;
 
-    // Safety check for empty data
-    if (male.count == 0 && female.count == 0) {
+    if (male.count == 0 && female.count == 0 && ageGroups.isEmpty) {
       return Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
@@ -576,83 +576,146 @@ class _HospitalDashboardScreenState extends State<HospitalDashboardScreen> {
     }
 
     return Container(
-      height: 220,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: cardColor,
         borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          if (Theme.of(context).brightness == Brightness.light)
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.08),
+              blurRadius: 15,
+              offset: const Offset(0, 5),
+            ),
+        ],
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: PieChart(
-              PieChartData(
-                sectionsSpace: 4,
-                centerSpaceRadius: 30,
-                sections: [
-                  PieChartSectionData(
-                    color: _primaryBlue,
-                    value: male.percentage.toDouble(),
-                    title: '',
-                    radius: 20,
-                  ),
-                  PieChartSectionData(
-                    color: const Color(0xFFFF6B6B), // Soft Red/Pink for female
-                    value: female.percentage.toDouble(),
-                    title: '',
-                    radius: 20,
-                  ),
-                ],
+          // Age Distribution
+          if (ageGroups.isNotEmpty) ...[
+            Text(
+              'Age Distribution',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: textColor,
+                fontSize: 16,
               ),
             ),
-          ),
-          const SizedBox(width: 20),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildLegendItem(
-                  'Male',
-                  '${male.percentage}%',
-                  _primaryBlue,
-                  textColor,
+            const SizedBox(height: 16),
+            ...ageGroups.map((age) {
+              final colors = [_primaryBlue, _lightBlue, _purple, _orange];
+              final color = colors[ageGroups.indexOf(age) % colors.length];
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 12,
+                      height: 12,
+                      decoration: BoxDecoration(
+                        color: color,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      age.range,
+                      style: TextStyle(
+                        color: Colors.grey[600],
+                        fontSize: 12,
+                      ),
+                    ),
+                    const Spacer(),
+                    Text(
+                      '${age.count} (${age.percentage.toStringAsFixed(1)}%)',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: textColor,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 10),
-                _buildLegendItem(
-                  'Female',
-                  '${female.percentage}%',
-                  const Color(0xFFFF6B6B),
-                  textColor,
+              );
+            }),
+            const SizedBox(height: 20),
+          ],
+          // Gender Distribution
+          if (male.count > 0 || female.count > 0) ...[
+            Text(
+              'Gender Distribution',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: textColor,
+                fontSize: 16,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: _primaryBlue.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          male.count.toString(),
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: _primaryBlue,
+                          ),
+                        ),
+                        Text(
+                          'Male (${male.percentage.toStringAsFixed(1)}%)',
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFF6B6B).withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          female.count.toString(),
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFFF6B6B),
+                          ),
+                        ),
+                        Text(
+                          'Female (${female.percentage.toStringAsFixed(1)}%)',
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
-          ),
+          ],
         ],
       ),
-    );
-  }
-
-  Widget _buildLegendItem(
-    String label,
-    String value,
-    Color color,
-    Color textColor,
-  ) {
-    return Row(
-      children: [
-        Container(
-          width: 12,
-          height: 12,
-          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-        ),
-        const SizedBox(width: 8),
-        Text(label, style: TextStyle(color: Colors.grey[600], fontSize: 12)),
-        const Spacer(),
-        Text(
-          value,
-          style: TextStyle(fontWeight: FontWeight.bold, color: textColor),
-        ),
-      ],
     );
   }
 
@@ -728,6 +791,613 @@ class _HospitalDashboardScreenState extends State<HospitalDashboardScreen> {
             ),
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildKeyMetricsGrid(
+    BuildContext context,
+    HospitalStats stats,
+    Color cardColor,
+    Color textColor,
+    bool isDark,
+  ) {
+    return GridView.count(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      crossAxisCount: 2,
+      crossAxisSpacing: 12,
+      mainAxisSpacing: 12,
+      childAspectRatio: 1.2,
+      children: [
+        _buildMetricCard(
+          'Total Patients',
+          stats.totalPatients.toString(),
+          '${stats.trends.patients.value}% from last month',
+          stats.trends.patients.direction,
+          Icons.people_alt_rounded,
+          _lightBlue,
+          cardColor,
+          textColor,
+          isDark,
+        ),
+        _buildMetricCard(
+          'Appointments',
+          '${stats.todayAppointments}/${stats.monthlyAppointments}',
+          'Today / This Month',
+          'flat',
+          Icons.calendar_today_rounded,
+          _purple,
+          cardColor,
+          textColor,
+          isDark,
+        ),
+        _buildMetricCard(
+          'Monthly Revenue',
+          '₹${(stats.monthlyRevenue / 1000).toStringAsFixed(0)}k',
+          '${stats.trends.revenue.value}% from last month',
+          stats.trends.revenue.direction,
+          Icons.currency_rupee_rounded,
+          const Color(0xFF00C853),
+          cardColor,
+          textColor,
+          isDark,
+        ),
+        _buildMetricCard(
+          'Active Staff',
+          stats.activeStaff.toString(),
+          'Currently on duty',
+          'flat',
+          Icons.medical_services_rounded,
+          _orange,
+          cardColor,
+          textColor,
+          isDark,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildMetricCard(
+    String title,
+    String value,
+    String subtitle,
+    String trend,
+    IconData icon,
+    Color accentColor,
+    Color cardColor,
+    Color textColor,
+    bool isDark,
+  ) {
+    final isUp = trend == 'up';
+    final trendIcon = isUp
+        ? Icons.trending_up
+        : (trend == 'down' ? Icons.trending_down : null);
+    final trendColor =
+        isUp ? Colors.green : (trend == 'down' ? Colors.red : null);
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: cardColor,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          if (!isDark)
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.08),
+              blurRadius: 15,
+              offset: const Offset(0, 5),
+            ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: accentColor.withOpacity(0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(icon, color: accentColor, size: 18),
+              ),
+              if (trendIcon != null)
+                Icon(trendIcon, color: trendColor, size: 20),
+            ],
+          ),
+          const Spacer(),
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 12,
+              color: isDark ? Colors.grey[400] : Colors.grey[600],
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: textColor,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            subtitle,
+            style: TextStyle(
+              fontSize: 10,
+              color: isDark ? Colors.grey[500] : Colors.grey[500],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTopTreatmentsCard(
+    BuildContext context,
+    List<TopTreatment> treatments,
+    Color cardColor,
+    Color textColor,
+    bool isDark,
+  ) {
+    if (treatments.isEmpty) {
+      return Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: cardColor,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: const Center(child: Text('No treatment data available')),
+      );
+    }
+
+    final colors = [_primaryBlue, _lightBlue, _purple, _orange, Colors.green];
+
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: cardColor,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          if (!isDark)
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.08),
+              blurRadius: 15,
+              offset: const Offset(0, 5),
+            ),
+        ],
+      ),
+      child: Column(
+        children: treatments.take(5).map((treatment) {
+          final index = treatments.indexOf(treatment);
+          final color = colors[index % colors.length];
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Row(
+              children: [
+                Container(
+                  width: 24,
+                  height: 24,
+                  decoration: BoxDecoration(
+                    color: color,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: Text(
+                      '${index + 1}',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        treatment.name,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: textColor,
+                          fontSize: 14,
+                        ),
+                      ),
+                      Text(
+                        '${treatment.count} procedures',
+                        style: TextStyle(
+                          color: isDark ? Colors.grey[400] : Colors.grey[600],
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Text(
+                  '₹${(treatment.revenue / 1000).toStringAsFixed(0)}k Revenue',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: color,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget _buildDoctorPerformanceCard(
+    BuildContext context,
+    List<DoctorPerformance> doctors,
+    Color cardColor,
+    Color textColor,
+    bool isDark,
+  ) {
+    if (doctors.isEmpty) {
+      return Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: cardColor,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: const Center(child: Text('No doctor performance data')),
+      );
+    }
+
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: cardColor,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          if (!isDark)
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.08),
+              blurRadius: 15,
+              offset: const Offset(0, 5),
+            ),
+        ],
+      ),
+      child: Column(
+        children: doctors.map((doctor) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 20,
+                  backgroundColor: _primaryBlue.withOpacity(0.1),
+                  child: Text(
+                    doctor.name.split(' ').map((n) => n[0]).take(2).join(),
+                    style: TextStyle(
+                      color: _primaryBlue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        doctor.name,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: textColor,
+                          fontSize: 14,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          const Icon(Icons.star, color: Colors.amber, size: 14),
+                          const SizedBox(width: 4),
+                          Text(
+                            doctor.rating.toStringAsFixed(1),
+                            style: TextStyle(
+                              color:
+                                  isDark ? Colors.grey[400] : Colors.grey[600],
+                              fontSize: 12,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Text(
+                            '${doctor.patientsTreated} patients',
+                            style: TextStyle(
+                              color:
+                                  isDark ? Colors.grey[400] : Colors.grey[600],
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Text(
+                  '₹${(doctor.revenue / 100000).toStringAsFixed(1)}L',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget _buildRetentionCard(
+    BuildContext context,
+    PatientRetention retention,
+    Color cardColor,
+    Color textColor,
+  ) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: cardColor,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          if (Theme.of(context).brightness == Brightness.light)
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.08),
+              blurRadius: 15,
+              offset: const Offset(0, 5),
+            ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Text(
+            '${retention.retentionRate.toStringAsFixed(0)}%',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: textColor,
+            ),
+          ),
+          Text(
+            'Retention Rate',
+            style: TextStyle(
+              color: Colors.grey[600],
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  Text(
+                    retention.newPatientsThisMonth.toString(),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: _lightBlue,
+                    ),
+                  ),
+                  Text(
+                    'New Patients',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    retention.returningPatients.toString(),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                  ),
+                  Text(
+                    'Returning',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPaymentCard(
+    BuildContext context,
+    PaymentStats payment,
+    Color cardColor,
+    Color textColor,
+  ) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: cardColor,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          if (Theme.of(context).brightness == Brightness.light)
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.08),
+              blurRadius: 15,
+              offset: const Offset(0, 5),
+            ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Text(
+            '${payment.collectionRate.toStringAsFixed(0)}%',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: textColor,
+            ),
+          ),
+          Text(
+            'Collection Rate',
+            style: TextStyle(
+              color: Colors.grey[600],
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  Text(
+                    '₹${(payment.collectedThisMonth / 1000).toStringAsFixed(0)}k',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                  ),
+                  Text(
+                    'Collected',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    '₹${(payment.pendingPayments / 100000).toStringAsFixed(1)}L',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red,
+                    ),
+                  ),
+                  Text(
+                    'Pending',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPeakHoursCard(
+    BuildContext context,
+    List<PeakHour> peakHours,
+    Color cardColor,
+    Color textColor,
+    bool isDark,
+  ) {
+    if (peakHours.isEmpty) {
+      return Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: cardColor,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: const Center(child: Text('No peak hours data')),
+      );
+    }
+
+    final maxAppointments =
+        peakHours.map((h) => h.appointments).reduce((a, b) => a > b ? a : b);
+
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: cardColor,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          if (!isDark)
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.08),
+              blurRadius: 15,
+              offset: const Offset(0, 5),
+            ),
+        ],
+      ),
+      child: Column(
+        children: peakHours.map((hour) {
+          final percentage = hour.appointments / maxAppointments;
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 80,
+                  child: Text(
+                    hour.time,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: isDark ? Colors.grey[400] : Colors.grey[600],
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Container(
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: isDark ? Colors.grey[800] : Colors.grey[200],
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: FractionallySizedBox(
+                      alignment: Alignment.centerLeft,
+                      widthFactor: percentage,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: _primaryBlue,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  hour.appointments.toString(),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: textColor,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          );
+        }).toList(),
       ),
     );
   }
