@@ -46,7 +46,7 @@ class AuthController extends GetxController {
 
       final response = await _authRepository.superAdminLogin(email, password);
 
-      if (response.success == true) {
+      if (response.success ?? false) {
         _authResponse.value = response;
         Get.offAllNamed(AppConstants.superAdminDashboard);
       } else {
@@ -68,7 +68,7 @@ class AuthController extends GetxController {
       final response =
           await _authRepository.businessAdminLogin(email, password);
 
-      if (response.success == true) {
+      if (response.success ?? false) {
         _authResponse.value = response;
         Get.offAllNamed(AppConstants.adminHomeScreen);
       } else {
@@ -89,7 +89,7 @@ class AuthController extends GetxController {
 
       final response = await _authRepository.staffLogin(email, password);
 
-      if (response.status == true || response.success == true) {
+      if ((response.status ?? false) || (response.success ?? false)) {
         _authResponse.value = response;
         navigateBasedOnUserType(response.userType);
       } else {

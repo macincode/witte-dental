@@ -11,7 +11,9 @@ class AuthRepository {
 
   // Super Admin Login
   Future<AdminLoginResponse> superAdminLogin(
-      String email, String password) async {
+    String email,
+    String password,
+  ) async {
     final response = await _apiService.superAdminLogin(email, password);
     await _hiveService.saveAuthResponse(response);
     return response;
@@ -19,7 +21,9 @@ class AuthRepository {
 
   // Business Admin Login
   Future<AdminLoginResponse> businessAdminLogin(
-      String email, String password) async {
+    String email,
+    String password,
+  ) async {
     final response = await _apiService.businessAdminLogin(email, password);
     await _hiveService.saveAuthResponse(response);
     return response;
@@ -34,12 +38,12 @@ class AuthRepository {
 
   // Admin Dashboard
   Future<AdminDashboardResponse> getAdminDashboard(String businessId) async {
-    return await _apiService.getAdminDashboard(businessId);
+    return _apiService.getAdminDashboard(businessId);
   }
 
   // Hospital Dashboard
   Future<HospitalDashboardResponse> getHospitalDashboard(int hospitalId) async {
-    return await _apiService.getHospitalDashboard(hospitalId);
+    return _apiService.getHospitalDashboard(hospitalId);
   }
 
   Future<void> logout() async {

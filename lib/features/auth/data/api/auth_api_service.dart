@@ -11,7 +11,9 @@ class AuthApiService {
 
   // Super Admin Login - /api/superadmin/login
   Future<AdminLoginResponse> superAdminLogin(
-      String email, String password) async {
+    String email,
+    String password,
+  ) async {
     final response = await _apiService.post(
       ApiEndpoints.superAdminLogin,
       data: {
@@ -24,7 +26,9 @@ class AuthApiService {
 
   // Business Admin Login - /api/admin/login
   Future<AdminLoginResponse> businessAdminLogin(
-      String email, String password) async {
+    String email,
+    String password,
+  ) async {
     final response = await _apiService.post(
       ApiEndpoints.adminLogin,
       data: {

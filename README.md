@@ -1,702 +1,364 @@
-# witte_dental_pms
+# Witte Dental Practice Management System (PMS)
 
-A new Flutter project.
+<div align="center">
+  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter">
+  <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart">
+  <img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel">
+  <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
+</div>
 
-## Getting Started
+## 🏥 Overview
 
-This project is a starting point for a Flutter application.
+Witte Dental PMS is a comprehensive, multi-tenant SaaS solution designed specifically for dental practice management. Built with Flutter for cross-platform mobile applications and Laravel for robust backend services, it provides a complete ecosystem for managing dental clinics, hospitals, and multi-location practices.
 
-A few resources to get you started if this is your first Flutter project:
+## ✨ Key Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 🔐 Multi-Level Authentication System
+- **Super Admin**: Platform-wide management for Witte company employees
+- **Business Admin**: Hospital/clinic owners with business management capabilities
+- **Staff Access**: Unified login for Doctors, Staff, and Patients with role-based permissions
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 📊 Comprehensive Dashboard System
+- **Business Dashboard**: Overview of all hospital branches with key metrics
+- **Hospital Dashboard**: Individual hospital analytics with real-time KPIs
+- **Appointment Delay Tracking**: Monitor and manage appointment delays
+- **Revenue Analytics**: Financial insights and payment statistics
 
+### 🏥 Multi-Hospital Management
+- Support for multiple hospital branches under one business
+- Individual hospital settings and configurations
+- Centralized patient and staff management across locations
 
-Clean Authentication Architecture:
-1. Super Admin Login (/superadmin/login)
-Who: Witte company employees managing the SaaS platform
+### 👥 User Management
+- **Patient Management**: Complete patient records and history
+- **Doctor Management**: Staff scheduling and performance tracking
+- **Staff Management**: Role-based access control
+- **Appointment Scheduling**: Advanced booking system with delay notifications
 
-Credentials: Email + Password
+### 💳 Integrated Payment System
+- Razorpay integration for secure payments
+- Payment tracking and collection analytics
+- Billing and invoice management
 
-Access: Platform-wide management, no business context needed
+### 📱 Communication Features
+- WhatsApp integration for patient notifications
+- Automated appointment reminders
+- Real-time updates and alerts
 
-2. Business Admin Login (/admin/login)
-Who: Hospital/clinic owners and their business admins
+## 🏗️ Architecture
 
-Credentials: Email + Password
+### Frontend (Flutter)
+```
+lib/
+├── app/
+│   └── routes/                 # App routing configuration
+├── core/
+│   ├── constants/             # App constants and configurations
+│   ├── controllers/           # Global state management
+│   ├── services/              # API services and utilities
+│   ├── storage/               # Local data storage (Hive)
+│   └── theme/                 # App theming and styling
+├── features/
+│   ├── auth/                  # Authentication module
+│   ├── admin/                 # Admin dashboard and management
+│   ├── dashboard/             # Hospital dashboards
+│   ├── doctors/               # Doctor management
+│   ├── patients/              # Patient management
+│   └── shared/                # Shared widgets and components
+└── main.dart                  # App entry point
+```
 
-Access: Business management with X-Business-ID header required
+### Backend (Laravel)
+- RESTful API architecture
+- Multi-tenant database design
+- JWT authentication
+- Role-based access control
+- Real-time notifications
 
-Response: Business context with hospitals list
+## 🚀 App Workflow
 
-3. Unified Staff Login (/login)
-Who: Doctors, Staff, Patients within hospitals
+### 1. Authentication Flow
 
-Credentials: Email + Password
+#### Super Admin Login
+```
+/api/superadmin/login
+├── Platform-wide access
+├── Business management
+├── Subscription oversight
+└── System administration
+```
 
-Access: Hospital-scoped operations
+#### Business Admin Login
+```
+/api/admin/login
+├── Business dashboard access
+├── Hospital management
+├── Staff and patient oversight
+└── Financial analytics
+```
 
-Response: User type + hospital context
+#### Staff/Doctor/Patient Login
+```
+/api/login
+├── Role-based dashboard
+├── Hospital-specific access
+├── Appointment management
+└── Patient records (role-dependent)
+```
 
+### 2. Dashboard Navigation
 
+#### Business Admin Workflow
+```
+Business Dashboard
+├── Overview Statistics
+│   ├── Total Hospitals: 2
+│   ├── Total Patients: 150+
+│   ├── Staff Members: 25+
+│   └── Today's Appointments: 45
+├── Hospital Branches
+│   ├── Main Branch (⭐)
+│   │   └── Click → Hospital Dashboard
+│   └── Branch Locations
+│       └── Click → Individual Analytics
+└── Business Management
+    ├── Settings Configuration
+    ├── Payment Integration
+    └── WhatsApp Setup
+```
 
+#### Hospital Dashboard Workflow
+```
+Hospital Dashboard (/api/dashboard/home?hospital_id=1)
+├── Real-time KPIs
+│   ├── Patient Statistics
+│   ├── Appointment Metrics
+│   ├── Revenue Analytics
+│   └── Staff Performance
+├── Appointment Management
+│   ├── Today's Schedule
+│   ├── Upcoming Appointments
+│   └── Delay Tracking
+├── Patient Analytics
+│   ├── Demographics
+│   ├── Retention Rates
+│   └── Treatment History
+└── Financial Insights
+    ├── Monthly Revenue
+    ├── Payment Collection
+    └── Outstanding Dues
+```
 
-Looking at the user table structure, I can see the role mapping:
+### 3. User Management Flow
 
-role_id = 1: Super Admin
+#### Patient Management
+```
+Patient Module
+├── Registration
+│   ├── Personal Information
+│   ├── Medical History
+│   └── Contact Details
+├── Appointment Booking
+│   ├── Doctor Selection
+│   ├── Time Slot Booking
+│   └── Treatment Planning
+└── Records Management
+    ├── Treatment History
+    ├── Billing Records
+    └── Communication Logs
+```
 
-role_id = 2: Admin (Business Admin)
+#### Doctor/Staff Management
+```
+Staff Module
+├── Profile Management
+│   ├── Credentials
+│   ├── Specializations
+│   └── Schedule Settings
+├── Appointment Management
+│   ├── Daily Schedule
+│   ├── Patient Consultations
+│   └── Treatment Plans
+└── Performance Analytics
+    ├── Patient Satisfaction
+    ├── Appointment Statistics
+    └── Revenue Contribution
+```
 
-role_id = 3: Doctor
+### 4. Appointment Delay Management
 
-role_id = 4: Staff
+```
+Delay Tracking System
+├── Real-time Monitoring
+│   ├── Scheduled vs Actual Times
+│   ├── Delay Notifications
+│   └── Patient Communication
+├── Analytics Dashboard
+│   ├── On-time Percentage: 85%
+│   ├── Average Delay: 15 minutes
+│   └── Peak Delay Hours
+└── Automated Actions
+    ├── WhatsApp Notifications
+    ├── Rescheduling Options
+    └── Compensation Tracking
+```
 
-role_id = 5: Patient
+### 5. Payment Integration Workflow
 
-Three Clean Login Endpoints:
-/api/superadmin/login - Super Admin only
+```
+Payment System (Razorpay)
+├── Configuration
+│   ├── API Key Setup
+│   ├── Webhook Configuration
+│   └── Security Settings
+├── Transaction Processing
+│   ├── Online Payments
+│   ├── Payment Tracking
+│   └── Receipt Generation
+└── Analytics
+    ├── Collection Rates: 85%
+    ├── Pending Payments
+    └── Revenue Trends
+```
 
-/api/admin/login - Business Admin (requires X-Business-ID for dashboard)
+## 🛠️ Technical Implementation
 
-/api/login - Unified for Doctor/Staff/Patient (email-based)
+### State Management
+- **GetX**: Reactive state management
+- **Obx Widgets**: Real-time UI updates
+- **Controllers**: Business logic separation
 
-// Business Admin
-const adminResponse = await fetch('/api/admin/login', {
-  body: JSON.stringify({ email: 'admin.main@witte.com', password: 'password' })
-});
+### Data Persistence
+- **Hive**: Local storage for offline capability
+- **Token Management**: Secure authentication persistence
+- **Cache Strategy**: Optimized data loading
 
-// Doctor/Staff/Patient  
-const userResponse = await fetch('/api/login', {
-  body: JSON.stringify({ email: 'doctor.main@witte.com', password: 'password' })
-});
-// Returns: user_type: 'doctor'|'staff'|'patient'
+### API Integration
+- **Dio**: HTTP client with interceptors
+- **Error Handling**: Comprehensive error management
+- **Retry Logic**: Network resilience
 
-// Super Admin
-const superResponse = await fetch('/api/superadmin/login', {
-  body: JSON.stringify({ email: 'superadmin@witte.com', password: 'password' })
-});
+### UI/UX Features
+- **Theme System**: Light/Dark mode support
+- **Responsive Design**: Adaptive layouts
+- **Material Design**: Modern UI components
+- **Custom Colors**: Brand-consistent theming
 
+## 🎨 Design System
 
-updated collection for authentication flow:
-{
-  "info": {
-    "_postman_id": "761d91d7-58e7-460d-94e4-e5b8e377708b",
-    "name": "Witte Dental PMS - Updated API Collection",
-    "description": "Updated API collection with unified authentication system for Witte Dental Practice Management System",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "8648285"
-  },
-  "variable": [
-    {
-      "key": "base_url",
-      "value": "http://127.0.0.1:8000",
-      "type": "string"
-    },
-    {
-      "key": "api_token",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "business_id",
-      "value": "1",
-      "type": "string"
-    }
-  ],
-  "auth": {
-    "type": "bearer",
-    "bearer": [
-      {
-        "key": "token",
-        "value": "{{api_token}}",
-        "type": "string"
-      }
-    ]
-  },
-  "item": [
-    {
-      "name": "🔐 Authentication System",
-      "item": [
-        {
-          "name": "Super Admin Login",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "if (pm.response.code === 200) {",
-                  "    const response = pm.response.json();",
-                  "    if (response.success && response.token) {",
-                  "        pm.collectionVariables.set('api_token', response.token);",
-                  "    }",
-                  "}"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"email\": \"superadmin@witte.com\",\n    \"password\": \"password\"\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/superadmin/login",
-              "host": ["{{base_url}}"],
-              "path": ["api", "superadmin", "login"]
-            },
-            "description": "Login for Witte company super admins who manage the entire SaaS platform"
-          }
-        },
-        {
-          "name": "Business Admin Login",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "if (pm.response.code === 200) {",
-                  "    const response = pm.response.json();",
-                  "    if (response.success && response.token) {",
-                  "        pm.collectionVariables.set('api_token', response.token);",
-                  "        if (response.current_business && response.current_business.id) {",
-                  "            pm.collectionVariables.set('business_id', response.current_business.id);",
-                  "        }",
-                  "    }",
-                  "}"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"email\": \"admin.main@witte.com\",\n    \"password\": \"password\"\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/admin/login",
-              "host": ["{{base_url}}"],
-              "path": ["api", "admin", "login"]
-            },
-            "description": "Login for business admins who manage hospitals/clinics"
-          }
-        },
-        {
-          "name": "Staff Login (Doctor/Staff/Patient)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "if (pm.response.code === 200) {",
-                  "    const response = pm.response.json();",
-                  "    if (response.status && response.token) {",
-                  "        pm.collectionVariables.set('api_token', response.token);",
-                  "    }",
-                  "}"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"email\": \"doctor.main@witte.com\",\n    \"password\": \"password\"\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/login",
-              "host": ["{{base_url}}"],
-              "path": ["api", "login"]
-            },
-            "description": "Unified login for Doctors (role_id=3), Staff (role_id=4), and Patients (role_id=5)"
-          }
-        },
-        {
-          "name": "Logout",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/logout",
-              "host": ["{{base_url}}"],
-              "path": ["api", "logout"]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "📊 Dashboard System",
-      "item": [
-        {
-          "name": "Super Admin Dashboard",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/superadmin/dashboard",
-              "host": ["{{base_url}}"],
-              "path": ["api", "superadmin", "dashboard"]
-            },
-            "description": "SaaS platform overview for super admins"
-          }
-        },
-        {
-          "name": "Business Admin Dashboard",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              },
-              {
-                "key": "X-Business-ID",
-                "value": "{{business_id}}",
-                "description": "Required for business admin dashboard"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/admin/dashboard",
-              "host": ["{{base_url}}"],
-              "path": ["api", "admin", "dashboard"]
-            },
-            "description": "Business-specific dashboard (requires X-Business-ID header)"
-          }
-        },
-        {
-          "name": "Hospital Dashboard",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/dashboard/home?hospital_id=1",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dashboard", "home"],
-              "query": [
-                {
-                  "key": "hospital_id",
-                  "value": "1"
-                }
-              ]
-            },
-            "description": "Hospital-specific dashboard with real-time KPIs and delay statistics"
-          }
-        }
-      ]
-    },
-    {
-      "name": "🏥 Super Admin Management",
-      "item": [
-        {
-          "name": "Get All Businesses",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/superadmin/businesses?status=active&search=",
-              "host": ["{{base_url}}"],
-              "path": ["api", "superadmin", "businesses"],
-              "query": [
-                {
-                  "key": "status",
-                  "value": "active",
-                  "description": "Filter by status: active, trial, expired"
-                },
-                {
-                  "key": "search",
-                  "value": "",
-                  "description": "Search by business name or email"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "Update Business Status",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"status\": \"suspended\"\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/superadmin/businesses/1/status",
-              "host": ["{{base_url}}"],
-              "path": ["api", "superadmin", "businesses", "1", "status"]
-            }
-          }
-        },
-        {
-          "name": "Get Subscription Plans",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/superadmin/subscription-plans",
-              "host": ["{{base_url}}"],
-              "path": ["api", "superadmin", "subscription-plans"]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "🏢 Business Admin Management",
-      "item": [
-        {
-          "name": "Get Hospital Settings",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/hospital/settings?hospital_id=1",
-              "host": ["{{base_url}}"],
-              "path": ["api", "hospital", "settings"],
-              "query": [
-                {
-                  "key": "hospital_id",
-                  "value": "1"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "Update Payment Settings",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"hospital_id\": 1,\n    \"provider\": \"razorpay\",\n    \"key_id\": \"rzp_test_key\",\n    \"key_secret\": \"rzp_test_secret\",\n    \"webhook_secret\": \"webhook_secret\",\n    \"is_active\": true\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/hospital/settings/payment",
-              "host": ["{{base_url}}"],
-              "path": ["api", "hospital", "settings", "payment"]
-            }
-          }
-        },
-        {
-          "name": "Update WhatsApp Settings",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"hospital_id\": 1,\n    \"access_token\": \"whatsapp_access_token\",\n    \"phone_number_id\": \"phone_number_id\",\n    \"business_account_id\": \"business_account_id\",\n    \"language_code\": \"en\",\n    \"is_active\": true\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/hospital/settings/whatsapp",
-              "host": ["{{base_url}}"],
-              "path": ["api", "hospital", "settings", "whatsapp"]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "⏰ Appointment Delay Management",
-      "item": [
-        {
-          "name": "Get Delay Statistics",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/appointment-delays/stats?hospital_id=1&date=2026-01-27",
-              "host": ["{{base_url}}"],
-              "path": ["api", "appointment-delays", "stats"],
-              "query": [
-                {
-                  "key": "hospital_id",
-                  "value": "1"
-                },
-                {
-                  "key": "date",
-                  "value": "2026-01-27",
-                  "description": "Optional: defaults to today"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "Mark Appointment Started",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"appointment_id\": 1\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/appointment-delays/mark-started",
-              "host": ["{{base_url}}"],
-              "path": ["api", "appointment-delays", "mark-started"]
-            }
-          }
-        },
-        {
-          "name": "Manual Delay Check",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/appointment-delays/check-delays",
-              "host": ["{{base_url}}"],
-              "path": ["api", "appointment-delays", "check-delays"]
-            },
-            "description": "Manually trigger delay check (for testing)"
-          }
-        }
-      ]
-    },
-    {
-      "name": "👨⚕️ Doctor Management",
-      "item": [
-        {
-          "name": "Get Doctor List",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/doctor_list",
-              "host": ["{{base_url}}"],
-              "path": ["api", "doctor_list"]
-            }
-          }
-        },
-        {
-          "name": "Add Doctor",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"first_name\": \"Dr. John\",\n    \"surname\": \"Doe\",\n    \"email\": \"doctor@example.com\",\n    \"phone\": \"9876543210\",\n    \"aadhar_number\": \"123456789012\",\n    \"department_id\": 1,\n    \"password\": \"doctor123\",\n    \"confirm_password\": \"doctor123\",\n    \"dob\": \"1985-01-15\",\n    \"age\": 38,\n    \"gender\": \"Male\",\n    \"address\": \"123 Medical Street\",\n    \"qualification\": \"BDS, MDS\",\n    \"specialist\": \"Orthodontist\",\n    \"hospital_id\": 1\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/store_doctor",
-              "host": ["{{base_url}}"],
-              "path": ["api", "store_doctor"]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "👥 Patient Management",
-      "item": [
-        {
-          "name": "Get Patient List",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/patient_list",
-              "host": ["{{base_url}}"],
-              "path": ["api", "patient_list"]
-            }
-          }
-        },
-        {
-          "name": "Add Patient",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"first_name\": \"John\",\n    \"surname\": \"Patient\",\n    \"email\": \"patient@example.com\",\n    \"phone\": \"9876543219\",\n    \"dob\": \"1990-01-01\",\n    \"age\": 34,\n    \"gender\": \"Male\",\n    \"address\": \"Patient Address\",\n    \"hospital_id\": 1\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/store_patient",
-              "host": ["{{base_url}}"],
-              "path": ["api", "store_patient"]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "📅 Appointment Management",
-      "item": [
-        {
-          "name": "Get Appointment List",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/appointment_list",
-              "host": ["{{base_url}}"],
-              "path": ["api", "appointment_list"]
-            }
-          }
-        },
-        {
-          "name": "Create Appointment",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"patient_id\": 8,\n    \"doctor_id\": 4,\n    \"treatment_id\": 1,\n    \"service_id\": 1,\n    \"appointment_date\": \"2026-01-28\",\n    \"appointment_time\": \"10:00\",\n    \"treatment_name\": \"Dental Checkup\"\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/store_appointment",
-              "host": ["{{base_url}}"],
-              "path": ["api", "store_appointment"]
-            }
-          }
-        }
-      ]
-    }
-  ]
-}
+### Color Palette
+```dart
+Primary Colors:
+- Sea Blue: Color(0xFF07BDFF)
+- Deep Blue: Color(0xFF145BD9)
+
+Theme Integration:
+- Automatic theme adaptation
+- Context-aware color usage
+- Accessibility compliance
+```
+
+### Typography
+- Material Design typography scale
+- Theme-aware text styling
+- Consistent font weights and sizes
+
+## 🔧 Getting Started
+
+### Prerequisites
+- Flutter SDK (3.0+)
+- Dart SDK (3.0+)
+- Android Studio / VS Code
+- Laravel Backend Setup
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-repo/witte-dental-pms.git
+   cd witte-dental-pms
+   ```
+
+2. **Install dependencies**
+   ```bash
+   flutter pub get
+   ```
+
+3. **Configure API endpoints**
+   ```dart
+   // lib/core/constants/api_constants.dart
+   static const String baseUrl = 'http://your-api-url.com';
+   ```
+
+4. **Run the application**
+   ```bash
+   flutter run
+   ```
+
+## 📱 User Experience Features
+
+### Navigation
+- **Double-tap to exit**: Prevents accidental app closure
+- **Logout confirmation**: Secure session management
+- **Role-based routing**: Automatic dashboard selection
+
+### Offline Capability
+- **Local data caching**: Hive storage integration
+- **Sync on reconnection**: Automatic data synchronization
+- **Offline indicators**: Clear connectivity status
+
+### Performance Optimizations
+- **Lazy loading**: Efficient memory usage
+- **Image caching**: Faster load times
+- **Background sync**: Seamless data updates
+
+## 🔒 Security Features
+
+- **JWT Authentication**: Secure token-based auth
+- **Role-based Access**: Granular permission control
+- **Data Encryption**: Sensitive data protection
+- **Session Management**: Automatic timeout handling
+
+## 📊 Analytics & Reporting
+
+### Business Intelligence
+- **Revenue Analytics**: Financial performance tracking
+- **Patient Demographics**: Population insights
+- **Appointment Analytics**: Scheduling efficiency
+- **Staff Performance**: Productivity metrics
+
+### Real-time Dashboards
+- **Live KPIs**: Instant metric updates
+- **Interactive Charts**: Visual data representation
+- **Export Capabilities**: Data export options
+
+## 🚀 Future Enhancements
+
+- [ ] **Telemedicine Integration**: Video consultation support
+- [ ] **AI-powered Analytics**: Predictive insights
+- [ ] **Multi-language Support**: Localization features
+- [ ] **Advanced Reporting**: Custom report builder
+- [ ] **Mobile Payments**: Enhanced payment options
+- [ ] **Patient Portal**: Self-service capabilities
+
+## 🤝 Contributing
+
+We welcome contributions! Please read our contributing guidelines and submit pull requests for any improvements.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 📞 Support
+
+For support and queries:
+- Email: support@witte.com
+- Documentation: [docs.witte.com](https://docs.witte.com)
+- Issues: [GitHub Issues](https://github.com/your-repo/issues)
+
+---
+
+<div align="center">
+  <p><strong>Built with ❤️ for the dental community</strong></p>
+  <p>© 2026 Witte Dental Solutions. All rights reserved.</p>
+</div>

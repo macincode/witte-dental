@@ -4,15 +4,15 @@ import 'package:hive/hive.dart';
 class Hospital extends HiveObject {
   Hospital({
     required this.id,
-    this.businessId,
     required this.name,
-    this.patientRegPrefix,
     required this.code,
+    required this.isMain,
+    this.businessId,
+    this.patientRegPrefix,
     this.address,
     this.phone,
     this.email,
     this.licenseNumber,
-    required this.isMain,
     this.status,
     this.settings,
     this.paymentSettings,

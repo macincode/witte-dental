@@ -4,9 +4,8 @@ import 'package:witte_dental_pms/features/auth/presentation/controllers/auth_con
 import '../../data/models/hospital_dashboard_response.dart';
 
 class HospitalDashboardController extends GetxController {
-  final int hospitalId;
-
   HospitalDashboardController(this.hospitalId);
+  final int hospitalId;
 
   final RxBool _isLoading = false.obs;
   final RxString _errorMessage = ''.obs;

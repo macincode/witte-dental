@@ -315,7 +315,9 @@ class _LoginPageState extends State<LoginPage> {
                                   // Use business admin login as default
                                   // In a real app, you'd determine this based on role selection
                                   authController.businessAdminLogin(
-                                      email, password);
+                                    email,
+                                    password,
+                                  );
                                 },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent,

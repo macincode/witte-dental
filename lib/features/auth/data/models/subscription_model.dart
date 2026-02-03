@@ -3,11 +3,11 @@ import 'package:hive/hive.dart';
 @HiveType(typeId: 4)
 class Subscription extends HiveObject {
   Subscription({
+    required this.status,
     this.id,
     this.businessId,
     this.planId,
     this.razorpaySubscriptionId,
-    required this.status,
     this.currentPeriodStart,
     this.currentPeriodEnd,
     this.trialEndsAt,
@@ -107,8 +107,8 @@ class SubscriptionPlan extends HiveObject {
     required this.billingCycle,
     required this.features,
     required this.limits,
-    this.razorpayPlanId,
     required this.isActive,
+    this.razorpayPlanId,
     this.createdAt,
     this.updatedAt,
   });

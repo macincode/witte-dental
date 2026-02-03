@@ -4,9 +4,6 @@ import 'package:witte_dental_pms/features/auth/data/models/hospital_model.dart';
 
 @JsonSerializable()
 class AdminDashboardResponse {
-  final bool success;
-  final AdminDashboardData data;
-
   AdminDashboardResponse({
     required this.success,
     required this.data,
@@ -18,6 +15,8 @@ class AdminDashboardResponse {
       data: AdminDashboardData.fromJson(json['data']),
     );
   }
+  final bool success;
+  final AdminDashboardData data;
 
   Map<String, dynamic> toJson() {
     return {
@@ -29,10 +28,6 @@ class AdminDashboardResponse {
 
 @JsonSerializable()
 class AdminDashboardData {
-  final Business business;
-  final DashboardStats stats;
-  final List<Hospital> hospitals;
-
   AdminDashboardData({
     required this.business,
     required this.stats,
@@ -47,6 +42,9 @@ class AdminDashboardData {
           (json['hospitals'] as List).map((e) => Hospital.fromJson(e)).toList(),
     );
   }
+  final Business business;
+  final DashboardStats stats;
+  final List<Hospital> hospitals;
 
   Map<String, dynamic> toJson() {
     return {
@@ -59,15 +57,6 @@ class AdminDashboardData {
 
 @JsonSerializable()
 class DashboardStats {
-  @JsonKey(name: 'total_hospitals')
-  final int totalHospitals;
-  @JsonKey(name: 'total_patients')
-  final int totalPatients;
-  @JsonKey(name: 'total_staff')
-  final int totalStaff;
-  @JsonKey(name: 'appointments_today')
-  final int appointmentsToday;
-
   DashboardStats({
     required this.totalHospitals,
     required this.totalPatients,
@@ -83,6 +72,14 @@ class DashboardStats {
       appointmentsToday: json['appointments_today'] ?? 0,
     );
   }
+  @JsonKey(name: 'total_hospitals')
+  final int totalHospitals;
+  @JsonKey(name: 'total_patients')
+  final int totalPatients;
+  @JsonKey(name: 'total_staff')
+  final int totalStaff;
+  @JsonKey(name: 'appointments_today')
+  final int appointmentsToday;
 
   Map<String, dynamic> toJson() {
     return {

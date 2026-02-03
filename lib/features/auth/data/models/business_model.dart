@@ -6,10 +6,10 @@ import 'package:witte_dental_pms/features/auth/data/models/subscription_model.da
 class Business extends HiveObject {
   Business({
     required this.id,
-    this.organizationId,
     required this.name,
-    this.slug,
     required this.businessType,
+    this.organizationId,
+    this.slug,
     this.ownerName,
     this.ownerEmail,
     this.ownerPhone,

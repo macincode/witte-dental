@@ -39,6 +39,7 @@
         android:requestLegacyExternalStorage="false"
         android:largeHeap="true"
         android:hardwareAccelerated="true"
+        android:enableOnBackInvokedCallback="true"
         android:theme="@style/LaunchTheme">
         
         <activity

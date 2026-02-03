@@ -1,8 +1,4 @@
 class HospitalDashboardResponse {
-  final bool status;
-  final String message;
-  final HospitalDashboardData data;
-
   HospitalDashboardResponse({
     required this.status,
     required this.message,
@@ -16,25 +12,12 @@ class HospitalDashboardResponse {
       data: HospitalDashboardData.fromJson(json['data'] ?? {}),
     );
   }
+  final bool status;
+  final String message;
+  final HospitalDashboardData data;
 }
 
 class HospitalDashboardData {
-  final String hospitalId;
-  final HospitalStats stats;
-  final List<dynamic> todayAppointments;
-  final List<dynamic> upcomingAppointments;
-  final List<RecentActivity> recentActivities;
-  final CalendarData calendarData;
-  final RevenueChart revenueChart;
-  final QuickStats quickStats;
-  final List<dynamic> topTreatments;
-  final List<dynamic> doctorPerformance;
-  final PatientRetention patientRetention;
-  final PaymentStats paymentStats;
-  final List<dynamic> peakHours;
-  final DelayStats delayStats;
-  final Meta meta;
-
   HospitalDashboardData({
     required this.hospitalId,
     required this.stats,
@@ -76,18 +59,24 @@ class HospitalDashboardData {
       meta: Meta.fromJson(json['meta'] ?? {}),
     );
   }
+  final String hospitalId;
+  final HospitalStats stats;
+  final List<dynamic> todayAppointments;
+  final List<dynamic> upcomingAppointments;
+  final List<RecentActivity> recentActivities;
+  final CalendarData calendarData;
+  final RevenueChart revenueChart;
+  final QuickStats quickStats;
+  final List<dynamic> topTreatments;
+  final List<dynamic> doctorPerformance;
+  final PatientRetention patientRetention;
+  final PaymentStats paymentStats;
+  final List<dynamic> peakHours;
+  final DelayStats delayStats;
+  final Meta meta;
 }
 
 class HospitalStats {
-  final int totalPatients;
-  final int todayAppointments;
-  final double monthlyRevenue;
-  final int monthlyAppointments;
-  final int activeStaff;
-  final int pendingAppointments;
-  final int completedTreatments;
-  final Trends trends;
-
   HospitalStats({
     required this.totalPatients,
     required this.todayAppointments,
@@ -111,13 +100,17 @@ class HospitalStats {
       trends: Trends.fromJson(json['trends'] ?? {}),
     );
   }
+  final int totalPatients;
+  final int todayAppointments;
+  final double monthlyRevenue;
+  final int monthlyAppointments;
+  final int activeStaff;
+  final int pendingAppointments;
+  final int completedTreatments;
+  final Trends trends;
 }
 
 class Trends {
-  final TrendData patients;
-  final TrendData appointments;
-  final TrendData revenue;
-
   Trends({
     required this.patients,
     required this.appointments,
@@ -131,12 +124,12 @@ class Trends {
       revenue: TrendData.fromJson(json['revenue'] ?? {}),
     );
   }
+  final TrendData patients;
+  final TrendData appointments;
+  final TrendData revenue;
 }
 
 class TrendData {
-  final int value;
-  final String direction;
-
   TrendData({
     required this.value,
     required this.direction,
@@ -148,14 +141,11 @@ class TrendData {
       direction: json['direction'] ?? 'up',
     );
   }
+  final int value;
+  final String direction;
 }
 
 class RecentActivity {
-  final String type;
-  final String message;
-  final String time;
-  final String icon;
-
   RecentActivity({
     required this.type,
     required this.message,
@@ -171,12 +161,13 @@ class RecentActivity {
       icon: json['icon'] ?? '',
     );
   }
+  final String type;
+  final String message;
+  final String time;
+  final String icon;
 }
 
 class CalendarData {
-  final String currentMonth;
-  final List<dynamic> appointmentsByDate;
-
   CalendarData({
     required this.currentMonth,
     required this.appointmentsByDate,
@@ -188,12 +179,11 @@ class CalendarData {
       appointmentsByDate: json['appointments_by_date'] ?? [],
     );
   }
+  final String currentMonth;
+  final List<dynamic> appointmentsByDate;
 }
 
 class RevenueChart {
-  final List<MonthlyData> monthlyData;
-  final double totalRevenue;
-
   RevenueChart({
     required this.monthlyData,
     required this.totalRevenue,
@@ -208,13 +198,11 @@ class RevenueChart {
       totalRevenue: (json['total_revenue'] ?? 0).toDouble(),
     );
   }
+  final List<MonthlyData> monthlyData;
+  final double totalRevenue;
 }
 
 class MonthlyData {
-  final String month;
-  final double revenue;
-  final int appointments;
-
   MonthlyData({
     required this.month,
     required this.revenue,
@@ -228,11 +216,12 @@ class MonthlyData {
       appointments: json['appointments'] ?? 0,
     );
   }
+  final String month;
+  final double revenue;
+  final int appointments;
 }
 
 class QuickStats {
-  final PatientDemographics patientDemographics;
-
   QuickStats({
     required this.patientDemographics,
   });
@@ -243,11 +232,10 @@ class QuickStats {
           PatientDemographics.fromJson(json['patient_demographics'] ?? {}),
     );
   }
+  final PatientDemographics patientDemographics;
 }
 
 class PatientDemographics {
-  final GenderDistribution genderDistribution;
-
   PatientDemographics({
     required this.genderDistribution,
   });
@@ -258,12 +246,10 @@ class PatientDemographics {
           GenderDistribution.fromJson(json['gender_distribution'] ?? {}),
     );
   }
+  final GenderDistribution genderDistribution;
 }
 
 class GenderDistribution {
-  final GenderData male;
-  final GenderData female;
-
   GenderDistribution({
     required this.male,
     required this.female,
@@ -275,12 +261,11 @@ class GenderDistribution {
       female: GenderData.fromJson(json['female'] ?? {}),
     );
   }
+  final GenderData male;
+  final GenderData female;
 }
 
 class GenderData {
-  final int count;
-  final int percentage;
-
   GenderData({
     required this.count,
     required this.percentage,
@@ -292,12 +277,11 @@ class GenderData {
       percentage: json['percentage'] ?? 0,
     );
   }
+  final int count;
+  final int percentage;
 }
 
 class PatientRetention {
-  final int newPatientsThisMonth;
-  final int retentionRate;
-
   PatientRetention({
     required this.newPatientsThisMonth,
     required this.retentionRate,
@@ -309,13 +293,11 @@ class PatientRetention {
       retentionRate: json['retention_rate'] ?? 0,
     );
   }
+  final int newPatientsThisMonth;
+  final int retentionRate;
 }
 
 class PaymentStats {
-  final double collectedThisMonth;
-  final double pendingPayments;
-  final int collectionRate;
-
   PaymentStats({
     required this.collectedThisMonth,
     required this.pendingPayments,
@@ -329,14 +311,12 @@ class PaymentStats {
       collectionRate: json['collection_rate'] ?? 0,
     );
   }
+  final double collectedThisMonth;
+  final double pendingPayments;
+  final int collectionRate;
 }
 
 class DelayStats {
-  final int totalAppointments;
-  final int delayedAppointments;
-  final int avgDelayMinutes;
-  final int onTimePercentage;
-
   DelayStats({
     required this.totalAppointments,
     required this.delayedAppointments,
@@ -352,13 +332,13 @@ class DelayStats {
       onTimePercentage: json['on_time_percentage'] ?? 100,
     );
   }
+  final int totalAppointments;
+  final int delayedAppointments;
+  final int avgDelayMinutes;
+  final int onTimePercentage;
 }
 
 class Meta {
-  final String lastUpdated;
-  final int refreshInterval;
-  final String timezone;
-
   Meta({
     required this.lastUpdated,
     required this.refreshInterval,
@@ -372,4 +352,7 @@ class Meta {
       timezone: json['timezone'] ?? 'UTC',
     );
   }
+  final String lastUpdated;
+  final int refreshInterval;
+  final String timezone;
 }

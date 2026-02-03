@@ -7,9 +7,9 @@ part 'admin_login_response.g.dart';
 @HiveType(typeId: 0)
 class AdminLoginResponse extends HiveObject {
   AdminLoginResponse({
+    required this.message,
     this.success,
     this.status,
-    required this.message,
     this.userType,
     this.data,
     this.token,
