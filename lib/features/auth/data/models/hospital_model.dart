@@ -13,6 +13,14 @@ class Hospital extends HiveObject {
     this.phone,
     this.email,
     this.licenseNumber,
+    this.logo,
+    this.website,
+    this.description,
+    this.operatingHours,
+    this.services,
+    this.establishedYear,
+    this.totalBeds,
+    this.socialMedia,
     this.status,
     this.settings,
     this.paymentSettings,
@@ -35,6 +43,14 @@ class Hospital extends HiveObject {
       phone: json['phone'],
       email: json['email'],
       licenseNumber: json['license_number'],
+      logo: json['logo'],
+      website: json['website'],
+      description: json['description'],
+      operatingHours: json['operating_hours'],
+      services: json['services'],
+      establishedYear: json['established_year'],
+      totalBeds: json['total_beds'],
+      socialMedia: json['social_media'],
       isMain: json['is_main'],
       status: json['status'],
       settings: json['settings'],
@@ -74,6 +90,30 @@ class Hospital extends HiveObject {
 
   @HiveField(8)
   final String? licenseNumber;
+
+  @HiveField(19)
+  final String? logo;
+
+  @HiveField(20)
+  final String? website;
+
+  @HiveField(21)
+  final String? description;
+
+  @HiveField(22)
+  final Map<String, dynamic>? operatingHours;
+
+  @HiveField(23)
+  final List<dynamic>? services;
+
+  @HiveField(24)
+  final int? establishedYear;
+
+  @HiveField(25)
+  final int? totalBeds;
+
+  @HiveField(26)
+  final Map<String, dynamic>? socialMedia;
 
   @HiveField(9)
   final bool isMain;
@@ -116,6 +156,14 @@ class Hospital extends HiveObject {
       'phone': phone,
       'email': email,
       'license_number': licenseNumber,
+      'logo': logo,
+      'website': website,
+      'description': description,
+      'operating_hours': operatingHours,
+      'services': services,
+      'established_year': establishedYear,
+      'total_beds': totalBeds,
+      'social_media': socialMedia,
       'is_main': isMain,
       'status': status,
       'settings': settings,

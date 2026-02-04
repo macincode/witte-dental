@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/services/dio_service.dart';
@@ -68,5 +69,16 @@ class PatientListController extends GetxController {
     filteredPatients.value = filtered;
   }
 
-  List<String> get genderOptions => ['All', 'Male', 'Female'];
+  void search(String query) {
+    searchQuery.value = query;
+    applyFilters();
+  }
+
+  void showFilterDialog(BuildContext context) {
+    // TODO: Implement filter dialog
+  }
+
+  void toggleView() {
+    isGridView.value = !isGridView.value;
+  }
 }

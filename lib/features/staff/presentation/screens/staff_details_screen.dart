@@ -17,6 +17,7 @@ class StaffDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(staff.fullName),
         backgroundColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+        foregroundColor: isDark ? Colors.white : Colors.black87,
         elevation: 0,
       ),
       body: SingleChildScrollView(
@@ -32,8 +33,11 @@ class StaffDetailsScreen extends StatelessWidget {
                 _buildInfoRow('Phone', staff.phone, Icons.phone),
                 _buildInfoRow('Date of Birth', staff.dob, Icons.cake),
                 _buildInfoRow('Age', '${staff.age} years', Icons.person),
-                _buildInfoRow('Gender', staff.gender,
-                    staff.gender == 'Male' ? Icons.male : Icons.female),
+                _buildInfoRow(
+                  'Gender',
+                  staff.gender,
+                  staff.gender == 'Male' ? Icons.male : Icons.female,
+                ),
               ],
               cardColor,
               isDark,
@@ -44,7 +48,10 @@ class StaffDetailsScreen extends StatelessWidget {
               [
                 _buildInfoRow('Category', staff.staffCategory, Icons.work),
                 _buildInfoRow(
-                    'Qualification', staff.qualification, Icons.school),
+                  'Qualification',
+                  staff.qualification,
+                  Icons.school,
+                ),
                 _buildInfoRow('Address', staff.address, Icons.location_on),
               ],
               cardColor,
@@ -56,11 +63,20 @@ class StaffDetailsScreen extends StatelessWidget {
               [
                 _buildInfoRow('Staff ID', '#${staff.id}', Icons.badge),
                 _buildInfoRow(
-                    'Category ID', '#${staff.staffCategoryId}', Icons.category),
-                _buildInfoRow('Status',
-                    staff.status == 1 ? 'Active' : 'Inactive', Icons.info),
-                _buildInfoRow('Joined', staff.createdAt.split(' ')[0],
-                    Icons.calendar_today),
+                  'Category ID',
+                  '#${staff.staffCategoryId}',
+                  Icons.category,
+                ),
+                _buildInfoRow(
+                  'Status',
+                  staff.status == 1 ? 'Active' : 'Inactive',
+                  Icons.info,
+                ),
+                _buildInfoRow(
+                  'Joined',
+                  staff.createdAt.split(' ')[0],
+                  Icons.calendar_today,
+                ),
               ],
               cardColor,
               isDark,
@@ -72,7 +88,11 @@ class StaffDetailsScreen extends StatelessWidget {
   }
 
   Widget _buildProfileHeader(
-      Staff staff, Color cardColor, bool isDark, Color primaryBlue) {
+    Staff staff,
+    Color cardColor,
+    bool isDark,
+    Color primaryBlue,
+  ) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -143,7 +163,11 @@ class StaffDetailsScreen extends StatelessWidget {
   }
 
   Widget _buildInfoCard(
-      String title, List<Widget> children, Color cardColor, bool isDark) {
+    String title,
+    List<Widget> children,
+    Color cardColor,
+    bool isDark,
+  ) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(

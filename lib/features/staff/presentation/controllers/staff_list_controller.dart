@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/services/dio_service.dart';
@@ -81,5 +82,18 @@ class StaffListController extends GetxController {
   List<String> get categoryOptions {
     final categories = staff.map((s) => s.staffCategory).toSet().toList();
     return ['All', ...categories];
+  }
+
+  void search(String query) {
+    searchQuery.value = query;
+    applyFilters();
+  }
+
+  void showFilterDialog(BuildContext context) {
+    // TODO: Implement filter dialog
+  }
+
+  void toggleView() {
+    isGridView.value = !isGridView.value;
   }
 }

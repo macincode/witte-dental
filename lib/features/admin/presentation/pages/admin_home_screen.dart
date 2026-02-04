@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:witte_dental_pms/core/controllers/language_controller.dart';
@@ -655,15 +656,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                             : _lightBlue.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Center(
-                        child: Icon(
-                          isMain
-                              ? Icons.star_rounded
-                              : Icons.local_hospital_rounded,
-                          color: isMain ? _primaryBlue : _lightBlue,
-                          size: 26,
-                        ),
-                      ),
+                      child: _buildHospitalLogo(hospital, isMain),
                     ),
                     const SizedBox(width: 16),
                     // Info Column
@@ -838,6 +831,50 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
       return false;
     }
     return true;
+  }
+
+  Widget _buildHospitalLogo(dynamic hospital, bool isMain) {
+    String? logoUrl;
+
+    if (hospital is Map<String, dynamic>) {
+      logoUrl = hospital['logo'] as String?;
+    } else {
+      logoUrl = hospital.logo;
+    }
+
+    if (logoUrl != null && logoUrl.isNotEmpty) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: CachedNetworkImage(
+          imageUrl: logoUrl,
+          fit: BoxFit.cover,
+          width: 50,
+          height: 50,
+          placeholder: (context, url) => Center(
+            child: Icon(
+              isMain ? Icons.star_rounded : Icons.local_hospital_rounded,
+              color: isMain ? _primaryBlue : _lightBlue,
+              size: 26,
+            ),
+          ),
+          errorWidget: (context, url, error) => Center(
+            child: Icon(
+              isMain ? Icons.star_rounded : Icons.local_hospital_rounded,
+              color: isMain ? _primaryBlue : _lightBlue,
+              size: 26,
+            ),
+          ),
+        ),
+      );
+    }
+
+    return Center(
+      child: Icon(
+        isMain ? Icons.star_rounded : Icons.local_hospital_rounded,
+        color: isMain ? _primaryBlue : _lightBlue,
+        size: 26,
+      ),
+    );
   }
 
   void _showLogoutDialog(BuildContext context) {
