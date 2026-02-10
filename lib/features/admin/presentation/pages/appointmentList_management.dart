@@ -130,7 +130,7 @@ class _AppointmentlistManagementState extends State<AppointmentlistManagement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text('Appointments List'),
         elevation: 0,

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:witte_dental_pms/core/constants/app_constants.dart';
 import 'package:witte_dental_pms/core/controllers/theme_controller.dart';
-import 'package:witte_dental_pms/features/admin/details_card.dart';
+import 'package:witte_dental_pms/features/admin/presentation/pages/details_card.dart';
 
-import '../shared/widgets/network_aware_widget.dart';
+import '../../../shared/widgets/network_aware_widget.dart';
 
 class InquiryScreen extends StatefulWidget {
   const InquiryScreen({super.key});
@@ -20,7 +20,7 @@ class _InquiryScreenState extends State<InquiryScreen> {
 
     return NetworkAwareWidget(
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surface,
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           title: const Text('Inquiries'),
         ),

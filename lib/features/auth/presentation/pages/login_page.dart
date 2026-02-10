@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
 
     return NetworkAwareWidget(
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surface,
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-class PharmacylistManagement extends StatefulWidget {
-  const PharmacylistManagement({super.key});
+class InventorylistManagement extends StatefulWidget {
+  const InventorylistManagement({super.key});
 
   @override
-  State<PharmacylistManagement> createState() => _PharmacylistManagementState();
+  State<InventorylistManagement> createState() =>
+      _InventorylistManagementState();
 }
 
-class _PharmacylistManagementState extends State<PharmacylistManagement> {
+class _InventorylistManagementState extends State<InventorylistManagement> {
   int? _selectedIndex;
   final List<String> _options = [
     'All Items',
@@ -20,14 +21,73 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text('All Medicines List'),
+        title: const Text('Inventory List'),
         elevation: 0,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: List<Widget>.generate(
+                  _options.length,
+                  (int index) {
+                    final isSelected = _selectedIndex == index;
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 12),
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Theme.of(context).colorScheme.surface,
+                              blurRadius: 8,
+                              offset: const Offset(2, 2),
+                            ),
+                          ],
+                        ),
+                        child: ChoiceChip(
+                          label: Text(
+                            _options[index],
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  color: isSelected
+                                      ? Colors.white
+                                      : Colors.grey[600],
+                                  fontWeight: isSelected
+                                      ? FontWeight.w600
+                                      : FontWeight.w500,
+                                ),
+                          ),
+                          selected: isSelected,
+                          checkmarkColor: Colors.white,
+                          selectedColor: Theme.of(context).colorScheme.primary,
+                          backgroundColor: Colors.grey[300],
+                          side: BorderSide.none,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                          onSelected: (bool selected) {
+                            setState(() {
+                              _selectedIndex = selected ? index : null;
+                            });
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Row(
@@ -46,7 +106,7 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
                     ),
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: 'Search medicines by name...',
+                        hintText: 'Search by material name or make...',
                         hintStyle:
                             TextStyle(color: Colors.grey[400], fontSize: 14),
                         border: OutlineInputBorder(
@@ -99,8 +159,8 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
               itemCount: 20,
               itemBuilder: (context, index) {
                 final categories = [
-                  'Toothbrush & Interdental Aids',
-                  'Oral Gels',
+                  'ULTRADENT SILANE',
+                  'DPI PORCELAIN ETCH',
                 ];
                 final icons = [
                   Icons.medical_services,
@@ -113,10 +173,20 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
 
                 final categoryName = categories[index % categories.length];
                 final category = [
-                  'STIM FLOSS',
-                  'MUCOPAIN 15GM GEL',
+                  'DPI',
+                  'RADIX',
                 ];
                 final categorynum = category[index % categories.length];
+
+                final categoryService = [
+                  'Periodontics',
+                  'Oral Medicine and Pathology',
+                ];
+                final categoryServices =
+                    categoryService[index % categories.length];
+
+                final categoryIcon = icons[index % icons.length];
+                final categoryColor = colors[index % colors.length];
 
                 return Container(
                   margin: const EdgeInsets.only(bottom: 12),
@@ -180,41 +250,11 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
                                 ],
                               ),
                             ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 4,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .primary
-                                    .withOpacity(0.09),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'In Stock',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 10,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
-                                        ),
-                                  ),
-                                ],
-                              ),
-                            ),
                           ],
                         ),
                         const SizedBox(height: 5),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          spacing: 5,
                           children: [
                             Container(
                               padding: const EdgeInsets.symmetric(
@@ -231,7 +271,7 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
                               child: Row(
                                 children: [
                                   Text(
-                                    'Stock Available:',
+                                    'Stock In:',
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodySmall
@@ -244,7 +284,7 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
                                         ),
                                   ),
                                   Text(
-                                    '6',
+                                    '1',
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodySmall
@@ -274,26 +314,69 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
                               child: Row(
                                 children: [
                                   Text(
-                                    'Price (₹):',
+                                    'Stock Out:',
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodySmall
                                         ?.copyWith(
                                           fontWeight: FontWeight.w500,
-                                          fontSize: 12,
+                                          fontSize: 10,
                                           color: Theme.of(context)
                                               .colorScheme
                                               .onSecondary,
                                         ),
                                   ),
                                   Text(
-                                    '6',
+                                    '-1',
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodySmall
                                         ?.copyWith(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 12,
+                                          fontSize: 10,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.09),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Available:',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 10,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondary,
+                                        ),
+                                  ),
+                                  Text(
+                                    'Active',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 10,
                                           color: Theme.of(context)
                                               .colorScheme
                                               .primary,
@@ -306,7 +389,7 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
                         ),
                         const SizedBox(height: 12),
                         Row(
-                          spacing: 10,
+                          spacing: 5,
                           children: [
                             Expanded(
                               child: DecoratedBox(
@@ -330,7 +413,9 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
                                 ),
                                 child: ElevatedButton.icon(
                                   onPressed: () {
-                                    AddPharmacyHelper.addPharmacySheet(context);
+                                    AddInventoryHelper.addInventorySheet(
+                                      context,
+                                    );
                                   },
                                   icon: const Icon(
                                     Icons.edit,
@@ -425,8 +510,8 @@ class _PharmacylistManagementState extends State<PharmacylistManagement> {
   }
 }
 
-class AddPharmacyHelper {
-  static void addPharmacySheet(BuildContext context) {
+class AddInventoryHelper {
+  static void addInventorySheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -477,7 +562,7 @@ class AddPharmacyHelper {
                     ),
                     const SizedBox(width: 16),
                     Text(
-                      'Add New Medicine',
+                      'Add New Inventory Item',
                       style:
                           Theme.of(context).textTheme.headlineSmall?.copyWith(
                                 fontWeight: FontWeight.w600,
@@ -492,31 +577,23 @@ class AddPharmacyHelper {
                       children: [
                         _buildFormField(
                           context,
-                          'Category',
-                          isRequired: true,
-                          child: DropdownButtonFormField<String>(
-                            decoration: _getInputDecoration(
-                              context,
-                            ),
-                            items: ['Antibiotics', 'Steroids']
-                                .map(
-                                  (e) => DropdownMenuItem(
-                                    value: e,
-                                    child: Text(e),
-                                  ),
-                                )
-                                .toList(),
-                            onChanged: (value) {},
-                          ),
-                        ),
-                        _buildFormField(
-                          context,
-                          'Medicine Name',
+                          'Material Name',
                           isRequired: true,
                           child: TextField(
                             decoration: _getInputDecoration(
                               context,
-                              'Enter medicine name',
+                              'Enter material name',
+                            ),
+                          ),
+                        ),
+                        _buildFormField(
+                          context,
+                          'Make',
+                          isRequired: true,
+                          child: TextField(
+                            decoration: _getInputDecoration(
+                              context,
+                              'Enter make/brand',
                             ),
                           ),
                         ),
@@ -533,13 +610,21 @@ class AddPharmacyHelper {
                         ),
                         _buildFormField(
                           context,
-                          'Price (₹) ',
+                          'Category',
                           isRequired: true,
-                          child: TextField(
+                          child: DropdownButtonFormField<String>(
                             decoration: _getInputDecoration(
                               context,
-                              'Enter price',
                             ),
+                            items: ['Materials', 'Instruments', 'Stationary']
+                                .map(
+                                  (e) => DropdownMenuItem(
+                                    value: e,
+                                    child: Text(e),
+                                  ),
+                                )
+                                .toList(),
+                            onChanged: (value) {},
                           ),
                         ),
                         const SizedBox(height: 24),
@@ -616,7 +701,7 @@ class AddPharmacyHelper {
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                   ),
-                                  child: const Text('Submit'),
+                                  child: const Text('Add Item'),
                                 ),
                               ),
                             ),

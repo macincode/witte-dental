@@ -1,4 +1,4 @@
-import 'package:witte_dental_pms/core/constants/api_constants.dart';
+import 'package:witte_dental_pms/core/constants/api_endpoints.dart';
 import 'package:witte_dental_pms/core/services/dio_service.dart';
 import 'package:witte_dental_pms/features/shared/widgets/global_widgets.dart';
 import '../models/admin_dashboard_response.dart';

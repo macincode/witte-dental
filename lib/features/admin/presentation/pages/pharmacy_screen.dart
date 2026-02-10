@@ -2,28 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:witte_dental_pms/core/constants/app_constants.dart';
 import 'package:witte_dental_pms/core/controllers/theme_controller.dart';
-import 'package:witte_dental_pms/features/admin/details_card.dart';
-import 'package:witte_dental_pms/features/admin/inventoryList_management.dart';
+import 'package:witte_dental_pms/features/admin/presentation/pages/details_card.dart';
+import 'package:witte_dental_pms/features/admin/presentation/pages/pharmacyList_management.dart';
 
-import '../shared/widgets/network_aware_widget.dart';
+import '../../../shared/widgets/network_aware_widget.dart';
 
-class InventoryScreen extends StatefulWidget {
-  const InventoryScreen({super.key});
+class PharmacyScreen extends StatefulWidget {
+  const PharmacyScreen({super.key});
 
   @override
-  State<InventoryScreen> createState() => _InventoryScreenState();
+  State<PharmacyScreen> createState() => _PharmacyScreenState();
 }
 
-class _InventoryScreenState extends State<InventoryScreen> {
+class _PharmacyScreenState extends State<PharmacyScreen> {
   @override
   Widget build(BuildContext context) {
     final themeController = Get.find<ThemeController>();
 
     return NetworkAwareWidget(
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surface,
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
-          title: const Text('Inventory'),
+          title: const Text('Pharmacy'),
         ),
         body: Container(
           width: double.infinity,
@@ -33,8 +33,8 @@ class _InventoryScreenState extends State<InventoryScreen> {
             children: [
               DashboardCard.buildHeaderCard(
                 context,
-                'Inventory Management',
-                'Manage and track all equipment and supplies Add Item',
+                'Pharmacy Management',
+                'Manage and track all medicines and pharmacy inventory',
                 actionButton: DecoratedBox(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -49,10 +49,10 @@ class _InventoryScreenState extends State<InventoryScreen> {
                   ),
                   child: ElevatedButton.icon(
                     onPressed: () {
-                      AddInventoryHelper.addInventorySheet(context);
+                      AddPharmacyHelper.addPharmacySheet(context);
                     },
                     icon: const Icon(Icons.person_add, size: 18),
-                    label: const Text('Add Items'),
+                    label: const Text('Add Medicine'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent,
                       shadowColor: Colors.transparent,
@@ -72,11 +72,11 @@ class _InventoryScreenState extends State<InventoryScreen> {
                   mainAxisSpacing: 16,
                   children: [
                     DashboardCard(
-                      title: 'Total Item',
+                      title: 'Total Medicines',
                       icon: Icons.group,
                       count: '434',
                       onTap: () {
-                        Get.toNamed(AppConstants.inventoryListManagement);
+                        Get.toNamed(AppConstants.pharmacyListManagement);
                       },
                     ),
                     const DashboardCard(

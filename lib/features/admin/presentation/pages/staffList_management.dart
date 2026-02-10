@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class PatientlistManagement extends StatefulWidget {
-  const PatientlistManagement({super.key});
+class StafflistManagement extends StatefulWidget {
+  const StafflistManagement({super.key});
 
   @override
-  State<PatientlistManagement> createState() => _PatientlistManagementState();
+  State<StafflistManagement> createState() => _StafflistManagementState();
 }
 
-class _PatientlistManagementState extends State<PatientlistManagement> {
+class _StafflistManagementState extends State<StafflistManagement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text('Patient List'),
+        title: const Text('Staff List'),
         elevation: 0,
       ),
       body: Column(
@@ -37,7 +37,7 @@ class _PatientlistManagementState extends State<PatientlistManagement> {
                     ),
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: 'Search by patient name,mobile...',
+                        hintText: 'Search by staff name,mobile...',
                         hintStyle:
                             TextStyle(color: Colors.grey[400], fontSize: 14),
                         border: OutlineInputBorder(
@@ -212,7 +212,7 @@ class _PatientlistManagementState extends State<PatientlistManagement> {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Text(
-                                    'Age: ${'24'} ${'• Male'}',
+                                    'KDC-S0001',
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodySmall
@@ -270,7 +270,7 @@ class _PatientlistManagementState extends State<PatientlistManagement> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
-                            'KDC-P0367',
+                            categoryServices,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodySmall
@@ -324,7 +324,7 @@ class _PatientlistManagementState extends State<PatientlistManagement> {
                                   ],
                                 ),
                                 child: const Icon(
-                                  Icons.schedule_outlined,
+                                  Icons.grade_outlined,
                                   size: 16,
                                   color: Colors.white,
                                 ),
@@ -335,7 +335,7 @@ class _PatientlistManagementState extends State<PatientlistManagement> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Registered:',
+                                      'Qualification :',
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodySmall
@@ -347,7 +347,7 @@ class _PatientlistManagementState extends State<PatientlistManagement> {
                                           ),
                                     ),
                                     Text(
-                                      'Today, 10:${30 + index} AM',
+                                      'M.D.S., (Perio), MFDS RCP',
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyMedium
@@ -361,37 +361,6 @@ class _PatientlistManagementState extends State<PatientlistManagement> {
                                   ],
                                 ),
                               ),
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                  vertical: 4,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary
-                                          .withOpacity(0.3),
-                                      blurRadius: 4,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: Text(
-                                  '2.00 ${'PM'}',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 11,
-                                      ),
-                                ),
-                              ),
                             ],
                           ),
                         ),
@@ -399,63 +368,6 @@ class _PatientlistManagementState extends State<PatientlistManagement> {
                         Row(
                           spacing: 5,
                           children: [
-                            Expanded(
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Theme.of(context)
-                                          .colorScheme
-                                          .onSecondary
-                                          .withOpacity(0.02),
-                                      Theme.of(context)
-                                          .colorScheme
-                                          .onSecondary
-                                          .withOpacity(0.5),
-                                    ],
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight,
-                                  ),
-                                  border: Border.all(
-                                    width: 0.5,
-                                    color: Colors.grey,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.3),
-                                      blurRadius: 6,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: ElevatedButton.icon(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.visibility_outlined,
-                                    size: 16,
-                                    color: Colors.white,
-                                  ),
-                                  label: const Text(
-                                    'View',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent,
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 12,
-                                    ),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
                             Expanded(
                               child: DecoratedBox(
                                 decoration: BoxDecoration(
@@ -478,7 +390,7 @@ class _PatientlistManagementState extends State<PatientlistManagement> {
                                 ),
                                 child: ElevatedButton.icon(
                                   onPressed: () {
-                                    AddPatientHelper.addPatientSheet(context);
+                                    AddStaffHelper.addStaffSheet(context);
                                   },
                                   icon: const Icon(
                                     Icons.edit,
@@ -573,8 +485,8 @@ class _PatientlistManagementState extends State<PatientlistManagement> {
   }
 }
 
-class AddPatientHelper {
-  static void addPatientSheet(BuildContext context) {
+class AddStaffHelper {
+  static void addStaffSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -625,7 +537,7 @@ class AddPatientHelper {
                     ),
                     const SizedBox(width: 16),
                     Text(
-                      'Edit Patient',
+                      'Add Staff',
                       style:
                           Theme.of(context).textTheme.headlineSmall?.copyWith(
                                 fontWeight: FontWeight.w600,
@@ -657,6 +569,40 @@ class AddPatientHelper {
                         _buildFormField(
                           context,
                           'Mobile Number',
+                          isRequired: true,
+                          child: TextField(
+                            decoration: _getInputDecoration(
+                              context,
+                              'Enter mobile number',
+                              Icons.phone,
+                            ),
+                          ),
+                        ),
+                        _buildFormField(
+                          context,
+                          'Qualification',
+                          isRequired: true,
+                          child: TextField(
+                            decoration: _getInputDecoration(
+                              context,
+                              'Enter qualification',
+                            ),
+                          ),
+                        ),
+                        _buildFormField(
+                          context,
+                          'Staff Category',
+                          isRequired: true,
+                          child: TextField(
+                            decoration: _getInputDecoration(
+                              context,
+                              'Enter specialist area',
+                            ),
+                          ),
+                        ),
+                        _buildFormField(
+                          context,
+                          'Email',
                           isRequired: true,
                           child: TextField(
                             decoration: _getInputDecoration(
@@ -728,71 +674,43 @@ class AddPatientHelper {
                         ),
                         _buildFormField(
                           context,
-                          'Registration Number',
+                          'Aadhar Number',
                           isRequired: true,
                           child: TextField(
                             decoration: _getInputDecoration(
                               context,
-                              'Auto Generated if empty',
-                            ),
-                          ),
-                        ),
-                        _buildFormField(
-                          context,
-                          'Email',
-                          child: TextField(
-                            decoration: _getInputDecoration(
-                              context,
-                              'Enter email',
-                              Icons.email,
-                            ),
-                          ),
-                        ),
-                        _buildFormField(
-                          context,
-                          'Profession',
-                          child: TextField(
-                            decoration: _getInputDecoration(
-                              context,
-                              'Enter profession',
-                              Icons.work,
-                            ),
-                          ),
-                        ),
-                        _buildFormField(
-                          context,
-                          'Emergency Contact Name',
-                          child: TextField(
-                            decoration: _getInputDecoration(
-                              context,
-                            ),
-                          ),
-                        ),
-                        _buildFormField(
-                          context,
-                          'Relationship',
-                          child: TextField(
-                            decoration: _getInputDecoration(
-                              context,
-                            ),
-                          ),
-                        ),
-                        _buildFormField(
-                          context,
-                          'Emergency Contact Mobile',
-                          child: TextField(
-                            decoration: _getInputDecoration(
-                              context,
+                              'Enter Aadhar Number',
                             ),
                           ),
                         ),
                         _buildFormField(
                           context,
                           'Address',
+                          isRequired: true,
                           child: TextField(
-                            maxLines: 2,
                             decoration: _getInputDecoration(
                               context,
+                              'Enter Address',
+                            ),
+                          ),
+                        ),
+                        _buildFormField(
+                          context,
+                          'Password',
+                          isRequired: true,
+                          child: TextField(
+                            decoration:
+                                _getInputDecoration(context, 'Enter password'),
+                          ),
+                        ),
+                        _buildFormField(
+                          context,
+                          'Confirm Password',
+                          isRequired: true,
+                          child: TextField(
+                            decoration: _getInputDecoration(
+                              context,
+                              'Confirm password',
                             ),
                           ),
                         ),
@@ -802,15 +720,36 @@ class AddPatientHelper {
                             Expanded(
                               child: DecoratedBox(
                                 decoration: BoxDecoration(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onSecondary
-                                      .withOpacity(0.15),
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Theme.of(context)
+                                          .colorScheme
+                                          .onSecondary
+                                          .withOpacity(0.02),
+                                      Theme.of(context)
+                                          .colorScheme
+                                          .onSecondary
+                                          .withOpacity(0.5),
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                  border: Border.all(
+                                    width: 0.5,
+                                    color: Colors.grey,
+                                  ),
                                   borderRadius: BorderRadius.circular(50),
                                 ),
-                                child: ElevatedButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  style: OutlinedButton.styleFrom(
+                                child: ElevatedButton.icon(
+                                  onPressed: () {},
+                                  label: const Text(
+                                    'Cancel',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent,
                                     padding: const EdgeInsets.symmetric(
@@ -819,10 +758,6 @@ class AddPatientHelper {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(12),
                                     ),
-                                  ),
-                                  child: const Text(
-                                    'Cancel',
-                                    style: TextStyle(color: Colors.grey),
                                   ),
                                 ),
                               ),
@@ -853,7 +788,7 @@ class AddPatientHelper {
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                   ),
-                                  child: const Text('Update'),
+                                  child: const Text('Submit'),
                                 ),
                               ),
                             ),

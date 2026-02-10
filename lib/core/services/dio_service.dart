@@ -4,7 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:get/get.dart' hide FormData, Response;
-import 'package:witte_dental_pms/core/constants/api_constants.dart';
+import 'package:witte_dental_pms/core/constants/api_endpoints.dart';
 import 'package:witte_dental_pms/core/handlers/error_handler.dart';
 import 'package:witte_dental_pms/core/storage/hive_service.dart';
 import 'package:witte_dental_pms/features/shared/widgets/global_widgets.dart';

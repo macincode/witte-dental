@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:witte_dental_pms/core/constants/app_constants.dart';
 import 'package:witte_dental_pms/core/controllers/theme_controller.dart';
-import 'package:witte_dental_pms/features/admin/details_card.dart';
-import 'package:witte_dental_pms/features/admin/patientList_management.dart';
+import 'package:witte_dental_pms/features/admin/presentation/controllers/admin_patient_controller.dart';
+import 'package:witte_dental_pms/features/admin/presentation/pages/details_card.dart';
+import 'package:witte_dental_pms/features/admin/presentation/pages/patientList_management.dart';
+import 'package:witte_dental_pms/features/shared/widgets/global_widgets.dart';
 
-import '../shared/widgets/network_aware_widget.dart';
+import '../../../shared/widgets/network_aware_widget.dart';
 
 class PatientScreen extends StatefulWidget {
   const PatientScreen({super.key});
@@ -15,13 +17,22 @@ class PatientScreen extends StatefulWidget {
 }
 
 class _PatientScreenState extends State<PatientScreen> {
+   final AdminPatientController _patientController =
+      Get.put(AdminPatientController());
+
+  @override
+  void initState() {
+    super.initState();
+     _patientController.getPatientListData();
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeController = Get.find<ThemeController>();
 
     return NetworkAwareWidget(
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surface,
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           title: const Text('Patients'),
         ),
@@ -49,6 +60,8 @@ class _PatientScreenState extends State<PatientScreen> {
                   ),
                   child: ElevatedButton.icon(
                     onPressed: () {
+                      dPrint('patient list----');
+                      dPrint('${_patientController.adminPatientList.length}');
                       AddPatientHelper.addPatientSheet(context);
                     },
                     icon: const Icon(Icons.person_add, size: 18),
@@ -71,28 +84,45 @@ class _PatientScreenState extends State<PatientScreen> {
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
                   children: [
-                    DashboardCard(
-                      title: 'Total Patients',
-                      icon: Icons.group,
-                      count: '434',
-                      onTap: () {
-                        Get.toNamed(AppConstants.patientListManagement);
-                      },
+                    Obx(
+                      () => DashboardCard(
+                        title: 'Total Patients',
+                        icon: Icons.group,
+                        count: '${_patientController.adminPatientList.length}',
+                        onTap: () {
+                          Get.toNamed(AppConstants.patientListManagement);
+                        },
+                      ),
                     ),
-                    const DashboardCard(
-                      title: 'Male Patients',
-                      icon: Icons.person,
-                      count: '24',
+                    Obx(
+                      () => DashboardCard(
+                        title: 'Male Patients',
+                        icon: Icons.person,
+                        count: '${_patientController.adminPatientList.where((patient) => patient['gender']?.toString().toLowerCase() == 'male').length}',
+                      ),
                     ),
-                    const DashboardCard(
-                      title: 'Female Patients',
-                      icon: Icons.person,
-                      count: '132',
+                    Obx(
+                      () => DashboardCard(
+                        title: 'Female Patients',
+                        icon: Icons.person,
+                        count: '${_patientController.adminPatientList.where((patient) => patient['gender']?.toString().toLowerCase() == 'female').length}',
+                      ),
                     ),
-                    const DashboardCard(
-                      title: 'New (30 days)',
-                      icon: Icons.person_add,
-                      count: '132',
+                    Obx(
+                      () => DashboardCard(
+                        title: 'New (30 days)',
+                        icon: Icons.person_add,
+                        count: '${_patientController.adminPatientList.where((patient) {
+                          if (patient['created_at'] == null) return false;
+                          try {
+                            final createdAt = DateTime.parse(patient['created_at']);
+                            final thirtyDaysAgo = DateTime.now().subtract(const Duration(days: 30));
+                            return createdAt.isAfter(thirtyDaysAgo);
+                          } catch (e) {
+                            return false;
+                          }
+                        }).length}',
+                      ),
                     ),
                   ],
                 ),

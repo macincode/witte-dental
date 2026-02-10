@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:witte_dental_pms/features/admin/presentation/controllers/admin_patient_controller.dart';
 import '../constants/app_constants.dart';
 
 class RoleBasedNavigation {
@@ -75,28 +76,39 @@ class RoleBasedNavigation {
       ),
       NavigationItem(
         title: 'Inquiries',
-        icon: Icons.group,
+        icon: Icons.all_inbox_sharp,
         route: AppConstants.inquiryScreen,
-      ),
-      NavigationItem(
-        title: 'Users',
-        icon: Icons.people,
-        route: AppConstants.inquiryListManagement,
       ),
       NavigationItem(
         title: 'Appointments',
         icon: Icons.calendar_today,
         route: AppConstants.appointmentScreen,
       ),
-      NavigationItem(
-        title: 'Billings',
-        icon: Icons.payment,
-        route: AppConstants.billings,
+       NavigationItem(
+        title: 'Patients',
+        icon: Icons.group,
+        route: AppConstants.patientScreen,
+       
+      ),
+       NavigationItem(
+        title: 'Doctors',
+        icon: Icons.person,
+        route: AppConstants.doctorScreen,
+      ),
+       NavigationItem(
+        title: 'Staff',
+        icon: Icons.group,
+        route: AppConstants.staffScreen,
       ),
       NavigationItem(
-        title: 'reports'.tr,
-        icon: Icons.analytics,
-        route: '/admin/reports',
+        title: 'Inventory',
+        icon: Icons.inventory,
+        route: AppConstants.inventoryScreen,
+      ),
+      NavigationItem(
+        title: 'Pharmacy',
+        icon: Icons.medical_information,
+        route: AppConstants.pharmacyScreen,
       ),
     ];
   }

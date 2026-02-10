@@ -24,6 +24,8 @@ class AppTheme {
       error: errorColor,
       onPrimary: lightThemePrimaryText,
       onSecondary: lightThemeSecondaryText,
+      background: lightThemeBackgroundColor,
+      surface: lightThemeSurfaceColor
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: primaryColor,
@@ -116,6 +118,7 @@ class AppTheme {
       onPrimary: darkThemePrimaryText,
       onSecondary: darkThemeSecondaryText,
       // secondaryContainer: secondaryContainerColor,
+      background: darkThemeBackgroundColor,
       surface: darkThemeSurfaceColor,
     ),
     appBarTheme: const AppBarTheme(

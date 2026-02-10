@@ -155,7 +155,8 @@ class AppIconSettingsPage extends StatelessWidget {
         'note'.tr,
         'icon_change_note'.tr,
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+        backgroundColor:
+            Theme.of(context).colorScheme.surfaceContainerHighest,
         colorText: Theme.of(context).colorScheme.onSurfaceVariant,
       );
     }

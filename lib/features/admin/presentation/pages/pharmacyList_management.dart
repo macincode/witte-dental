@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 
-class StafflistManagement extends StatefulWidget {
-  const StafflistManagement({super.key});
+class PharmacylistManagement extends StatefulWidget {
+  const PharmacylistManagement({super.key});
 
   @override
-  State<StafflistManagement> createState() => _StafflistManagementState();
+  State<PharmacylistManagement> createState() => _PharmacylistManagementState();
 }
 
-class _StafflistManagementState extends State<StafflistManagement> {
+class _PharmacylistManagementState extends State<PharmacylistManagement> {
+  int? _selectedIndex;
+  final List<String> _options = [
+    'All Items',
+    'Materials',
+    'Instruments',
+    'Equipments',
+    'Stationary',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text('Staff List'),
+        title: const Text('All Medicines List'),
         elevation: 0,
       ),
       body: Column(
@@ -37,7 +46,7 @@ class _StafflistManagementState extends State<StafflistManagement> {
                     ),
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: 'Search by staff name,mobile...',
+                        hintText: 'Search medicines by name...',
                         hintStyle:
                             TextStyle(color: Colors.grey[400], fontSize: 14),
                         border: OutlineInputBorder(
@@ -90,8 +99,8 @@ class _StafflistManagementState extends State<StafflistManagement> {
               itemCount: 20,
               itemBuilder: (context, index) {
                 final categories = [
-                  'Karthick K',
-                  'Ram',
+                  'Toothbrush & Interdental Aids',
+                  'Oral Gels',
                 ];
                 final icons = [
                   Icons.medical_services,
@@ -104,20 +113,10 @@ class _StafflistManagementState extends State<StafflistManagement> {
 
                 final categoryName = categories[index % categories.length];
                 final category = [
-                  '9944262945',
-                  '9444262945',
+                  'STIM FLOSS',
+                  'MUCOPAIN 15GM GEL',
                 ];
                 final categorynum = category[index % categories.length];
-
-                final categoryService = [
-                  'Periodontics',
-                  'Oral Medicine and Pathology',
-                ];
-                final categoryServices =
-                    categoryService[index % categories.length];
-
-                final categoryIcon = icons[index % icons.length];
-                final categoryColor = colors[index % colors.length];
 
                 return Container(
                   margin: const EdgeInsets.only(bottom: 12),
@@ -139,25 +138,6 @@ class _StafflistManagementState extends State<StafflistManagement> {
                       children: [
                         Row(
                           children: [
-                            Container(
-                              padding: const EdgeInsets.all(18),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: categoryColor.withOpacity(0.1),
-                                // borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Text(
-                                categoryName[0],
-                                style: TextStyle(
-                                  color: categoryColor,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -175,10 +155,14 @@ class _StafflistManagementState extends State<StafflistManagement> {
                                   // const SizedBox(height: 2),
                                   Row(
                                     children: [
-                                      Icon(
-                                        Icons.phone,
-                                        size: 14,
-                                        color: Colors.grey[600],
+                                      Text(
+                                        '•',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.copyWith(
+                                              color: Colors.grey[600],
+                                            ),
                                       ),
                                       const SizedBox(width: 4),
                                       Text(
@@ -196,23 +180,22 @@ class _StafflistManagementState extends State<StafflistManagement> {
                                 ],
                               ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .primary
-                                        .withOpacity(0.09),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Text(
-                                    'KDC-S0001',
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.09),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'In Stock',
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodySmall
@@ -224,149 +207,106 @@ class _StafflistManagementState extends State<StafflistManagement> {
                                               .primary,
                                         ),
                                   ),
-                                ),
-                                const SizedBox(height: 4),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .primary
-                                        .withOpacity(0.09),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Text(
-                                    'Active',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 10,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
-                                        ),
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ],
                         ),
                         const SizedBox(height: 5),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withOpacity(0.09),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Text(
-                            categoryServices,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 10,
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        Container(
-                          padding: const EdgeInsets.all(14),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Theme.of(context)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context)
                                     .colorScheme
                                     .primary
-                                    .withOpacity(0.08),
-                                Theme.of(context)
+                                    .withOpacity(0.09),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Stock Available:',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 10,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondary,
+                                        ),
+                                  ),
+                                  Text(
+                                    '6',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 10,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context)
                                     .colorScheme
                                     .primary
-                                    .withOpacity(0.03),
-                              ],
-                            ),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primary
-                                  .withOpacity(0.2),
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary
-                                          .withOpacity(0.3),
-                                      blurRadius: 6,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: const Icon(
-                                  Icons.grade_outlined,
-                                  size: 16,
-                                  color: Colors.white,
-                                ),
+                                    .withOpacity(0.09),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Qualification :',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall
-                                          ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onSecondary,
-                                            fontSize: 11,
-                                          ),
-                                    ),
-                                    Text(
-                                      'M.D.S., (Perio), MFDS RCP',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium
-                                          ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
-                                  ],
-                                ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Price (₹):',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondary,
+                                        ),
+                                  ),
+                                  Text(
+                                    '6',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                        ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: 12),
                         Row(
-                          spacing: 5,
+                          spacing: 10,
                           children: [
                             Expanded(
                               child: DecoratedBox(
@@ -390,7 +330,7 @@ class _StafflistManagementState extends State<StafflistManagement> {
                                 ),
                                 child: ElevatedButton.icon(
                                   onPressed: () {
-                                    AddStaffHelper.addStaffSheet(context);
+                                    AddPharmacyHelper.addPharmacySheet(context);
                                   },
                                   icon: const Icon(
                                     Icons.edit,
@@ -485,8 +425,8 @@ class _StafflistManagementState extends State<StafflistManagement> {
   }
 }
 
-class AddStaffHelper {
-  static void addStaffSheet(BuildContext context) {
+class AddPharmacyHelper {
+  static void addPharmacySheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -496,7 +436,7 @@ class AddStaffHelper {
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
         child: Container(
-          height: MediaQuery.of(context).size.height * 0.85,
+          height: MediaQuery.of(context).size.height * 0.70,
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surface,
             borderRadius: const BorderRadius.only(
@@ -537,7 +477,7 @@ class AddStaffHelper {
                     ),
                     const SizedBox(width: 16),
                     Text(
-                      'Add Staff',
+                      'Add New Medicine',
                       style:
                           Theme.of(context).textTheme.headlineSmall?.copyWith(
                                 fontWeight: FontWeight.w600,
@@ -552,165 +492,53 @@ class AddStaffHelper {
                       children: [
                         _buildFormField(
                           context,
-                          'First Name',
+                          'Category',
                           isRequired: true,
-                          child: TextField(
-                            decoration: _getInputDecoration(context),
-                          ),
-                        ),
-                        _buildFormField(
-                          context,
-                          'Last Name',
-                          isRequired: true,
-                          child: TextField(
-                            decoration: _getInputDecoration(context),
-                          ),
-                        ),
-                        _buildFormField(
-                          context,
-                          'Mobile Number',
-                          isRequired: true,
-                          child: TextField(
+                          child: DropdownButtonFormField<String>(
                             decoration: _getInputDecoration(
                               context,
-                              'Enter mobile number',
-                              Icons.phone,
                             ),
-                          ),
-                        ),
-                        _buildFormField(
-                          context,
-                          'Qualification',
-                          isRequired: true,
-                          child: TextField(
-                            decoration: _getInputDecoration(
-                              context,
-                              'Enter qualification',
-                            ),
-                          ),
-                        ),
-                        _buildFormField(
-                          context,
-                          'Staff Category',
-                          isRequired: true,
-                          child: TextField(
-                            decoration: _getInputDecoration(
-                              context,
-                              'Enter specialist area',
-                            ),
-                          ),
-                        ),
-                        _buildFormField(
-                          context,
-                          'Email',
-                          isRequired: true,
-                          child: TextField(
-                            decoration: _getInputDecoration(
-                              context,
-                              'Enter mobile number',
-                              Icons.phone,
-                            ),
-                          ),
-                        ),
-                        _buildFormField(
-                          context,
-                          'Date of Birth',
-                          isRequired: true,
-                          child: TextField(
-                            decoration: _getInputDecoration(
-                              context,
-                              'MM/DD/YYYY',
-                              Icons.calendar_today,
-                            ),
-                            readOnly: true,
-                            onTap: () async {
-                              await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(1900),
-                                lastDate: DateTime.now()
-                                    .add(const Duration(days: 365)),
-                              );
-                            },
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: _buildFormField(
-                                context,
-                                isRequired: true,
-                                'Age',
-                                child: TextField(
-                                  decoration: _getInputDecoration(
-                                    context,
+                            items: ['Antibiotics', 'Steroids']
+                                .map(
+                                  (e) => DropdownMenuItem(
+                                    value: e,
+                                    child: Text(e),
                                   ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: _buildFormField(
-                                context,
-                                'Gender',
-                                isRequired: true,
-                                child: DropdownButtonFormField<String>(
-                                  decoration: _getInputDecoration(
-                                    context,
-                                  ),
-                                  items: ['Male', 'Female', 'Others']
-                                      .map(
-                                        (e) => DropdownMenuItem(
-                                          value: e,
-                                          child: Text(e),
-                                        ),
-                                      )
-                                      .toList(),
-                                  onChanged: (value) {},
-                                ),
-                              ),
-                            ),
-                          ],
+                                )
+                                .toList(),
+                            onChanged: (value) {},
+                          ),
                         ),
                         _buildFormField(
                           context,
-                          'Aadhar Number',
+                          'Medicine Name',
                           isRequired: true,
                           child: TextField(
                             decoration: _getInputDecoration(
                               context,
-                              'Enter Aadhar Number',
+                              'Enter medicine name',
                             ),
                           ),
                         ),
                         _buildFormField(
                           context,
-                          'Address',
+                          'Stock Quantity',
                           isRequired: true,
                           child: TextField(
                             decoration: _getInputDecoration(
                               context,
-                              'Enter Address',
+                              'Enter stock quantity',
                             ),
                           ),
                         ),
                         _buildFormField(
                           context,
-                          'Password',
-                          isRequired: true,
-                          child: TextField(
-                            decoration:
-                                _getInputDecoration(context, 'Enter password'),
-                          ),
-                        ),
-                        _buildFormField(
-                          context,
-                          'Confirm Password',
+                          'Price (₹) ',
                           isRequired: true,
                           child: TextField(
                             decoration: _getInputDecoration(
                               context,
-                              'Confirm password',
+                              'Enter price',
                             ),
                           ),
                         ),

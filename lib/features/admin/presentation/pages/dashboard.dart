@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:witte_dental_pms/core/controllers/theme_controller.dart';
 
-import '../shared/widgets/network_aware_widget.dart';
+import '../../../shared/widgets/network_aware_widget.dart';
 
 class AdminDashboard extends StatelessWidget {
   AdminDashboard({super.key});
@@ -13,7 +13,7 @@ class AdminDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return NetworkAwareWidget(
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surface,
+        backgroundColor: Theme.of(context).colorScheme.background,
         // drawer: const RoleBasedDrawer(),
         appBar: AppBar(
           title: Text('Dashboard'.tr),

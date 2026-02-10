@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:witte_dental_pms/features/admin/presentation/controllers/admin_doctor_controller.dart';
 
 class DoctorlistManagement extends StatefulWidget {
   const DoctorlistManagement({super.key});
@@ -8,10 +11,95 @@ class DoctorlistManagement extends StatefulWidget {
 }
 
 class _DoctorlistManagementState extends State<DoctorlistManagement> {
+  final AdminDoctorController _doctorController =
+      Get.put(AdminDoctorController());
+  final TextEditingController _searchController = TextEditingController();
+  final RxList<dynamic> _filteredDoctors = <dynamic>[].obs;
+  String? _selectedFilter;
+  String? _selectedFilterValue;
+
+  @override
+  void initState() {
+    super.initState();
+    _filteredDoctors.value = _doctorController.adminDoctorList;
+  }
+
+  void _filterDoctors(String query) {
+    List<dynamic> doctors = _doctorController.adminDoctorList.toList();
+    
+    if (_selectedFilter != null && _selectedFilterValue != null) {
+      doctors = doctors.where((doctor) {
+        return (doctor as Map)[_selectedFilter] == _selectedFilterValue;
+      }).toList();
+    }
+    
+    if (query.isEmpty) {
+      _filteredDoctors.value = doctors;
+    } else {
+      _filteredDoctors.value = doctors.where((doctor) {
+        final doc = doctor as Map;
+        final name = '${doc['first_name']} ${doc['surname']}'.toLowerCase();
+        final phone = (doc['phone'] ?? '').toString().toLowerCase();
+        final searchLower = query.toLowerCase();
+        return name.contains(searchLower) || phone.contains(searchLower);
+      }).toList();
+    }
+  }
+
+  void _showFilterOptions(String filterType) {
+    final values = _doctorController.adminDoctorList
+        .map((d) => (d as Map)[filterType])
+        .where((v) => v != null && v.toString().isNotEmpty)
+        .toSet()
+        .toList();
+
+    showMenu(
+      context: context,
+      position: const RelativeRect.fromLTRB(100, 100, 0, 0),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 8,
+      color: Theme.of(context).colorScheme.surface,
+      items: values.map((value) => PopupMenuItem(
+        value: value,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Row(
+          children: [
+            Icon(
+              Icons.check_circle_outline,
+              size: 18,
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                value.toString(),
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ),
+          ],
+        ),
+      )).toList(),
+    ).then((selectedValue) {
+      if (selectedValue != null) {
+        setState(() {
+          _selectedFilter = filterType;
+          _selectedFilterValue = selectedValue.toString();
+        });
+        _filterDoctors(_searchController.text);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text('Doctor List'),
         elevation: 0,
@@ -36,6 +124,8 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                       ],
                     ),
                     child: TextField(
+                      controller: _searchController,
+                      onChanged: _filterDoctors,
                       decoration: InputDecoration(
                         hintText: 'Search by doctor name,mobile...',
                         hintStyle:
@@ -56,19 +146,83 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                   ),
                 ),
                 const SizedBox(width: 12),
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    color:
-                        Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.tune,
-                      color: Theme.of(context).colorScheme.primary,
+                PopupMenuButton(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  elevation: 8,
+                  offset: const Offset(0, 50),
+                  icon: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Icon(
+                        Icons.tune,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
                   ),
+                  itemBuilder: (context) => [
+                    PopupMenuItem(
+                      value: 'qualification',
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      child: Row(
+                        children: [
+                          Icon(Icons.school, size: 20, color: Theme.of(context).colorScheme.primary),
+                          const SizedBox(width: 12),
+                          const Text('Qualification'),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: 'specialist',
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      child: Row(
+                        children: [
+                          Icon(Icons.medical_services, size: 20, color: Theme.of(context).colorScheme.primary),
+                          const SizedBox(width: 12),
+                          const Text('Specialist'),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: 'department_name',
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      child: Row(
+                        children: [
+                          Icon(Icons.business, size: 20, color: Theme.of(context).colorScheme.primary),
+                          const SizedBox(width: 12),
+                          const Text('Department'),
+                        ],
+                      ),
+                    ),
+                    if (_selectedFilter != null) 
+                      // const PopupMenuDivider(),
+                      PopupMenuItem(
+                        value: 'clear',
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        child: Row(
+                          children: [
+                            Icon(Icons.clear, size: 20, color: Colors.red[400]),
+                            const SizedBox(width: 12),
+                            Text('Clear Filter', style: TextStyle(color: Colors.red[400])),
+                          ],
+                        ),
+                      ),
+                    ],
+                
+                  onSelected: (value) {
+                    if (value == 'clear') {
+                      setState(() {
+                        _selectedFilter = null;
+                        _selectedFilterValue = null;
+                      });
+                      _filterDoctors(_searchController.text);
+                    } else {
+                      _showFilterOptions(value.toString());
+                    }
+                  },
                 ),
                 // const SizedBox(width: 8),
                 // DecoratedBox(
@@ -85,38 +239,27 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-              itemCount: 20,
-              itemBuilder: (context, index) {
-                final categories = [
-                  'Karthick K',
-                  'Ram',
-                ];
-                final icons = [
-                  Icons.medical_services,
-                  Icons.content_cut,
-                ];
+            child: Obx(
+              () => ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                itemCount: _filteredDoctors.length,
+                itemBuilder: (context, index) {
+                  final doctor = _filteredDoctors[index];
+                final doctorName =
+                    '${doctor['first_name']} ${doctor['surname']}';
+                final phone = doctor['phone'] ?? '';
+                final department = doctor['department_name'] ?? '';
+                final specialist = doctor['specialist'] ?? '';
+                final qualification = doctor['qualification'] ?? '';
+                final employeeNumber = doctor['employee_number'] ?? 'N/A';
+                final status = doctor['status'] == 1 ? 'Active' : 'Inactive';
+
                 final colors = [
                   Colors.blue,
                   Colors.green,
+                  Colors.orange,
+                  Colors.purple
                 ];
-
-                final categoryName = categories[index % categories.length];
-                final category = [
-                  '9944262945',
-                  '9444262945',
-                ];
-                final categorynum = category[index % categories.length];
-
-                final categoryService = [
-                  'Periodontics',
-                  'Oral Medicine and Pathology',
-                ];
-                final categoryServices =
-                    categoryService[index % categories.length];
-
-                final categoryIcon = icons[index % icons.length];
                 final categoryColor = colors[index % colors.length];
 
                 return Container(
@@ -147,7 +290,7 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                                 // borderRadius: BorderRadius.circular(10),
                               ),
                               child: Text(
-                                categoryName[0],
+                                doctorName[4],
                                 style: TextStyle(
                                   color: categoryColor,
                                   fontWeight: FontWeight.w600,
@@ -164,7 +307,7 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    categoryName,
+                                    doctorName,
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleMedium
@@ -182,7 +325,7 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                                       ),
                                       const SizedBox(width: 4),
                                       Text(
-                                        categorynum,
+                                        phone,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium
@@ -212,7 +355,7 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Text(
-                                    'KDC-D0001',
+                                    employeeNumber,
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodySmall
@@ -239,7 +382,7 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Text(
-                                    'Active',
+                                    status,
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodySmall
@@ -270,7 +413,7 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
-                            categoryServices,
+                            department,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodySmall
@@ -330,36 +473,80 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                                 ),
                               ),
                               const SizedBox(width: 12),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Qualification :',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall
-                                          ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onSecondary,
-                                            fontSize: 11,
-                                          ),
-                                    ),
-                                    Text(
-                                      'M.D.S., (Perio), MFDS RCP',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium
-                                          ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
-                                  ],
-                                ),
+                              Row(
+                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Qualification :',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSecondary,
+                                              fontSize: 11,
+                                            ),
+                                      ),
+                                      Text(
+                                        qualification,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Container(
+                                    height: 30,
+                                    width: 2,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary
+                                        .withOpacity(0.3),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Specialist :',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSecondary,
+                                              fontSize: 11,
+                                            ),
+                                      ),
+                                      Text(
+                                        specialist,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -447,7 +634,8 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                                 ),
                                 child: ElevatedButton.icon(
                                   onPressed: () {
-                                    AddDoctorHelper.addDoctorSheet(context);
+                                    AddDoctorHelper.addDoctorSheet(context,
+                                        doctorData: doctor);
                                   },
                                   icon: const Icon(
                                     Icons.edit,
@@ -528,7 +716,7 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
                 );
               },
             ),
-          ),
+          ),),
         ],
       ),
     );
@@ -536,7 +724,35 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
 }
 
 class AddDoctorHelper {
-  static void addDoctorSheet(BuildContext context) {
+  static void addDoctorSheet(BuildContext context,
+      {Map<String, dynamic>? doctorData}) {
+    final firstNameController =
+        TextEditingController(text: doctorData?['first_name']);
+    final surnameController =
+        TextEditingController(text: doctorData?['surname']);
+    final phoneController = TextEditingController(text: doctorData?['phone']);
+    final qualificationController =
+        TextEditingController(text: doctorData?['qualification']);
+    final specialistController =
+        TextEditingController(text: doctorData?['specialist']);
+    final emailController = TextEditingController(text: doctorData?['email']);
+    final dobController = TextEditingController(text: doctorData?['dob']);
+    final ageController =
+        TextEditingController(text: doctorData?['age']?.toString());
+    final aadharController =
+        TextEditingController(text: doctorData?['aadhar_number']);
+    final addressController =
+        TextEditingController(text: doctorData?['address']);
+    final practicingController =
+        TextEditingController(text: doctorData?['currently_practicing']);
+    final experienceController =
+        TextEditingController(text: doctorData?['experience']);
+    final awardsController =
+        TextEditingController(text: doctorData?['awards_achievements']);
+    final journeyController =
+        TextEditingController(text: doctorData?['journey']);
+    String? selectedGender = doctorData?['gender'];
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -587,7 +803,7 @@ class AddDoctorHelper {
                     ),
                     const SizedBox(width: 16),
                     Text(
-                      'Add Doctor',
+                      doctorData != null ? 'Edit Doctor' : 'Add Doctor',
                       style:
                           Theme.of(context).textTheme.headlineSmall?.copyWith(
                                 fontWeight: FontWeight.w600,
@@ -605,6 +821,17 @@ class AddDoctorHelper {
                           'First Name',
                           isRequired: true,
                           child: TextField(
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimary
+                                      .withOpacity(0.8),
+                                ),
+                            controller: firstNameController,
                             decoration: _getInputDecoration(context),
                           ),
                         ),
@@ -613,6 +840,17 @@ class AddDoctorHelper {
                           'Last Name',
                           isRequired: true,
                           child: TextField(
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimary
+                                      .withOpacity(0.8),
+                                ),
+                            controller: surnameController,
                             decoration: _getInputDecoration(context),
                           ),
                         ),
@@ -621,6 +859,17 @@ class AddDoctorHelper {
                           'Mobile Number',
                           isRequired: true,
                           child: TextField(
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimary
+                                      .withOpacity(0.8),
+                                ),
+                            controller: phoneController,
                             decoration: _getInputDecoration(
                               context,
                               'Enter mobile number',
@@ -633,6 +882,17 @@ class AddDoctorHelper {
                           'Qualification',
                           isRequired: true,
                           child: TextField(
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimary
+                                      .withOpacity(0.8),
+                                ),
+                            controller: qualificationController,
                             decoration: _getInputDecoration(
                               context,
                               'Enter qualification',
@@ -644,6 +904,17 @@ class AddDoctorHelper {
                           'Specialist',
                           isRequired: true,
                           child: TextField(
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimary
+                                      .withOpacity(0.8),
+                                ),
+                            controller: specialistController,
                             decoration: _getInputDecoration(
                               context,
                               'Enter specialist area',
@@ -655,10 +926,21 @@ class AddDoctorHelper {
                           'Email',
                           isRequired: true,
                           child: TextField(
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimary
+                                      .withOpacity(0.8),
+                                ),
+                            controller: emailController,
                             decoration: _getInputDecoration(
                               context,
-                              'Enter mobile number',
-                              Icons.phone,
+                              'Enter email',
+                              Icons.email,
                             ),
                           ),
                         ),
@@ -667,6 +949,17 @@ class AddDoctorHelper {
                           'Date of Birth',
                           isRequired: true,
                           child: TextField(
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimary
+                                      .withOpacity(0.8),
+                                ),
+                            controller: dobController,
                             decoration: _getInputDecoration(
                               context,
                               'MM/DD/YYYY',
@@ -674,13 +967,17 @@ class AddDoctorHelper {
                             ),
                             readOnly: true,
                             onTap: () async {
-                              await showDatePicker(
+                              final pickedDate = await showDatePicker(
                                 context: context,
                                 initialDate: DateTime.now(),
                                 firstDate: DateTime(1900),
                                 lastDate: DateTime.now()
                                     .add(const Duration(days: 365)),
                               );
+                              if (pickedDate != null) {
+                                dobController.text =
+                                    '${pickedDate.year}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.day.toString().padLeft(2, '0')}';
+                              }
                             },
                           ),
                         ),
@@ -692,6 +989,17 @@ class AddDoctorHelper {
                                 isRequired: true,
                                 'Age',
                                 child: TextField(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displayMedium
+                                      ?.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary
+                                            .withOpacity(0.8),
+                                      ),
+                                  controller: ageController,
                                   decoration: _getInputDecoration(
                                     context,
                                   ),
@@ -705,6 +1013,17 @@ class AddDoctorHelper {
                                 'Gender',
                                 isRequired: true,
                                 child: DropdownButtonFormField<String>(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displayMedium
+                                      ?.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary
+                                            .withOpacity(0.8),
+                                      ),
+                                  value: selectedGender,
                                   decoration: _getInputDecoration(
                                     context,
                                   ),
@@ -716,7 +1035,9 @@ class AddDoctorHelper {
                                         ),
                                       )
                                       .toList(),
-                                  onChanged: (value) {},
+                                  onChanged: (value) {
+                                    selectedGender = value;
+                                  },
                                 ),
                               ),
                             ),
@@ -727,6 +1048,17 @@ class AddDoctorHelper {
                           'Aadhar Number',
                           isRequired: true,
                           child: TextField(
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimary
+                                      .withOpacity(0.8),
+                                ),
+                            controller: aadharController,
                             decoration: _getInputDecoration(
                               context,
                               'Enter Aadhar Number',
@@ -738,6 +1070,17 @@ class AddDoctorHelper {
                           'Address',
                           isRequired: true,
                           child: TextField(
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimary
+                                      .withOpacity(0.8),
+                                ),
+                            controller: addressController,
                             decoration: _getInputDecoration(
                               context,
                               'Enter Address',
@@ -748,6 +1091,17 @@ class AddDoctorHelper {
                           context,
                           'Currently Practicing',
                           child: TextField(
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimary
+                                      .withOpacity(0.8),
+                                ),
+                            controller: practicingController,
                             decoration: _getInputDecoration(
                               context,
                               'Enter current practice',
@@ -758,6 +1112,17 @@ class AddDoctorHelper {
                           context,
                           'Experience (Years)',
                           child: TextField(
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimary
+                                      .withOpacity(0.8),
+                                ),
+                            controller: experienceController,
                             decoration: _getInputDecoration(
                               context,
                               'Enter years of experience',
@@ -768,6 +1133,17 @@ class AddDoctorHelper {
                           context,
                           'Awards & Achievements',
                           child: TextField(
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimary
+                                      .withOpacity(0.8),
+                                ),
+                            controller: awardsController,
                             maxLines: 2,
                             decoration: _getInputDecoration(
                               context,
@@ -779,6 +1155,17 @@ class AddDoctorHelper {
                           context,
                           'Experience Journey',
                           child: TextField(
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimary
+                                      .withOpacity(0.8),
+                                ),
+                            controller: journeyController,
                             maxLines: 2,
                             decoration: _getInputDecoration(
                               context,
@@ -786,26 +1173,48 @@ class AddDoctorHelper {
                             ),
                           ),
                         ),
-                        _buildFormField(
-                          context,
-                          'Password',
-                          isRequired: true,
-                          child: TextField(
-                            decoration:
-                                _getInputDecoration(context, 'Enter password'),
-                          ),
-                        ),
-                        _buildFormField(
-                          context,
-                          'Confirm Password',
-                          isRequired: true,
-                          child: TextField(
-                            decoration: _getInputDecoration(
-                              context,
-                              'Confirm password',
+                        if (doctorData == null || doctorData.isEmpty)
+                          _buildFormField(
+                            context,
+                            'Password',
+                            isRequired: true,
+                            child: TextField(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayMedium
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onPrimary
+                                        .withOpacity(0.8),
+                                  ),
+                              decoration: _getInputDecoration(
+                                  context, 'Enter password'),
                             ),
                           ),
-                        ),
+                        if (doctorData == null || doctorData.isEmpty)
+                          _buildFormField(
+                            context,
+                            'Confirm Password',
+                            isRequired: true,
+                            child: TextField(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayMedium
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onPrimary
+                                        .withOpacity(0.8),
+                                  ),
+                              decoration: _getInputDecoration(
+                                context,
+                                'Confirm password',
+                              ),
+                            ),
+                          ),
                         const SizedBox(height: 24),
                         Row(
                           children: [
@@ -869,7 +1278,64 @@ class AddDoctorHelper {
                                   borderRadius: BorderRadius.circular(50),
                                 ),
                                 child: ElevatedButton(
-                                  onPressed: () => Navigator.pop(context),
+                                  onPressed: () {
+                                    if (doctorData != null) {
+                                      final updatedData = {
+                                        'first_name': firstNameController.text,
+                                        'surname': surnameController.text,
+                                        'phone': phoneController.text,
+                                        'qualification':
+                                            qualificationController.text,
+                                        'specialist': specialistController.text,
+                                        'email': emailController.text,
+                                        'dob': dobController.text,
+                                        'age': ageController.text,
+                                        'gender': selectedGender,
+                                        'aadhar_number': aadharController.text,
+                                        'address': addressController.text,
+                                        'currently_practicing':
+                                            practicingController.text,
+                                        'experience': experienceController.text,
+                                        'awards_achievements':
+                                            awardsController.text,
+                                        'journey': journeyController.text,
+                                      };
+
+                                      print('Updated Data: $updatedData');
+                                      final doctorController =
+                                          Get.find<AdminDoctorController>();
+                                      doctorController
+                                          .updateDoctorData(updatedData);
+                                      Navigator.pop(context);
+                                    } else {
+                                      final addData = {
+                                        'first_name': firstNameController.text,
+                                        'surname': surnameController.text,
+                                        'phone': phoneController.text,
+                                        'qualification':
+                                            qualificationController.text,
+                                        'specialist': specialistController.text,
+                                        'department_id': '1',
+                                        'email': emailController.text,
+                                        'dob': dobController.text,
+                                        'age': ageController.text,
+                                        'gender': selectedGender,
+                                        'aadhar_number': aadharController.text,
+                                        'address': addressController.text,
+                                        'currently_practicing':
+                                            practicingController.text,
+                                        'experience': experienceController.text,
+                                        'awards_achievements':
+                                            awardsController.text,
+                                        'journey': journeyController.text,
+                                      };
+                                      print('Add Data: $addData');
+                                      final doctorController =
+                                          Get.find<AdminDoctorController>();
+                                      doctorController.addDoctorData(addData);
+                                      Navigator.pop(context);
+                                    }
+                                  },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.transparent,
                                     shadowColor: Colors.transparent,
@@ -880,7 +1346,9 @@ class AddDoctorHelper {
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                   ),
-                                  child: const Text('Submit'),
+                                  child: doctorData != null
+                                      ? const Text('Update')
+                                      : const Text('Submit'),
                                 ),
                               ),
                             ),
@@ -889,10 +1357,10 @@ class AddDoctorHelper {
                       ],
                     ),
                   ),
-                ),
-              ],
+                )
+                ],
+              ),
             ),
-          ),
         ),
       ),
     );
