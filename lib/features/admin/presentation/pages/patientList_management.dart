@@ -246,8 +246,21 @@ class _PatientlistManagementState extends State<PatientlistManagement> {
             ),
           ),
           Expanded(
-            child: Obx(
-              () => ListView.builder(
+            child: Obx(                                                       
+              () => _filteredPatients.isEmpty
+                  ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.people_outline,
+                              size: 48, color: Colors.grey[400]),
+                          const SizedBox(height: 16),
+                          Text('No Patients found',
+                              style: TextStyle(color: Colors.grey[500])),
+                        ],
+                      ),
+                    )
+                  : ListView.builder(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 itemCount: _filteredPatients.length,
@@ -270,6 +283,8 @@ class _PatientlistManagementState extends State<PatientlistManagement> {
                     Colors.purple
                   ];
                   final categoryColor = colors[index % colors.length];
+
+                 
 
                   return Container(
                     margin: const EdgeInsets.only(bottom: 12),

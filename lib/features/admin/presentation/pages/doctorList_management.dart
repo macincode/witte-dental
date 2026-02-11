@@ -240,7 +240,20 @@ class _DoctorlistManagementState extends State<DoctorlistManagement> {
           ),
           Expanded(
             child: Obx(
-              () => ListView.builder(
+              () => _filteredDoctors.isEmpty
+                  ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.people_outline,
+                              size: 48, color: Colors.grey[400]),
+                          const SizedBox(height: 16),
+                          Text('No Doctors found',
+                              style: TextStyle(color: Colors.grey[500])),
+                        ],
+                      ),
+                    ) :
+              ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 itemCount: _filteredDoctors.length,
                 itemBuilder: (context, index) {
